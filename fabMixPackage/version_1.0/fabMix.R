@@ -966,7 +966,7 @@ dealWithLabelSwitching_same_sigma <- function(x_data, outputFolder, q, burn, z.t
 		cat(paste0('         * write file: `weights_estimate_ecr.txt`'),'\n')
 		write.table(ls$clusters, file = "singleBestClusterings.txt", quote = FALSE, row.names = FALSE)
 		cat(paste0('         * write file: `singleBestClusterings.txt`'),'\n')
-		zMAP <- read.table("singleBestClusterings.txt",header=TRUE)[,1]
+		zMAP <- as.matrix(read.table("singleBestClusterings.txt",header=TRUE))[1, ]
 
 
 		mapAllocationsPosteriorProbs <- numeric(n)
