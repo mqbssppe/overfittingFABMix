@@ -1,0 +1,16 @@
+fabMix-package	fabMix-package
+complete.log.likelihood	complete.log.likelihood
+compute_A_B_G_D_and_simulate_mu_Lambda	compute_A_B_G_D_and_simulate_mu_Lambda
+compute_sufficient_statistics	compute_sufficient_statistics
+dealWithLabelSwitching_same_sigma	dealWithLabelSwitching_same_sigma
+fabMix	fabMix
+getStuffForDIC	getStuffForDIC
+log_dirichlet_pdf	log_dirichlet_pdf
+myDirichlet	myDirichlet
+observed.log.likelihood0	observed.log.likelihood0
+overfittingMFA	overfittingMFA
+update_all_y	update_all_y
+update_OmegaINV	update_OmegaINV
+update_SigmaINV_faster	update_SigmaINV_faster
+update_z4	update_z4
+update_z_b	update_z_b

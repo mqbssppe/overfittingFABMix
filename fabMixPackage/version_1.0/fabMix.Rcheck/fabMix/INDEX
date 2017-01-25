@@ -1,0 +1,25 @@
+complete.log.likelihood
+                        Complete log-likelihood function
+compute_A_B_G_D_and_simulate_mu_Lambda
+                        Computation and simulations
+compute_sufficient_statistics
+                        Compute sufficient statistics
+dealWithLabelSwitching_same_sigma
+                        Apply label switching algorithms for the Sigma
+                        model
+fabMix                  Main function of the package
+fabMix-package          Overfitting Bayesian Mixtures of Factor
+                        Analyzers with an Unknown Number of Components
+getStuffForDIC          Compute information criteria
+log_dirichlet_pdf       Log-density function of the Dirichlet
+                        distribution
+myDirichlet             Simulate from the Dirichlet distribution
+observed.log.likelihood0
+                        Log-likelihood of the mixture model
+overfittingMFA          Basic MCMC sampler
+update_OmegaINV         Gibbs sampling for Omega^{-1}
+update_SigmaINV_faster
+                        Gibbs sampling for Sigma^{-1}
+update_all_y            Gibbs sampling for y
+update_z4               Collapsed Gibbs for z
+update_z_b              Gibbs sampling for z
