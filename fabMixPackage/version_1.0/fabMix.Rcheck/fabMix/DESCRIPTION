@@ -10,5 +10,5 @@ Description: Model-based clustering of multivariate continuous data with possibl
 Imports: MASS, doParallel, foreach, label.switching, mvtnorm
 License: GPL-2
 NeedsCompilation: no
-Packaged: 2017-01-25 14:15:25 UTC; mqbssppe
-Built: R 3.3.1; ; 2017-01-25 14:15:35 UTC; unix
+Packaged: 2017-01-25 16:45:06 UTC; mqbssppe
+Built: R 3.3.1; ; 2017-01-25 16:45:21 UTC; unix
