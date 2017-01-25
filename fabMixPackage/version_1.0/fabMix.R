@@ -245,7 +245,7 @@ update_OmegaINV <- function(Lambda, K, g, h){
 ################################################################################################################
 ################################################################################################################
 
-truncatedDirichletProcess <- function(x_data, originalX, outputDirectory, Kmax, m, thinning, burn, g, h, alpha_prior, alpha_sigma, beta_sigma, progressGraphs, start_values, q, zStart, gibbs_z){
+overfittingMFA <- function(x_data, originalX, outputDirectory, Kmax, m, thinning, burn, g, h, alpha_prior, alpha_sigma, beta_sigma, progressGraphs, start_values, q, zStart, gibbs_z){
 	if(missing(originalX)){originalX <- x_data}
 	if(missing(gibbs_z)){gibbs_z = 0.05}
 	if(missing(zStart)){zStart = FALSE}
@@ -447,7 +447,7 @@ log_dirichlet_pdf <- function(alpha, weights){
 	return(pdf)
 }
 
-heated_chains <- function(dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCycles, g, h, alpha_sigma, beta_sigma, q, normalize, thinning, zStart, nIterPerCycle){
+fabMix <- function(dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCycles, g, h, alpha_sigma, beta_sigma, q, normalize, thinning, zStart, nIterPerCycle){
 	if(missing(Kmax)){Kmax <- 20}
 	if(missing(nIterPerCycle)){nIterPerCycle = 10}
 	if(missing(zStart)){zStart = FALSE}
@@ -509,14 +509,14 @@ heated_chains <- function(dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCy
 	d_per_cluster = 2*p + p*q + q*(q-1)/2
 	initialAlphas <- seq(d_per_cluster/2, d_per_cluster, length = nChains)
 	foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dopar% {
-		truncatedDirichletProcess(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
+		overfittingMFA(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
 			Kmax = Kmax, m = 100, thinning = 1, burn = 99, alpha_prior= rep(initialAlphas[myChain], Kmax), g = g, h = h, 
 			alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, progressGraphs = FALSE, start_values = FALSE, gibbs_z = 0.05)
 	}
 	cat(paste(' OK'),'\n')
 	cat(paste('-    (2) Initializing the actual model from the previously obtained values... '))
 	foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dopar% {
-		truncatedDirichletProcess(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
+		overfittingMFA(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
 			Kmax = Kmax, m = 300, thinning = 1, burn = 299, alpha_prior= rep(dirPriorAlphas[myChain], Kmax), g = g, h = h, 
 			alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, progressGraphs = FALSE, start_values = TRUE, gibbs_z = 0.05)
 	}
@@ -550,7 +550,7 @@ heated_chains <- function(dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCy
 	for( iteration in 2:mCycles ){
 		
 		foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dopar% {
-			truncatedDirichletProcess(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
+			overfittingMFA(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
 				Kmax = Kmax, m = nIterPerCycle, thinning = 1, burn = bb, alpha_prior= rep( dirPriorAlphas[myChain], Kmax), g = g, h = h, 
 				alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, progressGraphs = FALSE, start_values = TRUE)
 			kValues[iteration, myChain] <- read.table( paste0(outputDirs[myChain],'/k.and.logl.Values.txt') )[1,1]
