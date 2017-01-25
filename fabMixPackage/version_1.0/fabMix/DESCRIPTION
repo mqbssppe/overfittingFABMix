@@ -1,0 +1,9 @@
+Package: fabMix
+Type: Package
+Title: Overfitting Bayesian mixtures of Factor Analyzers with an unknown number of components
+Version: 1.0
+Date: 2017-01-25
+Author: Panagiotis Papastamoulis
+Maintainer: papapast@yahoo.gr
+Description: This package can be used to cluster multivariate continuous data with possibly complex covariance structure. The underlying model is a Bayesian mixture of factor analyzers with a large number of components (overfitting mixture). Suitable prior assumptions ensure that asymptotically the extra components will have zero posterior weight (empty), therefore, the inference on the number of clusters is based on the ``alive'' components. The number of factors is considered fixed, and the optimal one can be estimated using information criteria. Identifiability issues related to label switching are dealt by post-processing the simulated output with the ECR algorithm.
+License: GPL-2
