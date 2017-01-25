@@ -682,7 +682,7 @@ observed.log.likelihood0 <- function(x_data, w, mu, Lambda, Sigma, z){
 
 
 
-getStuffForDIC <- function(x_data, outputFolder, q, burn, Km, normalize){
+getStuffForDIC <- function(x_data, outputFolder, q, burn, Km, normalize, discardLower){
 	cat(paste0('-    (4) Computing information criteria for q = ', q), '\n')
 	if(missing(normalize)){normalize = TRUE}
 	if(normalize){
@@ -714,7 +714,7 @@ getStuffForDIC <- function(x_data, outputFolder, q, burn, Km, normalize){
         Kindex <- index
 	m <- length(index)
 
-
+	#this is artificial
 
 	ECR <- matrix(1:Km, nrow = m, ncol = Km, byrow=T)
 	permutations <- vector('list', length = 1)
@@ -813,7 +813,12 @@ getStuffForDIC <- function(x_data, outputFolder, q, burn, Km, normalize){
 		aic <- aic + obsL
 		bic <- bic + obsL
 	}
-	cll <- cll/m
+	if(missing(discardLower)){ discardLower <- 0.1 }
+	if ( discardLower == FALSE){
+		cll <- cll/m
+	}else{
+		cll <- mean( lValues[which( lValues > as.numeric(quantile(lValues, discardLower)) )] )
+	}
 #	dic_classic <- -4*cll + 2*logL.theta_hat
 #	dic_star <- -6*cll + 4*logL.theta_hat
 #	dic_classicMAP <- -4*cll + 2*logL.theta_map
@@ -830,7 +835,8 @@ getStuffForDIC <- function(x_data, outputFolder, q, burn, Km, normalize){
 
 	dic <- c(aic, bic, dic_classic, dic_star, dic_classicMAP, dic_starMAP, aic_MAX, bic_MAX)
 	names(dic) <- c('AIC', 'BIC', 'DIC1', 'DIC*2', 'DIC', 'DIC_2', 'AIC_map', 'BIC_map')	
-	write.table(file = 'informationCriteria_map_model.txt', dic[c(1,2,5,6,7,8)], col.names = paste0('q_',q), quote = FALSE)
+#	write.table(file = 'informationCriteria_map_model.txt', dic[c(1,2,5,6,7,8)], col.names = paste0('q_',q), quote = FALSE)
+	write.table(file = 'informationCriteria_map_model.txt', dic[c(5,6,7,8)], col.names = paste0('q_',q), quote = FALSE)
 	write.table(file = 'lValues_map.txt', lValues, quote = FALSE)
 	setwd("../")
 	cat(paste0('         - Information criteria written to `', outputFolder,'/informationCriteria_map_model.txt`.'), '\n')
