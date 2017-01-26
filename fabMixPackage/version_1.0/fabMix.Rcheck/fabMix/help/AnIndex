@@ -9,6 +9,7 @@ log_dirichlet_pdf	log_dirichlet_pdf
 myDirichlet	myDirichlet
 observed.log.likelihood0	observed.log.likelihood0
 overfittingMFA	overfittingMFA
+simData	simData
 update_all_y	update_all_y
 update_OmegaINV	update_OmegaINV
 update_SigmaINV_faster	update_SigmaINV_faster

@@ -70,39 +70,40 @@ No file Rd2.aux.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [1{/var/lib/texmf/fonts
-/map/pdftex/updmap/pdftex.map}]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [2]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [3]
+/map/pdftex/updmap/pdftex.map}] [2]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [3]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [4]
-Overfull \hbox (21.31825pt too wide) in paragraph at lines 199--200
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (21.31825pt too wide) in paragraph at lines 230--231
 []\T1/ptm/m/n/10 This func-tions is a wrap-per for the \T1/zi4/m/n/10 label.swi
 tching \T1/ptm/m/n/10 pack-age and ap-plies the \T1/zi4/m/n/10 ECR \T1/ptm/m/n/
 10 and \T1/zi4/m/n/10 ECR.ITERATIVE.1
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [5]
-Overfull \hbox (63.33775pt too wide) in paragraph at lines 319--320
+[5] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (63.33775pt too wide) in paragraph at lines 350--351
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching_same_sigma
 [6] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [7]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [8]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [9]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [10]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [11]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 604.
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 715.
 
 
-[11] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+[12] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 641.
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 752.
 
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [12]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [13]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [14]
 No file Rd2.ind.
-[14] (/tmp/RtmpsMp8aq/Rd2pdf112211f39606/Rd2.aux)
+[15] (/tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55/Rd2.aux)
 
 Package rerunfilecheck Warning: File `Rd2.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
@@ -122,7 +123,7 @@ exlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/ut
 mr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (14 pages, 154140 bytes).
+Output written on Rd2.pdf (15 pages, 162014 bytes).
 Transcript written on Rd2.log.
 This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex)
  restricted \write18 enabled.
@@ -183,52 +184,53 @@ Package hyperref Warning: Option `pagebackref' has already been used,
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.dfu))
 (/usr/share/texlive/texmf-dist/tex/latex/base/latin1.def))
 Writing index file Rd2.idx
-(/tmp/RtmpsMp8aq/Rd2pdf112211f39606/Rd2.aux)
+(/tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55/Rd2.aux)
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 ) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty))
-(/tmp/RtmpsMp8aq/Rd2pdf112211f39606/Rd2.out)
-(/tmp/RtmpsMp8aq/Rd2pdf112211f39606/Rd2.out)
+(/tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55/Rd2.out)
+(/tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55/Rd2.out)
 (/usr/share/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd)
-(/tmp/RtmpsMp8aq/Rd2pdf112211f39606/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/
+(/tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/
 updmap/pdftex.map}]) (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-[2] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [3]
+[2] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [3]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [4]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-Overfull \hbox (21.31825pt too wide) in paragraph at lines 199--200
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (21.31825pt too wide) in paragraph at lines 230--231
 []\T1/ptm/m/n/10 This func-tions is a wrap-per for the \T1/zi4/m/n/10 label.swi
 tching \T1/ptm/m/n/10 pack-age and ap-plies the \T1/zi4/m/n/10 ECR \T1/ptm/m/n/
 10 and \T1/zi4/m/n/10 ECR.ITERATIVE.1
-[5] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-Overfull \hbox (63.33775pt too wide) in paragraph at lines 319--320
+[5] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [6]
+Overfull \hbox (63.33775pt too wide) in paragraph at lines 350--351
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching_same_sigma
-[6] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [7]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [7]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [8]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [9]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [10]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [11]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [12]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 604.
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 715.
 
 
-[11] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+[13] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 641.
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 752.
 
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [12]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [13]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [14]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [15]
 No file Rd2.ind.
-[14] (/tmp/RtmpsMp8aq/Rd2pdf112211f39606/Rd2.aux) )
+[16] (/tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55/Rd2.aux) )
 (see the transcript file for additional information){/usr/share/texlive/texmf-d
 ist/fonts/enc/dvips/base/8r.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/
 inconsolata/i4-t1-0.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/incon
@@ -242,12 +244,12 @@ exlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/ut
 mr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (14 pages, 156161 bytes).
+Output written on Rd2.pdf (16 pages, 164407 bytes).
 Transcript written on Rd2.log.
 This is makeindex, version 2.15 [TeX Live 2016] (kpathsea + Thai support).
-Scanning input file Rd2.idx....done (21 entries accepted, 0 rejected).
-Sorting entries....done (87 comparisons).
-Generating output file Rd2.ind....done (50 lines written, 0 warnings).
+Scanning input file Rd2.idx....done (22 entries accepted, 0 rejected).
+Sorting entries....done (92 comparisons).
+Generating output file Rd2.ind....done (54 lines written, 0 warnings).
 Output written in Rd2.ind.
 Transcript written in Rd2.ilg.
 This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex)
@@ -309,54 +311,55 @@ Package hyperref Warning: Option `pagebackref' has already been used,
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.dfu))
 (/usr/share/texlive/texmf-dist/tex/latex/base/latin1.def))
 Writing index file Rd2.idx
-(/tmp/RtmpsMp8aq/Rd2pdf112211f39606/Rd2.aux)
+(/tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55/Rd2.aux)
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 ) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty))
-(/tmp/RtmpsMp8aq/Rd2pdf112211f39606/Rd2.out)
-(/tmp/RtmpsMp8aq/Rd2pdf112211f39606/Rd2.out)
+(/tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55/Rd2.out)
+(/tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55/Rd2.out)
 (/usr/share/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd)
-(/tmp/RtmpsMp8aq/Rd2pdf112211f39606/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/
+(/tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/
 updmap/pdftex.map}]) (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-[2] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [3]
+[2] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [3]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [4]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-Overfull \hbox (21.31825pt too wide) in paragraph at lines 199--200
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (21.31825pt too wide) in paragraph at lines 230--231
 []\T1/ptm/m/n/10 This func-tions is a wrap-per for the \T1/zi4/m/n/10 label.swi
 tching \T1/ptm/m/n/10 pack-age and ap-plies the \T1/zi4/m/n/10 ECR \T1/ptm/m/n/
 10 and \T1/zi4/m/n/10 ECR.ITERATIVE.1
-[5] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-Overfull \hbox (63.33775pt too wide) in paragraph at lines 319--320
+[5] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [6]
+Overfull \hbox (63.33775pt too wide) in paragraph at lines 350--351
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching_same_sigma
-[6] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [7]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [7]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [8]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [9]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [10]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [11]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [12]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 604.
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 715.
 
 
-[11] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+[13] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 641.
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 752.
 
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [12]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [13]
-(/tmp/RtmpsMp8aq/Rd2pdf112211f39606/Rd2.ind [14]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [14]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [15]
+(/tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55/Rd2.ind [16]
 Overfull \hbox (3.3567pt too wide) in paragraph at lines 9--11
 []\T1/zi4/m/n/10 compute_A_B_G_D_and_simulate_mu_Lambda\T1/ptm/m/n/10 , 
-[15]) (/tmp/RtmpsMp8aq/Rd2pdf112211f39606/Rd2.aux)
+[17]) (/tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55/Rd2.aux)
 
 Package rerunfilecheck Warning: File `Rd2.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
@@ -376,12 +379,12 @@ exlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/ut
 mr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (15 pages, 158331 bytes).
+Output written on Rd2.pdf (17 pages, 166432 bytes).
 Transcript written on Rd2.log.
 This is makeindex, version 2.15 [TeX Live 2016] (kpathsea + Thai support).
-Scanning input file Rd2.idx....done (21 entries accepted, 0 rejected).
-Sorting entries....done (87 comparisons).
-Generating output file Rd2.ind....done (50 lines written, 0 warnings).
+Scanning input file Rd2.idx....done (22 entries accepted, 0 rejected).
+Sorting entries....done (92 comparisons).
+Generating output file Rd2.ind....done (54 lines written, 0 warnings).
 Output written in Rd2.ind.
 Transcript written in Rd2.ilg.
 This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex)
@@ -443,54 +446,55 @@ Package hyperref Warning: Option `pagebackref' has already been used,
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.dfu))
 (/usr/share/texlive/texmf-dist/tex/latex/base/latin1.def))
 Writing index file Rd2.idx
-(/tmp/RtmpsMp8aq/Rd2pdf112211f39606/Rd2.aux)
+(/tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55/Rd2.aux)
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 ) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty))
-(/tmp/RtmpsMp8aq/Rd2pdf112211f39606/Rd2.out)
-(/tmp/RtmpsMp8aq/Rd2pdf112211f39606/Rd2.out)
+(/tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55/Rd2.out)
+(/tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55/Rd2.out)
 (/usr/share/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd)
-(/tmp/RtmpsMp8aq/Rd2pdf112211f39606/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/
+(/tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/
 updmap/pdftex.map}]) (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-[2] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [3]
+[2] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [3]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [4]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-Overfull \hbox (21.31825pt too wide) in paragraph at lines 199--200
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (21.31825pt too wide) in paragraph at lines 230--231
 []\T1/ptm/m/n/10 This func-tions is a wrap-per for the \T1/zi4/m/n/10 label.swi
 tching \T1/ptm/m/n/10 pack-age and ap-plies the \T1/zi4/m/n/10 ECR \T1/ptm/m/n/
 10 and \T1/zi4/m/n/10 ECR.ITERATIVE.1
-[5] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-Overfull \hbox (63.33775pt too wide) in paragraph at lines 319--320
+[5] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [6]
+Overfull \hbox (63.33775pt too wide) in paragraph at lines 350--351
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching_same_sigma
-[6] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [7]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [7]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [8]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [9]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [10]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [11]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [12]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 604.
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 715.
 
 
-[11] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+[13] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 641.
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 752.
 
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [12]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [13]
-(/tmp/RtmpsMp8aq/Rd2pdf112211f39606/Rd2.ind [14]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [14]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [15]
+(/tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55/Rd2.ind [16]
 Overfull \hbox (3.3567pt too wide) in paragraph at lines 9--11
 []\T1/zi4/m/n/10 compute_A_B_G_D_and_simulate_mu_Lambda\T1/ptm/m/n/10 , 
-[15]) (/tmp/RtmpsMp8aq/Rd2pdf112211f39606/Rd2.aux) )
+[17]) (/tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55/Rd2.aux) )
 (see the transcript file for additional information){/usr/share/texlive/texmf-d
 ist/fonts/enc/dvips/base/8r.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/
 inconsolata/i4-t1-0.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/incon
@@ -504,8 +508,8 @@ exlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/ut
 mr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (15 pages, 158708 bytes).
+Output written on Rd2.pdf (17 pages, 166636 bytes).
 Transcript written on Rd2.log.
 Saving output to 'fabMix-manual.pdf' ...
 Done
-You may want to clean up by 'rm -rf /tmp/RtmpsMp8aq/Rd2pdf112211f39606'
+You may want to clean up by 'rm -rf /tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55'

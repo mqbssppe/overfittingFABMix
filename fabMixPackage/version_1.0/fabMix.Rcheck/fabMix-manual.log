@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2016.11.15)  26 JAN 2017 08:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2016.11.15)  26 JAN 2017 16:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -712,7 +712,7 @@ File: latin1.def 2015/03/17 v1.2c Input encoding file
 
 
 Writing index file Rd2.idx
-(/tmp/RtmpsMp8aq/Rd2pdf112211f39606/Rd2.aux)
+(/tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55/Rd2.aux)
 \openout1 = `Rd2.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
@@ -769,8 +769,8 @@ LaTeX Info: Redefining \ref on input line 8.
 LaTeX Info: Redefining \pageref on input line 8.
 LaTeX Info: Redefining \nameref on input line 8.
 
-(/tmp/RtmpsMp8aq/Rd2pdf112211f39606/Rd2.out)
-(/tmp/RtmpsMp8aq/Rd2pdf112211f39606/Rd2.out)
+(/tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55/Rd2.out)
+(/tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55/Rd2.out)
 \@outlinefile=\write4
 \openout4 = `Rd2.out'.
 
@@ -797,7 +797,7 @@ LaTeX Font Info:    Try loading font information for T1+phv on input line 28.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 )
-(/tmp/RtmpsMp8aq/Rd2pdf112211f39606/Rd2.toc
+(/tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55/Rd2.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 1.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -814,9 +814,6 @@ File: utf8.def 2016/02/28 v1.1s UTF-8 support for inputenc
 )
 [2] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2016/02/28 v1.1s UTF-8 support for inputenc
-)
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
-File: utf8.def 2016/02/28 v1.1s UTF-8 support for inputenc
 ) [3]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2016/02/28 v1.1s UTF-8 support for inputenc
@@ -824,7 +821,10 @@ File: utf8.def 2016/02/28 v1.1s UTF-8 support for inputenc
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2016/02/28 v1.1s UTF-8 support for inputenc
 )
-Overfull \hbox (21.31825pt too wide) in paragraph at lines 199--200
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2016/02/28 v1.1s UTF-8 support for inputenc
+)
+Overfull \hbox (21.31825pt too wide) in paragraph at lines 230--231
 []\T1/ptm/m/n/10 This func-tions is a wrap-per for the \T1/zi4/m/n/10 label.swi
 tching \T1/ptm/m/n/10 pack-age and ap-plies the \T1/zi4/m/n/10 ECR \T1/ptm/m/n/
 10 and \T1/zi4/m/n/10 ECR.ITERATIVE.1
@@ -832,51 +832,54 @@ tching \T1/ptm/m/n/10 pack-age and ap-plies the \T1/zi4/m/n/10 ECR \T1/ptm/m/n/
 
 [5] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2016/02/28 v1.1s UTF-8 support for inputenc
-)
-Overfull \hbox (63.33775pt too wide) in paragraph at lines 319--320
+) [6]
+Overfull \hbox (63.33775pt too wide) in paragraph at lines 350--351
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching_same_sigma
  []
 
-[6] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
-File: utf8.def 2016/02/28 v1.1s UTF-8 support for inputenc
-) [7]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2016/02/28 v1.1s UTF-8 support for inputenc
-)
+) [7]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2016/02/28 v1.1s UTF-8 support for inputenc
 ) [8]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2016/02/28 v1.1s UTF-8 support for inputenc
-) [9]
+)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2016/02/28 v1.1s UTF-8 support for inputenc
-)
+) [9]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2016/02/28 v1.1s UTF-8 support for inputenc
 ) [10]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2016/02/28 v1.1s UTF-8 support for inputenc
-)
-
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 604.
-
-
-[11] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
-File: utf8.def 2016/02/28 v1.1s UTF-8 support for inputenc
-)
-
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 641.
-
-
+) [11]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2016/02/28 v1.1s UTF-8 support for inputenc
 ) [12]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2016/02/28 v1.1s UTF-8 support for inputenc
-) [13]
-(/tmp/RtmpsMp8aq/Rd2pdf112211f39606/Rd2.ind [14]
+)
+
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 715.
+
+
+[13] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2016/02/28 v1.1s UTF-8 support for inputenc
+)
+
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 752.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2016/02/28 v1.1s UTF-8 support for inputenc
+) [14]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2016/02/28 v1.1s UTF-8 support for inputenc
+) [15]
+(/tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55/Rd2.ind [16]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 3.
 
@@ -884,27 +887,27 @@ Overfull \hbox (3.3567pt too wide) in paragraph at lines 9--11
 []\T1/zi4/m/n/10 compute_A_B_G_D_and_simulate_mu_Lambda\T1/ptm/m/n/10 , 
  []
 
-[15
+[17
 
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 779.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 779.
- (/tmp/RtmpsMp8aq/Rd2pdf112211f39606/Rd2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 779.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 779.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 890.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 890.
+ (/tmp/Rtmpr2QPB6/Rd2pdf7a824131eb55/Rd2.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 890.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 890.
 Package rerunfilecheck Info: File `Rd2.out' has not changed.
-(rerunfilecheck)             Checksum: DFEA03A3D1367042FF192AF6145428D9;1300.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 779.
+(rerunfilecheck)             Checksum: 1AF0AA1BFCDE441AE4B17ED6588EAEE8;1347.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 890.
  ) 
 Here is how much of TeX's memory you used:
- 6605 strings out of 494903
- 95059 string characters out of 6179898
+ 6617 strings out of 494903
+ 95273 string characters out of 6179898
  168486 words of memory out of 5000000
- 9638 multiletter control sequences out of 15000+600000
+ 9639 multiletter control sequences out of 15000+600000
  40988 words of font info for 50 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 38i,6n,34p,774b,558s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,6n,34p,774b,592s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texliv
 e/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}</usr/share/texlive/texmf-
 dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb></usr/share/texlive/te
@@ -918,10 +921,10 @@ pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type
 1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (15 pages, 158708 bytes).
+Output written on Rd2.pdf (17 pages, 166636 bytes).
 PDF statistics:
- 368 PDF objects out of 1000 (max. 8388607)
- 335 compressed objects within 4 object streams
- 138 named destinations out of 1000 (max. 500000)
- 137 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 391 PDF objects out of 1000 (max. 8388607)
+ 356 compressed objects within 4 object streams
+ 147 named destinations out of 1000 (max. 500000)
+ 145 words of extra memory for PDF output out of 10000 (max. 10000000)
 

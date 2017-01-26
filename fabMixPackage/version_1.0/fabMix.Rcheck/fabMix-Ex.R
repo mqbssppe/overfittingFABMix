@@ -31,7 +31,41 @@ base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 
 ### ** Examples
 
-runif(1)
+# simulate a synthetic dataset along the lines of the paper:
+n = 1000              # sample size
+p = 40                # number of variables
+q = 4                 # number of factors
+K = 10                # number of clusters
+sINV_diag = 1/((1:p)) # diagonal of inverse variance of errors
+set.seed(10)
+syntheticDataset <- simData(K.true = K, n = n, q = q, p = p, sINV_values = sINV_diag )
+
+## Not run: 
+##D 
+##D # define parameters
+##D Kmax <- 20    # number of overfitted mixture components
+##D nChains <- 8  # number of parallel chains
+##D dN <- 1
+##D # Dirichlet prior of mixture weights per chain.
+##D #   The target chain corresponds to the first entry.
+##D dirPriorAlphas <- c(1, 1 + dN * (2:nChains - 1))/Kmax	
+##D outputFolder <- "fabMixExample"
+##D # Run algorithm
+##D fabMix( dirPriorAlphas = dirPriorAlphas, 
+##D 	rawData = syntheticDataset$data, 
+##D 	outDir = outputFolder, Kmax = Kmax, mCycles = 1200, 
+##D 	burnCycles = 200, q = q) 
+##D 
+##D # Compute information criteria:
+##D getStuffForDIC(x_data = originalX, outputFolder = outputFolder, q = q)
+##D 
+##D # Deal with label switching:
+##D dealWithLabelSwitching_same_sigma(x_data = syntheticDataset$data, 
+##D 	outputFolder = outputFolder, q = q, 
+##D 	compute_regularized_expression = TRUE, Km = Kmax)
+## End(Not run)
+
+
 
 
 

@@ -17,6 +17,7 @@ myDirichlet             Simulate from the Dirichlet distribution
 observed.log.likelihood0
                         Log-likelihood of the mixture model
 overfittingMFA          Basic MCMC sampler
+simData                 Synthetic data generator
 update_OmegaINV         Gibbs sampling for Omega^{-1}
 update_SigmaINV_faster
                         Gibbs sampling for Sigma^{-1}
