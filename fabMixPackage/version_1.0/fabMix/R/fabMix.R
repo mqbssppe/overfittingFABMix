@@ -603,7 +603,7 @@ fabMix <- function(dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCycles, g
 			matplot(t(x_data), type = "l", col = as.numeric(as.factor(z)))
 			matplot(t(originalX), type = "l", col = as.numeric(as.factor(z)))
 			ar <- round(100*mh_acceptance_rate/iteration, 3)
-			cat(paste0('-        mcmc cycle: ',iteration,' (<=> iteration: ',iteration*nIterPerCycle,'). Swap acceptance rate: ', ar), '\n')
+			cat(paste0('-        mcmc cycle: ',iteration,' (<=> iteration: ',iteration*nIterPerCycle,'). Swap acceptance rate: ', ar, '%.'), '\n')
 		}
 		if(iteration %% thinning == 0){
 			if(iteration > burnCycles){

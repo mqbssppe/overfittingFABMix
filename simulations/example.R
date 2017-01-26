@@ -1,5 +1,5 @@
-library('MASS')
-
+library(fabMix)
+library(MASS)
 
 dIter <- 1
 set.seed(101)
@@ -10,7 +10,7 @@ w.true <- myDirichlet(rep(10,K.true))
 w.true <- w.true/sum(w.true)
 p <- 40
 q <- 4
-n <- 500
+n <- 200
 z.true <- sample(K.true,n,replace = TRUE, prob = w.true)
 v_r <- numeric(p) #indicates the non-zero values of Lambdas
 Lambda.true <- array(data = 0, dim = c(K.true,p,q))
@@ -108,23 +108,23 @@ write.table(z.true, file = paste0('z_',K.true,'_',dIter,'.txt'))
 matplot(t(originalX), type = "l", col = z.true)
 table(z.true)
 
-library(fabMix)
 Kmax <- 20
 q <- q.true
 #qIndex <- (1:10)
 #for(q in qIndex){
 
 	nChains <- 8
-        dN <- 1
+        dN <- 2.5
+	dN <- exp(seq(0,2,length = nChains - 1))
         dirPriorAlphas <- c(1, 1 + dN * (2:nChains - 1))/Kmax
 
 	outputFolder <- paste0('q.true_',q.true,'q_',q,'_data_',dIter) 
 
 	fabMix( dirPriorAlphas = dirPriorAlphas, rawData = originalX, outDir = outputFolder, 
-	        Kmax = Kmax, mCycles = 1200, burnCycles = 200, 
+	        Kmax = Kmax, mCycles = 1200, burnCycles = 200, nIterPerCycle = 20,
 		q = q, g = 2, h = 1, alpha_sigma = 2, beta_sigma = 1) 
 
-	getStuffForDIC(outputFolder = outputFolder, q = q)
+	getStuffForDIC(x_data = originalX, outputFolder = outputFolder, q = q)
 
 	dealWithLabelSwitching_same_sigma(x_data = originalX, 
 		outputFolder = outputFolder, q = q, 
