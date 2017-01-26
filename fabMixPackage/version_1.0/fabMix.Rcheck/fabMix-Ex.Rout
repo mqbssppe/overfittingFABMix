@@ -76,17 +76,17 @@ Simulation parameters:
 > ##D outputFolder <- "fabMixExample"
 > ##D # Run algorithm
 > ##D fabMix( dirPriorAlphas = dirPriorAlphas, 
-> ##D 	rawData = syntheticDataset$data, 
-> ##D 	outDir = outputFolder, Kmax = Kmax, mCycles = 1200, 
-> ##D 	burnCycles = 200, q = q) 
+> ##D         rawData = syntheticDataset$data, 
+> ##D         outDir = outputFolder, Kmax = Kmax, mCycles = 1200, 
+> ##D         burnCycles = 200, q = q) 
 > ##D 
 > ##D # Compute information criteria:
-> ##D getStuffForDIC(x_data = originalX, outputFolder = outputFolder, q = q)
+> ##D getStuffForDIC(x_data = syntheticDataset$data, outputFolder = outputFolder, q = q)
 > ##D 
 > ##D # Deal with label switching:
 > ##D dealWithLabelSwitching_same_sigma(x_data = syntheticDataset$data, 
-> ##D 	outputFolder = outputFolder, q = q, 
-> ##D 	compute_regularized_expression = TRUE, Km = Kmax)
+> ##D         outputFolder = outputFolder, q = q, 
+> ##D         compute_regularized_expression = TRUE, Km = Kmax)
 > ## End(Not run)
 > 
 > 
@@ -99,7 +99,7 @@ Simulation parameters:
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.496 0.008 0.505 0 0 
+Time elapsed:  0.496 0.004 0.501 0 0 
 > grDevices::dev.off()
 null device 
           1 

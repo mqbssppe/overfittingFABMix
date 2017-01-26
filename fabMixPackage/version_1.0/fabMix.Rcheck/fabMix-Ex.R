@@ -52,17 +52,17 @@ syntheticDataset <- simData(K.true = K, n = n, q = q, p = p, sINV_values = sINV_
 ##D outputFolder <- "fabMixExample"
 ##D # Run algorithm
 ##D fabMix( dirPriorAlphas = dirPriorAlphas, 
-##D 	rawData = syntheticDataset$data, 
-##D 	outDir = outputFolder, Kmax = Kmax, mCycles = 1200, 
-##D 	burnCycles = 200, q = q) 
+##D         rawData = syntheticDataset$data, 
+##D         outDir = outputFolder, Kmax = Kmax, mCycles = 1200, 
+##D         burnCycles = 200, q = q) 
 ##D 
 ##D # Compute information criteria:
-##D getStuffForDIC(x_data = originalX, outputFolder = outputFolder, q = q)
+##D getStuffForDIC(x_data = syntheticDataset$data, outputFolder = outputFolder, q = q)
 ##D 
 ##D # Deal with label switching:
 ##D dealWithLabelSwitching_same_sigma(x_data = syntheticDataset$data, 
-##D 	outputFolder = outputFolder, q = q, 
-##D 	compute_regularized_expression = TRUE, Km = Kmax)
+##D         outputFolder = outputFolder, q = q, 
+##D         compute_regularized_expression = TRUE, Km = Kmax)
 ## End(Not run)
 
 

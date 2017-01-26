@@ -49,17 +49,17 @@ dirPriorAlphas <- c(1, 1 + dN * (2:nChains - 1))/Kmax
 outputFolder <- "fabMixExample"
 # Run algorithm
 fabMix( dirPriorAlphas = dirPriorAlphas, 
-	rawData = syntheticDataset$data, 
-	outDir = outputFolder, Kmax = Kmax, mCycles = 1200, 
-	burnCycles = 200, q = q) 
+        rawData = syntheticDataset$data, 
+        outDir = outputFolder, Kmax = Kmax, mCycles = 1200, 
+        burnCycles = 200, q = q) 
 
 # Compute information criteria:
-getStuffForDIC(x_data = originalX, outputFolder = outputFolder, q = q)
+getStuffForDIC(x_data = syntheticDataset$data, outputFolder = outputFolder, q = q)
 
 # Deal with label switching:
 dealWithLabelSwitching_same_sigma(x_data = syntheticDataset$data, 
-	outputFolder = outputFolder, q = q, 
-	compute_regularized_expression = TRUE, Km = Kmax)
+        outputFolder = outputFolder, q = q, 
+        compute_regularized_expression = TRUE, Km = Kmax)
 }
 
 
