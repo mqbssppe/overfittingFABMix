@@ -10,4 +10,4 @@ Description: Model-based clustering of multivariate continuous data with possibl
 Imports: MASS, doParallel, foreach, label.switching, mvtnorm
 License: GPL-2
 NeedsCompilation: no
-Packaged: 2017-01-26 16:35:43 UTC; mqbssppe
+Packaged: 2017-01-27 08:32:56 UTC; mqbssppe

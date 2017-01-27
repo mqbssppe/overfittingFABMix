@@ -24,3 +24,4 @@ update_SigmaINV_faster
 update_all_y            Gibbs sampling for y
 update_z4               Collapsed Gibbs for z
 update_z_b              Gibbs sampling for z
+waveDataset1500         Wave dataset

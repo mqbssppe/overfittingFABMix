@@ -76,5 +76,41 @@ Papastamoulis, P. (2017). Overfitting Bayesian mixtures of factor analyzers with
 \author{
 Panagiotis Papastamoulis
 }
+\examples{
+\dontrun{
+# simulate a synthetic dataset along the lines of the paper:
+n = 1000              # sample size
+p = 40                # number of variables
+q = 4                 # number of factors
+K = 10                # number of clusters
+sINV_diag = 1/((1:p)) # diagonal of inverse variance of errors
+set.seed(10)
+syntheticDataset <- simData(K.true = K, n = n, q = q, p = p, sINV_values = sINV_diag )
+
+# define parameters
+Kmax <- 20    # number of overfitted mixture components
+nChains <- 8  # number of parallel chains
+dN <- 1
+# Dirichlet prior of mixture weights per chain.
+#   The target chain corresponds to the first entry.
+dirPriorAlphas <- c(1, 1 + dN * (2:nChains - 1))/Kmax   
+outputFolder <- "fabMixExample"
+# Run algorithm
+fabMix( dirPriorAlphas = dirPriorAlphas, 
+        rawData = syntheticDataset$data, 
+        outDir = outputFolder, Kmax = Kmax, mCycles = 1200, 
+        burnCycles = 200, q = q) 
+
+# Compute information criteria:
+getStuffForDIC(x_data = syntheticDataset$data, outputFolder = outputFolder, q = q)
+
+# Deal with label switching:
+dealWithLabelSwitching_same_sigma(x_data = syntheticDataset$data, 
+        outputFolder = outputFolder, q = q, 
+        compute_regularized_expression = TRUE, Km = Kmax)
+}
+
+
+}
 
 
