@@ -1,11 +1,11 @@
-# ****************************************************************#
-# (a) Simulate a dataset along the lines of the paper.           #
-#       It follows the scenario used in subsection:             #
-#       ``Estimating the number of clusters''                  #
-# (b) Run fabMix                                               #
-# (c) Run mclust and flexmix                                    #
-# (d) Compare estimated clusters against the true classification #
-# ****************************************************************#
+# ****************************************************************#      #     #     #
+# (a) Simulate a dataset along the lines of the paper.           # #    # #   # #   #
+#       It follows the scenario used in subsection:             #   #  #   # #   # #
+#       ``Estimating the number of clusters''                  #     ##     #     #
+# (b) Run fabMix                                               #     ##     #     #
+# (c) Run mclust and flexmix                                    #   #  #   # #   # #
+# (d) Compare estimated clusters against the true classification # #    # #   # #   #
+# ****************************************************************#      #     #     #
 
 
 library(fabMix)
@@ -82,14 +82,8 @@ adjRandIndex["mclust",2] <-  length(table(mclust_clusters))
 # the result should be similar to the following output:
 
 > adjRandIndex
+              ARI nClusters
 fabMix  1.0000000        10
 flexmix 0.3658515         3
 mclust  0.7068138        19
-
-
-
-
-
-
-
 
