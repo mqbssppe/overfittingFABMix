@@ -38,20 +38,18 @@ dirPriorAlphas <- c(1, 1 + dN * (2:nChains - 1))/Kmax
 
 
 outputFolder <- paste0("fabMixExample_nFactors_",q)
-# step.1) Run algorithm (warning: 8 parallel threads needed, computation takes ~ 1.5 - 2 hours)
-ptm <- proc.time()
+# step.1) Run algorithm (warning: 8 parallel threads needed, computation takes ~ 2.5 - 3 hours)
 fabMix( dirPriorAlphas = dirPriorAlphas, 
         rawData = syntheticDataset$data, 
         outDir = outputFolder, Kmax = Kmax, mCycles = 1200, 
         burnCycles = 200, q = q) 
-timeNeeded <- proc.time() - ptm
 # step.2) Compute information criteria for the given value of q
 getStuffForDIC(x_data = syntheticDataset$data, outputFolder = outputFolder, q = q)
 
 # step.3) Undo the label switching for the most probable number of alive clusters
 dealWithLabelSwitching_same_sigma(x_data = syntheticDataset$data, 
 	outputFolder = outputFolder, q = q, 
-	compute_regularized_expression = TRUE, Km = Kmax)
+	compute_regularized_expression = FALSE, Km = Kmax)
 
 # for a complete analysis, you should rerun steps 1, 2, 3 with various values of q (eg: q = 1, 2,... , 10) 
 #	and select the model with the smallest BIC or AIC. It corresponds to q = 4. 
@@ -66,7 +64,7 @@ mclustModel = Mclust(syntheticDataset$data, prior = priorControl(functionName="d
 mclust_clusters <- mclustModel$classification
 
 # Run flexmix
-flexmixModel <- initFlexmix(syntheticDataset$data ~ 1, k = 1:20, model = FLXMCmvnorm(diagonal = FALSE), nrep = 10)
+flexmixModel <- initFlexmix(syntheticDataset$data ~ 1, k = 1:20, model = FLXMCmvnorm(diagonal = FALSE), nrep = 20)
 getFlexmixResult <- getModel(flexmixModel, which = "BIC")
 flexmix_clusters <- getFlexmixResult@cluster
 
@@ -84,11 +82,9 @@ adjRandIndex["mclust",2] <-  length(table(mclust_clusters))
 # the result should be similar to the following output:
 
 > adjRandIndex
-              ARI nClusters
 fabMix  1.0000000        10
-flexmix 0.3600983         3
+flexmix 0.3658515         3
 mclust  0.7068138        19
-
 
 
 
