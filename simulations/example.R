@@ -1,11 +1,11 @@
-# **********************************************************************#
-# (a) Simulate a dataset along the lines of the paper.			#
-#	It follows the scenario used in subsection:			#
-#	``Estimating the number of clusters''				#
-# (b) Run fabMix							#
-# (c) Run mclust and flexmix						#
-# (d) Compare estimated clusters against the true classification	#
-# **********************************************************************#
+# ****************************************************************#
+# (a) Simulate a dataset along the lines of the paper.           #
+#	It follows the scenario used in subsection:             #
+#	``Estimating the number of clusters''                  #
+# (b) Run fabMix                                               #
+# (c) Run mclust and flexmix                                    #
+# (d) Compare estimated clusters against the true classification #
+# ****************************************************************#
 
 
 library(fabMix)
