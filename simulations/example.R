@@ -1,8 +1,18 @@
-#The following data generation mechanism is used:
+# **********************************************************************#
+# (a) Simulate a dataset along the lines of the paper.			#
+#	It follows the scenario used in subsection:			#
+#	``Estimating the number of clusters''				#
+# (b) Run fabMix							#
+# (c) Run mclust and flexmix						#
+# (d) Compare estimated clusters against the true classification	#
+# **********************************************************************#
+
 
 library(fabMix)
 library(flexmix)
 library(mclust)
+
+# Simulation parameters							
 
 n = 1000              # sample size
 p = 40                # number of variables
@@ -17,11 +27,8 @@ sINV_diag = 1/((1:p)) # diagonal of inverse variance of errors
 #			for features j --> p 
 set.seed(10)
 syntheticDataset <- simData(K.true = K, n = n, q = q, p = p, sINV_values = sINV_diag )
-#Simulation parameters: 
-   n = 1000   # sample size
-   p = 40     # number of variables
-   q = 4      # number of factors
-   K = 10     # number of  clusters
+
+# fabMix parameters: 
 Kmax <- 20    # number of overfitted mixture components
 nChains <- 8  # number of parallel chains
 dN <- 1
@@ -49,7 +56,7 @@ dealWithLabelSwitching_same_sigma(x_data = syntheticDataset$data,
 # for a complete analysis, you should rerun steps 1, 2, 3 with various values of q (eg: q = 1, 2,... , 10) 
 #	and select the model with the smallest BIC or AIC. It corresponds to q = 4. 
 
-
+#	Get estimated clusters using the ECR reordering algorithm:
 fabMix_clusters <- as.matrix(read.table(paste0(outputFolder,"/singleBestClusterings.txt"), header= TRUE))[1,]
 
 
