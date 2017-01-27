@@ -22,7 +22,7 @@ K = 10                # number of clusters
 sINV_diag = 1/((1:p)) # diagonal of inverse variance of errors
 #			or you can also use scenario 2:
 #sINV_diag = rgamma(p, shape = 1, rate = 1)
-#			note that scenario is more challenging
+#			scenario 1 is more challenging
 #			as it produces more noisy observations
 #			for features j --> p 
 set.seed(10)
