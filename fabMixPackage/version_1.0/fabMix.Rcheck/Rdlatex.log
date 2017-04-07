@@ -4,7 +4,7 @@ This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded
  restricted \write18 enabled.
 entering extended mode
 LaTeX2e <2016/03/31>
-Babel <3.9r> and hyphenation patterns for 5 language(s) loaded.
+Babel <3.9r> and hyphenation patterns for 9 language(s) loaded.
 (./Rd2.tex
 (/usr/share/texlive/texmf-dist/tex/latex/base/book.cls
 Document Class: book 2014/09/29 v1.4h Standard LaTeX document class
@@ -108,7 +108,7 @@ Overfull \hbox (6.77829pt too wide) in paragraph at lines 952--953
 T1/zi4/m/n/10 http : / / archive . ics . uci . edu / ml$[][]\T1/ptm/m/n/10 . Ir
 vine,
 No file Rd2.ind.
-[16] (/tmp/RtmpGzRGW2/Rd2pdf3a9f61f25e35/Rd2.aux)
+[16] (/tmp/RtmpduqEMV/Rd2pdf22b659f9735/Rd2.aux)
 
 Package rerunfilecheck Warning: File `Rd2.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
@@ -128,13 +128,13 @@ exlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/ut
 mr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (16 pages, 165182 bytes).
+Output written on Rd2.pdf (16 pages, 165184 bytes).
 Transcript written on Rd2.log.
 This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex)
  restricted \write18 enabled.
 entering extended mode
 LaTeX2e <2016/03/31>
-Babel <3.9r> and hyphenation patterns for 5 language(s) loaded.
+Babel <3.9r> and hyphenation patterns for 9 language(s) loaded.
 (./Rd2.tex
 (/usr/share/texlive/texmf-dist/tex/latex/base/book.cls
 Document Class: book 2014/09/29 v1.4h Standard LaTeX document class
@@ -189,20 +189,20 @@ Package hyperref Warning: Option `pagebackref' has already been used,
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.dfu))
 (/usr/share/texlive/texmf-dist/tex/latex/base/latin1.def))
 Writing index file Rd2.idx
-(/tmp/RtmpGzRGW2/Rd2pdf3a9f61f25e35/Rd2.aux)
+(/tmp/RtmpduqEMV/Rd2pdf22b659f9735/Rd2.aux)
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 ) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty))
-(/tmp/RtmpGzRGW2/Rd2pdf3a9f61f25e35/Rd2.out)
-(/tmp/RtmpGzRGW2/Rd2pdf3a9f61f25e35/Rd2.out)
+(/tmp/RtmpduqEMV/Rd2pdf22b659f9735/Rd2.out)
+(/tmp/RtmpduqEMV/Rd2pdf22b659f9735/Rd2.out)
 (/usr/share/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd)
-(/tmp/RtmpGzRGW2/Rd2pdf3a9f61f25e35/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/
-updmap/pdftex.map}]) (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/tmp/RtmpduqEMV/Rd2pdf22b659f9735/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/u
+pdmap/pdftex.map}]) (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 [2] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [3]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [4]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
@@ -240,7 +240,7 @@ Overfull \hbox (6.77829pt too wide) in paragraph at lines 952--953
 T1/zi4/m/n/10 http : / / archive . ics . uci . edu / ml$[][]\T1/ptm/m/n/10 . Ir
 vine,
 No file Rd2.ind.
-[16] (/tmp/RtmpGzRGW2/Rd2pdf3a9f61f25e35/Rd2.aux) )
+[16] (/tmp/RtmpduqEMV/Rd2pdf22b659f9735/Rd2.aux) )
 (see the transcript file for additional information){/usr/share/texlive/texmf-d
 ist/fonts/enc/dvips/base/8r.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/
 inconsolata/i4-t1-0.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/incon
@@ -254,7 +254,7 @@ exlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/ut
 mr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (16 pages, 167904 bytes).
+Output written on Rd2.pdf (16 pages, 167912 bytes).
 Transcript written on Rd2.log.
 This is makeindex, version 2.15 [TeX Live 2016] (kpathsea + Thai support).
 Scanning input file Rd2.idx....done (24 entries accepted, 0 rejected).
@@ -266,7 +266,7 @@ This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded
  restricted \write18 enabled.
 entering extended mode
 LaTeX2e <2016/03/31>
-Babel <3.9r> and hyphenation patterns for 5 language(s) loaded.
+Babel <3.9r> and hyphenation patterns for 9 language(s) loaded.
 (./Rd2.tex
 (/usr/share/texlive/texmf-dist/tex/latex/base/book.cls
 Document Class: book 2014/09/29 v1.4h Standard LaTeX document class
@@ -321,20 +321,20 @@ Package hyperref Warning: Option `pagebackref' has already been used,
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.dfu))
 (/usr/share/texlive/texmf-dist/tex/latex/base/latin1.def))
 Writing index file Rd2.idx
-(/tmp/RtmpGzRGW2/Rd2pdf3a9f61f25e35/Rd2.aux)
+(/tmp/RtmpduqEMV/Rd2pdf22b659f9735/Rd2.aux)
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 ) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty))
-(/tmp/RtmpGzRGW2/Rd2pdf3a9f61f25e35/Rd2.out)
-(/tmp/RtmpGzRGW2/Rd2pdf3a9f61f25e35/Rd2.out)
+(/tmp/RtmpduqEMV/Rd2pdf22b659f9735/Rd2.out)
+(/tmp/RtmpduqEMV/Rd2pdf22b659f9735/Rd2.out)
 (/usr/share/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd)
-(/tmp/RtmpGzRGW2/Rd2pdf3a9f61f25e35/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/
-updmap/pdftex.map}]) (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/tmp/RtmpduqEMV/Rd2pdf22b659f9735/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/u
+pdmap/pdftex.map}]) (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 [2] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [3]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [4]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
@@ -371,10 +371,10 @@ Overfull \hbox (6.77829pt too wide) in paragraph at lines 952--953
 []\T1/ptm/m/n/10 Lichman, M. (2013). UCI Ma-chine Learn-ing Repos-i-tory [][]$\
 T1/zi4/m/n/10 http : / / archive . ics . uci . edu / ml$[][]\T1/ptm/m/n/10 . Ir
 vine,
-(/tmp/RtmpGzRGW2/Rd2pdf3a9f61f25e35/Rd2.ind [16]
+(/tmp/RtmpduqEMV/Rd2pdf22b659f9735/Rd2.ind [16]
 Overfull \hbox (3.3567pt too wide) in paragraph at lines 11--13
 []\T1/zi4/m/n/10 compute_A_B_G_D_and_simulate_mu_Lambda\T1/ptm/m/n/10 , 
-[17]) (/tmp/RtmpGzRGW2/Rd2pdf3a9f61f25e35/Rd2.aux)
+[17]) (/tmp/RtmpduqEMV/Rd2pdf22b659f9735/Rd2.aux)
 
 Package rerunfilecheck Warning: File `Rd2.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
@@ -394,7 +394,7 @@ exlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/ut
 mr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (17 pages, 170130 bytes).
+Output written on Rd2.pdf (17 pages, 170143 bytes).
 Transcript written on Rd2.log.
 This is makeindex, version 2.15 [TeX Live 2016] (kpathsea + Thai support).
 Scanning input file Rd2.idx....done (24 entries accepted, 0 rejected).
@@ -406,7 +406,7 @@ This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded
  restricted \write18 enabled.
 entering extended mode
 LaTeX2e <2016/03/31>
-Babel <3.9r> and hyphenation patterns for 5 language(s) loaded.
+Babel <3.9r> and hyphenation patterns for 9 language(s) loaded.
 (./Rd2.tex
 (/usr/share/texlive/texmf-dist/tex/latex/base/book.cls
 Document Class: book 2014/09/29 v1.4h Standard LaTeX document class
@@ -461,20 +461,20 @@ Package hyperref Warning: Option `pagebackref' has already been used,
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.dfu))
 (/usr/share/texlive/texmf-dist/tex/latex/base/latin1.def))
 Writing index file Rd2.idx
-(/tmp/RtmpGzRGW2/Rd2pdf3a9f61f25e35/Rd2.aux)
+(/tmp/RtmpduqEMV/Rd2pdf22b659f9735/Rd2.aux)
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 ) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty))
-(/tmp/RtmpGzRGW2/Rd2pdf3a9f61f25e35/Rd2.out)
-(/tmp/RtmpGzRGW2/Rd2pdf3a9f61f25e35/Rd2.out)
+(/tmp/RtmpduqEMV/Rd2pdf22b659f9735/Rd2.out)
+(/tmp/RtmpduqEMV/Rd2pdf22b659f9735/Rd2.out)
 (/usr/share/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd)
-(/tmp/RtmpGzRGW2/Rd2pdf3a9f61f25e35/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/
-updmap/pdftex.map}]) (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/tmp/RtmpduqEMV/Rd2pdf22b659f9735/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/u
+pdmap/pdftex.map}]) (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 [2] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [3]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [4]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
@@ -511,10 +511,10 @@ Overfull \hbox (6.77829pt too wide) in paragraph at lines 952--953
 []\T1/ptm/m/n/10 Lichman, M. (2013). UCI Ma-chine Learn-ing Repos-i-tory [][]$\
 T1/zi4/m/n/10 http : / / archive . ics . uci . edu / ml$[][]\T1/ptm/m/n/10 . Ir
 vine,
-(/tmp/RtmpGzRGW2/Rd2pdf3a9f61f25e35/Rd2.ind [16]
+(/tmp/RtmpduqEMV/Rd2pdf22b659f9735/Rd2.ind [16]
 Overfull \hbox (3.3567pt too wide) in paragraph at lines 11--13
 []\T1/zi4/m/n/10 compute_A_B_G_D_and_simulate_mu_Lambda\T1/ptm/m/n/10 , 
-[17]) (/tmp/RtmpGzRGW2/Rd2pdf3a9f61f25e35/Rd2.aux) )
+[17]) (/tmp/RtmpduqEMV/Rd2pdf22b659f9735/Rd2.aux) )
 (see the transcript file for additional information){/usr/share/texlive/texmf-d
 ist/fonts/enc/dvips/base/8r.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/
 inconsolata/i4-t1-0.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/incon
@@ -528,8 +528,8 @@ exlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/ut
 mr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (17 pages, 170598 bytes).
+Output written on Rd2.pdf (17 pages, 170605 bytes).
 Transcript written on Rd2.log.
 Saving output to 'fabMix-manual.pdf' ...
 Done
-You may want to clean up by 'rm -rf /tmp/RtmpGzRGW2/Rd2pdf3a9f61f25e35'
+You may want to clean up by 'rm -rf /tmp/RtmpduqEMV/Rd2pdf22b659f9735'

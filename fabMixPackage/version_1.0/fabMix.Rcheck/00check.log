@@ -10,6 +10,8 @@
 Maintainer: ‘Panagiotis Papastamoulis <papapast@yahoo.gr>’
 
 New submission
+
+The Date field is over a month old.
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK

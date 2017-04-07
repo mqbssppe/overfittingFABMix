@@ -693,15 +693,17 @@ getStuffForDIC <- function(x_data, outputFolder, q, burn, Km, normalize, discard
 	p <- dim(x_data)[2]
 
 	if(missing(Km)){Km <- 20}
-	if(missing(burn)){burn <- 1:1}
+	if(missing(burn)){burn <- 0}
 	setwd(outputFolder)
 	cat(paste0('         - Entering directory: ', getwd()),'\n')
 	z <- as.matrix(read.table("zValues.txt"))
 	logl <- read.table("cllValues.txt")
         tmp  <- apply(z,1,function(y){length(table(y))})
         logl <- cbind(tmp, logl)
-	z <- z[-burn,]
-	logl <- logl[-burn,]
+	if(burn > 0){
+		z <- z[-(1:burn),]
+		logl <- logl[-(1:burn),]
+	}
 	cat(paste0('            Nclusters:    ', paste(as.character(names(table(logl[,1]))), collapse="     ") ), '\n')
 	cat(paste0('            Frequency:    ', paste(as.character(as.numeric(table(logl[,1]))), collapse="    ") ), '\n')
 #	K <- Km
@@ -735,30 +737,44 @@ getStuffForDIC <- function(x_data, outputFolder, q, burn, Km, normalize, discard
 	#	lMean.matrix <- matrix(lMean,nrow = p, ncol = q, byrow=TRUE)
 		l <- as.matrix(read.table(paste0("LambdaValues",k,".txt")))
 #		if(q == 1){ l <- array(l, dim = c(length(l) , 1))}
-		l <- l[-burn,]
+		if(burn > 0){
+		l <- l[-(1:burn),]}
 		mcmc[,k,] <- l[index,]
 	}
 	lambda.perm.mcmc <- permute.mcmc(mcmc, ls$permutations$ECR)$output
 	for(k in 1:Km){
 		lMean <- apply(lambda.perm.mcmc[,k,],2,mean)
 	}
-
-	mu <- read.table("muValues.txt")[max(burn) + Kindex,] # auto to grafei ws mu_{11},mu_{12},...,mu_{1K}, ...., mu_{p1},mu_{p2},...,mu_{pK} gia kathe grammi
+	mu <- read.table("muValues.txt")# auto to grafei ws mu_{11},mu_{12},...,mu_{1K}, ...., mu_{p1},mu_{p2},...,mu_{pK} gia kathe grammi
+	if(burn > 0){
+		mu <- mu[-(1:burn),] 
+	}
+	mu <- mu[Kindex,]
 	mu.mcmc <- array(data = NA, dim = c(m,Km,p))
 	for(k in 1:Km){
 		mu.mcmc[,k,] <- as.matrix(mu[,k + Km*((1:p)-1)])
 	}
 	mu.mcmc <- permute.mcmc(mu.mcmc, ls$permutations$ECR)$output
 	#
-	SigmaINV <- as.matrix(read.table("sigmainvValues.txt")[max(burn) + Kindex,]) # auto to grafei ws (s_{11},...,s_{p1}),....,(s_{1k},...,s_{pk}),....,(s_{1K},...,s_{pK})
+	SigmaINV <- as.matrix(read.table("sigmainvValues.txt"))# auto to grafei ws (s_{11},...,s_{p1}),....,(s_{1k},...,s_{pk}),....,(s_{1K},...,s_{pK})
+	if(burn > 0){
+		SigmaINV <- SigmaINV[-(1:burn),] 
+	}
+	SigmaINV <- SigmaINV[Kindex, ] 
 	SigmaINV.mcmc <- SigmaINV
 
 	Sigma.mcmc <- 1/SigmaINV.mcmc
 
 	#SigmaINV.mean <- as.numeric(apply(SigmaINV,2,mean))
-
-	w.mcmc <- array(as.matrix(read.table("wValues.txt")[max(burn) + Kindex, ]),dim = c(length(Kindex),Km,1))
-	w.mcmc <- array(w.mcmc[,1:Km,],dim = c(length(Kindex),Km,1))
+	w.mcmc <- as.matrix(read.table("wValues.txt"))
+	w.mcmc <- array(w.mcmc, dim = c(dim(w.mcmc)[1], Km, 1))
+	if(burn > 0){
+		w.mcmc <- w.mcmc[-(1:burn),,]
+		w.mcmc <- w.mcmc[Kindex,]
+	}else{
+		w.mcmc <- w.mcmc[Kindex,,]
+	}
+	w.mcmc <- array(w.mcmc[,1:Km],dim = c(length(Kindex),Km,1))
 	w.mcmc <- permute.mcmc(w.mcmc, ls$permutations$"ECR")$output
 
 	lValues <- numeric(m)
@@ -789,6 +805,7 @@ getStuffForDIC <- function(x_data, outputFolder, q, burn, Km, normalize, discard
 	bic <- bic + obsL
 	iterMax <- i
 	for(i in 2:m){
+#		cat(paste0("i  = ", i), "\n")
 		lambda.current <- array(data = NA, dim = c(Km,p,q))
 		Sigma.current <- Sigma.mcmc[i, ]
 		mu.current <- mu.mcmc[i,,]
@@ -797,6 +814,7 @@ getStuffForDIC <- function(x_data, outputFolder, q, burn, Km, normalize, discard
 			mu.current <- array(mu.mcmc[i,,], dim = c(1, p))
 		}
 		for(k in 1:Km){
+#			cat(paste0("  k  = ", k), "\n")
 			ldraw <- lambda.perm.mcmc[i,k,]
 			lambda.current[k,,] <- matrix(ldraw,nrow = p, ncol = q, byrow=TRUE)
 			for(i1 in 1:p){
@@ -848,15 +866,17 @@ dealWithLabelSwitching_same_sigma <- function(x_data, outputFolder, q, burn, z.t
 	p <- dim(x_data)[2]
 	n <- dim(x_data)[1]
 	if(missing(Km)){Km <- 20}
-	if(missing(burn)){burn <- 1:1}
+	if(missing(burn)){burn <- 0}
 	if(missing(compute_regularized_expression)){ compute_regularized_expression = FALSE }
 	cat(paste0('-    (5) Dealing with label switching for q = ', q), '\n')
 	setwd(outputFolder)
 	cat(paste0('         * Entering directory: ', getwd()),'\n')
 	z <- as.matrix(read.table("zValues.txt"))
 	logl <- read.table("kValues.txt", header=T)
-	logl <- logl[-burn, ]
-	z <- z[-burn,]
+	if(burn > 0){
+		logl <- logl[-(1:burn), ]
+		z <- z[-(1:burn),]
+	}
 #	print(table(logl[,1]))
 	K <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
 	kSelected <- K
@@ -903,7 +923,9 @@ dealWithLabelSwitching_same_sigma <- function(x_data, outputFolder, q, burn, z.t
 		#       lMean <- apply(l,2,mean)
 		#       lMean.matrix <- matrix(lMean,nrow = p, ncol = q, byrow=TRUE)
 			l <- as.matrix(read.table(paste0("LambdaValues",k,".txt")))
-			l <- l[-burn,]
+			if(burn > 0){
+				l <- l[-(1:burn),]
+			}
 			mcmc[,k,] <- l[index,]
 		}
 		if(skiniko == TRUE){
@@ -924,7 +946,12 @@ dealWithLabelSwitching_same_sigma <- function(x_data, outputFolder, q, burn, z.t
 		}
 		write.table(lambda.mean, file = 'lambda_estimate_ecr.txt', col.names = paste('lambda',1:p, rep(1:q, each = p), sep = "_"))
 		cat(paste0('         * write file: `lambda_estimate_ecr.txt`'),'\n')
-		mu <- read.table("muValues.txt")[max(burn) + Kindex,] # auto to grafei ws mu_{11},mu_{12},...,mu_{1K}, ...., mu_{p1},mu_{p2},...,mu_{pK} gia kathe grammi
+		mu <- read.table("muValues.txt")# auto to grafei ws mu_{11},mu_{12},...,mu_{1K}, ...., mu_{p1},mu_{p2},...,mu_{pK} gia kathe grammi
+		if(burn > 0){
+			mu <- mu[-(1:burn),] 
+		}
+		mu <- mu[Kindex,]
+
 		mu.mcmc <- array(data = NA, dim = c(m,K,p))
 		for(k in 1:K){
 			mu.mcmc[,k,] <- as.matrix(mu[,k + K*((1:p)-1)])
@@ -950,9 +977,18 @@ dealWithLabelSwitching_same_sigma <- function(x_data, outputFolder, q, burn, z.t
 		cat(paste0('         * write file: `mu_estimate_ecr.txt`'),'\n')
 
 
-		w.mcmc <- array(as.matrix(read.table("wValues.txt")[max(burn) + Kindex, ]),dim = c(length(Kindex),K,1))
+#		w.mcmc <- array(as.matrix(read.table("wValues.txt")[max(burn) + Kindex, ]),dim = c(length(Kindex),K,1))
+
+		w.mcmc <- as.matrix(read.table("wValues.txt"))
+		w.mcmc <- array(w.mcmc, dim = c(dim(w.mcmc)[1], K, 1))
+		if(burn > 0){
+			w.mcmc <- w.mcmc[-(1:burn),,]
+			w.mcmc <- w.mcmc[Kindex,]
+		}else{
+			w.mcmc <- w.mcmc[Kindex,,]
+		}
+		w.mcmc <- array(w.mcmc[,1:K],dim = c(length(Kindex),K,1))
 		w.mcmc_raw <- w.mcmc
-		w.mcmc <- array(w.mcmc[,1:K,],dim = c(length(Kindex),K,1))
 		if(skiniko == TRUE){
 			tmp1 <- w.mcmc[,kLAST,]
 			tmp2 <-  w.mcmc[,Km,]	
@@ -984,7 +1020,11 @@ dealWithLabelSwitching_same_sigma <- function(x_data, outputFolder, q, burn, z.t
 		cat(paste0('         * write file: `classificationProbabilities.txt`'),'\n')
 
 		aliveClusters <- as.numeric(names(table(ls$clusters[1,])))
-		sigmaINV <- as.matrix(read.table("sigmainvValues.txt")[Kindex, ])
+		sigmaINV <- as.matrix(read.table("sigmainvValues.txt"))# auto to grafei ws (s_{11},...,s_{p1}),....,(s_{1k},...,s_{pk}),....,(s_{1K},...,s_{pK})
+		if(burn > 0){
+			sigmaINV <- sigmaINV[-(1:burn),] 
+		}
+		sigmaINV <- sigmaINV[Kindex, ] 
 		covmat <- array(data = 0, dim = c( length(aliveClusters), p, p ))
 		rownames(covmat) <- as.character(aliveClusters)
 		for(iter in 1:m){
@@ -1007,7 +1047,11 @@ dealWithLabelSwitching_same_sigma <- function(x_data, outputFolder, q, burn, z.t
 
 		if( compute_regularized_expression == TRUE ){
 			cat(paste("-    computing regularized expressions..."),'\n')
-			yValues <- read.table("yValues.txt")[Kindex, ]
+			yValues <- read.table("yValues.txt")
+			if(burn > 0){
+				yValues <- yValues[-(1:burn), ]
+			}
+			yValues <- yValues[Kindex, ]
 			regularizedExpression <- array(data = 0, dim = c(length(aliveClusters), p))
 			regularizedExpression2 <- array(data = 0, dim = c(length(aliveClusters), p, q))			
 			rownames(regularizedExpression) <- rownames(regularizedExpression2) <- as.character(aliveClusters)
