@@ -55,8 +55,8 @@ ARI.EMMIXmfa <- adjustedRandIndex(EmMfaRun4[[K.EMMIXmfa]]$clust, syntheticDatase
 #.......................................................................................................................#
 #	(b.3): fabMix package............................................................................................
 # 	fabMix parameters: 												#
-nChains <- 8  	# number of parallel chains										#
-dN <- 3		# NOTE: Larger dN values reduce the acceptance rate of proposed swaps. 					#
+nChains <- 4  	# number of parallel chains (in the results shown in the paper 8 chains are used).										#
+dN <- 5		# NOTE: Larger dN values reduce the acceptance rate of proposed swaps. 					#
 		#	The user should carefully examine this parameter to achieve 					#
 		#	reasonable acceptance rates. In the paper values 1 <= dN <= 5 are considered. 			#
 # Dirichlet prior of mixture weights per chain.										#
