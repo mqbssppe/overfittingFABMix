@@ -1,10 +1,8 @@
-# computation of log{ f(d_il = 0| ...)/f(d_il = 1| ...) }
-library('MASS')
-library('mvtnorm')
-library('foreach')
-library('doParallel')
-library('ellipse')
-library('label.switching')
+#library('MASS')
+#library('mvtnorm')
+#library('foreach')
+#library('doParallel')
+#library('label.switching')
 
 update_all_y <- function(x_data, mu, SigmaINV, Lambda, z){
 	p <- dim(Lambda)[2]
@@ -172,6 +170,34 @@ update_z4 <- function(w, mu, Lambda, SigmaINV, K, x_data){
 }
 
 
+# using the matrix inversion lemma
+update_z2 <- function(w, mu, Lambda, SigmaINV, K, x_data){
+	n <- dim(x_data)[1]
+	p <- dim(x_data)[2]
+        probs <- array(data = 0, dim =c(n,K))
+        for(k in 1:K){
+                center_x <- x_data - matrix(mu[k,], nrow = n, ncol = p, byrow=TRUE)
+		x_var <- t(Lambda[k,,]) %*% SigmaINV %*% Lambda[k,,]
+		diag(x_var) <- diag(x_var) + 1
+		x_var <- try(solve(x_var), TRUE)
+                if(is.numeric(x_var) == TRUE){
+			x_var <- Lambda[k,,] %*% x_var %*% t(Lambda[k,,])
+			x_var <- SigmaINV %*% x_var %*% SigmaINV
+			x_var <- SigmaINV - x_var
+                        probs[,k] <- log(w[k]) -0.5*apply(center_x,1,function(tmp){return( as.numeric(t(tmp) %*% x_var %*% tmp) )}) + 0.5*log(det(x_var)) 
+                }
+        }
+        probs <- array(t(apply(probs, 1, function(tmp){return(exp(tmp - max(tmp)))} )),dim = c(n,K))
+        z <- apply(probs,1,function(tmp){return(sample(K,1,prob = tmp))})
+        results <- vector("list", length=2)
+        names(results) <- c("w","z")
+        results[[1]] <- w
+        results[[2]] <- z
+        return(results)
+}
+
+
+
 
 
 
@@ -245,13 +271,15 @@ update_OmegaINV <- function(Lambda, K, g, h){
 ################################################################################################################
 ################################################################################################################
 
-overfittingMFA <- function(x_data, originalX, outputDirectory, Kmax, m, thinning, burn, g, h, alpha_prior, alpha_sigma, beta_sigma, progressGraphs, start_values, q, zStart, gibbs_z){
+overfittingMFA <- function(x_data, originalX, outputDirectory, Kmax, m, thinning, burn, g, h, alpha_prior, alpha_sigma, beta_sigma, start_values, q, zStart, gibbs_z){
 	if(missing(originalX)){originalX <- x_data}
 	if(missing(gibbs_z)){gibbs_z = 0.05}
 	if(missing(zStart)){zStart = FALSE}
 	if(missing(x_data)){stop('x_data not provided.')}
 	if(missing(q)){stop('q not provided.')}
 	p <- dim(x_data)[2]
+	ledermannBound <- ( 2*p + 1 - sqrt(8*p + 1) ) / 2
+	if (q > ledermannBound){ stop(paste0('q should not exceed the Ledermann bound: ', ledermannBound)) }
 	n <- dim(x_data)[1]
 	v_r <- numeric(p) #indicates the non-zero values of Lambdas
 	for( r in 1:p ){
@@ -267,7 +295,6 @@ overfittingMFA <- function(x_data, originalX, outputDirectory, Kmax, m, thinning
 	if(missing(alpha_prior)){alpha_prior <- 1*rep(1/Kmax,Kmax)}
 	if(missing(alpha_sigma)){alpha_sigma <- 2}
 	if(missing(beta_sigma)){beta_sigma <- 1}
-	if(missing(progressGraphs)){progressGraphs <- FALSE}
 	if(missing(start_values)){start_values <- FALSE}
 	if( start_values == F ){
 		dir.create(outputDirectory)
@@ -385,7 +412,7 @@ overfittingMFA <- function(x_data, originalX, outputDirectory, Kmax, m, thinning
 #		3
 		u_v <- runif(1)
 		if(u_v < gibbs_z){
-			f2 <- update_z4(w = w.values, mu = array(mu.values,dim = c(K,p)), Lambda = array(Lambda.values,dim = c(K,p,q)), SigmaINV = SigmaINV.values, K = K, x_data = x_data)
+			f2 <- update_z2(w = w.values, mu = array(mu.values,dim = c(K,p)), Lambda = array(Lambda.values,dim = c(K,p,q)), SigmaINV = SigmaINV.values, K = K, x_data = x_data)
 		}else{
 			f2 <- update_z_b(w = w.values, mu = array(mu.values,dim = c(K,p)), Lambda = array(Lambda.values,dim = c(K,p,q)), y = y, 
 						SigmaINV = SigmaINV.values, K = K, x_data = x_data)
@@ -447,7 +474,8 @@ log_dirichlet_pdf <- function(alpha, weights){
 	return(pdf)
 }
 
-fabMix <- function(dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCycles, g, h, alpha_sigma, beta_sigma, q, normalize, thinning, zStart, nIterPerCycle){
+fabMix <- function(dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCycles, g, h, alpha_sigma, beta_sigma, q, normalize, thinning, zStart, nIterPerCycle, gibbs_z = 1){
+	dev.new(width=15, height=5)
 	if(missing(Kmax)){Kmax <- 20}
 	if(missing(nIterPerCycle)){nIterPerCycle = 10}
 	if(missing(zStart)){zStart = FALSE}
@@ -511,14 +539,14 @@ fabMix <- function(dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCycles, g
 	foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dopar% {
 		overfittingMFA(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
 			Kmax = Kmax, m = 100, thinning = 1, burn = 99, alpha_prior= rep(initialAlphas[myChain], Kmax), g = g, h = h, 
-			alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, progressGraphs = FALSE, start_values = FALSE, gibbs_z = 0.05)
+			alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = FALSE, gibbs_z = 0.05)
 	}
 	cat(paste(' OK'),'\n')
 	cat(paste('-    (2) Initializing the actual model from the previously obtained values... '))
 	foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dopar% {
 		overfittingMFA(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
 			Kmax = Kmax, m = 300, thinning = 1, burn = 299, alpha_prior= rep(dirPriorAlphas[myChain], Kmax), g = g, h = h, 
-			alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, progressGraphs = FALSE, start_values = TRUE, gibbs_z = 0.05)
+			alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = TRUE, gibbs_z = gibbs_z)
 	}
 	cat(paste(' OK'),'\n')
 	for(myChain in 1:nChains){
@@ -552,7 +580,7 @@ fabMix <- function(dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCycles, g
 		foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dopar% {
 			overfittingMFA(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
 				Kmax = Kmax, m = nIterPerCycle, thinning = 1, burn = bb, alpha_prior= rep( dirPriorAlphas[myChain], Kmax), g = g, h = h, 
-				alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, progressGraphs = FALSE, start_values = TRUE)
+				alpha_sigma = alpha_sigma, beta_sigma = beta_sigma,  start_values = TRUE)
 			kValues[iteration, myChain] <- read.table( paste0(outputDirs[myChain],'/k.and.logl.Values.txt') )[1,1]
 		}
 
@@ -604,7 +632,7 @@ fabMix <- function(dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCycles, g
 			matplot(t(x_data), type = "l", col = as.numeric(as.factor(z)))
 			matplot(t(originalX), type = "l", col = as.numeric(as.factor(z)))
 			ar <- round(100*mh_acceptance_rate/iteration, 3)
-			cat(paste0('-        iteration: ',iteration,'. Metropolis-Hastings acceptance rate: ', ar), '\n')
+			cat(paste0('-        mcmc cycle: ',iteration,' (<=> iteration: ',iteration*nIterPerCycle,'). Swap acceptance rate: ', ar, '%.'), '\n')
 		}
 		if(iteration %% thinning == 0){
 			if(iteration > burnCycles){
@@ -679,6 +707,8 @@ observed.log.likelihood0 <- function(x_data, w, mu, Lambda, Sigma, z){
         }
         return( logL )
 }
+
+
 
 
 
@@ -1091,5 +1121,83 @@ dealWithLabelSwitching_same_sigma <- function(x_data, outputFolder, q, burn, z.t
 }
 
 
+
+simData <- function(p, q, K.true, n, loading_means, loading_sd, sINV_values){
+	if(missing(p)){p = 40}
+	if(missing(q)){q = 4}
+	if(missing(K.true)){K.true = 6}
+	if(missing(n)){n = 200}
+	if(missing(sINV_values)){ sINV_values = rgamma(p, shape = 1, rate = 1) }
+	if( missing(loading_means) ){ loading_means <- c(-30,-20,-10,10, 20, 30) }
+	if( missing(loading_sd) ){ loading_sd <- rep(2, length(loading_means)) }
+	if ( length(loading_means) !=  length(loading_sd) ){
+		stop("`loading_means` and `loading_sd` should have same length.")
+	}
+	cat(paste0("Simulation parameters:"),'\n')
+	if(q >= p){stop("q should not be greater than p")}
+	cat(paste0("   n = ", n),'\n')
+	cat(paste0("   p = ", p),'\n')
+	cat(paste0("   q = ", q),'\n')
+	cat(paste0("   K = ", K.true),'\n')
+	w.true <- myDirichlet(rep(10,K.true))
+	z.true <- sample(K.true,n,replace = TRUE, prob = w.true)
+	Lambda.true <- array(data = rnorm(K.true*p*q, mean = 0, sd = 1), dim = c(K.true,p,q))
+	mu.true <- array(data = 0, dim = c(K.true,p))
+	for(k in 1:K.true){
+		u <- runif(1)
+		subROW <- floor(p/q)
+		for(j in 1:q){
+			meanCOL <- rep(0,p)
+			pickAnIndex <- sample(length(loading_means), 1)
+			meanCOL[ (j-1)*subROW + 1:subROW] <- loading_means[pickAnIndex]
+			Lambda.true[k, , j] <- rnorm(p, mean = meanCOL, sd = loading_sd[pickAnIndex] )
+			if(j > 1)  {
+				Lambda.true[k, 1:(j-1), j] <- rep(0, j - 1)
+			}
+		}
+		u <- runif(1)
+		if(u < 1/3){
+			mu.true[k, ] <- 20*sin(seq(0,k*pi, length = p))
+		}else{
+			if(u < 2/3){
+				mu.true[k, ] <- 20*cos(seq(0,k*pi, length = p))
+			}else{
+				mu.true[k, ] <- 40*(sin(seq(0,k*pi, length = p)))^2 - 40*(cos(seq(0,k*pi, length = p)))^2
+			}
+		}
+	}
+
+
+
+	SigmaINV.true <- array(data = 0, dim = c(p,p))
+	diag(SigmaINV.true) <- sINV_values
+	y.true <- array(data = 0, dim = c(n,q))
+	Sigma.true <- SigmaINV.true
+	diag(Sigma.true) <- 1/diag(SigmaINV.true)
+	x_data <- array(data = 0, dim = c(n,p))
+	ly <- q
+	for(i in 1:n){
+		y.true[i,] <- rnorm(ly,mean = 0,sd = 1)
+		j <- z.true[i]
+		if(q == 1){
+			x_mean <- mu.true[j,] + Lambda.true[j, , ] %*% array(y.true[i, ], dim = c(q,1))
+		}else{
+			x_mean <- mu.true[j,] + Lambda.true[j, , ] %*% y.true[i, ]
+		}
+		x_data[i,] <- mvrnorm(n = 1, mu = x_mean, Sigma = Sigma.true)
+	}
+	matplot(t(x_data), type = "l", col = z.true, lty = 1)
+	legend("bottomleft", paste0("cluster ",1:K.true, ": ",as.character(as.numeric(table(z.true)))), col = 1:K.true, lty = 1)
+	results <- vector('list', length = 7)
+	results[[1]] <- x_data
+	results[[2]] <- z.true
+	results[[3]] <- Lambda.true
+	results[[4]] <- mu.true 
+	results[[5]] <- Sigma.true
+	results[[6]] <- y.true
+	results[[7]] <- w.true
+	names(results) <- c("data", "class", "factorLoadings", "means", "variance","factors","weights")
+	return(results)
+}
 
 

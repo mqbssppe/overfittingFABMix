@@ -170,6 +170,34 @@ update_z4 <- function(w, mu, Lambda, SigmaINV, K, x_data){
 }
 
 
+# using the matrix inversion lemma
+update_z2 <- function(w, mu, Lambda, SigmaINV, K, x_data){
+	n <- dim(x_data)[1]
+	p <- dim(x_data)[2]
+        probs <- array(data = 0, dim =c(n,K))
+        for(k in 1:K){
+                center_x <- x_data - matrix(mu[k,], nrow = n, ncol = p, byrow=TRUE)
+		x_var <- t(Lambda[k,,]) %*% SigmaINV %*% Lambda[k,,]
+		diag(x_var) <- diag(x_var) + 1
+		x_var <- try(solve(x_var), TRUE)
+                if(is.numeric(x_var) == TRUE){
+			x_var <- Lambda[k,,] %*% x_var %*% t(Lambda[k,,])
+			x_var <- SigmaINV %*% x_var %*% SigmaINV
+			x_var <- SigmaINV - x_var
+                        probs[,k] <- log(w[k]) -0.5*apply(center_x,1,function(tmp){return( as.numeric(t(tmp) %*% x_var %*% tmp) )}) + 0.5*log(det(x_var)) 
+                }
+        }
+        probs <- array(t(apply(probs, 1, function(tmp){return(exp(tmp - max(tmp)))} )),dim = c(n,K))
+        z <- apply(probs,1,function(tmp){return(sample(K,1,prob = tmp))})
+        results <- vector("list", length=2)
+        names(results) <- c("w","z")
+        results[[1]] <- w
+        results[[2]] <- z
+        return(results)
+}
+
+
+
 
 
 
@@ -384,7 +412,7 @@ overfittingMFA <- function(x_data, originalX, outputDirectory, Kmax, m, thinning
 #		3
 		u_v <- runif(1)
 		if(u_v < gibbs_z){
-			f2 <- update_z4(w = w.values, mu = array(mu.values,dim = c(K,p)), Lambda = array(Lambda.values,dim = c(K,p,q)), SigmaINV = SigmaINV.values, K = K, x_data = x_data)
+			f2 <- update_z2(w = w.values, mu = array(mu.values,dim = c(K,p)), Lambda = array(Lambda.values,dim = c(K,p,q)), SigmaINV = SigmaINV.values, K = K, x_data = x_data)
 		}else{
 			f2 <- update_z_b(w = w.values, mu = array(mu.values,dim = c(K,p)), Lambda = array(Lambda.values,dim = c(K,p,q)), y = y, 
 						SigmaINV = SigmaINV.values, K = K, x_data = x_data)
@@ -446,7 +474,7 @@ log_dirichlet_pdf <- function(alpha, weights){
 	return(pdf)
 }
 
-fabMix <- function(dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCycles, g, h, alpha_sigma, beta_sigma, q, normalize, thinning, zStart, nIterPerCycle){
+fabMix <- function(dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCycles, g, h, alpha_sigma, beta_sigma, q, normalize, thinning, zStart, nIterPerCycle, gibbs_z = 1){
 	dev.new(width=15, height=5)
 	if(missing(Kmax)){Kmax <- 20}
 	if(missing(nIterPerCycle)){nIterPerCycle = 10}
@@ -518,7 +546,7 @@ fabMix <- function(dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCycles, g
 	foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dopar% {
 		overfittingMFA(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
 			Kmax = Kmax, m = 300, thinning = 1, burn = 299, alpha_prior= rep(dirPriorAlphas[myChain], Kmax), g = g, h = h, 
-			alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = TRUE, gibbs_z = 0.05)
+			alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = TRUE, gibbs_z = gibbs_z)
 	}
 	cat(paste(' OK'),'\n')
 	for(myChain in 1:nChains){

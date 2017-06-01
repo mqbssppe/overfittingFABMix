@@ -13,6 +13,7 @@ simData	simData
 update_all_y	update_all_y
 update_OmegaINV	update_OmegaINV
 update_SigmaINV_faster	update_SigmaINV_faster
+update_z2	update_z2
 update_z4	update_z4
 update_z_b	update_z_b
 waveDataset1500	waveDataset1500

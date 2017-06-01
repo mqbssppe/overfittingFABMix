@@ -8,7 +8,8 @@ This function runs parallel chains under a prior tempering scheme of the Dirichl
 }
 \usage{
 fabMix(dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCycles, 
-	g, h, alpha_sigma, beta_sigma, q, normalize, thinning, zStart, nIterPerCycle)
+	g, h, alpha_sigma, beta_sigma, q, normalize, thinning, 
+	zStart, nIterPerCycle, gibbs_z)
 }
 \arguments{
   \item{dirPriorAlphas}{
@@ -55,6 +56,9 @@ Number of cycles that will be discarded as burn-in period.
 }
   \item{nIterPerCycle}{
 	Number of iteration per MCMC cycle. Default value: 10.
+}
+  \item{gibbs_z}{
+	Select the gibbs sampling scheme for updating latent allocations of mixture model. Default value: 1.
 }
 }
 \value{

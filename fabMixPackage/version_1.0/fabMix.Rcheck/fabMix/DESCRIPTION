@@ -3,12 +3,12 @@ Type: Package
 Title: Overfitting Bayesian Mixtures of Factor Analyzers with an
         Unknown Number of Components
 Version: 1.0
-Date: 2017-01-25
+Date: 2017-06-01
 Author: Panagiotis Papastamoulis
 Maintainer: Panagiotis Papastamoulis <papapast@yahoo.gr>
 Description: Model-based clustering of multivariate continuous data with possibly complex covariance structure. The underlying model is a Bayesian mixture of factor analyzers with a large number of components (overfitting mixture). Suitable prior assumptions ensure that asymptotically the extra components will have zero posterior weight (empty), therefore, the inference on the number of clusters is based on the ``alive'' components. The number of factors is considered fixed, and the optimal one can be estimated using information criteria. Identifiability issues related to label switching are dealt by post-processing the simulated output with the ECR algorithm.
 Imports: MASS, doParallel, foreach, label.switching, mvtnorm
 License: GPL-2
 NeedsCompilation: no
-Packaged: 2017-04-07 15:34:34 UTC; mqbssppe
-Built: R 3.3.1; ; 2017-04-07 15:35:15 UTC; unix
+Packaged: 2017-06-01 12:50:26 UTC; mqbssppe
+Built: R 3.4.0; ; 2017-06-01 12:50:39 UTC; unix
