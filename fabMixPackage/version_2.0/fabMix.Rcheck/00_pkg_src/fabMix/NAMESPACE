@@ -1,0 +1,11 @@
+exportPattern("^[[:alpha:]]+")
+import(doParallel)
+import(foreach)
+import(label.switching)
+import(MASS)
+import(mvtnorm)
+importFrom("grDevices", "topo.colors", "dev.new")
+importFrom("graphics", "legend", "matplot", "points", "par")
+importFrom("stats", "rbinom", "dbinom", "dpois", "ppois", "rbeta", "rgamma", "runif", "quantile", "rnorm", "var", "sd")
+importFrom("utils", "read.table", "write.csv", "read.csv", "write.table")
+

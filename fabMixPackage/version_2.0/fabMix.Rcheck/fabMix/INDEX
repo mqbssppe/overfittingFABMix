@@ -1,0 +1,49 @@
+complete.log.likelihood
+                        Complete log-likelihood function
+complete.log.likelihood_Sj
+                        Complete log-likelihood function
+compute_A_B_G_D_and_simulate_mu_Lambda
+                        Computation and simulations
+compute_A_B_G_D_and_simulate_mu_Lambda_Sj
+                        Computation and simulations
+compute_sufficient_statistics
+                        Compute sufficient statistics
+dealWithLabelSwitching
+                        Apply label switching algorithms
+fabMix                  Main function of the package
+fabMix-package          Overfitting Bayesian Mixtures of Factor
+                        Analyzers with an Unknown Number of Components
+fabMix_missing_values   Main function for the case of missing values
+getStuffForDIC          Compute information criteria
+log_dirichlet_pdf       Log-density function of the Dirichlet
+                        distribution
+myDirichlet             Simulate from the Dirichlet distribution
+observed.log.likelihood0
+                        Log-likelihood of the mixture model
+observed.log.likelihood0_Sj
+                        Log-likelihood of the mixture model
+overfittingMFA          Basic MCMC sampler
+overfittingMFA_Sj       Basic MCMC sampler using different error
+                        variance per component
+overfittingMFA_Sj_missing_values
+                        Basic MCMC sampler for the case of missing data
+                        and different error variance
+overfittingMFA_missing_values
+                        Basic MCMC sampler for the case of missing data
+simData                 Synthetic data generator
+update_OmegaINV         Gibbs sampling for Omega^{-1}
+update_SigmaINV_faster
+                        Gibbs sampling for Sigma^{-1}
+update_SigmaINV_faster_Sj
+                        Gibbs sampling for Sigma^{-1} per component
+update_all_y            Gibbs sampling for y
+update_all_y_Sj         Gibbs sampling for y
+update_z2               Collapsed Gibbs for z using matrix inversion
+                        lemma
+update_z2_Sj            Collapsed Gibbs for z using matrix inversion
+                        lemma
+update_z4               Collapsed Gibbs for z
+update_z4_Sj            Collapsed Gibbs for z
+update_z_b              Gibbs sampling for z
+update_z_b_Sj           Gibbs sampling for z
+waveDataset1500         Wave dataset

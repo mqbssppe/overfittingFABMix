@@ -1,0 +1,4 @@
+name	user	system	elapsed
+fabMix-package	0.416	0.004	0.421	
+fabMix	0.004	0.000	0.001	
+fabMix_missing_values	0.000	0.000	0.001	
