@@ -8,4 +8,4 @@ Beta-version of the package is up:
 
 2. [See simulation example](https://github.com/mqbssppe/overfittingFABMix/blob/master/simulations/mfaMethodsBenchmark.R)
 
-### New features: version_2.0 added witg support for **missing values** :waxing_gibbous_moon:
+### New features: version_2.0 added with support for **missing values** :waxing_gibbous_moon:
