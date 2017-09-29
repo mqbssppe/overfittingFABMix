@@ -1,6 +1,6 @@
 # fabMix
  
-## R code for 'Overfitting Bayesian Mixtures of Factor Analyzers with an Unknown Number of Components' [arXiv:1701.04605v2 [stat.ME]](https://arxiv.org/abs/1701.04605v2).
+## R code for *Overfitting Bayesian Mixtures of Factor Analyzers with an Unknown Number of Components* [arXiv:1701.04605v2 [stat.ME]](https://arxiv.org/abs/1701.04605v2).
 
 Beta-version of the package is up:
 
