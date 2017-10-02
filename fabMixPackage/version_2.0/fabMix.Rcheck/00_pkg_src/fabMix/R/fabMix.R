@@ -1265,6 +1265,12 @@ log_dirichlet_pdf <- function(alpha, weights){
 }
 
 fabMix <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCycles, g, h, alpha_sigma, beta_sigma, q, normalize, thinning, zStart, nIterPerCycle, gibbs_z = 1){
+	cat("          ____      __    __  ____     ", "\n")
+	cat("         / __/___ _/ /_  /  |/  (_)  __", "\n")
+	cat("        / /_/ __ `/ __ \\/ /|_/ / / |/_/", "\n")
+	cat("       / __/ /_/ / /_/ / /  / / />  <  ", "\n")
+	cat("      /_/  \\__,_/_.___/_/  /_/_/_/|_|  ", "\n")
+
 	missingRowsIndex <- which(is.na(rowSums(rawData)) == TRUE)
 	nMissingRows <- length( missingRowsIndex ) 
 	if(nMissingRows > 0){
@@ -1504,6 +1510,11 @@ fabMix <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, mCyc
 
 
 fabMix_missing_values <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCycles, g, h, alpha_sigma, beta_sigma, q, normalize, thinning, zStart, nIterPerCycle, gibbs_z = 1){
+	cat("          ____      __    __  ____     ", "\n")
+	cat("         / __/___ _/ /_  /  |/  (_)  __", "\n")
+	cat("        / /_/ __ `/ __ \\/ /|_/ / / |/_/", "\n")
+	cat("       / __/ /_/ / /_/ / /  / / />  <  ", "\n")
+	cat("      /_/  \\__,_/_.___/_/  /_/_/_/|_|  ", "\n")
 	dev.new(width=15, height=5)
 	if(missing(Kmax)){Kmax <- 20}
 	if(missing(nIterPerCycle)){nIterPerCycle = 10}

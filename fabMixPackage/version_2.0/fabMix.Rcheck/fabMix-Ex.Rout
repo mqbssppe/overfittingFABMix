@@ -203,7 +203,7 @@ Simulation parameters:
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.556 0.02 0.579 0 0 
+Time elapsed:  0.588 0.008 0.593 0 0 
 > grDevices::dev.off()
 null device 
           1 
