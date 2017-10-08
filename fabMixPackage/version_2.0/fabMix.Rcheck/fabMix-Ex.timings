@@ -1,4 +1,4 @@
 name	user	system	elapsed
-fabMix-package	0.420	0.008	0.429	
-fabMix	0.000	0.000	0.001	
-fabMix_missing_values	0.004	0.000	0.001	
+fabMix-package	0.280	0.004	0.284	
+fabMix	0.001	0.000	0.001	
+fabMix_missing_values	0.001	0.000	0.001	

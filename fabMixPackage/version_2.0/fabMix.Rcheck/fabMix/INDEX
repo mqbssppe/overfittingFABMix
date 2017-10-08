@@ -2,12 +2,18 @@ complete.log.likelihood
                         Complete log-likelihood function
 complete.log.likelihood_Sj
                         Complete log-likelihood function
+complete.log.likelihood_q0
+                        Complete log-likelihood function for q=0
 compute_A_B_G_D_and_simulate_mu_Lambda
                         Computation and simulations
 compute_A_B_G_D_and_simulate_mu_Lambda_Sj
                         Computation and simulations
+compute_A_B_G_D_and_simulate_mu_Lambda_q0
+                        Computation and simulations for q = 0.
 compute_sufficient_statistics
                         Compute sufficient statistics
+compute_sufficient_statistics_q0
+                        Compute sufficient statistics for q = 0
 dealWithLabelSwitching
                         Apply label switching algorithms
 fabMix                  Main function of the package
@@ -22,6 +28,8 @@ observed.log.likelihood0
                         Log-likelihood of the mixture model
 observed.log.likelihood0_Sj
                         Log-likelihood of the mixture model
+observed.log.likelihood0_Sj_q0
+                        Log-likelihood of the mixture model for q=0
 overfittingMFA          Basic MCMC sampler
 overfittingMFA_Sj       Basic MCMC sampler using different error
                         variance per component
@@ -30,12 +38,16 @@ overfittingMFA_Sj_missing_values
                         and different error variance
 overfittingMFA_missing_values
                         Basic MCMC sampler for the case of missing data
+overfitting_q0          MCMC sampler for q=0
 simData                 Synthetic data generator
 update_OmegaINV         Gibbs sampling for Omega^{-1}
 update_SigmaINV_faster
                         Gibbs sampling for Sigma^{-1}
 update_SigmaINV_faster_Sj
                         Gibbs sampling for Sigma^{-1} per component
+update_SigmaINV_faster_q0
+                        Gibbs sampling for Sigma^{-1} per component for
+                        q=0
 update_all_y            Gibbs sampling for y
 update_all_y_Sj         Gibbs sampling for y
 update_z2               Collapsed Gibbs for z using matrix inversion
@@ -46,4 +58,5 @@ update_z4               Collapsed Gibbs for z
 update_z4_Sj            Collapsed Gibbs for z
 update_z_b              Gibbs sampling for z
 update_z_b_Sj           Gibbs sampling for z
+update_z_q0             Gibbs sampling for z for q=0
 waveDataset1500         Wave dataset

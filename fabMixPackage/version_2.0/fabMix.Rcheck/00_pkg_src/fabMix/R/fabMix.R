@@ -440,12 +440,273 @@ update_OmegaINV <- function(Lambda, K, g, h){
 	return(OmegaINV)
 }
 
+#-------------------------------------------------------------------------------------------
+### functions for q_0
+#-------------------------------------------------------------------------------------------
+
+complete.log.likelihood_q0 <- function(x_data, w, mu, SigmaINV, z){
+	n <- length(z)
+	p <- dim(x_data)[2]
+        probs <- numeric(n)
+        alive <- as.numeric(names(table(z)))
+        for(k in alive){
+                index <- which(z == k)
+                center_x <- x_data[index,] - matrix(mu[k,], nrow = length(index), ncol = p, byrow=TRUE)
+                x_var <- SigmaINV[k,,]
+                probs[index] <- log(w[k]) -0.5*apply(center_x,1,function(tmp){return( as.numeric(t(tmp) %*% x_var %*% tmp) )}) + 0.5*log(det(x_var)) 
+        }
+        return(sum(probs))
+}
+
+
+
+
+compute_sufficient_statistics_q0 <- function(z, K, x_data){
+	p <- dim(x_data)[2]
+        cluster_size <- numeric(K)
+        sx  <- array(data = 0, dim = c(K,p))
+        sy  <- 0
+        sxx <- array(data = 0, dim = c(K,p,p))
+        syy <- 0
+        sxy <- 0
+        for(k in 1:K){
+                index <- which(z == k)
+                cluster_size[k] <- length(index)
+                if( cluster_size[k] > 0){
+                        sx[k,]  <- colSums(array(x_data[index,],dim = c(cluster_size[k],p)))
+                        for( i in index){
+                                sxx[k,,] <- sxx[k,,] + x_data[i,] %*% t(x_data[i,])
+                        }
+                }
+
+        }
+        results <- vector("list", length=6)
+        names(results) <- c("cluster_size","sx","sy","sxx","syy","sxy")
+        results[[1]] <- cluster_size
+        results[[2]] <- sx
+        results[[3]] <- sy
+        results[[4]] <- sxx
+        results[[5]] <- syy
+        results[[6]] <- sxy
+        return(results)
+}
+
+
+
+compute_A_B_G_D_and_simulate_mu_Lambda_q0 <- function(SigmaINV, suff_statistics, K, priorConst1, T_INV, v_r){
+	p <- dim(SigmaINV[1,,])[2]
+        A <- array(data = 0, dim = c(K,p,p))
+        B <- mu <- array(data = 0, dim = c(K,p))
+        G <- 0
+        D <- 0
+#                               (2) mu|Lambda, sufficient statistics, ...
+        mu <- array(data = 0, dim = c(K,p))
+        Lambdas <- 0
+        for(k in 1:K){
+                diag(A[k,,]) <- 1/( suff_statistics$cluster_size[k]*diag(SigmaINV[k,,]) + diag(T_INV))
+                B[k,] <- SigmaINV[k,,] %*% (suff_statistics$sx[k,] ) + priorConst1
+                # this is for simulating mu_k 
+                mu_mean <- A[k,,] %*% B[k,]
+                mu[k,] <- mvrnorm(n = 1, mu = mu_mean, Sigma = A[k,,])  
+        }
+        results <- vector("list", length=6)
+        results[[1]] <- A
+        results[[2]] <- B
+        results[[3]] <- G
+        results[[4]] <- D
+        results[[5]] <- Lambdas
+        results[[6]] <- mu
+        names(results) <- c("A","B","G","D","Lambdas","mu")
+        return(results)
+}
+
+update_z_q0 <- function(w, mu, SigmaINV, K, x_data){
+	n <- dim(x_data)[1]
+	p <- dim(x_data)[2]
+        probs <- array(data = 0, dim =c(n,K))
+        for(k in 1:K){
+                center_x <- x_data - matrix(mu[k,], nrow = n, ncol = p , byrow = TRUE)
+                probs[,k] <- log(w[k]) -0.5*apply(center_x,1,function(tmp){return( as.numeric(t(tmp) %*% SigmaINV[k,,] %*% tmp) )}) + 0.5*sum(log(diag(SigmaINV[k,,]))) 
+        }
+        probs <- array(t(apply(probs, 1, function(tmp){return(exp(tmp - max(tmp)))} )),dim = c(n,K))
+        z <- apply(probs,1,function(tmp){return(sample(K,1,prob = tmp))})
+        results <- vector("list", length=2)
+        names(results) <- c("w","z")
+        results[[1]] <- w
+        results[[2]] <- z
+        return(results)
+}
+
+
+update_SigmaINV_faster_q0 <- function(z, mu, K, alpha_sigma, beta_sigma, x_data){
+	p <- dim(x_data)[2]
+        SigmaINV <- array(data = 0, dim = c(K,p,p))
+        alive <- as.numeric(names(table(z)))
+        for (k in 1:K){
+                s <- numeric(p)
+                ind <- which(z == k)
+                n_k <- length(ind)
+                if(n_k > 0){
+                        tmp <- matrix(mu[k, ], nrow = n_k, ncol = p, byrow = TRUE) 
+                        s <- colSums((x_data[ind, ] - tmp)^2)
+                }
+                diag(SigmaINV[k, , ]) <- rgamma(p,shape = alpha_sigma + n_k/2, rate = beta_sigma + s/2)
+        }
+        return(SigmaINV)
+}
+
+
+overfitting_q0 <- function(x_data, originalX, outputDirectory, Kmax, m, thinning, burn, g, h, alpha_prior, alpha_sigma, beta_sigma, start_values, q = 0, zStart, gibbs_z){
+	if(missing(originalX)){originalX <- x_data}
+	if(missing(gibbs_z)){gibbs_z = 0.05}
+	if(missing(zStart)){zStart = FALSE}
+	if(missing(x_data)){stop('x_data not provided.')}
+	p <- dim(x_data)[2]
+	ledermannBound <- 0
+	if (q > 0){ stop(paste0('q should be equal to ', ledermannBound)) }
+	n <- dim(x_data)[1]
+	v_r <- numeric(p) #indicates the non-zero values of Lambdas
+	for( r in 1:p ){
+		v_r[r] <- min(r,q)
+	}
+
+	if(missing(Kmax)){Kmax <- 20}
+	if(missing(m)){m <- 21000}
+	if(missing(burn)){burn <- 1000}
+	if(missing(thinning)){thinning <- 10}
+	if(missing(g)){g <- 2}
+	if(missing(h)){h <- 1}
+	if(missing(alpha_prior)){alpha_prior <- 1*rep(1/Kmax,Kmax)}
+	if(missing(alpha_sigma)){alpha_sigma <- 2}
+	if(missing(beta_sigma)){beta_sigma <- 1}
+	if(missing(start_values)){start_values <- FALSE}
+	if( start_values == F ){
+		dir.create(outputDirectory)
+	}
+	setwd(outputDirectory)
+	K <- Kmax
+	# prior parameters
+	T_INV <- array(data = 0, dim = c(p,p))
+	diag(T_INV) <- diag(var(x_data))
+	diag(T_INV) <- 1/diag(T_INV)
+	ksi <- colSums(x_data)/n
+	priorConst1 <- T_INV %*% ksi
+	sigma_y2 <- 1/1
+	SigmaINV.values <- array(data = 0, dim = c(K,p,p))
+	mu.values <- array(data = 0, dim = c(K,p))
+	z <- numeric(n)
+	w.values <- numeric(K)
+	# initial values
+	iter <- 1
+	if(start_values == FALSE){
+		for(k in 1:K){
+			diag(SigmaINV.values[k,,]) <- rgamma(n = p, shape = alpha_sigma, rate = beta_sigma) ## parameterization with mean = g/h and var = g/(h^2)
+			mu.values[k,] <- rnorm(p,mean = ksi, sd = sqrt( 1/diag(T_INV) ))
+		}
+		w.values <- myDirichlet(alpha_prior[1:K])
+		z <- sample(K,n,replace = TRUE, prob = w.values)
+		if( outputDirectory == 'alpha_1'){
+			if(is.numeric(zStart)){
+				z <- zStart
+				cluster_size <- numeric(K)
+				for(k in 1:K){ index <- which(z == k);	cluster_size[k] <- length(index)}	
+				w.values <- myDirichlet(alpha_prior[1:K] + cluster_size)
+			}
+		}
+	}else{
+#		cat(paste0('reading starting values... '))	
+		tmp1 <- read.table("muValues.txt")
+		tmp2 <- as.matrix(read.table("sigmainvValues.txt"))
+		for(k in 1:K){
+			mu.values[k, ] <- as.matrix(tmp1[ , k + Kmax*((1:p)-1)])
+			diag(SigmaINV.values[k, , ]) <- as.matrix(tmp2[,((k-1)*p + 1):(k*p)]) 
+		}
+		w.values <- as.numeric(read.table("wValues.txt"))
+		z <- as.numeric(read.table("zValues.txt"))
+	}
+	###############################################
+	trueVar <- array(data = 0, dim = c(K,p,p))
+	trueVar.values <- array(data = 0, dim = c(K,p,p))
+	mhAR <- mhAR1 <- 0
+	mhDeltaAR <- 0
+	mIter <- 0
+	# MCMC sampler
+	cluster_size <- numeric(K)
+	zOld <- z
+	kValues <- numeric(m)
+	kValues[iter] <- length(table(z))
+	zConnection <- file("zValues.txt",open = "w")
+	yConnection <- file("yValues.txt",open = "w")
+	sigmainvConnection <- file("sigmainvValues.txt",open = "w")
+	omegainvConnection <- file("omegainvValues.txt",open = "w")
+	muConnection <- file("muValues.txt",open = "w")
+	wConnection <- file("wValues.txt",open = "w")
+	logLConnection <- file("k.and.logl.Values.txt",open = "w")
+	LambdaConnection <- vector('list',length = K)
+	current_matrix <- vector("list", length = 4)
+	names(current_matrix) <- c("A","B","G","D")
+	kavatza <- 0
+	for (iter in 2:m){
+#		2
+		suf_stat <- compute_sufficient_statistics_q0(z = z, K = K, x_data = x_data)
+		f2 <- compute_A_B_G_D_and_simulate_mu_Lambda_q0(SigmaINV = SigmaINV.values, 
+				suff_statistics = suf_stat,
+				K = K, priorConst1 = priorConst1, T_INV = T_INV, v_r = v_r)
+		mu.values <- f2$mu
+#		cat(paste0("HERE"), "\n")
+
+#		3
+		f2 <- update_z_q0(w = w.values, mu = array(mu.values,dim = c(K,p)), SigmaINV = SigmaINV.values, K = K, x_data = x_data)
+		z <- f2$z
+		kValues[iter] <- length(table(z))
+		cluster_size <- numeric(K)
+		for(k in 1:K){ index <- which(z == k);	cluster_size[k] <- length(index)}	
+		w.values <- myDirichlet(alpha_prior[1:K] + cluster_size)
+#		5
+		SigmaINV.values <- update_SigmaINV_faster_q0(x_data = x_data, z = z,  
+				mu = array(mu.values,dim = c(K,p)), K = K, alpha_sigma = alpha_sigma, beta_sigma = beta_sigma)
+
+		if(iter %% thinning == 0){
+			if(iter > burn){
+				logLValues <- c(kValues[iter], complete.log.likelihood_q0(x_data = x_data, w = w.values, mu = mu.values, SigmaINV = SigmaINV.values, z = z))
+				cat(logLValues, file = logLConnection, '\n', append = TRUE)
+				cat(z, file = zConnection, '\n', append = TRUE)
+				cat(w.values, file = wConnection, '\n', append = TRUE)
+				cat(mu.values, file = muConnection, '\n', append = TRUE)
+				for(k in 1:K){
+					cat(diag(SigmaINV.values[k,,]), " ", file = sigmainvConnection, append = TRUE)
+				}
+				cat('\n', file = sigmainvConnection, append = TRUE)
+			}
+		}
+	}
+
+	close(zConnection)
+	close(yConnection)
+	close(wConnection)
+	close(muConnection)
+	close(sigmainvConnection)
+	close(omegainvConnection)
+	close(logLConnection)
+#	for(k in 1:K){
+#		close(regulonExpressionConnection[[k]])
+#		close(LambdaConnection[[k]])
+#	}
+	setwd("../")
+
+}
+
+
+#-------------------------------------------------------------------------------------------
+# end of q0 functions
+#-------------------------------------------------------------------------------------------
 
 
 ################################################################################################################
 ################################################################################################################
 
 overfittingMFA <- function(x_data, originalX, outputDirectory, Kmax, m, thinning, burn, g, h, alpha_prior, alpha_sigma, beta_sigma, start_values, q, zStart, gibbs_z){
+	if(q == 0){stop('When q = 0 only `sameSigma = FALSE` is allowed.')}
 	if(missing(originalX)){originalX <- x_data}
 	if(missing(gibbs_z)){gibbs_z = 0.05}
 	if(missing(zStart)){zStart = FALSE}
@@ -667,6 +928,16 @@ overfittingMFA_Sj <- function(x_data, originalX, outputDirectory, Kmax, m, thinn
 	if(missing(alpha_sigma)){alpha_sigma <- 2}
 	if(missing(beta_sigma)){beta_sigma <- 1}
 	if(missing(start_values)){start_values <- FALSE}
+	if(q == 0){
+	# redirecting everything to the corresponding function
+		overfitting_q0(x_data = x_data, originalX = originalX, 
+			outputDirectory = outputDirectory, Kmax = Kmax, 
+			m = m, thinning = thinning, burn = burn, g = g, 
+			h = h, alpha_prior = alpha_prior, alpha_sigma = alpha_sigma, 
+			beta_sigma = beta_sigma, start_values = start_values, 
+			q = 0, zStart = zStart, gibbs_z = gibbs_z)
+		return(doNothing <- 0) # exit
+	}
 	if( start_values == F ){
 		dir.create(outputDirectory)
 	}
@@ -1265,11 +1536,11 @@ log_dirichlet_pdf <- function(alpha, weights){
 }
 
 fabMix <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCycles, g, h, alpha_sigma, beta_sigma, q, normalize, thinning, zStart, nIterPerCycle, gibbs_z = 1){
-	cat("          ____      __    __  ____     ", "\n")
-	cat("         / __/___ _/ /_  /  |/  (_)  __", "\n")
-	cat("        / /_/ __ `/ __ \\/ /|_/ / / |/_/", "\n")
-	cat("       / __/ /_/ / /_/ / /  / / />  <  ", "\n")
-	cat("      /_/  \\__,_/_.___/_/  /_/_/_/|_|  ", "\n")
+	cat("         ____      __    __  ____     ", "\n")
+	cat("        / __/___ _/ /_  /  |/  (_)  __", "\n")
+	cat("       / /_/ __ `/ __ \\/ /|_/ / / |/_/", "\n")
+	cat("      / __/ /_/ / /_/ / /  / / />  <  ", "\n")
+	cat("     /_/  \\__,_/_.___/_/  /_/_/_/|_|  ", "\n")
 
 	missingRowsIndex <- which(is.na(rowSums(rawData)) == TRUE)
 	nMissingRows <- length( missingRowsIndex ) 
@@ -1284,12 +1555,6 @@ fabMix <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, mCyc
 		nChains <- 8
 		dN <- 1
 		dirPriorAlphas <- c(1, 1 + dN*(2:nChains - 1))/Kmax
-#		dirPriorAlphas <- c((1/Kmax)*exp(seq(0,2,length = 10)),0.5,1)
-#		dirPriorAlphas <- (1/Kmax)*exp( seq(0,4,length = 12) )
-#		dirPriorAlphas <- seq(1,5,length = 8)/Kmax
-#		dirPriorAlphas <- seq(1,10,length = 8)/Kmax
-	#	dirPriorAlphas <- c(seq(1, 0.25, length = 4),c((1/Kmax)*seq(3,1.05, length = 4)), c((1/Kmax)*seq(1.04,1, length = 2)))
-	#	dirPriorAlphas <- dirPriorAlphas[length(dirPriorAlphas):1]
 	}
 	nChains <- length(dirPriorAlphas)
 	if( range(diff(order(dirPriorAlphas)))[1] != 1){stop('dirPriorAlphas should be in increasing order.')}
@@ -1343,13 +1608,13 @@ fabMix <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, mCyc
 	d_per_cluster = 2*p + p*q + q*(q-1)/2
 	initialAlphas <- seq(d_per_cluster/2, d_per_cluster, length = nChains)
 	if(sameSigma == TRUE){
-		foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dopar% {
+		foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
 			overfittingMFA(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
 				Kmax = Kmax, m = 100, thinning = 1, burn = 99, alpha_prior= rep(initialAlphas[myChain], Kmax), g = g, h = h, 
 				alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = FALSE, gibbs_z = 0.05)
 		}
 	}else{
-		foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dopar% {
+		foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
 			overfittingMFA_Sj(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
 				Kmax = Kmax, m = 100, thinning = 1, burn = 99, alpha_prior= rep(initialAlphas[myChain], Kmax), g = g, h = h, 
 				alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = FALSE, gibbs_z = 0.05)
@@ -1358,15 +1623,15 @@ fabMix <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, mCyc
 	cat(paste(' OK'),'\n')
 	cat(paste('-    (2) Initializing the actual model from the previously obtained values... '))
 	if(sameSigma == TRUE){
-		foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dopar% {
+		foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
 			overfittingMFA(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
-				Kmax = Kmax, m = 300, thinning = 1, burn = 299, alpha_prior= rep(dirPriorAlphas[myChain], Kmax), g = g, h = h, 
+				Kmax = Kmax, m = 500, thinning = 1, burn = 499, alpha_prior= rep(dirPriorAlphas[myChain], Kmax), g = g, h = h, 
 				alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = TRUE, gibbs_z = gibbs_z)
 		}
 	}else{
-		foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dopar% {
+		foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
 			overfittingMFA_Sj(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
-				Kmax = Kmax, m = 300, thinning = 1, burn = 299, alpha_prior= rep(dirPriorAlphas[myChain], Kmax), g = g, h = h, 
+				Kmax = Kmax, m = 500, thinning = 1, burn = 499, alpha_prior= rep(dirPriorAlphas[myChain], Kmax), g = g, h = h, 
 				alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = TRUE, gibbs_z = gibbs_z)
 		}
 	}
@@ -1399,14 +1664,14 @@ fabMix <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, mCyc
 	bb <- nIterPerCycle - 1
 	for( iteration in 2:mCycles ){
 		if(sameSigma == TRUE){
-			foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dopar% {
+			foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
 				overfittingMFA(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
 					Kmax = Kmax, m = nIterPerCycle, thinning = 1, burn = bb, alpha_prior= rep( dirPriorAlphas[myChain], Kmax), g = g, h = h, 
 					alpha_sigma = alpha_sigma, beta_sigma = beta_sigma,  start_values = TRUE)
 				kValues[iteration, myChain] <- read.table( paste0(outputDirs[myChain],'/k.and.logl.Values.txt') )[1,1]
 			}
 		}else{
-			foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dopar% {
+			foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
 				overfittingMFA_Sj(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
 					Kmax = Kmax, m = nIterPerCycle, thinning = 1, burn = bb, alpha_prior= rep( dirPriorAlphas[myChain], Kmax), g = g, h = h, 
 					alpha_sigma = alpha_sigma, beta_sigma = beta_sigma,  start_values = TRUE)
@@ -1465,21 +1730,23 @@ fabMix <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, mCyc
 		}
 		if(iteration %% thinning == 0){
 			if(iteration > burnCycles){
-				y        <- as.numeric(read.table('alpha_1/yValues.txt'))
 				w        <- as.numeric(read.table('alpha_1/wValues.txt')) 
 				mu       <- as.numeric(read.table('alpha_1/muValues.txt'))
-				omegainv <- as.numeric(read.table('alpha_1/omegainvValues.txt'))
 				sigmainv <- as.numeric(read.table('alpha_1/sigmainvValues.txt')) 
 				cll      <- as.numeric(read.table('alpha_1/k.and.logl.Values.txt') )[2]
+			if(q > 0){
+				y        <- as.numeric(read.table('alpha_1/yValues.txt'))
+				omegainv <- as.numeric(read.table('alpha_1/omegainvValues.txt'))
 				for(k in 1:Kmax){
 					Lambda <- as.numeric( read.table(paste0('alpha_1/LambdaValues', k, '.txt') ) )
 					cat(Lambda, file = LambdaConnection_target[[k]], '\n', append = TRUE)
 				}
-				cat(z       , file = zConnection_target, '\n', append = TRUE)
 				cat(y       , file = yConnection_target, '\n', append = TRUE)
+				cat(omegainv, file = omegainvConnection_target, '\n', append = TRUE)
+			}
+				cat(z       , file = zConnection_target, '\n', append = TRUE)
 				cat(w       , file = wConnection_target, '\n', append = TRUE)
 				cat(mu      , file = muConnection_target, '\n', append = TRUE)
-				cat(omegainv, file = omegainvConnection_target, '\n', append = TRUE)
 				cat(sigmainv, file = sigmainvConnection_target, '\n', append = TRUE)
 				cat(cll     , file = cllConnection_target, '\n', append = TRUE)
 			}
@@ -1510,11 +1777,11 @@ fabMix <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, mCyc
 
 
 fabMix_missing_values <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCycles, g, h, alpha_sigma, beta_sigma, q, normalize, thinning, zStart, nIterPerCycle, gibbs_z = 1){
-	cat("          ____      __    __  ____     ", "\n")
-	cat("         / __/___ _/ /_  /  |/  (_)  __", "\n")
-	cat("        / /_/ __ `/ __ \\/ /|_/ / / |/_/", "\n")
-	cat("       / __/ /_/ / /_/ / /  / / />  <  ", "\n")
-	cat("      /_/  \\__,_/_.___/_/  /_/_/_/|_|  ", "\n")
+	cat("         ____      __    __  ____     ", "\n")
+	cat("        / __/___ _/ /_  /  |/  (_)  __", "\n")
+	cat("       / /_/ __ `/ __ \\/ /|_/ / / |/_/", "\n")
+	cat("      / __/ /_/ / /_/ / /  / / />  <  ", "\n")
+	cat("     /_/  \\__,_/_.___/_/  /_/_/_/|_|  ", "\n")
 	dev.new(width=15, height=5)
 	if(missing(Kmax)){Kmax <- 20}
 	if(missing(nIterPerCycle)){nIterPerCycle = 10}
@@ -1584,13 +1851,13 @@ fabMix_missing_values <- function(sameSigma = TRUE, dirPriorAlphas, rawData, out
 	d_per_cluster = 2*p + p*q + q*(q-1)/2
 	initialAlphas <- seq(d_per_cluster/2, d_per_cluster, length = nChains)
 	if(sameSigma == TRUE){
-		foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dopar% {
+		foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
 			overfittingMFA_missing_values(missing_entries = missing_entries, q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
 				Kmax = Kmax, m = 100, thinning = 1, burn = 99, alpha_prior= rep(initialAlphas[myChain], Kmax), g = g, h = h, 
 				alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = FALSE, gibbs_z = 0.05)
 		}
 	}else{
-		foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dopar% {
+		foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
 			overfittingMFA_Sj_missing_values(missing_entries = missing_entries, q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
 				Kmax = Kmax, m = 100, thinning = 1, burn = 99, alpha_prior= rep(initialAlphas[myChain], Kmax), g = g, h = h, 
 				alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = FALSE, gibbs_z = 0.05)
@@ -1599,15 +1866,15 @@ fabMix_missing_values <- function(sameSigma = TRUE, dirPriorAlphas, rawData, out
 	cat(paste(' OK'),'\n')
 	cat(paste('-    (2) Initializing the actual model from the previously obtained values... '))
 	if(sameSigma == TRUE){
-		foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dopar% {
+		foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
 			overfittingMFA_missing_values(missing_entries = missing_entries, q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
-				Kmax = Kmax, m = 300, thinning = 1, burn = 299, alpha_prior= rep(dirPriorAlphas[myChain], Kmax), g = g, h = h, 
+				Kmax = Kmax, m = 500, thinning = 1, burn = 499, alpha_prior= rep(dirPriorAlphas[myChain], Kmax), g = g, h = h, 
 				alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = TRUE, gibbs_z = gibbs_z)
 		}
 	}else{
-		foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dopar% {
+		foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
 			overfittingMFA_Sj_missing_values(missing_entries = missing_entries, q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
-				Kmax = Kmax, m = 300, thinning = 1, burn = 299, alpha_prior= rep(dirPriorAlphas[myChain], Kmax), g = g, h = h, 
+				Kmax = Kmax, m = 500, thinning = 1, burn = 499, alpha_prior= rep(dirPriorAlphas[myChain], Kmax), g = g, h = h, 
 				alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = TRUE, gibbs_z = gibbs_z)
 		}
 	}
@@ -1641,14 +1908,14 @@ fabMix_missing_values <- function(sameSigma = TRUE, dirPriorAlphas, rawData, out
 	xMean <- array(data = 0, dim = c(n, p))
 	for( iteration in 2:mCycles ){
 		if(sameSigma == TRUE){
-			foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dopar% {
+			foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
 				overfittingMFA_missing_values(missing_entries = missing_entries, q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
 					Kmax = Kmax, m = nIterPerCycle, thinning = 1, burn = bb, alpha_prior= rep( dirPriorAlphas[myChain], Kmax), g = g, h = h, 
 					alpha_sigma = alpha_sigma, beta_sigma = beta_sigma,  start_values = TRUE)
 				kValues[iteration, myChain] <- read.table( paste0(outputDirs[myChain],'/k.and.logl.Values.txt') )[1,1]
 			}
 		}else{
-			foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dopar% {
+			foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
 				overfittingMFA_Sj_missing_values(missing_entries = missing_entries, q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
 					Kmax = Kmax, m = nIterPerCycle, thinning = 1, burn = bb, alpha_prior= rep( dirPriorAlphas[myChain], Kmax), g = g, h = h, 
 					alpha_sigma = alpha_sigma, beta_sigma = beta_sigma,  start_values = TRUE)
@@ -1814,6 +2081,33 @@ observed.log.likelihood0_Sj <- function(x_data, w, mu, Lambda, Sigma, z){
 }
 
 
+observed.log.likelihood0_Sj_q0 <- function(x_data, w, mu, Sigma, z){
+	p <- dim(x_data)[2]
+	n <- dim(x_data)[1]
+	ct <- -(p/2)*log(2*pi)
+
+        probs <- numeric(n)
+        if( is.null(z) ){alive <- 1}else{
+        alive <- as.numeric(names(table(z)))}
+        newW <- numeric(length(w))
+        newW[alive] <- w[alive]/sum(w[alive])
+        loggedValues <- array(data = NA, dim = c(n, length(alive)))
+        colnames(loggedValues) <- alive
+        for(k in alive){
+                center_x <- x_data - matrix(mu[k,], nrow = n, ncol = p, byrow=TRUE)
+                x_var <- array(data = 0, dim = c(p,p)) 
+                diag(x_var) <- diag(x_var) + Sigma[k,]
+                loggedValues[ ,as.character(k)] <- log(newW[k]) + dmvnorm(center_x, mean = rep(0, p), sigma = x_var, log = TRUE)
+        }
+        lMax <- apply(loggedValues, 1, max)
+        if( length(alive) == 1 ){
+                logL <- sum(lMax + log( exp( apply(loggedValues, 2, function(y){return(y - lMax)}) ) ) )
+        }else{
+                logL <- sum(lMax + log( rowSums(exp( apply(loggedValues, 2, function(y){return(y - lMax)}) ))))
+        }
+        return( logL )
+}
+
 
 
 
@@ -1826,7 +2120,7 @@ getStuffForDIC <- function(sameSigma = TRUE, x_data, outputFolder, q, burn, Km, 
 	}
 	n <- dim(x_data)[1]
 	p <- dim(x_data)[2]
-
+	if(q == 0){sameSigma = FALSE}
 	if(missing(Km)){Km <- 20}
 	if(missing(burn)){burn <- 0}
 	setwd(outputFolder)
@@ -1864,21 +2158,23 @@ getStuffForDIC <- function(sameSigma = TRUE, x_data, outputFolder, q, burn, Km, 
 
 
 	#Lambda
-	l <- as.matrix(read.table(paste0("LambdaValues",1,".txt")))
-	J <- dim(l)[2]
-	mcmc <- array(data = NA, dim = c(m,Km,J))
-	for(k in 1:Km){
-	#	lMean <- apply(l,2,mean)
-	#	lMean.matrix <- matrix(lMean,nrow = p, ncol = q, byrow=TRUE)
-		l <- as.matrix(read.table(paste0("LambdaValues",k,".txt")))
-#		if(q == 1){ l <- array(l, dim = c(length(l) , 1))}
-		if(burn > 0){
-		l <- l[-(1:burn),]}
-		mcmc[,k,] <- l[index,]
-	}
-	lambda.perm.mcmc <- permute.mcmc(mcmc, ls$permutations$ECR)$output
-	for(k in 1:Km){
-		lMean <- apply(lambda.perm.mcmc[,k,],2,mean)
+	if(q > 0){
+		l <- as.matrix(read.table(paste0("LambdaValues",1,".txt")))
+		J <- dim(l)[2]
+		mcmc <- array(data = NA, dim = c(m,Km,J))
+		for(k in 1:Km){
+		#	lMean <- apply(l,2,mean)
+		#	lMean.matrix <- matrix(lMean,nrow = p, ncol = q, byrow=TRUE)
+			l <- as.matrix(read.table(paste0("LambdaValues",k,".txt")))
+	#		if(q == 1){ l <- array(l, dim = c(length(l) , 1))}
+			if(burn > 0){
+			l <- l[-(1:burn),]}
+			mcmc[,k,] <- l[index,]
+		}
+		lambda.perm.mcmc <- permute.mcmc(mcmc, ls$permutations$ECR)$output
+		for(k in 1:Km){
+			lMean <- apply(lambda.perm.mcmc[,k,],2,mean)
+		}
 	}
 	mu <- read.table("muValues.txt")# auto to grafei ws mu_{11},mu_{12},...,mu_{1K}, ...., mu_{p1},mu_{p2},...,mu_{pK} gia kathe grammi
 	if(burn > 0){
@@ -1931,7 +2227,6 @@ getStuffForDIC <- function(sameSigma = TRUE, x_data, outputFolder, q, burn, Km, 
 	bic <- 0
 	maxL <- 1
 	i <- 1
-	lambda.current <- array(data = NA, dim = c(Km,p,q))
 	if(sameSigma == TRUE){
 		Sigma.current <- Sigma.mcmc[i, ]
 	}else{
@@ -1942,9 +2237,12 @@ getStuffForDIC <- function(sameSigma = TRUE, x_data, outputFolder, q, burn, Km, 
 		Sigma.current <- array(Sigma.current, dim = c(1, p))
 		mu.current <- array(mu.mcmc[i,,], dim = c(1, p))
 	}
+	if(q > 0){lambda.current <- array(data = NA, dim = c(Km,p,q))}
 	for(k in 1:Km){
-		ldraw <- lambda.perm.mcmc[i,k,]
-		lambda.current[k,,] <- matrix(ldraw,nrow = p, ncol = q, byrow=TRUE)
+		if(q > 0){
+			ldraw <- lambda.perm.mcmc[i,k,]
+			lambda.current[k,,] <- matrix(ldraw,nrow = p, ncol = q, byrow=TRUE)
+		}
 		for(i1 in 1:p){
 			if( Sigma.current[ i1] > 100 ){ cat(paste0('oops: ', i),'\n'); Sigma.current[i1] <- 100 }
 		}
@@ -1952,7 +2250,11 @@ getStuffForDIC <- function(sameSigma = TRUE, x_data, outputFolder, q, burn, Km, 
 	if(sameSigma == TRUE){
 		obsL <- observed.log.likelihood0(x_data = x_data, w = w.mcmc[i,,1], mu = mu.current, Lambda = lambda.current, Sigma = Sigma.current, z = z[i,])
 	}else{
-		obsL <- observed.log.likelihood0_Sj(x_data = x_data, w = w.mcmc[i,,1], mu = mu.current, Lambda = lambda.current, Sigma = Sigma.current, z = z[i,])
+		if(q > 0){
+			obsL <- observed.log.likelihood0_Sj(x_data = x_data, w = w.mcmc[i,,1], mu = mu.current, Lambda = lambda.current, Sigma = Sigma.current, z = z[i,])
+		}else{
+			obsL <- observed.log.likelihood0_Sj_q0(x_data = x_data, w = w.mcmc[i,,1], mu = mu.current, Sigma = Sigma.current, z = z[i,])
+		}
 	}
 	lValues[i] <- obsL
 	maxL <- obsL
@@ -2000,13 +2302,19 @@ getStuffForDIC <- function(sameSigma = TRUE, x_data, outputFolder, q, burn, Km, 
 			}
 			for(k in 1:Km){
 	#			cat(paste0("  k  = ", k), "\n")
-				ldraw <- lambda.perm.mcmc[i,k,]
-				lambda.current[k,,] <- matrix(ldraw,nrow = p, ncol = q, byrow=TRUE)
+				if(q > 0){
+					ldraw <- lambda.perm.mcmc[i,k,]
+					lambda.current[k,,] <- matrix(ldraw,nrow = p, ncol = q, byrow=TRUE)
+				}
 				for(i1 in 1:p){
 					if( Sigma.current[k, i1] > 100 ){ Sigma.current[k, i1] <- 100 }
 				}
 			}
-			obsL <- observed.log.likelihood0_Sj(x_data = x_data, w = w.mcmc[i,,1], mu = mu.current, Lambda = lambda.current, Sigma = Sigma.current, z = z[i,])
+			if(q > 0){
+				obsL <- observed.log.likelihood0_Sj(x_data = x_data, w = w.mcmc[i,,1], mu = mu.current, Lambda = lambda.current, Sigma = Sigma.current, z = z[i,])
+			}else{
+				obsL <- observed.log.likelihood0_Sj_q0(x_data = x_data, w = w.mcmc[i,,1], mu = mu.current, Sigma = Sigma.current, z = z[i,])
+			}
 			lValues[i] <- obsL
 			if( obsL > maxL ){
 				maxL <- obsL	

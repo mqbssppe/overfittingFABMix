@@ -8,7 +8,8 @@
 }
 \usage{
 overfittingMFA(x_data, originalX, outputDirectory, Kmax, m, thinning, burn, 
-	g, h, alpha_prior, alpha_sigma, beta_sigma, start_values, q, zStart, gibbs_z)
+	g, h, alpha_prior, alpha_sigma, beta_sigma, 
+	start_values, q, zStart, gibbs_z)
 }
 \arguments{
   \item{x_data}{

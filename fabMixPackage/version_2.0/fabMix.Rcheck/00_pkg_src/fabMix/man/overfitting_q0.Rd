@@ -1,15 +1,14 @@
-\name{overfittingMFA}
-\alias{overfittingMFA}
+\name{overfitting_q0}
+\alias{overfitting_q0}
 \title{
-	Basic MCMC sampler
+	MCMC sampler for \eqn{q=0}
 }
 \description{
-	Gibbs sampling for fitting a mixture model of factor analyzers.
+	Gibbs sampling for fitting a mixture model with diagonal covariance structure.
 }
 \usage{
-overfittingMFA(x_data, originalX, outputDirectory, Kmax, m, thinning, burn, 
-	g, h, alpha_prior, alpha_sigma, beta_sigma, 
-	start_values, q, zStart, gibbs_z)
+overfitting_q0(x_data, originalX, outputDirectory, Kmax, m, thinning, burn, 
+	g, h, alpha_prior, alpha_sigma, beta_sigma, start_values, q, zStart, gibbs_z)
 }
 \arguments{
   \item{x_data}{
