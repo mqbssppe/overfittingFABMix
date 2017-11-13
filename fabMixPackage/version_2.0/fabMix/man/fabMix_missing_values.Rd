@@ -9,7 +9,8 @@ This function runs parallel chains under a prior tempering scheme of the Dirichl
 \usage{
 fabMix_missing_values(sameSigma, dirPriorAlphas, rawData, outDir, Kmax, mCycles, 
 	burnCycles, g, h, alpha_sigma, beta_sigma, q, normalize,  
-	thinning, zStart, nIterPerCycle, gibbs_z)
+	thinning, zStart, nIterPerCycle, gibbs_z, warm_up, 
+	progressGraphs, gwar)
 }
 \arguments{
   \item{sameSigma}{
@@ -62,6 +63,15 @@ Number of cycles that will be discarded as burn-in period.
 }
   \item{gibbs_z}{
 	Select the gibbs sampling scheme for updating latent allocations of mixture model. Default value: 1.
+}
+  \item{warm_up}{
+	NUmber of iterations that will be used to initialize the models before starting proposing switchings. Default value: 500.
+}
+  \item{progressGraphs}{
+	Logical value indicating whether to plot successive states of the chains while the sampler runs. Default: FALSE.
+}
+  \item{gwar}{
+	Initialization parameter. Default: 0.05.
 }
 }
 \value{
