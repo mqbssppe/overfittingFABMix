@@ -7,4 +7,8 @@ Beta-version of the package is up:
 1. [Download tarball](https://github.com/mqbssppe/overfittingFABMix/blob/master/fabMixPackage/version_2.0/fabMix_2.0.tar.gz)
 2. [See Basic Usage](https://github.com/mqbssppe/overfittingFABMix/wiki/Basic-usage)
 
+## Updates
+
 ### New features: version_2.0 added with support for **missing values** :waxing_gibbous_moon:
+
+### Paper accepted to *Computational Statistics & Data Analysis*
