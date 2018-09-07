@@ -1,5 +1,5 @@
-* using log directory ‘/home/mqbssppe/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_2.0/fabMix.Rcheck’
-* using R version 3.2.5 (2016-04-14)
+* using log directory ‘/myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_2.0/fabMix.Rcheck’
+* using R version 3.4.4 (2018-03-15)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * using option ‘--as-cran’
@@ -8,12 +8,10 @@
 * this is package ‘fabMix’ version ‘2.0’
 * checking CRAN incoming feasibility ... NOTE
 Maintainer: ‘Panagiotis Papastamoulis <papapast@yahoo.gr>’
-New submission
 
-Checking URLs requires 'libcurl' support in the R build
+New submission
 * checking package namespace information ... OK
-* checking package dependencies ... NOTE
-  No repository set, so cyclic dependency check skipped
+* checking package dependencies ... OK
 * checking if this is a source package ... OK
 * checking if there is a namespace ... OK
 * checking for executable files ... OK
@@ -57,4 +55,4 @@ Checking URLs requires 'libcurl' support in the R build
 * checking examples ... OK
 * checking PDF version of manual ... OK
 * DONE
-Status: 2 NOTEs
+Status: 1 NOTE

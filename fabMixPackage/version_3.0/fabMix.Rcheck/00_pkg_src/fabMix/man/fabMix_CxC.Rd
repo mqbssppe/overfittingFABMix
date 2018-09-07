@@ -1,13 +1,13 @@
-\name{fabMix}
-\alias{fabMix}
+\name{fabMix_CxC}
+\alias{fabMix_CxC}
 \title{
-Main function of the package
+Main function of the package for CUC, CCC models
 }
 \description{
 This function runs parallel chains under a prior tempering scheme of the Dirichlet prior distribution of mixture weights. 
 }
 \usage{
-fabMix(sameSigma, dirPriorAlphas, rawData, outDir, Kmax, mCycles, 
+fabMix_CxC(sameSigma, dirPriorAlphas, rawData, outDir, Kmax, mCycles, 
 	burnCycles, g, h, alpha_sigma, beta_sigma, q, normalize,  
 	thinning, zStart, nIterPerCycle, gibbs_z, 
 	warm_up_overfitting, warm_up, overfittingInitialization, 
@@ -15,7 +15,7 @@ fabMix(sameSigma, dirPriorAlphas, rawData, outDir, Kmax, mCycles,
 }
 \arguments{
   \item{sameSigma}{
-Logical value denoting the parameterization of the error variance per component. If \code{TRUE}, the parameterization \eqn{\Sigma_1 = \ldots = \Sigma_K} is fitted.
+Logical value denoting the parameterization of the error variance per component. If \code{TRUE}, the parameterization CCU is fitted. Otherwise, the parameterization CUU is fitted.
 }
   \item{dirPriorAlphas}{
 The prior Dirichlet parameters for each chain.
@@ -120,18 +120,18 @@ dN <- 1
 dirPriorAlphas <- c(1, 1 + dN * (2:nChains - 1))/Kmax   
 outputFolder <- "fabMixExample"
 # Run algorithm
-fabMix( dirPriorAlphas = dirPriorAlphas, 
+fabMix_CxC( dirPriorAlphas = dirPriorAlphas, 
         rawData = syntheticDataset$data, 
         outDir = outputFolder, Kmax = Kmax, mCycles = 1200, 
         burnCycles = 200, q = q) 
 
 # Compute information criteria:
-getStuffForDIC(x_data = syntheticDataset$data, outputFolder = outputFolder, q = q)
+#getStuffForDIC(x_data = syntheticDataset$data, outputFolder = outputFolder, q = q)
 
 # Deal with label switching:
-dealWithLabelSwitching(x_data = syntheticDataset$data, 
-        outputFolder = outputFolder, q = q, 
-        compute_regularized_expression = TRUE, Km = Kmax)
+#dealWithLabelSwitching(x_data = syntheticDataset$data, 
+#        outputFolder = outputFolder, q = q, 
+#        compute_regularized_expression = TRUE, Km = Kmax)
 }
 
 
