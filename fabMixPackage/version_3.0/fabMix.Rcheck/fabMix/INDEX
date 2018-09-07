@@ -29,7 +29,11 @@ dealWithLabelSwitching
 fabMix                  Main function of the package
 fabMix-package          Overfitting Bayesian Mixtures of Factor
                         Analyzers with an Unknown Number of Components
+fabMix_CxC              Main function of the package for CUC, CCC
+                        models
 fabMix_CxU              Main function of the package for CCU, CUU
+                        models
+fabMix_UxC              Main function of the package for UUC, UCC
                         models
 fabMix_missing_values   Main function for the case of missing values
 getStuffForDIC          Compute information criteria
@@ -46,13 +50,17 @@ observed.log.likelihood0_q0_sameSigma
                         Log-likelihood of the mixture model for q=0 and
                         same variance of errors
 overfittingMFA          Basic MCMC sampler
+overfittingMFA_CCC      Basic MCMC sampler for CCC
 overfittingMFA_CCU      Basic MCMC sampler for CCU
+overfittingMFA_CUC      Basic MCMC sampler for CUC
 overfittingMFA_CUU      Basic MCMC sampler for CUU
 overfittingMFA_Sj       Basic MCMC sampler using different error
                         variance per component
 overfittingMFA_Sj_missing_values
                         Basic MCMC sampler for the case of missing data
                         and different error variance
+overfittingMFA_UCC      Basic MCMC sampler for CCC
+overfittingMFA_UUC      Basic MCMC sampler for UUC
 overfittingMFA_missing_values
                         Basic MCMC sampler for the case of missing data
 overfitting_q0          MCMC sampler for q=0
@@ -71,6 +79,9 @@ update_SigmaINV_faster_q0
 update_SigmaINV_faster_q0_sameSigma
                         Gibbs sampling for Sigma^{-1} per component for
                         q=0
+update_SigmaINV_xCC     Gibbs sampling for Sigma^{-1} for xCC models
+update_SigmaINV_xUC     Gibbs sampling for Sigma^{-1} per component for
+                        xUC models
 update_all_y            Gibbs sampling for y
 update_all_y_Sj         Gibbs sampling for y
 update_z2               Collapsed Gibbs for z using matrix inversion

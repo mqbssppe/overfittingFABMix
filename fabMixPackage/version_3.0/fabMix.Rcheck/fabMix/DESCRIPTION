@@ -11,5 +11,5 @@ Imports: MASS, doParallel, foreach, label.switching, mvtnorm, doRNG,
         RColorBrewer
 License: GPL-2
 NeedsCompilation: no
-Packaged: 2018-09-05 10:54:24 UTC; panagiotis
-Built: R 3.4.4; ; 2018-09-05 10:55:13 UTC; unix
+Packaged: 2018-09-07 11:45:33 UTC; panagiotis
+Built: R 3.4.4; ; 2018-09-07 11:47:00 UTC; unix
