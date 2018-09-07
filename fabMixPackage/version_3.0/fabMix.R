@@ -568,7 +568,7 @@ update_SigmaINV_faster_Sj <- function(x_data, z, y, Lambda, mu, K, alpha_sigma, 
 						return(array(Lambda[ k, , ], dim = c(p,q)) %*% tk) 
 					}
 			)
-
+		)
                         s <- colSums((x_data[ind, ] - tmp)^2)
                 }
 		diag(SigmaINV[k, , ]) <- rgamma(p,shape = alpha_sigma + n_k/2, rate = beta_sigma + s/2)
