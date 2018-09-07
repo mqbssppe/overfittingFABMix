@@ -416,7 +416,16 @@ update_SigmaINV_faster_Sj <- function(x_data, z, y, Lambda, mu, K, alpha_sigma, 
 		ind <- which(z == k)
 		n_k <- length(ind)
                 if(n_k > 0){
-                        tmp <- matrix(mu[k, ], nrow = n_k, ncol = p, byrow = TRUE) 
+                        tmp <- matrix(mu[k, ], nrow = n_k, ncol = p, byrow = TRUE) + t(
+			apply
+			(
+				array(y[ind, ], dim = c(n_k,q)), 1, 
+					function(tk)
+					{ 
+						return(array(Lambda[ k, , ], dim = c(p,q)) %*% tk) 
+					}
+			)
+		)
                         s <- colSums((x_data[ind, ] - tmp)^2)
                 }
 		diag(SigmaINV[k, , ]) <- rgamma(p,shape = alpha_sigma + n_k/2, rate = beta_sigma + s/2)
