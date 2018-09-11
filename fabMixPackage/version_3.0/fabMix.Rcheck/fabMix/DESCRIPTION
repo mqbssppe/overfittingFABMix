@@ -8,8 +8,8 @@ Author: Panagiotis Papastamoulis
 Maintainer: Panagiotis Papastamoulis <papapast@yahoo.gr>
 Description: Model-based clustering of multivariate continuous data with or without missing values. The underlying model is a Bayesian mixture of factor analyzers with a large number of components (overfitting mixture). Suitable prior assumptions ensure that asymptotically the extra components will have zero posterior weight (empty), therefore, the inference on the number of clusters is based on the ``alive'' components. The number of factors is considered fixed, and the optimal one can be estimated using information criteria. Identifiability issues related to label switching are dealt by post-processing the simulated output with the ECR algorithm.
 Imports: MASS, doParallel, foreach, label.switching, mvtnorm, doRNG,
-        RColorBrewer
+        RColorBrewer, corrplot, mclust
 License: GPL-2
 NeedsCompilation: no
-Packaged: 2018-09-07 11:45:33 UTC; panagiotis
-Built: R 3.4.4; ; 2018-09-07 11:47:00 UTC; unix
+Packaged: 2018-09-11 17:11:03 UTC; panagiotis
+Built: R 3.4.4; ; 2018-09-11 17:12:26 UTC; unix

@@ -1,21 +1,21 @@
-\name{fabMix}
-\alias{fabMix}
+\name{fabMix_UxU}
+\alias{fabMix_UxU}
 \title{
-Main function
+Fit UxU mixtures
 }
 \description{
 This function runs parallel chains under a prior tempering scheme of the Dirichlet prior distribution of mixture weights. 
 }
 \usage{
-fabMix(model, dirPriorAlphas, rawData, outDir, Kmax, mCycles, 
+fabMix_UxU(sameSigma, dirPriorAlphas, rawData, outDir, Kmax, mCycles, 
 	burnCycles, g, h, alpha_sigma, beta_sigma, q, normalize,  
 	thinning, zStart, nIterPerCycle, gibbs_z, 
 	warm_up_overfitting, warm_up, overfittingInitialization, 
 	progressGraphs, gwar)
 }
 \arguments{
-  \item{model}{
-Any subset of "UUU" "CUU" "UCU" "CCU" "UCC" "UUC" "CUC", "CCC" indicating the fitted models.
+  \item{sameSigma}{
+Logical value denoting the parameterization of the error variance per component. If \code{TRUE}, the parameterization \eqn{\Sigma_1 = \ldots = \Sigma_K} is fitted.
 }
   \item{dirPriorAlphas}{
 The prior Dirichlet parameters for each chain.
@@ -48,7 +48,7 @@ Number of cycles that will be discarded as burn-in period.
 	Prior parameter \eqn{\beta}. Default value: \eqn{\beta = 1}.
 }
   \item{q}{
-	A vector containing the number of factors to be fitted.
+	Number of factors \eqn{q}, where \eqn{1 \leq q \leq L}. An error is thrown if the Ledermann bound (\eqn{L}) is exceeded.
 }
   \item{normalize}{
 	Should the observed data be normalized? Default value: TRUE. 
@@ -82,20 +82,14 @@ Number of cycles that will be discarded as burn-in period.
 }
 }
 \value{
-	An object of class \code{fabMix.object}, that is, a list consisting of the following entries:
-  \item{bic }{Bayesian Information Criterion per model and number of factors.}
-  \item{class }{The estimated single best clustering of the observations according to the selected model.}
-  \item{n_Clusters_per_model }{The most probable number of clusters (number of non-empty components of the overfitted mixture) per model and number of factors.}
-  \item{posterior_probability }{The posterior probability of the estimated allocations according to the selected model.}
-  \item{covariance_matrix }{The estimated posterior mean of the covariance matrix per cluster according to the selected model.}
-  \item{mu }{The estimated posterior mean of the mean per cluster according to the selected model.}
-  \item{weights }{The estimated posterior mean of the mixing proportions according to the selected model.}
-  \item{selected_model }{Data frame containing the parameterization, number of clusters and factors of the selected model.}
-  \item{mcmc }{A list containing the MCMC draws for the parameters of the selected models. All component-specific parameters have been reordered according to the ECR algorithm in order to undo the label switching problem.}
-  \item{data }{The observed data.}
+	List of files written to \code{outDir}
+%%  If it is a LIST, use
+%%  \item{comp1 }{Description of 'comp1'}
+%%  \item{comp2 }{Description of 'comp2'}
+%% ...
 }
 \note{
-It is recommended to always use: \code{normalize = TRUE} (default). Tuning of \code{dirPriorAlphas} may be necessary to achieve reasonable acceptance rates of chain swaps. Note that the output is reordered in order to deal with the label switching problem, according to the ECR algorithm applied by \code{dealWithLabelSwitching} function.
+It is recommended to always use: \code{normalize = TRUE} (default). Tuning of \code{dirPriorAlphas} may be necessary to achieve reasonable acceptance rates of chain swaps. Also note that the output is not identifiable due to label switching and the user has to subsequently call the \code{dealWithLabelSwitching} function.
 }
 \seealso{
 \code{\link{dealWithLabelSwitching}}
@@ -126,10 +120,18 @@ dN <- 1
 dirPriorAlphas <- c(1, 1 + dN * (2:nChains - 1))/Kmax   
 outputFolder <- "fabMixExample"
 # Run algorithm
-fabMix( dirPriorAlphas = dirPriorAlphas, 
+fabMix_UxU( dirPriorAlphas = dirPriorAlphas, 
         rawData = syntheticDataset$data, 
         outDir = outputFolder, Kmax = Kmax, mCycles = 1200, 
         burnCycles = 200, q = q) 
+
+# Compute information criteria:
+getStuffForDIC(x_data = syntheticDataset$data, outputFolder = outputFolder, q = q)
+
+# Deal with label switching:
+dealWithLabelSwitching(x_data = syntheticDataset$data, 
+        outputFolder = outputFolder, q = q, 
+        compute_regularized_expression = TRUE, Km = Kmax)
 }
 
 

@@ -26,7 +26,7 @@ compute_sufficient_statistics_q0
                         Compute sufficient statistics for q = 0
 dealWithLabelSwitching
                         Apply label switching algorithms
-fabMix                  Main function of the package
+fabMix                  Main function
 fabMix-package          Overfitting Bayesian Mixtures of Factor
                         Analyzers with an Unknown Number of Components
 fabMix_CxC              Main function of the package for CUC, CCC
@@ -35,6 +35,7 @@ fabMix_CxU              Main function of the package for CCU, CUU
                         models
 fabMix_UxC              Main function of the package for UUC, UCC
                         models
+fabMix_UxU              Fit UxU mixtures
 fabMix_missing_values   Main function for the case of missing values
 getStuffForDIC          Compute information criteria
 log_dirichlet_pdf       Log-density function of the Dirichlet
@@ -67,6 +68,8 @@ overfitting_q0          MCMC sampler for q=0
 overfitting_q0_sameSigma
                         MCMC sampler for q=0 and same error variance
                         parameterization
+plot.fabMix.object      Plot function
+print.fabMix.object     Print function
 simData                 Synthetic data generator
 update_OmegaINV         Gibbs sampling for Omega^{-1}
 update_SigmaINV_faster

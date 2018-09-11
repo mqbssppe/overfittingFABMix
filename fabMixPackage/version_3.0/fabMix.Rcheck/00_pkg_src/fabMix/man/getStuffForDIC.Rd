@@ -7,7 +7,7 @@ Compute information criteria
 This function computes four information criteria for a given run of the \code{fabMix} algorithm, namely: AIC, BIC, DIC and \eqn{\mbox{DIC}_2}. Given various runs with different number of factors, the selected model corresponds to the one with the smalled value of the selected criterion.
 }
 \usage{
-getStuffForDIC(sameSigma, sameLambda, x_data, outputFolder, q, burn, 
+getStuffForDIC(sameSigma, sameLambda, isotropic, x_data, outputFolder, q, burn, 
 				Km, normalize, discardLower)
 }
 \arguments{
@@ -17,7 +17,9 @@ getStuffForDIC(sameSigma, sameLambda, x_data, outputFolder, q, burn,
   \item{sameLambda}{
 	Logical value indicating whether the parameterization with same loadings per component is used. Default: FALSE.
 }
-
+  \item{isotropic}{
+	Logical value indicating whether the parameterization with isotropic error variance per component is used. Default: FALSE.
+}
   \item{x_data}{
 	Observed data.
 }

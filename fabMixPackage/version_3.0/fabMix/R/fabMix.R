@@ -3250,7 +3250,7 @@ log_dirichlet_pdf <- function(alpha, weights){
 
 
 # for UUU and UCU models
-fabMix <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCycles, g, h, alpha_sigma, beta_sigma, q, normalize, thinning, zStart, nIterPerCycle, gibbs_z = 1, warm_up_overfitting = 100, warm_up = 500, overfittingInitialization=TRUE, progressGraphs = FALSE, gwar = 0.05){
+fabMix_UxU <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCycles, g, h, alpha_sigma, beta_sigma, q, normalize, thinning, zStart, nIterPerCycle, gibbs_z = 1, warm_up_overfitting = 100, warm_up = 500, overfittingInitialization=TRUE, progressGraphs = FALSE, gwar = 0.05){
 
 	missingRowsIndex <- which(is.na(rowSums(rawData)) == TRUE)
 	nMissingRows <- length( missingRowsIndex ) 
@@ -3278,11 +3278,11 @@ fabMix <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, mCyc
 	}
 	mypal <- c(brewer.pal(9, "Set1"), "black") # up to 10 colours
 
-	cat("         ____      __    __  ____     ", "\n")
-	cat("        / __/___ _/ /_  /  |/  (_)  __", "\n")
-	cat("       / /_/ __ `/ __ \\/ /|_/ / / |/_/", "\n")
-	cat("      / __/ /_/ / /_/ / /  / / />  <  ", "\n")
-	cat("     /_/  \\__,_/_.___/_/  /_/_/_/|_|  version 3.0", "\n")
+#	cat("         ____      __    __  ____     ", "\n")
+#	cat("        / __/___ _/ /_  /  |/  (_)  __", "\n")
+#	cat("       / /_/ __ `/ __ \\/ /|_/ / / |/_/", "\n")
+#	cat("      / __/ /_/ / /_/ / /  / / />  <  ", "\n")
+#	cat("     /_/  \\__,_/_.___/_/  /_/_/_/|_|  version 3.0", "\n")
 
 
 	if( range(diff(order(dirPriorAlphas)))[1] != 1){stop('dirPriorAlphas should be in increasing order.')}
@@ -3304,21 +3304,22 @@ fabMix <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, mCyc
 	thinning <- floor(thinning)
 	if( missing(normalize) ){normalize <- TRUE}
 	cat('\n')
-	cat(paste0("-    p = ", p, ", q = ", q, ", n = ",n,", g = ", g, ", h = ", h, ", alpha_sigma = ", alpha_sigma, ", beta_sigma = ", beta_sigma,"\n"))
+#	cat(paste0("-    p = ", p, ", q = ", q, ", n = ",n,", g = ", g, ", h = ", h, ", alpha_sigma = ", alpha_sigma, ", beta_sigma = ", beta_sigma,"\n"))
 	if(sameSigma == TRUE){
 		cat(paste0('-    Parameterization: UCU model'),'\n')
 	}else{
 		cat(paste0('-    Parameterization: UUU model'),'\n')
 	}
-	cat(paste0('-    Using Nchains = ', nChains),'\n')
-	cat(paste0('-    Target posterior distribution corresponds to alpha = ', dirPriorAlphas[1]),'\n')
+	cat(paste0("-    Number of factors: q = ", q,"\n"))
+#	cat(paste0('-    Using Nchains = ', nChains),'\n')
+#	cat(paste0('-    Target posterior distribution corresponds to alpha = ', dirPriorAlphas[1]),'\n')
 	if( normalize == TRUE ){
 		x_data <- scale(originalX, center = TRUE, scale = TRUE)
-		cat('-    The sampler uses standardized data.','\n')
+#		cat('-    The sampler uses standardized data.','\n')
 	}
 	if( normalize == FALSE ){
 		x_data <- rawData
-		cat('-    The sampler uses raw data (NOT GOOD PRACTICE).','\n')
+#		cat('-    The sampler uses raw data (NOT GOOD PRACTICE).','\n')
 	}
 	kValues <- array(data = NA, dim = c(mCycles, nChains))
 	mh_acceptance_rate <- 0
@@ -3556,11 +3557,11 @@ fabMix_CxU <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 	}
 	mypal <- c(brewer.pal(9, "Set1"), "black") # up to 10 colours
 
-	cat("         ____      __    __  ____     ", "\n")
-	cat("        / __/___ _/ /_  /  |/  (_)  __", "\n")
-	cat("       / /_/ __ `/ __ \\/ /|_/ / / |/_/", "\n")
-	cat("      / __/ /_/ / /_/ / /  / / />  <  ", "\n")
-	cat("     /_/  \\__,_/_.___/_/  /_/_/_/|_|  version 3.0", "\n")
+#	cat("         ____      __    __  ____     ", "\n")
+#	cat("        / __/___ _/ /_  /  |/  (_)  __", "\n")
+#	cat("       / /_/ __ `/ __ \\/ /|_/ / / |/_/", "\n")
+#	cat("      / __/ /_/ / /_/ / /  / / />  <  ", "\n")
+#	cat("     /_/  \\__,_/_.___/_/  /_/_/_/|_|  version 3.0", "\n")
 
 
 	if( range(diff(order(dirPriorAlphas)))[1] != 1){stop('dirPriorAlphas should be in increasing order.')}
@@ -3582,21 +3583,22 @@ fabMix_CxU <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 	thinning <- floor(thinning)
 	if( missing(normalize) ){normalize <- TRUE}
 	cat('\n')
-	cat(paste0("-    p = ", p, ", q = ", q, ", n = ",n,", g = ", g, ", h = ", h, ", alpha_sigma = ", alpha_sigma, ", beta_sigma = ", beta_sigma,"\n"))
+#	cat(paste0("-    p = ", p, ", q = ", q, ", n = ",n,", g = ", g, ", h = ", h, ", alpha_sigma = ", alpha_sigma, ", beta_sigma = ", beta_sigma,"\n"))
 	if(sameSigma == TRUE){
 		cat(paste0('-    Parameterization: CCU model'),'\n')
 	}else{
 		cat(paste0('-    Parameterization: CUU model'),'\n')
 	}
-	cat(paste0('-    Using Nchains = ', nChains),'\n')
-	cat(paste0('-    Target posterior distribution corresponds to alpha = ', dirPriorAlphas[1]),'\n')
+	cat(paste0("-    Number of factors: q = ", q,"\n"))
+#	cat(paste0('-    Using Nchains = ', nChains),'\n')
+#	cat(paste0('-    Target posterior distribution corresponds to alpha = ', dirPriorAlphas[1]),'\n')
 	if( normalize == TRUE ){
 		x_data <- scale(originalX, center = TRUE, scale = TRUE)
-		cat('-    The sampler uses standardized data.','\n')
+#		cat('-    The sampler uses standardized data.','\n')
 	}
 	if( normalize == FALSE ){
 		x_data <- rawData
-		cat('-    The sampler uses raw data (NOT GOOD PRACTICE).','\n')
+#		cat('-    The sampler uses raw data (NOT GOOD PRACTICE).','\n')
 	}
 	kValues <- array(data = NA, dim = c(mCycles, nChains))
 	mh_acceptance_rate <- 0
@@ -3834,11 +3836,11 @@ fabMix_CxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 	}
 	mypal <- c(brewer.pal(9, "Set1"), "black") # up to 10 colours
 
-	cat("         ____      __    __  ____     ", "\n")
-	cat("        / __/___ _/ /_  /  |/  (_)  __", "\n")
-	cat("       / /_/ __ `/ __ \\/ /|_/ / / |/_/", "\n")
-	cat("      / __/ /_/ / /_/ / /  / / />  <  ", "\n")
-	cat("     /_/  \\__,_/_.___/_/  /_/_/_/|_|  version 3.0", "\n")
+#	cat("         ____      __    __  ____     ", "\n")
+#	cat("        / __/___ _/ /_  /  |/  (_)  __", "\n")
+#	cat("       / /_/ __ `/ __ \\/ /|_/ / / |/_/", "\n")
+#	cat("      / __/ /_/ / /_/ / /  / / />  <  ", "\n")
+#	cat("     /_/  \\__,_/_.___/_/  /_/_/_/|_|  version 3.0", "\n")
 
 
 	if( range(diff(order(dirPriorAlphas)))[1] != 1){stop('dirPriorAlphas should be in increasing order.')}
@@ -3860,21 +3862,22 @@ fabMix_CxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 	thinning <- floor(thinning)
 	if( missing(normalize) ){normalize <- TRUE}
 	cat('\n')
-	cat(paste0("-    p = ", p, ", q = ", q, ", n = ",n,", g = ", g, ", h = ", h, ", alpha_sigma = ", alpha_sigma, ", beta_sigma = ", beta_sigma,"\n"))
+#	cat(paste0("-    p = ", p, ", q = ", q, ", n = ",n,", g = ", g, ", h = ", h, ", alpha_sigma = ", alpha_sigma, ", beta_sigma = ", beta_sigma,"\n"))
 	if(sameSigma == TRUE){
 		cat(paste0('-    Parameterization: CCC model'),'\n')
 	}else{
 		cat(paste0('-    Parameterization: CUC model'),'\n')
 	}
-	cat(paste0('-    Using Nchains = ', nChains),'\n')
-	cat(paste0('-    Target posterior distribution corresponds to alpha = ', dirPriorAlphas[1]),'\n')
+	cat(paste0("-    Number of factors: q = ", q,"\n"))
+#	cat(paste0('-    Using Nchains = ', nChains),'\n')
+#	cat(paste0('-    Target posterior distribution corresponds to alpha = ', dirPriorAlphas[1]),'\n')
 	if( normalize == TRUE ){
 		x_data <- scale(originalX, center = TRUE, scale = TRUE)
-		cat('-    The sampler uses standardized data.','\n')
+#		cat('-    The sampler uses standardized data.','\n')
 	}
 	if( normalize == FALSE ){
 		x_data <- rawData
-		cat('-    The sampler uses raw data (NOT GOOD PRACTICE).','\n')
+#		cat('-    The sampler uses raw data (NOT GOOD PRACTICE).','\n')
 	}
 	kValues <- array(data = NA, dim = c(mCycles, nChains))
 	mh_acceptance_rate <- 0
@@ -4112,11 +4115,11 @@ fabMix_UxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 	}
 	mypal <- c(brewer.pal(9, "Set1"), "black") # up to 10 colours
 
-	cat("         ____      __    __  ____     ", "\n")
-	cat("        / __/___ _/ /_  /  |/  (_)  __", "\n")
-	cat("       / /_/ __ `/ __ \\/ /|_/ / / |/_/", "\n")
-	cat("      / __/ /_/ / /_/ / /  / / />  <  ", "\n")
-	cat("     /_/  \\__,_/_.___/_/  /_/_/_/|_|  version 3.0", "\n")
+#	cat("         ____      __    __  ____     ", "\n")
+#	cat("        / __/___ _/ /_  /  |/  (_)  __", "\n")
+#	cat("       / /_/ __ `/ __ \\/ /|_/ / / |/_/", "\n")
+#	cat("      / __/ /_/ / /_/ / /  / / />  <  ", "\n")
+#	cat("     /_/  \\__,_/_.___/_/  /_/_/_/|_|  version 3.0", "\n")
 
 
 	if( range(diff(order(dirPriorAlphas)))[1] != 1){stop('dirPriorAlphas should be in increasing order.')}
@@ -4138,21 +4141,20 @@ fabMix_UxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 	thinning <- floor(thinning)
 	if( missing(normalize) ){normalize <- TRUE}
 	cat('\n')
-	cat(paste0("-    p = ", p, ", q = ", q, ", n = ",n,", g = ", g, ", h = ", h, ", alpha_sigma = ", alpha_sigma, ", beta_sigma = ", beta_sigma,"\n"))
+#	cat(paste0("-    p = ", p, ", q = ", q, ", n = ",n,", g = ", g, ", h = ", h, ", alpha_sigma = ", alpha_sigma, ", beta_sigma = ", beta_sigma,"\n"))
 	if(sameSigma == TRUE){
 		cat(paste0('-    Parameterization: UCC model'),'\n')
 	}else{
 		cat(paste0('-    Parameterization: UUC model'),'\n')
 	}
-	cat(paste0('-    Using Nchains = ', nChains),'\n')
-	cat(paste0('-    Target posterior distribution corresponds to alpha = ', dirPriorAlphas[1]),'\n')
+	cat(paste0("-    Number of factors: q = ", q,"\n"))
 	if( normalize == TRUE ){
 		x_data <- scale(originalX, center = TRUE, scale = TRUE)
-		cat('-    The sampler uses standardized data.','\n')
+#		cat('-    The sampler uses standardized data.','\n')
 	}
 	if( normalize == FALSE ){
 		x_data <- rawData
-		cat('-    The sampler uses raw data (NOT GOOD PRACTICE).','\n')
+#		cat('-    The sampler uses raw data (NOT GOOD PRACTICE).','\n')
 	}
 	kValues <- array(data = NA, dim = c(mCycles, nChains))
 	mh_acceptance_rate <- 0
@@ -4728,7 +4730,7 @@ observed.log.likelihood0_q0_sameSigma <- function(x_data, w, mu, Sigma, z){
 
 
 
-getStuffForDIC <- function(sameSigma = TRUE, sameLambda = FALSE, x_data, outputFolder, q, burn, Km, normalize, discardLower){
+getStuffForDIC <- function(sameSigma = TRUE, sameLambda = FALSE, isotropic  = FALSE, x_data, outputFolder, q, burn, Km, normalize, discardLower){
 	cat(paste0('-    (4) Computing information criteria for q = ', q), '\n')
 	if(missing(normalize)){normalize = TRUE}
 	if(normalize){
@@ -4968,31 +4970,63 @@ getStuffForDIC <- function(sameSigma = TRUE, sameLambda = FALSE, x_data, outputF
 
 	if(sameSigma == TRUE){
 		if(sameLambda == FALSE){
-			#UCU
-			aic <- -2*aic/m + 2*(kSelected*( p+p*q - q*(q-1)/2 ) + p + kSelected - 1 ) 
-			bic <- -2*bic/m + log(n)*(kSelected*( p+p*q - q*(q-1)/2 ) + p + kSelected - 1 )
-			aic_MAX <- -2*maxL + 2*(kSelected*( p+p*q - q*(q-1)/2 ) + p + kSelected - 1 ) 
-			bic_MAX <- -2*maxL + log(n)*(kSelected*( p+p*q - q*(q-1)/2 ) + p + kSelected - 1 )
+			if(isotropic == FALSE){
+				#UCU
+				aic <- -2*aic/m + 2*(kSelected*( p+p*q - q*(q-1)/2 ) + p + kSelected - 1 ) 
+				bic <- -2*bic/m + log(n)*(kSelected*( p+p*q - q*(q-1)/2 ) + p + kSelected - 1 )
+				aic_MAX <- -2*maxL + 2*(kSelected*( p+p*q - q*(q-1)/2 ) + p + kSelected - 1 ) 
+				bic_MAX <- -2*maxL + log(n)*(kSelected*( p+p*q - q*(q-1)/2 ) + p + kSelected - 1 )
+			}else{
+				#UCC
+				aic <- -2*aic/m + 2*(kSelected*( p+p*q - q*(q-1)/2 ) + 1 + kSelected - 1 ) 
+				bic <- -2*bic/m + log(n)*(kSelected*( p+p*q - q*(q-1)/2 ) + 1 + kSelected - 1 )
+				aic_MAX <- -2*maxL + 2*(kSelected*( p+p*q - q*(q-1)/2 ) + 1 + kSelected - 1 ) 
+				bic_MAX <- -2*maxL + log(n)*(kSelected*( p+p*q - q*(q-1)/2 ) + 1 + kSelected - 1 )
+			}
 		}else{
-			#CCU
-			aic <- -2*aic/m + 2*(kSelected*p + p*q - q*(q-1)/2 + p + kSelected - 1 ) 
-			bic <- -2*bic/m + log(n)*(kSelected*p + p*q - q*(q-1)/2 + p + kSelected - 1 )
-			aic_MAX <- -2*maxL + 2*(kSelected*p + p*q - q*(q-1)/2 + p + kSelected - 1 ) 
-			bic_MAX <- -2*maxL + log(n)*(kSelected*p + p*q - q*(q-1)/2 + p + kSelected - 1 )
+			if(isotropic == FALSE){
+				#CCU
+				aic <- -2*aic/m + 2*(kSelected*p + p*q - q*(q-1)/2 + p + kSelected - 1 ) 
+				bic <- -2*bic/m + log(n)*(kSelected*p + p*q - q*(q-1)/2 + p + kSelected - 1 )
+				aic_MAX <- -2*maxL + 2*(kSelected*p + p*q - q*(q-1)/2 + p + kSelected - 1 ) 
+				bic_MAX <- -2*maxL + log(n)*(kSelected*p + p*q - q*(q-1)/2 + p + kSelected - 1 )
+			}else{
+				#CCC
+				aic <- -2*aic/m + 2*(kSelected*p + p*q - q*(q-1)/2 + 1 + kSelected - 1 ) 
+				bic <- -2*bic/m + log(n)*(kSelected*p + p*q - q*(q-1)/2 + 1 + kSelected - 1 )
+				aic_MAX <- -2*maxL + 2*(kSelected*p + p*q - q*(q-1)/2 + 1 + kSelected - 1 ) 
+				bic_MAX <- -2*maxL + log(n)*(kSelected*p + p*q - q*(q-1)/2 + 1 + kSelected - 1 )
+			}
 		}
 	}else{
 		if(sameLambda == FALSE){
-			#UUU
-			aic <- -2*aic/m + 2*(kSelected*( 2*p+p*q - q*(q-1)/2 ) + kSelected - 1 ) 
-			bic <- -2*bic/m + log(n)*(kSelected*( 2*p+p*q - q*(q-1)/2 ) + kSelected - 1 )
-			aic_MAX <- -2*maxL + 2*(kSelected*( 2*p+p*q - q*(q-1)/2 ) + kSelected - 1 ) 
-			bic_MAX <- -2*maxL + log(n)*(kSelected*( 2*p+p*q - q*(q-1)/2 ) + kSelected - 1 )
+			if(isotropic == FALSE){
+				#UUU
+				aic <- -2*aic/m + 2*(kSelected*( 2*p+p*q - q*(q-1)/2 ) + kSelected - 1 ) 
+				bic <- -2*bic/m + log(n)*(kSelected*( 2*p+p*q - q*(q-1)/2 ) + kSelected - 1 )
+				aic_MAX <- -2*maxL + 2*(kSelected*( 2*p+p*q - q*(q-1)/2 ) + kSelected - 1 ) 
+				bic_MAX <- -2*maxL + log(n)*(kSelected*( 2*p+p*q - q*(q-1)/2 ) + kSelected - 1 )
+			}else{
+				#UUC
+				aic <- -2*aic/m + 2*(kSelected*( p + 1 + p*q - q*(q-1)/2 ) + kSelected - 1 ) 
+				bic <- -2*bic/m + log(n)*(kSelected*( p + 1 + p*q - q*(q-1)/2 ) + kSelected - 1 )
+				aic_MAX <- -2*maxL + 2*(kSelected*( p + 1 + p*q - q*(q-1)/2 ) + kSelected - 1 ) 
+				bic_MAX <- -2*maxL + log(n)*(kSelected*( p + 1 + p*q - q*(q-1)/2 ) + kSelected - 1 )
+			}
 		}else{
-			#CUU
-			aic <- -2*aic/m + 2*(kSelected*2*p + p*q - q*(q-1)/2 + kSelected - 1 ) 
-			bic <- -2*bic/m + log(n)*(kSelected*2*p + p*q - q*(q-1)/2 + kSelected - 1 )
-			aic_MAX <- -2*maxL + 2*(kSelected*2*p + p*q - q*(q-1)/2 + kSelected - 1 ) 
-			bic_MAX <- -2*maxL + log(n)*(kSelected*2*p + p*q - q*(q-1)/2 + kSelected - 1 )
+			if(isotropic == FALSE){
+				#CUU
+				aic <- -2*aic/m + 2*(kSelected*2*p + p*q - q*(q-1)/2 + kSelected - 1 ) 
+				bic <- -2*bic/m + log(n)*(kSelected*2*p + p*q - q*(q-1)/2 + kSelected - 1 )
+				aic_MAX <- -2*maxL + 2*(kSelected*2*p + p*q - q*(q-1)/2 + kSelected - 1 ) 
+				bic_MAX <- -2*maxL + log(n)*(kSelected*2*p + p*q - q*(q-1)/2 + kSelected - 1 )
+			}else{
+				#CUC
+				aic <- -2*aic/m + 2*(kSelected*(p + 1) + p*q - q*(q-1)/2 + kSelected - 1 ) 
+				bic <- -2*bic/m + log(n)*(kSelected*(p + 1) + p*q - q*(q-1)/2 + kSelected - 1 )
+				aic_MAX <- -2*maxL + 2*(kSelected*(p + 1) + p*q - q*(q-1)/2 + kSelected - 1 ) 
+				bic_MAX <- -2*maxL + log(n)*(kSelected*(p + 1) + p*q - q*(q-1)/2 + kSelected - 1 )
+			}
 		}
 	}
 
@@ -5060,7 +5094,7 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 			allocationsECR[i,] <- myPerm[z[i,]]
 		}
 		write.table(allocationsECR, file = 'reordered_allocations_ecr.txt')
-		cat(paste0('         * write file: `reordered_allocations_ecr.txt`' ),'\n')
+#		cat(paste0('         * write file: `reordered_allocations_ecr.txt`' ),'\n')
 		if(q > 0){
 			l <- as.matrix(read.table(paste0("LambdaValues",1,".txt")))
 			J <- dim(l)[2]
@@ -5082,7 +5116,7 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 			}
 			lambda.perm.mcmc <- permute.mcmc(mcmc, ls$permutations$ECR)$output
 			write.table(lambda.perm.mcmc, file = 'reordered_lambda_ecr.txt')
-			cat(paste0('         * write file: `reordered_lambda_ecr.txt`'),'\n')
+#			cat(paste0('         * write file: `reordered_lambda_ecr.txt`'),'\n')
 			lambda.mean <- array(data = NA, dim = c(K,p,q))
 			lambda.map <- array(data = NA, dim = c(K,p,q))
 			for(k in 1:K){
@@ -5091,7 +5125,7 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 				lambda.map[k,,] <- matrix(lambda.perm.mcmc[mapIndex,k,],nrow = p, ncol = q, byrow=TRUE)
 			}
 			write.table(lambda.mean, file = 'lambda_estimate_ecr.txt', col.names = paste('lambda',1:p, rep(1:q, each = p), sep = "_"))
-			cat(paste0('         * write file: `lambda_estimate_ecr.txt`'),'\n')
+#			cat(paste0('         * write file: `lambda_estimate_ecr.txt`'),'\n')
 		}
 		mu <- read.table("muValues.txt")# auto to grafei ws mu_{11},mu_{12},...,mu_{1K}, ...., mu_{p1},mu_{p2},...,mu_{pK} gia kathe grammi
 		if(burn > 0){
@@ -5111,7 +5145,7 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 		}
 		mu.mcmc <- permute.mcmc(mu.mcmc, ls$permutations$ECR)$output
 		write.table(mu.mcmc, file = 'reordered_mu_ecr.txt')
-		cat(paste0('         * write file: `reordered_mu_ecr.txt`'),'\n')
+#		cat(paste0('         * write file: `reordered_mu_ecr.txt`'),'\n')
 		mu.mean <- array(data = NA, dim = c(K,p))
 		mu.map <- array(data = NA, dim = c(K,p))
 		for(k in 1:K){
@@ -5121,7 +5155,7 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 			}
 		}
 		write.table(mu.mean, file = 'mu_estimate_ecr.txt')
-		cat(paste0('         * write file: `mu_estimate_ecr.txt`'),'\n')
+#		cat(paste0('         * write file: `mu_estimate_ecr.txt`'),'\n')
 		if(sameSigma == TRUE){
 			sigmaINV <- as.matrix(read.table("sigmainvValues.txt"))# auto to grafei ws (s_{11},...,s_{p1}),....,(s_{1k},...,s_{pk}),....,(s_{1K},...,s_{pK})
 			if(burn > 0){
@@ -5153,7 +5187,7 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 		                }
 		        }
 		        write.table(sigma.mean, file = 'sigma_estimate_ecr.txt')
-		        cat(paste0('         * write file: `sigma_estimate_ecr.txt`'),'\n')
+#		        cat(paste0('         * write file: `sigma_estimate_ecr.txt`'),'\n')
 		}
 #		w.mcmc <- array(as.matrix(read.table("wValues.txt")[max(burn) + Kindex, ]),dim = c(length(Kindex),K,1))
 
@@ -5181,11 +5215,11 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 			w.map[k] <- w.mcmc[mapIndex,k,1]
 		}
 		write.table(w.mcmc, file = 'reordered_weights_ecr.txt')
-		cat(paste0('         * write file: `reordered_weights_ecr.txt`'),'\n')
+#		cat(paste0('         * write file: `reordered_weights_ecr.txt`'),'\n')
 		write.table(w.mean, file = 'weights_estimate_ecr.txt')
-		cat(paste0('         * write file: `weights_estimate_ecr.txt`'),'\n')
+#		cat(paste0('         * write file: `weights_estimate_ecr.txt`'),'\n')
 		write.table(ls$clusters, file = "singleBestClusterings.txt", quote = FALSE, row.names = FALSE)
-		cat(paste0('         * write file: `singleBestClusterings.txt`'),'\n')
+#		cat(paste0('         * write file: `singleBestClusterings.txt`'),'\n')
 		zMAP <- as.matrix(read.table("singleBestClusterings.txt",header=TRUE))[1, ]
 
 
@@ -5195,7 +5229,7 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 		}
 		mapAllocationsPosteriorProbs <- mapAllocationsPosteriorProbs/dim(allocationsECR)[1]
 		write.table(mapAllocationsPosteriorProbs, file = "classificationProbabilities.txt")
-		cat(paste0('         * write file: `classificationProbabilities.txt`'),'\n')
+#		cat(paste0('         * write file: `classificationProbabilities.txt`'),'\n')
 
 		aliveClusters <- as.numeric(names(table(ls$clusters[1,])))
 		if(q > 0){
@@ -5221,16 +5255,16 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 			covmat <- covmat/m
 			for(k in 1:length(aliveClusters)){
 				write.table(covmat[k, , ], file = paste0("estimated_cov_cluster_",k,".txt"))
-				cat(paste0('         * write file: `estimated_cov_cluster_',k,'.txt`'),'\n')
+#				cat(paste0('         * write file: `estimated_cov_cluster_',k,'.txt`'),'\n')
 				write.table(lambda.map[k, , ], file = paste0('lambda_map_',k,'.txt'))
-				cat(paste0('         * write file: `lambda_map_',k,'.txt`'),'\n')
+#				cat(paste0('         * write file: `lambda_map_',k,'.txt`'),'\n')
 			}
 		}
 
 
 
 		if( compute_regularized_expression == TRUE ){
-			cat(paste("-    computing regularized expressions..."),'\n')
+#			cat(paste("-    computing regularized expressions..."),'\n')
 			yValues <- read.table("yValues.txt")
 			if(burn > 0){
 				yValues <- yValues[-(1:burn), ]
@@ -5252,7 +5286,7 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 					regularizedExpression2[as.character(k), , ] <- regularizedExpression2[as.character(k), , ] + tmp
 					regularizedExpression[as.character(k), ] <- regularizedExpression[as.character(k), ] + rowSums(tmp)
 				}
-				if(iter %% 50 == 0){cat(paste('iter = ', iter),'\n')}
+#				if(iter %% 50 == 0){cat(paste('iter = ', iter),'\n')}
 			}
 			regularizedExpression <- regularizedExpression/m
 			regularizedExpression2 <- regularizedExpression2/m
@@ -5260,11 +5294,11 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 				write.table(
 				regularizedExpression2[,,j], 
 				file = paste0("estimated_regularized_expression_per_cluster_",j,".txt"))
-				cat(paste0('         * write file: `estimated_regularized_expression_per_cluster_',j,'.txt`'),'\n')
+#				cat(paste0('         * write file: `estimated_regularized_expression_per_cluster_',j,'.txt`'),'\n')
 
 			}
 			write.table(regularizedExpression, file = "estimated_regularized_expression_per_cluster.txt")
-			cat(paste0('         * write file: `estimated_regularized_expression_per_cluster.txt`'),'\n')
+#			cat(paste0('         * write file: `estimated_regularized_expression_per_cluster.txt`'),'\n')
 		}
 
 
@@ -5274,6 +5308,330 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 
 }
 
+
+
+
+#new in version 3
+# overall main function
+fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "CCC"), 
+			dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCycles, 
+			g, h, alpha_sigma, beta_sigma, q, normalize = TRUE, thinning, zStart, 
+			nIterPerCycle, gibbs_z = 1, warm_up_overfitting = 100, warm_up = 500, 
+			overfittingInitialization=TRUE, progressGraphs = FALSE, gwar = 0.05			
+			){
+
+
+	cat("         ____      __    __  ____     ", "\n")
+	cat("        / __/___ _/ /_  /  |/  (_)  __", "\n")
+	cat("       / /_/ __ `/ __ \\/ /|_/ / / |/_/", "\n")
+	cat("      / __/ /_/ / /_/ / /  / / />  <  ", "\n")
+	cat("     /_/  \\__,_/_.___/_/  /_/_/_/|_|  version 3.0", "\n\n")
+
+	if(missing(Kmax)){Kmax <- 20}
+	if(missing(nIterPerCycle)){nIterPerCycle = 10}
+	if(missing(zStart)){zStart = FALSE}
+	if( missing(dirPriorAlphas) ){
+		nChains <- 8
+		dN <- 1
+		dirPriorAlphas <- c(1, 1 + dN*(2:nChains - 1))/Kmax
+	}
+	if( range(diff(order(dirPriorAlphas)))[1] != 1){stop('dirPriorAlphas should be in increasing order.')}
+	if( range(diff(order(dirPriorAlphas)))[2] != 1){stop('dirPriorAlphas should be in increasing order.')}
+	if(mCycles < burnCycles + 1){ stop('`burnCycles` should be less than `mCycles`.') } 
+	if(missing(g)){g <- 0.5}
+	if(missing(h)){h <- 0.5}
+	if(missing(alpha_sigma)){alpha_sigma <- 0.5}
+	if(missing(beta_sigma)){beta_sigma <- 0.5}
+
+	p <- dim(rawData)[2]
+	n <- dim(rawData)[1]
+	cat(paste0("-    Data consists of p = ", p, " variables and n = ",n," observations, g = ", g, ", h = ", h, ", alpha_sigma = ", alpha_sigma, ", beta_sigma = ", beta_sigma,"\n"))
+	cat(paste0("-    MCMC parameters: g = ", g, ", h = ", h, ", alpha_sigma = ", alpha_sigma, ", beta_sigma = ", beta_sigma,"\n"))
+	cat(paste0('-         using Nchains = ', nChains),'\n')
+	cat(paste0('-         target posterior distribution corresponds to alpha = ', dirPriorAlphas[1]),'\n')
+	if( normalize == TRUE ){
+		cat('-    The sampler uses standardized data.','\n')
+	}
+	if( normalize == FALSE ){
+		cat('-    The sampler uses raw data (NOT GOOD PRACTICE).','\n')
+	}
+
+	# define output objects
+	bic <- array(data = NA, dim = c(length(q), length(model)))
+	colnames(bic) <- model
+	rownames(bic) <- q
+	nClusters <- array(data = NA, dim = c(length(q), length(model)))
+	colnames(nClusters) <- model
+	rownames(nClusters) <- q
+
+	dir.create(outDir)
+	setwd(outDir)
+	check_if_at_least_one_model <- 0
+	if("UUU" %in% model){
+		for(nFactors in q){
+			myDir <- paste0("UUU_",nFactors)
+			fabMix_UxU(sameSigma = FALSE, dirPriorAlphas = dirPriorAlphas, rawData = rawData, 
+				outDir = myDir, Kmax = Kmax, mCycles = mCycles, 
+				burnCycles = burnCycles, g = g, h = h, alpha_sigma = alpha_sigma, 
+				beta_sigma = beta_sigma, q = nFactors, normalize = normalize, 
+				thinning = thinning, zStart = zStart, nIterPerCycle = nIterPerCycle, 
+				gibbs_z = gibbs_z, warm_up_overfitting = warm_up_overfitting, warm_up = warm_up, 
+				overfittingInitialization=overfittingInitialization, progressGraphs = progressGraphs, gwar = gwar)
+			if(progressGraphs==TRUE){dev.off()}
+			getStuffForDIC(sameSigma = FALSE, sameLambda = FALSE, isotropic = FALSE, x_data = rawData, outputFolder = myDir, q = nFactors, Km = Kmax)
+#			dealWithLabelSwitching(sameSigma = FALSE, x_data = rawData, outputFolder = myDir, q = nFactors, compute_regularized_expression = FALSE, Km = Kmax)
+			bic[as.character(nFactors), "UUU"] <- read.table(paste0(myDir,"/informationCriteria_map_model.txt"))[4, ]
+			logl <- read.table(paste0(myDir,"/kValues.txt"), header=T)
+			nClusters[as.character(nFactors), "UUU"] <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
+			check_if_at_least_one_model <- 	check_if_at_least_one_model + 1
+		}
+	}
+
+	if("UCU" %in% model){
+		for(nFactors in q){
+			myDir <- paste0("UCU_",nFactors)
+			fabMix_UxU(sameSigma = TRUE, dirPriorAlphas = dirPriorAlphas, rawData = rawData, 
+				outDir = myDir, Kmax = Kmax, mCycles = mCycles, 
+				burnCycles = burnCycles, g = g, h = h, alpha_sigma = alpha_sigma, 
+				beta_sigma = beta_sigma, q = nFactors, normalize = normalize, 
+				thinning = thinning, zStart = zStart, nIterPerCycle = nIterPerCycle, 
+				gibbs_z = gibbs_z, warm_up_overfitting = warm_up_overfitting, warm_up = warm_up, 
+				overfittingInitialization=overfittingInitialization, progressGraphs = progressGraphs, gwar = gwar)
+			if(progressGraphs==TRUE){dev.off()}
+			getStuffForDIC(sameSigma = TRUE, sameLambda = FALSE, isotropic = FALSE, x_data = rawData, outputFolder = myDir, q = nFactors, Km = Kmax)
+#			dealWithLabelSwitching(sameSigma = TRUE, x_data = rawData, outputFolder = myDir, q = nFactors, compute_regularized_expression = FALSE, Km = Kmax)
+			bic[as.character(nFactors), "UCU"] <- read.table(paste0(myDir,"/informationCriteria_map_model.txt"))[4, ]
+			logl <- read.table(paste0(myDir,"/kValues.txt"), header=T)
+			nClusters[as.character(nFactors), "UCU"] <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
+			check_if_at_least_one_model <- 	check_if_at_least_one_model + 1
+		}
+	}
+
+	if("CUU" %in% model){
+		for(nFactors in q){
+			myDir <- paste0("CUU_",nFactors)
+			fabMix_CxU(sameSigma = FALSE, dirPriorAlphas = dirPriorAlphas, rawData = rawData, 
+				outDir = myDir, Kmax = Kmax, mCycles = mCycles, 
+				burnCycles = burnCycles, g = g, h = h, alpha_sigma = alpha_sigma, 
+				beta_sigma = beta_sigma, q = nFactors, normalize = normalize, 
+				thinning = thinning, zStart = zStart, nIterPerCycle = nIterPerCycle, 
+				gibbs_z = gibbs_z, warm_up_overfitting = warm_up_overfitting, warm_up = warm_up, 
+				overfittingInitialization=overfittingInitialization, progressGraphs = progressGraphs, gwar = gwar)
+			if(progressGraphs==TRUE){dev.off()}
+			getStuffForDIC(sameSigma = FALSE, sameLambda = TRUE, isotropic = FALSE, x_data = rawData, outputFolder = myDir, q = nFactors, Km = Kmax)
+#			dealWithLabelSwitching(sameSigma = FALSE, x_data = rawData, outputFolder = myDir, q = nFactors, compute_regularized_expression = FALSE, Km = Kmax)
+			bic[as.character(nFactors), "CUU"] <- read.table(paste0(myDir,"/informationCriteria_map_model.txt"))[4, ]
+			logl <- read.table(paste0(myDir,"/kValues.txt"), header=T)
+			nClusters[as.character(nFactors), "CUU"] <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
+			check_if_at_least_one_model <- 	check_if_at_least_one_model + 1
+		}
+	}
+
+	if("CCU" %in% model){
+		for(nFactors in q){
+			myDir <- paste0("CCU_",nFactors)
+			fabMix_CxU(sameSigma = TRUE, dirPriorAlphas = dirPriorAlphas, rawData = rawData, 
+				outDir = myDir, Kmax = Kmax, mCycles = mCycles, 
+				burnCycles = burnCycles, g = g, h = h, alpha_sigma = alpha_sigma, 
+				beta_sigma = beta_sigma, q = nFactors, normalize = normalize, 
+				thinning = thinning, zStart = zStart, nIterPerCycle = nIterPerCycle, 
+				gibbs_z = gibbs_z, warm_up_overfitting = warm_up_overfitting, warm_up = warm_up, 
+				overfittingInitialization=overfittingInitialization, progressGraphs = progressGraphs, gwar = gwar)
+			if(progressGraphs==TRUE){dev.off()}
+			getStuffForDIC(sameSigma = TRUE, sameLambda = TRUE, isotropic = FALSE, x_data = rawData, outputFolder = myDir, q = nFactors, Km = Kmax)
+#			dealWithLabelSwitching(sameSigma = TRUE, x_data = rawData, outputFolder = myDir, q = nFactors, compute_regularized_expression = FALSE, Km = Kmax)
+			bic[as.character(nFactors), "CCU"] <- read.table(paste0(myDir,"/informationCriteria_map_model.txt"))[4, ]
+			logl <- read.table(paste0(myDir,"/kValues.txt"), header=T)
+			nClusters[as.character(nFactors), "CCU"] <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
+			check_if_at_least_one_model <- 	check_if_at_least_one_model + 1
+		}
+	}
+
+	if("CUC" %in% model){
+		for(nFactors in q){
+			myDir <- paste0("CUC_",nFactors)
+			fabMix_CxC(sameSigma = FALSE, dirPriorAlphas = dirPriorAlphas, rawData = rawData, 
+				outDir = myDir, Kmax = Kmax, mCycles = mCycles, 
+				burnCycles = burnCycles, g = g, h = h, alpha_sigma = alpha_sigma, 
+				beta_sigma = beta_sigma, q = nFactors, normalize = normalize, 
+				thinning = thinning, zStart = zStart, nIterPerCycle = nIterPerCycle, 
+				gibbs_z = gibbs_z, warm_up_overfitting = warm_up_overfitting, warm_up = warm_up, 
+				overfittingInitialization=overfittingInitialization, progressGraphs = progressGraphs, gwar = gwar)
+			if(progressGraphs==TRUE){dev.off()}
+			getStuffForDIC(sameSigma = FALSE, sameLambda = TRUE, isotropic = TRUE, x_data = rawData, outputFolder = myDir, q = nFactors, Km = Kmax)
+#			dealWithLabelSwitching(sameSigma = FALSE, x_data = rawData, outputFolder = myDir, q = nFactors, compute_regularized_expression = FALSE, Km = Kmax)
+			bic[as.character(nFactors), "CUC"] <- read.table(paste0(myDir,"/informationCriteria_map_model.txt"))[4, ]
+			logl <- read.table(paste0(myDir,"/kValues.txt"), header=T)
+			nClusters[as.character(nFactors), "CUC"] <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
+			check_if_at_least_one_model <- 	check_if_at_least_one_model + 1
+		}
+	}
+
+	if("CCC" %in% model){
+		for(nFactors in q){
+			myDir <- paste0("CCC_",nFactors)
+			fabMix_CxC(sameSigma = TRUE, dirPriorAlphas = dirPriorAlphas, rawData = rawData, 
+				outDir = myDir, Kmax = Kmax, mCycles = mCycles, 
+				burnCycles = burnCycles, g = g, h = h, alpha_sigma = alpha_sigma, 
+				beta_sigma = beta_sigma, q = nFactors, normalize = normalize, 
+				thinning = thinning, zStart = zStart, nIterPerCycle = nIterPerCycle, 
+				gibbs_z = gibbs_z, warm_up_overfitting = warm_up_overfitting, warm_up = warm_up, 
+				overfittingInitialization=overfittingInitialization, progressGraphs = progressGraphs, gwar = gwar)
+			if(progressGraphs==TRUE){dev.off()}
+			getStuffForDIC(sameSigma = TRUE, sameLambda = TRUE, isotropic = TRUE, x_data = rawData, outputFolder = myDir, q = nFactors, Km = Kmax)
+#			dealWithLabelSwitching(sameSigma = TRUE, x_data = rawData, outputFolder = myDir, q = nFactors, compute_regularized_expression = FALSE, Km = Kmax)
+			bic[as.character(nFactors), "CCC"] <- read.table(paste0(myDir,"/informationCriteria_map_model.txt"))[4, ]
+			logl <- read.table(paste0(myDir,"/kValues.txt"), header=T)
+			nClusters[as.character(nFactors), "CCC"] <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
+			check_if_at_least_one_model <- 	check_if_at_least_one_model + 1
+		}
+	}
+
+	if("UUC" %in% model){
+		for(nFactors in q){
+			myDir <- paste0("UUC_",nFactors)
+			fabMix_UxC(sameSigma = FALSE, dirPriorAlphas = dirPriorAlphas, rawData = rawData, 
+				outDir = myDir, Kmax = Kmax, mCycles = mCycles, 
+				burnCycles = burnCycles, g = g, h = h, alpha_sigma = alpha_sigma, 
+				beta_sigma = beta_sigma, q = nFactors, normalize = normalize, 
+				thinning = thinning, zStart = zStart, nIterPerCycle = nIterPerCycle, 
+				gibbs_z = gibbs_z, warm_up_overfitting = warm_up_overfitting, warm_up = warm_up, 
+				overfittingInitialization=overfittingInitialization, progressGraphs = progressGraphs, gwar = gwar)
+			if(progressGraphs==TRUE){dev.off()}
+			getStuffForDIC(sameSigma = FALSE, sameLambda = FALSE, isotropic = TRUE, x_data = rawData, outputFolder = myDir, q = nFactors, Km = Kmax)
+#			dealWithLabelSwitching(sameSigma = FALSE, x_data = rawData, outputFolder = myDir, q = nFactors, compute_regularized_expression = FALSE, Km = Kmax)
+			bic[as.character(nFactors), "UUC"] <- read.table(paste0(myDir,"/informationCriteria_map_model.txt"))[4, ]
+			logl <- read.table(paste0(myDir,"/kValues.txt"), header=T)
+			nClusters[as.character(nFactors), "UUC"] <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
+			check_if_at_least_one_model <- 	check_if_at_least_one_model + 1
+		}
+	}
+
+	if("UCC" %in% model){
+		for(nFactors in q){
+			myDir <- paste0("UCC_",nFactors)
+			fabMix_UxC(sameSigma = TRUE, dirPriorAlphas = dirPriorAlphas, rawData = rawData, 
+				outDir = myDir, Kmax = Kmax, mCycles = mCycles, 
+				burnCycles = burnCycles, g = g, h = h, alpha_sigma = alpha_sigma, 
+				beta_sigma = beta_sigma, q = nFactors, normalize = normalize, 
+				thinning = thinning, zStart = zStart, nIterPerCycle = nIterPerCycle, 
+				gibbs_z = gibbs_z, warm_up_overfitting = warm_up_overfitting, warm_up = warm_up, 
+				overfittingInitialization=overfittingInitialization, progressGraphs = progressGraphs, gwar = gwar)
+			if(progressGraphs==TRUE){dev.off()}
+			getStuffForDIC(sameSigma = TRUE, sameLambda = FALSE, isotropic = TRUE, x_data = rawData, outputFolder = myDir, q = nFactors, Km = Kmax)
+#			dealWithLabelSwitching(sameSigma = TRUE, x_data = rawData, outputFolder = myDir, q = nFactors, compute_regularized_expression = FALSE, Km = Kmax)
+			bic[as.character(nFactors), "UCC"] <- read.table(paste0(myDir,"/informationCriteria_map_model.txt"))[4, ]
+			logl <- read.table(paste0(myDir,"/kValues.txt"), header=T)
+			nClusters[as.character(nFactors), "UCC"] <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
+			check_if_at_least_one_model <- 	check_if_at_least_one_model + 1
+		}
+	}
+
+	if(check_if_at_least_one_model < 1){ 
+		stop("Please specify at least one valid model.")
+	}
+
+	#selected model
+	model_selected <- colnames(bic)[which.min(apply(bic,2,min))]
+	q_selected <- rownames(bic)[which.min(apply(bic,1,min))]
+	outDir <- paste0(model_selected,"_",q_selected)
+	cat(paste0('-    The label.switching package says hello.'), '\n')
+	if( strsplit(model_selected,split="")[[1]][2] == "C" ){
+		dealWithLabelSwitching(sameSigma = TRUE, x_data = rawData, outputFolder = outDir, q = as.numeric(q_selected), compute_regularized_expression = TRUE, Km = Kmax)
+	}else{
+		dealWithLabelSwitching(sameSigma = FALSE, x_data = rawData, outputFolder = outDir, q = as.numeric(q_selected), compute_regularized_expression = TRUE, Km = Kmax)
+	}
+
+	z <- as.numeric(read.table(paste0(outDir,"/singleBestClusterings.txt"), header=TRUE)[1,])
+	classification_probabilities_MAP <- read.table(paste0(outDir,"/classificationProbabilities.txt"))
+	covariance_matrix_MAP <- vector("list", length = nClusters[q_selected, model_selected])
+	for (k in 1:nClusters[q_selected, model_selected]){
+		covariance_matrix_MAP[[k]] <- as.matrix(read.table(paste0(outDir,"/estimated_cov_cluster_",k,".txt")))
+	}
+	names(covariance_matrix_MAP) <- names(table(z))
+	mu <- read.table(paste0(outDir,"/mu_estimate_ecr.txt"), header=TRUE)
+	mu <- t(mu[as.numeric(names(table(z))),])
+	w <- read.table(paste0(outDir,"/weights_estimate_ecr.txt"))[as.numeric(names(table(z))),]
+	w <- w/sum(w)	
+
+	MCMC <- vector("list", length = 7)
+	names(MCMC) <- c("y", "w", "Lambda","mu","z","Sigma","K_all_chains")
+	if( strsplit(model_selected, split = "")[[1]][1] == "U" ){
+		MCMC$Lambda <- vector("list", length = nClusters[q_selected, model_selected])
+		names(MCMC$Lambda) <- names(table(z))
+		for(k in names(table(z))){
+			MCMC$Lambda[[k]] <- read.table(paste0(outDir,"/LambdaValues",k,".txt"))
+		}
+	}else{
+		MCMC$Lambda <- read.table(paste0(outDir,"/LambdaValues1.txt"))
+	}
+	muValues <- read.table(paste0(outDir,"/reordered_mu_ecr.txt"))
+	MCMC$mu <- vector("list", length = nClusters[q_selected, model_selected])
+	names(MCMC$mu) <- names(table(z))
+	for(k in names(table(z))){
+		MCMC$mu[[k]] <- as.matrix(muValues[,as.numeric(k) + Kmax*((1:p)-1)])
+		colnames(MCMC$mu[[k]]) <- paste0("V",1:p)
+	}
+	MCMC$w <- read.table(paste0(outDir,"/reordered_weights_ecr.txt"))[,as.numeric(names(table(z)))]
+	MCMC$y <- read.table(paste0(outDir,"/yValues.txt"))
+	MCMC$z <- read.table(paste0(outDir,"/reordered_allocations_ecr.txt"))
+	if( strsplit(model_selected, split = "")[[1]][2] == "U" ){
+		sMATRIX <- read.table(paste0(outDir,'/reordered_sigma_ecr.txt'))
+		MCMC$Sigma <- vector("list", length = nClusters[q_selected, model_selected])
+		names(MCMC$Sigma) <- names(table(z))
+		if( strsplit(model_selected, split = "")[[1]][3] == "U" ){
+			for(k in names(table(z))){
+				MCMC$Sigma[[k]] <- as.matrix(sMATRIX[,((as.numeric(k)-1)*p + 1):(as.numeric(k)*p)])
+			}
+		}else{
+			for(k in names(table(z))){
+				MCMC$Sigma[[k]] <- as.matrix(sMATRIX[,as.numeric(k)])
+			}
+		}		
+	}else{
+		MCMC$Sigma <- 1/read.table(paste0(outDir, '/sigmainvValues.txt'))
+		if( strsplit(model_selected, split = "")[[1]][3] == "U" ){
+			MCMC$Sigma <- MCMC$Sigma
+		}else{
+			MCMC$Sigma <- MCMC$Sigma[,1]
+		}		
+	}
+	MCMC$K <- read.table(paste0(outDir,"/kValues.txt"))
+	rr <- vector("list", length = as.numeric(q_selected))
+	for(j in 1:as.numeric(q_selected)){
+		rr[[j]] <- read.table(paste0(outDir,"/estimated_regularized_expression_per_cluster_",j,".txt"))
+	}
+
+	cat(paste0("\n","Given the specified range of models, factors, maximum number of clusters and MCMC parameters,","\n", "the best model corresponds to the ", model_selected, " parameterization with q = ", q_selected, " factors and K = ",nClusters[q_selected, model_selected]," clusters. ","\n","The BIC for this model equals ", round(min(bic),3), "."),"\n")
+	best_model <- data.frame(parameterization = model_selected, num_Clusters = nClusters[q_selected, model_selected], num_Factors = as.numeric(q_selected))
+	setwd("../")
+	results <- vector("list", length = 11)
+	results[[1]] <- bic
+	results[[2]] <- z
+	results[[3]] <- nClusters
+	results[[4]] <- classification_probabilities_MAP
+	results[[5]] <- covariance_matrix_MAP
+	results[[6]] <- mu
+	results[[7]] <- w
+	results[[8]] <- best_model
+	results[[9]] <- MCMC
+	results[[10]] <- rawData
+	results[[11]] <- rr
+	names(results) <- c(	"bic", 
+				"class", 
+				"n_Clusters_per_model", 
+				"posterior_probability", 
+				"covariance_matrix", 
+				"mu", 
+				"weights", 
+				"selected_model", 
+				"mcmc",
+				"data",
+				"regularizedExpression"
+			)
+	class(results) <- c('list', 'fabMix.object')
+	return(results)
+}
 
 
 simData <- function(sameSigma = TRUE, sameLambda = FALSE, p, q, K.true, n, loading_means, loading_sd, sINV_values){
@@ -5390,5 +5748,173 @@ simData <- function(sameSigma = TRUE, sameLambda = FALSE, p, q, K.true, n, loadi
 	names(results) <- c("data", "class", "factorLoadings", "means", "variance","factors","weights")
 	return(results)
 }
+
+#' @export
+print.fabMix.object <- function(x, printSubset = TRUE, ...){
+        if( 'fabMix.object' %in% class(x) ){
+                cat("\n")
+                cat(paste0("* Run information:"),"\n")
+                cat(paste0("      Number of fitted models: (", dim(x$bic)[1]," different number of factors) x (",dim(x$bic)[2]," parameterizations) = ",prod(dim(x$bic))," models.","\n"))
+        }else{
+                cat(paste("    The input is not in class `fabMix.object`"),'\n')
+        }
+}
+
+#' @export
+plot.fabMix.object <- function(x, what, ...){
+        if( 'fabMix.object' %in% class(x) ){
+	K <- as.numeric(x$selected_model['num_Clusters'])
+	cMeans <- colMeans(x$data)
+	sdevs <- sqrt(apply(x$data, 2, var))
+	p <- dim(x$data)[2]
+	v <- 99
+	oldpar <- par(no.readonly = TRUE)
+	mclustColors <- c("dodgerblue2","red3","green3","slateblue","darkorange","skyblue1",
+			"violetred4","forestgreen","steelblue4","slategrey","brown",
+			"black","darkseagreen","darkgoldenrod3","olivedrab", "royalblue", 
+			"tomato4","cyan2","springgreen2")
+
+	if(missing(what)){what = "menu"}
+	while(v > 0){
+		if(what=="menu"){
+			cat(paste0("fabMix plots:"),"\n\n")
+			cat(paste0("0: Exit"),"\n")
+			cat(paste0("1: BIC"),"\n")
+			cat(paste0("2: Classification (matplot view)"),"\n")
+			cat(paste0("3: Classification (scatter view)"),"\n")
+			cat(paste0("4: Correlation plot"),"\n")
+			cat(paste0("5: Regularized expression"),"\n")
+			cat("\n")
+			v <- readline(prompt="Selection:")
+		}else{
+			v = 0
+		}
+		if((v == 1)||(what == "BIC")){
+			on.exit(par())
+			# 1. Plot BIC values
+			par(mfrow=c(1,1),mar=c(5.1, 4.1, 4.1, 8.1), xpd=TRUE)
+			myCols <- brewer.pal(8, "Set1")
+			matplot(x$bic, type = "b", xlab = "number of factors", ylab = "BIC", cex = 0, col = myCols, lty = 1)
+			for (i in 1:dim(x$bic)[2]){
+				text(labels = x$n_Clusters_per_model[,i], y = x$bic[,i], x = as.numeric(rownames(x$bic)), col = myCols[i])
+			}
+			legend("topright", inset=c(-0.3,0.3), legend=colnames(x$bic), col = myCols, lty = 1, title="Model")
+		}
+		
+		if((v == 2)||(what == "classification_matplot")){
+			on.exit(par())
+			# 2. Matplot per cluster
+			if(K %% 2 == 0){
+				par(mfrow = c(floor(K/2), 2 ))
+			}else{
+				par(mfrow = c(floor(K/2) + 1, 2 ))
+			}
+			for(k in 1:K){
+				ind <- which(x$class == as.numeric(names(table(x$class)))[k])
+				# apply the suitable transformation:
+				sNew <- array(data = NA, dim = c(p,p))
+				for(i in 1:p){
+					for(j in 1:p){
+						sNew[i,j] <- sdevs[i]*sdevs[j]*x$covariance_matrix[[names(table(x$class))[k]]][i,j]
+					}
+				}
+				matplot(t(x$data[ind,]), col = "gray", type = "l", lty = 1, main = paste0("cluster ``", names(table(x$class))[k],"''"), xlab = "", ylab = "")
+				points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k], type = "l", col = "blue")
+				points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k] + 2*sqrt(diag(sNew)), type = "l", col = "blue", lty = 2)
+				points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k] - 2*sqrt(diag(sNew)), type = "l", col = "blue", lty = 2)
+				legend("bottomleft", col = c("blue","blue", "gray"), c("estimated mean", "95% HDI", "observed data"), lty = c(1,2,1))
+			}
+		}
+
+		if((v == 3)||(what == "classification_pairs")){
+			on.exit(par())
+			tt <- vector("list", length = 2)
+			tt[[1]] <- x$mu
+			variance <- vector("list", length = 2)
+			variance[[1]] <- "dada"
+			variance[[2]] <- array(data = NA, dim = c(p,p,K))
+			for(k in 1:K){
+				variance[[2]][,,k] <- x$covariance_matrix[[k]]
+			}
+			names(variance) <- c("dada", "sigma")
+			tt[[2]] <- variance
+			names(tt) <- c("mean", "variance")
+			# 2. Pairwise scatterplots (hacking coordProj() from mclust).
+			dimens <- seq(p)
+			d <- length(dimens)
+			par(mfrow = c(d, d), mar = rep(c(0.3, 0.3/2), each = 2), oma = c(4, 4, 4, 4))
+			for (i in seq(d)) {
+			  for (j in seq(d)) {
+			    if (i == j) {
+			      plot(x$data[, c(j, i)], type = "n", xlab = "", ylab = "", axes = FALSE)
+			      text(mean(par("usr")[1:2]), mean(par("usr")[3:4]), labels = colnames(x$data[, dimens])[i], cex = 1.5, adj = 0.5)
+			      box()
+			    }
+			    else {
+			      coordProj(data = scale(x$data), what = "classification", 
+				parameters = tt, classification = x$class, 
+				addEllipses = TRUE, dimens = dimens[c(j, i)], main = FALSE, xaxt = "n", yaxt = "n", ...)
+			    }
+			    if (i == 1 && (!(j%%2))) 
+			      axis(3)
+			    if (i == d && (j%%2)) 
+			      axis(1)
+			    if (j == 1 && (!(i%%2))) 
+			      axis(2)
+			    if (j == d && (i%%2)) 
+			      axis(4)
+			  }
+			}
+		}
+
+		if((v == 4)||(what == "correlation")){
+			on.exit(par())
+			# 4. Correlation plot per cluster
+			if(K %% 2 == 0){
+				par(mfrow = c(floor(K/2), 2 ))
+			}else{
+				par(mfrow = c(floor(K/2) + 1, 2 ))
+			}
+			for(k in 1:K){
+				sNew <- array(data = NA, dim = c(p,p))
+				for(i in 1:p){
+					for(j in 1:p){
+						sNew[i,j] <- sdevs[i]*sdevs[j]*x$covariance_matrix[[names(table(x$class))[k]]][i,j]
+					}
+				}
+				corrplot(cov2cor(sNew),method = "ellipse", title = paste0("cluster ``", names(table(x$class))[k],"''"))
+			}
+		}
+
+		if((v==5)||(what == "regularized_expression")){
+			on.exit(par())
+			q <- as.numeric(x$selected_model['num_Factors'])
+			par(mfrow = c(q, q), mar = c(4,4,4,2))
+			for(i in seq(q)){
+				for(j in seq(q)){
+					if(i == j){
+						matplot(t(x$regularizedExpression[[i]]), type = "b", col = mclustColors, main =  paste0("factor ",i), xlab = "variable", ylab = "score")
+						legend("bottomright", paste0("cluster label ", names(table(x$class))), col = mclustColors[1:K], pch = 16)
+					}else{
+						plot(range(x$regularizedExpression[[i]]), range(x$regularizedExpression[[j]]), type = "n", xlab = paste0("factor ",i), 
+							ylab = paste0("factor ",j))
+						for(k in 1:K){
+							abline(h = 0, lty = 2, col = "gray")
+							abline(v = 0, lty = 2, col = "gray")
+							text(as.numeric(x$regularizedExpression[[i]][k,]),as.numeric(x$regularizedExpression[[j]][k,]), labels = 1:p, col = mclustColors[k])
+						}
+					}	
+				}
+			}
+		}
+
+	}
+
+        }else{
+                cat(paste("    The input is not in class `fabMix.object`"),'\n')
+        }
+}
+
+
 
 
