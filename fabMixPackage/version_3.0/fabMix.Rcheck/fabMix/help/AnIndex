@@ -44,6 +44,7 @@ simData	simData
 update_all_y	update_all_y
 update_all_y_Sj	update_all_y_Sj
 update_OmegaINV	update_OmegaINV
+update_OmegaINV_Cxx	update_OmegaINV_Cxx
 update_SigmaINV_faster	update_SigmaINV_faster
 update_SigmaINV_faster_q0	update_SigmaINV_faster_q0
 update_SigmaINV_faster_q0_sameSigma	update_SigmaINV_faster_q0_sameSigma

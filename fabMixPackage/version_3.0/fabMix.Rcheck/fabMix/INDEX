@@ -72,6 +72,7 @@ plot.fabMix.object      Plot function
 print.fabMix.object     Print function
 simData                 Synthetic data generator
 update_OmegaINV         Gibbs sampling for Omega^{-1}
+update_OmegaINV_Cxx     Gibbs sampling for Omega^{-1} for Cxx model
 update_SigmaINV_faster
                         Gibbs sampling for Sigma^{-1}
 update_SigmaINV_faster_Sj

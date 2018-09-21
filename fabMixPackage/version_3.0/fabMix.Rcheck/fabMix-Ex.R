@@ -1,18 +1,6 @@
 pkgname <- "fabMix"
 source(file.path(R.home("share"), "R", "examples-header.R"))
 options(warn = 1)
-base::assign(".ExTimings", "fabMix-Ex.timings", pos = 'CheckExEnv')
-base::cat("name\tuser\tsystem\telapsed\n", file=base::get(".ExTimings", pos = 'CheckExEnv'))
-base::assign(".format_ptime",
-function(x) {
-  if(!is.na(x[4L])) x[1L] <- x[1L] + x[4L]
-  if(!is.na(x[5L])) x[2L] <- x[2L] + x[5L]
-  options(OutDec = '.')
-  format(x[1L:3L], digits = 7L)
-},
-pos = 'CheckExEnv')
-
-### * </HEADER>
 library('fabMix')
 
 base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
@@ -22,7 +10,6 @@ nameEx("fabMix-package")
 
 flush(stderr()); flush(stdout())
 
-base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: fabMix-package
 ### Title: Overfitting Bayesian Mixtures of Factor Analyzers with an
 ###   Unknown Number of Components
@@ -69,15 +56,12 @@ syntheticDataset <- simData(K.true = K, n = n, q = q, p = p, sINV_values = sINV_
 
 
 
-base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
-base::cat("fabMix-package", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("fabMix")
 ### * fabMix
 
 flush(stderr()); flush(stdout())
 
-base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: fabMix
 ### Title: Main function
 ### Aliases: fabMix
@@ -113,15 +97,12 @@ base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 
 
 
-base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
-base::cat("fabMix", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("fabMix_CxC")
 ### * fabMix_CxC
 
 flush(stderr()); flush(stdout())
 
-base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: fabMix_CxC
 ### Title: Main function of the package for CUC, CCC models
 ### Aliases: fabMix_CxC
@@ -165,15 +146,12 @@ base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 
 
 
-base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
-base::cat("fabMix_CxC", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("fabMix_CxU")
 ### * fabMix_CxU
 
 flush(stderr()); flush(stdout())
 
-base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: fabMix_CxU
 ### Title: Main function of the package for CCU, CUU models
 ### Aliases: fabMix_CxU
@@ -217,15 +195,12 @@ base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 
 
 
-base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
-base::cat("fabMix_CxU", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("fabMix_UxC")
 ### * fabMix_UxC
 
 flush(stderr()); flush(stdout())
 
-base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: fabMix_UxC
 ### Title: Main function of the package for UUC, UCC models
 ### Aliases: fabMix_UxC
@@ -269,15 +244,12 @@ base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 
 
 
-base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
-base::cat("fabMix_UxC", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("fabMix_UxU")
 ### * fabMix_UxU
 
 flush(stderr()); flush(stdout())
 
-base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: fabMix_UxU
 ### Title: Fit UxU mixtures
 ### Aliases: fabMix_UxU
@@ -321,15 +293,12 @@ base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 
 
 
-base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
-base::cat("fabMix_UxU", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("fabMix_missing_values")
 ### * fabMix_missing_values
 
 flush(stderr()); flush(stdout())
 
-base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: fabMix_missing_values
 ### Title: Main function for the case of missing values
 ### Aliases: fabMix_missing_values
@@ -373,8 +342,6 @@ base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 
 
 
-base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
-base::cat("fabMix_missing_values", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 ### * <FOOTER>
 ###
 options(digits = 7L)

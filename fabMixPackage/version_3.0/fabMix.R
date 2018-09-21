@@ -59,13 +59,51 @@ update_all_y_Sj <- function(x_data, mu, SigmaINV, Lambda, z){
 
 
 # compute sufficient statistics given y, z, K (and x_data)
+#compute_sufficient_statistics <- function(y, z, K, x_data){
+#	cluster_size <- numeric(K)
+#	p <- dim(x_data)[2]
+#	q <- dim(y)[2]
+#	sx  <- array(data = 0, dim = c(K,p))
+#	sy  <- array(data = 0, dim = c(K,q))
+##	sxx <- array(data = 0, dim = c(K,p,p)) #this is not needed at all.
+#	sxx <- 0
+#	syy <- array(data = 0, dim = c(K,q,q))
+#	sxy <- array(data = 0, dim = c(K,p,q))
+#	for(k in 1:K){
+#		index <- which(z == k)
+#		cluster_size[k] <- length(index)
+#		if( cluster_size[k] > 0){
+#			sx[k,]  <- colSums(array(x_data[index,],dim = c(cluster_size[k],p)))
+#			sy[k,]  <- colSums(array(y[index,],dim = c(cluster_size[k],q)))
+#			for( i in index){
+#		#		sxx[k,,] <- sxx[k,,] + x_data[i,] %*% t(x_data[i,])
+#				syy[k,,] <- syy[k,,] + y[i,] %*% t(y[i,])
+#				sxy[k,,] <- sxy[k,,] + x_data[i,] %*% t(y[i,])
+#			}
+#		}
+#
+#	}
+#	results <- vector("list", length=6)
+#	names(results) <- c("cluster_size","sx","sy","sxx","syy","sxy")
+#	results[[1]] <- cluster_size
+#	results[[2]] <- sx
+#	results[[3]] <- sy
+#	results[[4]] <- sxx
+#	results[[5]] <- syy
+#	results[[6]] <- sxy
+#	return(results)
+#}
+
+
+# compute sufficient statistics given y, z, K (and x_data)
 compute_sufficient_statistics <- function(y, z, K, x_data){
 	cluster_size <- numeric(K)
 	p <- dim(x_data)[2]
 	q <- dim(y)[2]
 	sx  <- array(data = 0, dim = c(K,p))
 	sy  <- array(data = 0, dim = c(K,q))
-	sxx <- array(data = 0, dim = c(K,p,p))
+#	sxx <- array(data = 0, dim = c(K,p,p)) #this is not needed at all.
+	sxx <- 0
 	syy <- array(data = 0, dim = c(K,q,q))
 	sxy <- array(data = 0, dim = c(K,p,q))
 	for(k in 1:K){
@@ -74,10 +112,12 @@ compute_sufficient_statistics <- function(y, z, K, x_data){
 		if( cluster_size[k] > 0){
 			sx[k,]  <- colSums(array(x_data[index,],dim = c(cluster_size[k],p)))
 			sy[k,]  <- colSums(array(y[index,],dim = c(cluster_size[k],q)))
-			for( i in index){
-				sxx[k,,] <- sxx[k,,] + x_data[i,] %*% t(x_data[i,])
-				syy[k,,] <- syy[k,,] + y[i,] %*% t(y[i,])
-				sxy[k,,] <- sxy[k,,] + x_data[i,] %*% t(y[i,])
+			if(cluster_size[k] > 1){
+				syy[k,,] <- crossprod(y[index, ])
+				sxy[k,,] <- crossprod( x_data[index, ],  y[index, ])
+			}else{
+				syy[k,,] <- y[index,] %*% t(y[index,])
+				sxy[k,,] <- x_data[index,] %*% t(y[index,])
 			}
 		}
 
@@ -98,13 +138,49 @@ compute_sufficient_statistics <- function(y, z, K, x_data){
 
 # new in version 3
 # compute sufficient statistics given y, z, K and mu (and x_data)
+#compute_sufficient_statistics_given_mu <- function(y, z, K, x_data, mu){
+#	cluster_size <- numeric(K)
+#	p <- dim(x_data)[2]
+#	q <- dim(y)[2]
+#	sx  <- array(data = 0, dim = c(K,p))
+#	sy  <- array(data = 0, dim = c(K,q))
+##	sxx <- array(data = 0, dim = c(K,p,p))
+#	sxx <- 0
+#	syy <- array(data = 0, dim = c(K,q,q))
+#	sxy <- array(data = 0, dim = c(K,p,q))
+#	for(k in 1:K){
+#		index <- which(z == k)
+#		cluster_size[k] <- length(index)
+#		if( cluster_size[k] > 0){
+#			sx[k,]  <- colSums(array(x_data[index,],dim = c(cluster_size[k],p)))
+#			sy[k,]  <- colSums(array(y[index,],dim = c(cluster_size[k],q)))
+#			for( i in index){
+#		#		sxx[k,,] <- sxx[k,,] + x_data[i,] %*% t(x_data[i,])
+#				syy[k,,] <- syy[k,,] + y[i,] %*% t(y[i,])
+#				sxy[k,,] <- sxy[k,,] + (x_data[i,] - mu[k, ]) %*% t(y[i,])	#v3: edw afairw to mu
+#			}
+#		}
+#
+#	}
+#	results <- vector("list", length=6)
+#	names(results) <- c("cluster_size","sx","sy","sxx","syy","sxy")
+#	results[[1]] <- cluster_size
+#	results[[2]] <- sx
+#	results[[3]] <- sy
+#	results[[4]] <- sxx
+#	results[[5]] <- syy
+#	results[[6]] <- sxy
+#	return(results)
+#}
+
 compute_sufficient_statistics_given_mu <- function(y, z, K, x_data, mu){
 	cluster_size <- numeric(K)
 	p <- dim(x_data)[2]
 	q <- dim(y)[2]
 	sx  <- array(data = 0, dim = c(K,p))
 	sy  <- array(data = 0, dim = c(K,q))
-	sxx <- array(data = 0, dim = c(K,p,p))
+#	sxx <- array(data = 0, dim = c(K,p,p))
+	sxx <- 0
 	syy <- array(data = 0, dim = c(K,q,q))
 	sxy <- array(data = 0, dim = c(K,p,q))
 	for(k in 1:K){
@@ -113,11 +189,20 @@ compute_sufficient_statistics_given_mu <- function(y, z, K, x_data, mu){
 		if( cluster_size[k] > 0){
 			sx[k,]  <- colSums(array(x_data[index,],dim = c(cluster_size[k],p)))
 			sy[k,]  <- colSums(array(y[index,],dim = c(cluster_size[k],q)))
-			for( i in index){
-				sxx[k,,] <- sxx[k,,] + x_data[i,] %*% t(x_data[i,])
-				syy[k,,] <- syy[k,,] + y[i,] %*% t(y[i,])
-				sxy[k,,] <- sxy[k,,] + (x_data[i,] - mu[k, ]) %*% t(y[i,])	#v3: edw afairw to mu
+
+			if(cluster_size[k] > 1){
+				xNEW <- matrix( apply(x_data[index, ], 1, function(tk){return(tk - mu[k,])}), nrow = cluster_size[k], ncol = p, byrow = TRUE)
+				syy[k,,] <- crossprod(y[index, ])
+				sxy[k,,] <- crossprod( xNEW,  y[index, ])
+			}else{
+				xNEW <- x_data[index, ] - mu[k, ]
+				syy[k,,] <- y[index,] %*% t(y[index,])
+				sxy[k,,] <- xNEW %*% t(y[index,])
 			}
+#			for( i in index){
+#				syy[k,,] <- syy[k,,] + y[i,] %*% t(y[i,])
+#				sxy[k,,] <- sxy[k,,] + (x_data[i,] - mu[k, ]) %*% t(y[i,])	#v3: edw afairw to mu
+#			}
 		}
 
 	}
@@ -346,7 +431,8 @@ update_z_b <- function(w, mu, Lambda, y, SigmaINV, K, x_data){
 		probs[,k] <- log(w[k])  + dmvnorm(center_x, mean = rep(0, p), sigma = x_var, log = TRUE)
 	}
 	probs <- array(t(apply(probs, 1, function(tmp){return(exp(tmp - max(tmp)))} )),dim = c(n,K))
-	z <- apply(probs,1,function(tmp){return(sample(K,1,prob = tmp))})
+	z <- apply(probs,1,function(tmp){if(anyNA(tmp)){tmp <- rep(1,K)};return(sample(K,1,prob = tmp))})
+#	apply(probs,1,function(tmp){return(sample(K,1,prob = tmp))})
 	results <- vector("list", length=2)
 	names(results) <- c("w","z")
 	results[[1]] <- w
@@ -366,7 +452,8 @@ update_z_b_Sj <- function(w, mu, Lambda, y, SigmaINV, K, x_data){
 		probs[,k] <- log(w[k])  + dmvnorm(center_x, mean = rep(0, p), sigma = x_var, log = TRUE)
 	}
 	probs <- array(t(apply(probs, 1, function(tmp){return(exp(tmp - max(tmp)))} )),dim = c(n,K))
-	z <- apply(probs,1,function(tmp){return(sample(K,1,prob = tmp))})
+	z <- apply(probs,1,function(tmp){if(anyNA(tmp)){tmp <- rep(1,K)};return(sample(K,1,prob = tmp))})
+#	apply(probs,1,function(tmp){return(sample(K,1,prob = tmp))})
 	results <- vector("list", length=2)
 	names(results) <- c("w","z")
 	results[[1]] <- w
@@ -388,7 +475,8 @@ update_z4 <- function(w, mu, Lambda, SigmaINV, K, x_data){
 		probs[,k] <- lpdf
 	}
 	probs <- array(t(apply(probs, 1, function(tmp){return(exp(tmp - max(tmp)))} )),dim = c(n,K))
-	z <- apply(probs,1,function(tmp){return(sample(K,1,prob = tmp))})
+	z <- apply(probs,1,function(tmp){if(anyNA(tmp)){tmp <- rep(1,K)};return(sample(K,1,prob = tmp))})
+#	apply(probs,1,function(tmp){return(sample(K,1,prob = tmp))})
 	results <- vector("list", length=2)
 	names(results) <- c("w","z")
 	results[[1]] <- w
@@ -408,7 +496,8 @@ update_z4_Sj <- function(w, mu, Lambda, SigmaINV, K, x_data){
 		probs[,k] <- lpdf
 	}
 	probs <- array(t(apply(probs, 1, function(tmp){return(exp(tmp - max(tmp)))} )),dim = c(n,K))
-	z <- apply(probs,1,function(tmp){return(sample(K,1,prob = tmp))})
+	z <- apply(probs,1,function(tmp){if(anyNA(tmp)){tmp <- rep(1,K)};return(sample(K,1,prob = tmp))})
+#	apply(probs,1,function(tmp){return(sample(K,1,prob = tmp))})
 	results <- vector("list", length=2)
 	names(results) <- c("w","z")
 	results[[1]] <- w
@@ -436,7 +525,8 @@ update_z2 <- function(w, mu, Lambda, SigmaINV, K, x_data){
                 }
         }
         probs <- array(t(apply(probs, 1, function(tmp){return(exp(tmp - max(tmp)))} )),dim = c(n,K))
-        z <- apply(probs,1,function(tmp){return(sample(K,1,prob = tmp))})
+        z <- apply(probs,1,function(tmp){if(anyNA(tmp)){tmp <- rep(1,K)};return(sample(K,1,prob = tmp))})
+	#apply(probs,1,function(tmp){if(anyNA(tmp)){tmp <- rep(1,K)};return(sample(K,1,prob = tmp))})
         results <- vector("list", length=2)
         names(results) <- c("w","z")
         results[[1]] <- w
@@ -462,7 +552,8 @@ update_z2_Sj <- function(w, mu, Lambda, SigmaINV, K, x_data){
                 }
         }
         probs <- array(t(apply(probs, 1, function(tmp){return(exp(tmp - max(tmp)))} )),dim = c(n,K))
-        z <- apply(probs,1,function(tmp){return(sample(K,1,prob = tmp))})
+        z <- apply(probs,1,function(tmp){if(anyNA(tmp)){tmp <- rep(1,K)};return(sample(K,1,prob = tmp))})
+#	apply(probs,1,function(tmp){return(sample(K,1,prob = tmp))})
         results <- vector("list", length=2)
         names(results) <- c("w","z")
         results[[1]] <- w
@@ -650,6 +741,16 @@ update_OmegaINV <- function(Lambda, K, g, h){
 	return(OmegaINV)
 }
 
+#update OmegaINV
+update_OmegaINV_Cxx <- function(Lambda, K, g, h){
+	p <- dim(Lambda)[2]
+	q <- dim(Lambda)[3]
+	OmegaINV <- array(data = 0, dim = c(q,q))
+	betaVector <- colSums(array(Lambda[1,,]^2,dim = c(p,q)))
+	diag(OmegaINV) <- rgamma(q,shape = g + p/2, rate = h + betaVector/2)
+	return(OmegaINV)
+}
+
 #-------------------------------------------------------------------------------------------
 ### functions for q_0
 #-------------------------------------------------------------------------------------------
@@ -690,7 +791,8 @@ compute_sufficient_statistics_q0 <- function(z, K, x_data){
         cluster_size <- numeric(K)
         sx  <- array(data = 0, dim = c(K,p))
         sy  <- 0
-        sxx <- array(data = 0, dim = c(K,p,p))
+#        sxx <- array(data = 0, dim = c(K,p,p))
+	sxx <- 0
         syy <- 0
         sxy <- 0
         for(k in 1:K){
@@ -698,9 +800,9 @@ compute_sufficient_statistics_q0 <- function(z, K, x_data){
                 cluster_size[k] <- length(index)
                 if( cluster_size[k] > 0){
                         sx[k,]  <- colSums(array(x_data[index,],dim = c(cluster_size[k],p)))
-                        for( i in index){
-                                sxx[k,,] <- sxx[k,,] + x_data[i,] %*% t(x_data[i,])
-                        }
+                #        for( i in index){
+                 #               sxx[k,,] <- sxx[k,,] + x_data[i,] %*% t(x_data[i,])
+                  #      }
                 }
 
         }
@@ -1697,7 +1799,7 @@ overfittingMFA_CCU <- function(x_data, originalX, outputDirectory, Kmax, m, thin
 	for (iter in 2:m){
 		
 #		1
-		OmegaINV.constant <- update_OmegaINV(Lambda = array(Lambda.values,dim = c(K,p,q)), K = K, g = g, h = h)
+		OmegaINV.constant <- update_OmegaINV_Cxx(Lambda = array(Lambda.values,dim = c(K,p,q)), K = K, g = g, h = h)
 #		2
 		suf_stat <- compute_sufficient_statistics_given_mu(y = y, z = z, K = K, x_data = x_data, mu = mu.values)
 		f2 <- compute_A_B_G_D_and_simulate_mu_Lambda_CCU(SigmaINV = SigmaINV.values, 
@@ -1910,7 +2012,7 @@ overfittingMFA_CUU <- function(x_data, originalX, outputDirectory, Kmax, m, thin
 	for (iter in 2:m){
 		
 #		1
-		OmegaINV.constant <- update_OmegaINV(Lambda = array(Lambda.values,dim = c(K,p,q)), K = K, g = g, h = h)
+		OmegaINV.constant <- update_OmegaINV_Cxx(Lambda = array(Lambda.values,dim = c(K,p,q)), K = K, g = g, h = h)
 #		2
 		suf_stat <- compute_sufficient_statistics_given_mu(y = y, z = z, K = K, x_data = x_data, mu = mu.values)
 		f2 <- compute_A_B_G_D_and_simulate_mu_Lambda_CUU(SigmaINV = array(SigmaINV.values,dim = c(K,p,p)), 
@@ -2122,7 +2224,7 @@ overfittingMFA_CCC <- function(x_data, originalX, outputDirectory, Kmax, m, thin
 	for (iter in 2:m){
 		
 #		1
-		OmegaINV.constant <- update_OmegaINV(Lambda = array(Lambda.values,dim = c(K,p,q)), K = K, g = g, h = h)
+		OmegaINV.constant <- update_OmegaINV_Cxx(Lambda = array(Lambda.values,dim = c(K,p,q)), K = K, g = g, h = h)
 #		2
 		suf_stat <- compute_sufficient_statistics_given_mu(y = y, z = z, K = K, x_data = x_data, mu = mu.values)
 		f2 <- compute_A_B_G_D_and_simulate_mu_Lambda_CCU(SigmaINV = SigmaINV.values, 
@@ -2276,14 +2378,14 @@ overfittingMFA_CUC <- function(x_data, originalX, outputDirectory, Kmax, m, thin
 		}
 		w.values <- myDirichlet(alpha_prior[1:K])
 		z <- sample(K,n,replace = TRUE, prob = w.values)
-		if( outputDirectory == 'alpha_1'){
+#		if( outputDirectory == 'alpha_1'){
 			if(is.numeric(zStart)){
 				z <- zStart
 				cluster_size <- numeric(K)
 				for(k in 1:K){ index <- which(z == k);	cluster_size[k] <- length(index)}	
 				w.values <- myDirichlet(alpha_prior[1:K] + cluster_size)
 			}
-		}
+#		}
 	}else{
 #		cat(paste0('reading starting values... '))	
 		diag(OmegaINV.constant) <- as.numeric(read.table('omegainvValues.txt')[1,])
@@ -2334,7 +2436,7 @@ overfittingMFA_CUC <- function(x_data, originalX, outputDirectory, Kmax, m, thin
 	for (iter in 2:m){
 		
 #		1
-		OmegaINV.constant <- update_OmegaINV(Lambda = array(Lambda.values,dim = c(K,p,q)), K = K, g = g, h = h)
+		OmegaINV.constant <- update_OmegaINV_Cxx(Lambda = array(Lambda.values,dim = c(K,p,q)), K = K, g = g, h = h)
 #		2
 		suf_stat <- compute_sufficient_statistics_given_mu(y = y, z = z, K = K, x_data = x_data, mu = mu.values)
 		f2 <- compute_A_B_G_D_and_simulate_mu_Lambda_CUU(SigmaINV = array(SigmaINV.values,dim = c(K,p,p)), 
@@ -3808,7 +3910,7 @@ fabMix_CxU <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 
 # new in version 3
 # CUC and CCC models (sameSigma = TRUE => CCC, sameSigma = FALSE => CUC)
-fabMix_CxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCycles, g, h, alpha_sigma, beta_sigma, q, normalize, thinning, zStart, nIterPerCycle, gibbs_z = 1, warm_up_overfitting = 100, warm_up = 500, overfittingInitialization=TRUE, progressGraphs = FALSE, gwar = 0.05){
+fabMix_CxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCycles, g, h, alpha_sigma, beta_sigma, q, normalize, thinning, zStart, nIterPerCycle, gibbs_z = 1, warm_up_overfitting = 100, warm_up = 500, overfittingInitialization=TRUE, progressGraphs = FALSE, gwar = 0.05, cccStart = FALSE){
 
 	missingRowsIndex <- which(is.na(rowSums(rawData)) == TRUE)
 	nMissingRows <- length( missingRowsIndex ) 
@@ -3889,58 +3991,98 @@ fabMix_CxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 
 
 	#	initialization
-	iteration <- 1
-	if(q == 0){warm_up_overfitting = 2*warm_up_overfitting}
-	if(overfittingInitialization == TRUE){
-		cat(paste('-    (1) Initializing from priors that lead to overfitting... '))
-		d_per_cluster = 2*p + p*q + q*(q-1)/2
-		if(q == 0){d_per_cluster = 10*p}
-		initialAlphas <- seq(d_per_cluster/2, d_per_cluster, length = nChains)
+	if(cccStart == FALSE){
+		iteration <- 1
+		if(q == 0){warm_up_overfitting = 2*warm_up_overfitting}
+		if(overfittingInitialization == TRUE){
+			cat(paste('-    (1) Initializing from priors that lead to overfitting... '))
+			d_per_cluster = 2*p + p*q + q*(q-1)/2
+			if(q == 0){d_per_cluster = 10*p}
+			initialAlphas <- seq(d_per_cluster/2, d_per_cluster, length = nChains)
+			if(sameSigma == TRUE){
+				foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
+					overfittingMFA_CCC(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
+						Kmax = Kmax, m = warm_up_overfitting, thinning = 1, burn = warm_up_overfitting - 1, alpha_prior= rep(initialAlphas[myChain], Kmax), g = g, h = h, 
+						alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = FALSE, gibbs_z = gwar, zStart = zStart)
+				}
+			}else{
+				foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
+					overfittingMFA_CUC(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
+						Kmax = Kmax, m = warm_up_overfitting, thinning = 1, burn = warm_up_overfitting - 1, alpha_prior= rep(initialAlphas[myChain], Kmax), g = g, h = h, 
+						alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = FALSE, gibbs_z = gwar, zStart = zStart)
+				}
+			}
+		}else{
+			cat(paste('-    (1) Initializing from random starting values (NOT A GOOD PRACTICE)... '))
+			d_per_cluster = 2*p + p*q + q*(q-1)/2
+			initialAlphas <- dirPriorAlphas
+			if(sameSigma == TRUE){
+				foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
+					overfittingMFA_CCC(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
+						Kmax = Kmax, m = 10, thinning = 1, burn = 9, alpha_prior= rep(initialAlphas[myChain], Kmax), g = g, h = h, 
+						alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = FALSE, gibbs_z = gwar, zStart = zStart)
+				}
+			}else{
+				foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
+					overfittingMFA_CUC(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
+						Kmax = Kmax, m = 10, thinning = 1, burn = 9, alpha_prior= rep(initialAlphas[myChain], Kmax), g = g, h = h, 
+						alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = FALSE, gibbs_z = gwar, zStart = zStart)
+				}
+			}
+		}
+		cat(paste(' OK'),'\n')
+		cat(paste('-    (2) Initializing the actual model from the previously obtained values... '))
 		if(sameSigma == TRUE){
 			foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
 				overfittingMFA_CCC(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
-					Kmax = Kmax, m = warm_up_overfitting, thinning = 1, burn = warm_up_overfitting - 1, alpha_prior= rep(initialAlphas[myChain], Kmax), g = g, h = h, 
-					alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = FALSE, gibbs_z = gwar)
+					Kmax = Kmax, m = warm_up, thinning = 1, burn = warm_up - 1, alpha_prior= rep(dirPriorAlphas[myChain], Kmax), g = g, h = h, 
+					alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = TRUE, gibbs_z = gibbs_z)
 			}
 		}else{
 			foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
 				overfittingMFA_CUC(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
-					Kmax = Kmax, m = warm_up_overfitting, thinning = 1, burn = warm_up_overfitting - 1, alpha_prior= rep(initialAlphas[myChain], Kmax), g = g, h = h, 
-					alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = FALSE, gibbs_z = gwar)
+					Kmax = Kmax, m = warm_up, thinning = 1, burn = warm_up - 1, alpha_prior= rep(dirPriorAlphas[myChain], Kmax), g = g, h = h, 
+					alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = TRUE, gibbs_z = gibbs_z)
 			}
 		}
 	}else{
-		cat(paste('-    (1) Initializing from random starting values (NOT A GOOD PRACTICE)... '))
+		# starting from the ccc model
+		iteration <- 1
+		cat(paste('-    (1) Initializing from the CCC model with priors that lead to overfitting... '))
 		d_per_cluster = 2*p + p*q + q*(q-1)/2
-		initialAlphas <- dirPriorAlphas
-		if(sameSigma == TRUE){
-			foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
-				overfittingMFA_CCC(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
-					Kmax = Kmax, m = 10, thinning = 1, burn = 9, alpha_prior= rep(initialAlphas[myChain], Kmax), g = g, h = h, 
-					alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = FALSE, gibbs_z = gwar)
-			}
-		}else{
-			foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
-				overfittingMFA_CUC(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
-					Kmax = Kmax, m = 10, thinning = 1, burn = 9, alpha_prior= rep(initialAlphas[myChain], Kmax), g = g, h = h, 
-					alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = FALSE, gibbs_z = gwar)
-			}
+		if(q == 0){d_per_cluster = 10*p}
+		initialAlphas <- seq(d_per_cluster/2, d_per_cluster, length = nChains)
+		foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
+			overfittingMFA_CCC(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
+				Kmax = Kmax, m = warm_up_overfitting, thinning = 1, burn = warm_up_overfitting - 1, alpha_prior= rep(initialAlphas[myChain], Kmax), g = g, h = h, 
+				alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = FALSE, gibbs_z = gwar, zStart = zStart)
 		}
-	}
-	cat(paste(' OK'),'\n')
-	cat(paste('-    (2) Initializing the actual model from the previously obtained values... '))
-	if(sameSigma == TRUE){
 		foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
 			overfittingMFA_CCC(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
 				Kmax = Kmax, m = warm_up, thinning = 1, burn = warm_up - 1, alpha_prior= rep(dirPriorAlphas[myChain], Kmax), g = g, h = h, 
 				alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = TRUE, gibbs_z = gibbs_z)
+			if(sameSigma == FALSE){
+				tmp <- read.table(paste0(outputDirs[myChain],"/sigmainvValues.txt"))
+				tmp <- array(as.numeric(rep(tmp, Kmax)), dim = c(1, p*Kmax) )
+				write.table(tmp, file = paste0(outputDirs[myChain],"/sigmainvValues.txt"), append = FALSE, col.names=F, row.names=F)
+			}
+
 		}
-	}else{
-		foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
-			overfittingMFA_CUC(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
-				Kmax = Kmax, m = warm_up, thinning = 1, burn = warm_up - 1, alpha_prior= rep(dirPriorAlphas[myChain], Kmax), g = g, h = h, 
-				alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = TRUE, gibbs_z = gibbs_z)
-		}
+		cat(paste(' OK'),'\n')
+		#cat(paste('-    (2) Initializing the actual model from the previously obtained values... '))
+		#if(sameSigma == TRUE){
+		#	foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
+		#		overfittingMFA_CCC(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
+		#			Kmax = Kmax, m = warm_up, thinning = 1, burn = warm_up - 1, alpha_prior= rep(dirPriorAlphas[myChain], Kmax), g = g, h = h, 
+		#			alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = TRUE, gibbs_z = gibbs_z)
+		#	}
+		#}else{
+		#	foreach(myChain=1:nChains, .export=ls(envir=globalenv()) ) %dorng% {
+		#		overfittingMFA_CUC(q = q, originalX = originalX, x_data = x_data, outputDirectory = outputDirs[myChain], 
+		#			Kmax = Kmax, m = warm_up, thinning = 1, burn = warm_up - 1, alpha_prior= rep(dirPriorAlphas[myChain], Kmax), g = g, h = h, 
+		#			alpha_sigma = alpha_sigma, beta_sigma = beta_sigma, start_values = TRUE, gibbs_z = gibbs_z)
+		#	}
+		#}
 	}
 	cat(paste(' OK'),'\n')
 	for(myChain in 1:nChains){
@@ -4861,8 +5003,14 @@ getStuffForDIC <- function(sameSigma = TRUE, sameLambda = FALSE, isotropic  = FA
 			ldraw <- lambda.perm.mcmc[i,k,]
 			lambda.current[k,,] <- matrix(ldraw,nrow = p, ncol = q, byrow=TRUE)
 		}
-		for(i1 in 1:p){
-			if( Sigma.current[ i1] > 100 ){ cat(paste0('oops: ', i),'\n'); Sigma.current[i1] <- 100 }
+		if(sameSigma == TRUE){
+			for(i1 in 1:p){
+				if( Sigma.current[ i1] > 1000 ){  Sigma.current[i1] <- 1000 }
+			}
+		}else{
+			for(i1 in 1:p){
+				if( Sigma.current[k, i1] > 1000 ){ Sigma.current[k, i1] <- 1000 }
+			}
 		}
 	}
 	if(sameSigma == TRUE){
@@ -4901,7 +5049,9 @@ getStuffForDIC <- function(sameSigma = TRUE, sameLambda = FALSE, isotropic  = FA
 					lambda.current[k,,] <- matrix(ldraw,nrow = p, ncol = q, byrow=TRUE)
 				}
 				for(i1 in 1:p){
-					if( Sigma.current[ i1] > 100 ){ cat(paste0('oops: ', i),'\n'); Sigma.current[ i1] <- 100 }
+					if( Sigma.current[ i1] > 1000 ){ 
+#						cat(paste0('oops: ', i),'\n'); 
+					Sigma.current[ i1] <- 1000 }
 				}
 			}
 			if(q > 0){
@@ -4935,7 +5085,7 @@ getStuffForDIC <- function(sameSigma = TRUE, sameLambda = FALSE, isotropic  = FA
 					lambda.current[k,,] <- matrix(ldraw,nrow = p, ncol = q, byrow=TRUE)
 				}
 				for(i1 in 1:p){
-					if( Sigma.current[k, i1] > 100 ){ Sigma.current[k, i1] <- 100 }
+					if( Sigma.current[k, i1] > 1000 ){ Sigma.current[k, i1] <- 1000 }
 				}
 			}
 			if(q > 0){
@@ -4953,7 +5103,7 @@ getStuffForDIC <- function(sameSigma = TRUE, sameLambda = FALSE, isotropic  = FA
 			bic <- bic + obsL
 		}
 	}
-	if(missing(discardLower)){ discardLower <- 0.1 }
+	if(missing(discardLower)){ discardLower <- 0.01 }
 	if ( discardLower == FALSE){
 		cll <- cll/m
 	}else{
@@ -5177,7 +5327,7 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 		        SigmaINV.mcmc <- permute.mcmc(SigmaINV.mcmc, ls$permutations$ECR)$output
 		        Sigma.mcmc <- 1/SigmaINV.mcmc
 		        write.table(Sigma.mcmc, file = 'reordered_sigma_ecr.txt')
-		        cat(paste0('         * write file: `reordered_sigma_ecr.txt`'),'\n')
+		       # cat(paste0('         * write file: `reordered_sigma_ecr.txt`'),'\n')
 		        sigma.mean <- array(data = NA, dim = c(K,p))
 		        sigma.map <- array(data = NA, dim = c(K,p))
 		        for(k in 1:K){
@@ -5345,7 +5495,7 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 
 	p <- dim(rawData)[2]
 	n <- dim(rawData)[1]
-	cat(paste0("-    Data consists of p = ", p, " variables and n = ",n," observations, g = ", g, ", h = ", h, ", alpha_sigma = ", alpha_sigma, ", beta_sigma = ", beta_sigma,"\n"))
+	cat(paste0("-    Data consists of p = ", p, " variables and n = ",n," observations","\n"))
 	cat(paste0("-    MCMC parameters: g = ", g, ", h = ", h, ", alpha_sigma = ", alpha_sigma, ", beta_sigma = ", beta_sigma,"\n"))
 	cat(paste0('-         using Nchains = ', nChains),'\n')
 	cat(paste0('-         target posterior distribution corresponds to alpha = ', dirPriorAlphas[1]),'\n')
@@ -5755,13 +5905,58 @@ print.fabMix.object <- function(x, printSubset = TRUE, ...){
                 cat("\n")
                 cat(paste0("* Run information:"),"\n")
                 cat(paste0("      Number of fitted models: (", dim(x$bic)[1]," different number of factors) x (",dim(x$bic)[2]," parameterizations) = ",prod(dim(x$bic))," models.","\n"))
+                cat(paste0("      Selected model: ", as.character(x$selected_model$parameterization)," model with K = ", x$selected_model$num_Clusters, " and q = ", x$selected_model$num_Factors ," factors.","\n"))
+                cat(paste0("* Estimated number of observations per cluster:"),'\n')
+                print(table(x$class))
+
+                cat(paste0("* Posterior mean of the mean per cluster:"),'\n')
+		print(x$mu, digits = 2)
+
+
+		mySymbols <- c("\U0000A4", "\U0000A3", "\U0000A5", "\U000285","\U0009F8", "\U000E5B","\U001405","\U001518","\U001620",
+			"\U0018F2","\U00204D","\U0021AF","\U00220E","\U00261D","\U00262F",
+			"\U00266C","\U00267B","\U002687","\U002713","\U002730","\U00272A", "\U0027C6","\U002FC2","\U00265E",
+			"\U00269D","\U002A12", "\U002605", "\U0029EB", "\U002300", "\U002301", "\U002302", "\U002303", "\U002304", 
+			"\U002305", "\U002306", "\U002307", "\U002308", "\U002309", "\U0023F0", "\U0023ED", "\U0023E7", "\U0025F4", 
+			"\U0025CD", "\U0025B5", "\U002615", "\U002660", "\U0026C7", "\U002667", "\U002706", "\U00270D", "\U0026F7")
+
+		p <- dim(x$data)[2]
+		disMu <- floor(5*x$mu + 0.5)
+		nLines <- diff(range(disMu)) + 1
+		disMu <- -min(disMu) + disMu
+ 		words <- vector("list", length = max(disMu))
+		for(i in 1:max(disMu)){
+			words[[i]] <- character(p)
+				for(j in 1:p){
+					words[[i]][j] = " "
+				}
+		}
+
+		for(k in 1:x$selected_model$num_Clusters){		
+			for(i in 1:max(disMu)){
+				for(j in 1:p){
+					if(disMu[j,k] == i){
+						#words[[i]][j] <- mySymbols[k]
+						if(k < 10){
+							words[[i]][j] <- as.character(k)
+						}else{
+							words[[i]][j] <- mySymbols[k - 9]
+						}
+					}
+				}
+			}
+		}
+                cat(paste0("* Plot of the posterior means per cluster:"),'\n')
+		cat("\n")
+		for(i in max(disMu):1){cat(words[[i]],"\n")}
+		cat("\n")
         }else{
                 cat(paste("    The input is not in class `fabMix.object`"),'\n')
         }
 }
 
 #' @export
-plot.fabMix.object <- function(x, what, ...){
+plot.fabMix.object <- function(x, what, variableSubset, ...){
         if( 'fabMix.object' %in% class(x) ){
 	K <- as.numeric(x$selected_model['num_Clusters'])
 	cMeans <- colMeans(x$data)
@@ -5775,6 +5970,10 @@ plot.fabMix.object <- function(x, what, ...){
 			"tomato4","cyan2","springgreen2")
 
 	if(missing(what)){what = "menu"}
+	if(missing(variableSubset)){
+		variableSubset = 1:p
+	}
+	if(length(variableSubset) < 2){stop("variableSubset should contain at least 2 variables.")}
 	while(v > 0){
 		if(what=="menu"){
 			cat(paste0("fabMix plots:"),"\n\n")
@@ -5794,9 +5993,10 @@ plot.fabMix.object <- function(x, what, ...){
 			# 1. Plot BIC values
 			par(mfrow=c(1,1),mar=c(5.1, 4.1, 4.1, 8.1), xpd=TRUE)
 			myCols <- brewer.pal(8, "Set1")
-			matplot(x$bic, type = "b", xlab = "number of factors", ylab = "BIC", cex = 0, col = myCols, lty = 1)
+			matplot(x$bic, type = "b", xlab = "number of factors", ylab = "BIC", cex = 0, col = myCols, lty = 1, xaxt = "n")
+			axis(1, at = 1:dim(x$bic)[1], labels = as.numeric(rownames(x$bic)))
 			for (i in 1:dim(x$bic)[2]){
-				text(labels = x$n_Clusters_per_model[,i], y = x$bic[,i], x = as.numeric(rownames(x$bic)), col = myCols[i])
+				text(labels = x$n_Clusters_per_model[,i], y = x$bic[,i], x = 1:dim(x$bic)[1], col = myCols[i])
 			}
 			legend("topright", inset=c(-0.3,0.3), legend=colnames(x$bic), col = myCols, lty = 1, title="Model")
 		}
@@ -5840,7 +6040,7 @@ plot.fabMix.object <- function(x, what, ...){
 			tt[[2]] <- variance
 			names(tt) <- c("mean", "variance")
 			# 2. Pairwise scatterplots (hacking coordProj() from mclust).
-			dimens <- seq(p)
+			dimens <- variableSubset
 			d <- length(dimens)
 			par(mfrow = c(d, d), mar = rep(c(0.3, 0.3/2), each = 2), oma = c(4, 4, 4, 4))
 			for (i in seq(d)) {
