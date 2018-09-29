@@ -11,4 +11,4 @@ Imports: MASS, doParallel, foreach, label.switching, mvtnorm, doRNG,
         RColorBrewer, corrplot, mclust
 License: GPL-2
 NeedsCompilation: no
-Packaged: 2018-09-20 06:06:36 UTC; panagiotis
+Packaged: 2018-09-29 06:12:35 UTC; panagiotis

@@ -378,7 +378,7 @@ compute_A_B_G_D_and_simulate_mu_Lambda_CUU <- function(SigmaINV, suff_statistics
 		for(k in 1:K){
 			G[r,subIndex,subIndex] <- G[r,subIndex,subIndex] + suff_statistics$syy[k,subIndex,subIndex]*SigmaINV[k,r,r] 
 			#computing D[k,r,]: the actual dimension is v_r, r = 1,...,p
-			D[r,subIndex] <- suff_statistics$sxy[k,r,subIndex]*SigmaINV[k,r,r]
+			D[r,subIndex] <- D[r,subIndex] + suff_statistics$sxy[k,r,subIndex]*SigmaINV[k,r,r]
 		}
 		G[r,subIndex,subIndex] <- solve(OmegaINV[subIndex,subIndex] + G[r,subIndex,subIndex])
 		# this is for simulating Lambdas[r,,]
