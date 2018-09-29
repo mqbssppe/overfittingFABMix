@@ -10,8 +10,8 @@ Beta-version of the package is up:
 
 ## Updates
 
-### New features: version_2.0 added with support for **missing values** :waxing_gibbous_moon:
+### [September 2017] Version_2.0 added with support for **missing values** :waxing_gibbous_moon:
 
-### Paper accepted to [Computational Statistics & Data Analysis](https://doi.org/10.1016/j.csda.2018.03.007) (please use version 2.0 of the software for the relevant scripts)
+### [March 2018] Paper accepted to [Computational Statistics & Data Analysis](https://doi.org/10.1016/j.csda.2018.03.007) (please use version 2.0 of the software for the relevant scripts)
 
-### Versions 3 and 4 are now uploaded, which contain a plethora of new models and functionalities, but please note that are currently under development. 
+### [September 2018] Versions 3 and 4 added, which contain a plethora of new models and functionalities (currently under development). 
