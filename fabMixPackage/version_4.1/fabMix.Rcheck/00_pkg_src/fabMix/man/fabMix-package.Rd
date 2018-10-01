@@ -27,42 +27,43 @@ Papastamoulis, P. (2018). Overfitting Bayesian mixtures of factor analyzers with
 }
 \keyword{ package }
 \seealso{
-\code{\link{fabMix}}
+\code{\link{fabMix}}, \code{\link{plot.fabMix.object}}
 }
 \examples{
-# simulate a synthetic dataset along the lines of the paper:
-n = 1000              # sample size
-p = 40                # number of variables
-q = 4                 # number of factors
-K = 10                # number of clusters
-sINV_diag = 1/((1:p)) # diagonal of inverse variance of errors
-set.seed(10)
-syntheticDataset <- simData(K.true = K, n = n, q = q, p = p, sINV_values = sINV_diag )
 
-\dontrun{
+library('fabMix')
 
-# define parameters
-Kmax <- 20    # number of overfitted mixture components
-nChains <- 8  # number of parallel chains
-dN <- 1
-# Dirichlet prior of mixture weights per chain.
-#   The target chain corresponds to the first entry.
-dirPriorAlphas <- c(1, 1 + dN * (2:nChains - 1))/Kmax	
-outputFolder <- "fabMixExample"
-# Run algorithm
-fabMix( dirPriorAlphas = dirPriorAlphas, 
-        rawData = syntheticDataset$data, 
-        outDir = outputFolder, Kmax = Kmax, mCycles = 1200, 
-        burnCycles = 200, q = q) 
+n = 10               # sample size
+p = 8                # number of variables
+q = 2                # number of factors
+K = 2		     # number of clusters
 
-# Compute information criteria:
-getStuffForDIC(x_data = syntheticDataset$data, outputFolder = outputFolder, q = q)
+sINV_diag = 1/((1:p))	 				# diagonal of inverse variance of errors
+set.seed(100)
+syntheticDataset <- simData(sameLambda=TRUE,K.true = K, n = n, q = q, p = p, 
+			sINV_values = sINV_diag)
+colnames(syntheticDataset$data) <- paste0("x_",1:p)
+qRange <- 1:2	# range of values for the number of factors
 
-# Deal with label switching:
-dealWithLabelSwitching(x_data = syntheticDataset$data, 
-        outputFolder = outputFolder, q = q, 
-        compute_regularized_expression = TRUE, Km = Kmax)
-}
+Kmax <- 5		# number of components for the overfitted mixture model
+nChains <- 2		# number of parallel heated chains
+dN <- 2         	# parameter the controls difference between successive chains
+dirPriorAlphas <- c(1, 1 + dN * (2:nChains - 1))/Kmax	# Dirichlet prior parameter per chain
 
+set.seed(1)
+fm <- fabMix( model = c("UCU", "UUC"), dirPriorAlphas = dirPriorAlphas, 
+	rawData = syntheticDataset$data, outDir = "toyExample",
+        Kmax = Kmax, mCycles = 4, burnCycles = 1, q = qRange,
+        g = 0.5, h = 0.5, alpha_sigma = 0.5, beta_sigma = 0.5, 
+        warm_up_overfitting = 5, warm_up = 25) 
+
+# WARNING: the following parameters: 
+#  Kmax, nChains, mCycles, burnCycles, warm_up_overfitting, warm_up 
+#	 should take (much) larger values. E.g. a typical implementation consists of:
+#        Kmax = 20, nChains = 8, mCycles = 1100, burnCycles = 100, 
+#        warm_up_overfitting = 500, warm_up = 10000. 
+print(fm)
+plot(fm, what = "BIC")
+plot(fm, what = "classification_pairs")
 
 }

@@ -36,22 +36,22 @@ Number of MCMC cycles. Each cycle consists of \code{nIterPerCycle} MCMC iteratio
 Number of cycles that will be discarded as burn-in period.
 }
   \item{g}{
-	Prior parameter \eqn{g}. Default value: \eqn{g = 2}.
+	Prior parameter \eqn{g}. Default value: \eqn{g = 0.5}.
 }
   \item{h}{
-	Prior parameter \eqn{h}. Default value: \eqn{h = 1}.
+	Prior parameter \eqn{h}. Default value: \eqn{h = 0.5}.
 }
   \item{alpha_sigma}{
-	Prior parameter \eqn{\alpha}. Default value: \eqn{\alpha = 2}.
+	Prior parameter \eqn{\alpha}. Default value: \eqn{\alpha = 0.5}.
 }
   \item{beta_sigma}{
-	Prior parameter \eqn{\beta}. Default value: \eqn{\beta = 1}.
+	Prior parameter \eqn{\beta}. Default value: \eqn{\beta = 0.5}.
 }
   \item{q}{
 	A vector containing the number of factors to be fitted.
 }
   \item{normalize}{
-	Should the observed data be normalized? Default value: TRUE. 
+	Should the observed data be normalized? Default value: TRUE. (Recommended) 
 }
   \item{thinning}{
 	Optional integer denoting the thinning of the keeped MCMC cycles.
@@ -66,10 +66,10 @@ Number of cycles that will be discarded as burn-in period.
 	Select the gibbs sampling scheme for updating latent allocations of mixture model. Default value: 1.
 }
   \item{warm_up_overfitting}{
-	Number of iterations for the overfitting initialization scheme. Default value: 100.
+	Number of iterations for the overfitting initialization scheme. Default value: 500.
 }
   \item{warm_up}{
-	Number of iterations that will be used to initialize the models before starting proposing switchings. Default value: 500.
+	Number of iterations that will be used to initialize the models before starting proposing switchings. Default value: 5000.
 }
   \item{overfittingInitialization}{
 	Logical value indicating whether the chains are initialized via the overfitting initialization scheme. Default: TRUE.
@@ -126,10 +126,11 @@ dN <- 1
 dirPriorAlphas <- c(1, 1 + dN * (2:nChains - 1))/Kmax   
 outputFolder <- "fabMixExample"
 # Run algorithm
-fabMix( dirPriorAlphas = dirPriorAlphas, 
+fabMix( model = c("UUU" "CUU" "UCU" "CCU" "UCC" "UUC" "CUC", "CCC"),
+	dirPriorAlphas = dirPriorAlphas, 
         rawData = syntheticDataset$data, 
         outDir = outputFolder, Kmax = Kmax, mCycles = 1200, 
-        burnCycles = 200, q = q) 
+        burnCycles = 200, q = 3:5) 
 }
 
 

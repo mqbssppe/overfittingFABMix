@@ -5126,7 +5126,7 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "CCC"), 
 			dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCycles, 
 			g, h, alpha_sigma, beta_sigma, q, normalize = TRUE, thinning, zStart, 
-			nIterPerCycle, gibbs_z = 1, warm_up_overfitting = 100, warm_up = 500, 
+			nIterPerCycle, gibbs_z = 1, warm_up_overfitting = 500, warm_up = 5000, 
 			overfittingInitialization=TRUE, progressGraphs = FALSE, gwar = 0.05			
 			){
 
@@ -5170,6 +5170,18 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 	if( normalize == FALSE ){
 		cat('-    The sampler uses raw data (NOT GOOD PRACTICE).','\n')
 	}
+
+
+
+
+	ledermannBound <- ( 2*p + 1 - sqrt(8*p + 1) ) / 2
+	if( max(q) >  ledermannBound){
+		cat(paste0('-    WARNING: I will consider only the number of factors that do not exceed the ledermann bound.'),'\n')
+		cat(paste0('-         so: q <= ', ledermannBound),'\n')
+		q <- q[q <= ledermannBound]
+	}
+
+
 
 	# define output objects
 	bic <- array(data = NA, dim = c(length(q), length(model)))
@@ -5590,44 +5602,6 @@ print.fabMix.object <- function(x, printSubset = TRUE, ...){
                 cat(paste0("* Posterior mean of the mean per cluster:"),'\n')
 		print(x$mu, digits = 2)
 
-
-		mySymbols <- c("\U0000A4", "\U0000A3", "\U0000A5", "\U000285","\U0009F8", "\U000E5B","\U001405","\U001518","\U001620",
-			"\U0018F2","\U00204D","\U0021AF","\U00220E","\U00261D","\U00262F",
-			"\U00266C","\U00267B","\U002687","\U002713","\U002730","\U00272A", "\U0027C6","\U002FC2","\U00265E",
-			"\U00269D","\U002A12", "\U002605", "\U0029EB", "\U002300", "\U002301", "\U002302", "\U002303", "\U002304", 
-			"\U002305", "\U002306", "\U002307", "\U002308", "\U002309", "\U0023F0", "\U0023ED", "\U0023E7", "\U0025F4", 
-			"\U0025CD", "\U0025B5", "\U002615", "\U002660", "\U0026C7", "\U002667", "\U002706", "\U00270D", "\U0026F7")
-
-		p <- dim(x$data)[2]
-		disMu <- floor(5*x$mu + 0.5)
-		nLines <- diff(range(disMu)) + 1
-		disMu <- -min(disMu) + disMu
- 		words <- vector("list", length = max(disMu))
-		for(i in 1:max(disMu)){
-			words[[i]] <- character(p)
-				for(j in 1:p){
-					words[[i]][j] = " "
-				}
-		}
-
-		for(k in 1:x$selected_model$num_Clusters){		
-			for(i in 1:max(disMu)){
-				for(j in 1:p){
-					if(disMu[j,k] == i){
-						#words[[i]][j] <- mySymbols[k]
-						if(k < 10){
-							words[[i]][j] <- as.character(k)
-						}else{
-							words[[i]][j] <- mySymbols[k - 9]
-						}
-					}
-				}
-			}
-		}
-                cat(paste0("* Plot of the posterior means per cluster:"),'\n')
-		cat("\n")
-		for(i in max(disMu):1){cat(words[[i]],"\n")}
-		cat("\n")
         }else{
                 cat(paste("    The input is not in class `fabMix.object`"),'\n')
         }
