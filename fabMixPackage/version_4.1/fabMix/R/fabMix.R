@@ -3023,9 +3023,10 @@ fabMix_UxU <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 	}
 	mypal <- c(brewer.pal(9, "Set1"), "black") # up to 10 colours
 
-
-	if( range(diff(order(dirPriorAlphas)))[1] != 1){stop('dirPriorAlphas should be in increasing order.')}
-	if( range(diff(order(dirPriorAlphas)))[2] != 1){stop('dirPriorAlphas should be in increasing order.')}
+	if( nChains > 1 ){
+		if( range(diff(order(dirPriorAlphas)))[1] != 1){stop('dirPriorAlphas should be in increasing order.')}
+		if( range(diff(order(dirPriorAlphas)))[2] != 1){stop('dirPriorAlphas should be in increasing order.')}
+	}
 	if(mCycles < burnCycles + 1){ stop('`burnCycles` should be less than `mCycles`.') } 
 	if(missing(g)){g <- 0.5}
 	if(missing(h)){h <- 0.5}
@@ -3172,42 +3173,41 @@ fabMix_UxU <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 				kValues[iteration, myChain] <- read.table( paste0(outputDirs[myChain],'/k.and.logl.Values.txt') )[1,1]
 			}
 		}
+		
+		if(nChains > 1){
+			chains <- sample(nChains - 1, 1)
+			chains <- c(chains, chains + 1)
+			weights[1, ] <- as.numeric(read.table( paste0(outputDirs[ chains[1] ],'/wValues.txt') ))
+			weights[2, ] <- as.numeric(read.table( paste0(outputDirs[ chains[2] ],'/wValues.txt') ))
 
-		chains <- sample(nChains - 1, 1)
-		chains <- c(chains, chains + 1)
-		weights[1, ] <- as.numeric(read.table( paste0(outputDirs[ chains[1] ],'/wValues.txt') ))
-		weights[2, ] <- as.numeric(read.table( paste0(outputDirs[ chains[2] ],'/wValues.txt') ))
-
-		mh_denom <- log_dirichlet_pdf( rep( dirPriorAlphas[ chains[1] ], Kmax ), weights[1, ] ) 
-				+ log_dirichlet_pdf( rep( dirPriorAlphas[ chains[2] ], Kmax ), weights[2, ] )
-		mh_nom   <- log_dirichlet_pdf( rep( dirPriorAlphas[ chains[2] ], Kmax ), weights[1, ] ) 
-				+ log_dirichlet_pdf( rep( dirPriorAlphas[ chains[1] ], Kmax ), weights[2, ] )
-		mh_ratio <- mh_nom - mh_denom
-		if( log(runif(1)) < mh_ratio ){
-#		if( 0 < 1 ){
-
-			# dir1 to tmp
-			file.copy( 
-					from      = paste0(outputDirs[ chains[1] ], '/', file_names), 
-					to        = 'tmpDir',
-					overwrite = TRUE
-				)
-			# dir2 to dir1
-			file.copy( 
-					from      = paste0(outputDirs[ chains[2] ], '/', file_names), 
-					to        = outputDirs[ chains[1] ],
-					overwrite = TRUE
-				)
-			# tmp to dir2
-			file.copy( 
-					from      = paste0('tmpDir', '/', file_names), 
-					to        = outputDirs[ chains[2] ],
-					overwrite = TRUE
-				)
-			
-			mh_acceptance_rate <- mh_acceptance_rate + 1
+			mh_denom <- log_dirichlet_pdf( rep( dirPriorAlphas[ chains[1] ], Kmax ), weights[1, ] ) 
+					+ log_dirichlet_pdf( rep( dirPriorAlphas[ chains[2] ], Kmax ), weights[2, ] )
+			mh_nom   <- log_dirichlet_pdf( rep( dirPriorAlphas[ chains[2] ], Kmax ), weights[1, ] ) 
+					+ log_dirichlet_pdf( rep( dirPriorAlphas[ chains[1] ], Kmax ), weights[2, ] )
+			mh_ratio <- mh_nom - mh_denom
+			if( log(runif(1)) < mh_ratio ){
+				# dir1 to tmp
+				file.copy( 
+						from      = paste0(outputDirs[ chains[1] ], '/', file_names), 
+						to        = 'tmpDir',
+						overwrite = TRUE
+					)
+				# dir2 to dir1
+				file.copy( 
+						from      = paste0(outputDirs[ chains[2] ], '/', file_names), 
+						to        = outputDirs[ chains[1] ],
+						overwrite = TRUE
+					)
+				# tmp to dir2
+				file.copy( 
+						from      = paste0('tmpDir', '/', file_names), 
+						to        = outputDirs[ chains[2] ],
+						overwrite = TRUE
+					)
+				
+				mh_acceptance_rate <- mh_acceptance_rate + 1
+			}
 		}
-
 		for(myChain in 1:nChains){
 			kValues[iteration, myChain] <- read.table( paste0(outputDirs[myChain],'/k.and.logl.Values.txt') )[1,1]
 		}
@@ -3298,15 +3298,10 @@ fabMix_CxU <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 	}
 	mypal <- c(brewer.pal(9, "Set1"), "black") # up to 10 colours
 
-#	cat("         ____      __    __  ____     ", "\n")
-#	cat("        / __/___ _/ /_  /  |/  (_)  __", "\n")
-#	cat("       / /_/ __ `/ __ \\/ /|_/ / / |/_/", "\n")
-#	cat("      / __/ /_/ / /_/ / /  / / />  <  ", "\n")
-#	cat("     /_/  \\__,_/_.___/_/  /_/_/_/|_|  version 3.0", "\n")
-
-
-	if( range(diff(order(dirPriorAlphas)))[1] != 1){stop('dirPriorAlphas should be in increasing order.')}
-	if( range(diff(order(dirPriorAlphas)))[2] != 1){stop('dirPriorAlphas should be in increasing order.')}
+	if( nChains > 1 ){
+		if( range(diff(order(dirPriorAlphas)))[1] != 1){stop('dirPriorAlphas should be in increasing order.')}
+		if( range(diff(order(dirPriorAlphas)))[2] != 1){stop('dirPriorAlphas should be in increasing order.')}
+	}
 	if(mCycles < burnCycles + 1){ stop('`burnCycles` should be less than `mCycles`.') } 
 	if(missing(g)){g <- 0.5}
 	if(missing(h)){h <- 0.5}
@@ -3455,42 +3450,40 @@ fabMix_CxU <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 				kValues[iteration, myChain] <- read.table( paste0(outputDirs[myChain],'/k.and.logl.Values.txt') )[1,1]
 			}
 		}
+		if(nChains > 1){
+			chains <- sample(nChains - 1, 1)
+			chains <- c(chains, chains + 1)
+			weights[1, ] <- as.numeric(read.table( paste0(outputDirs[ chains[1] ],'/wValues.txt') ))
+			weights[2, ] <- as.numeric(read.table( paste0(outputDirs[ chains[2] ],'/wValues.txt') ))
 
-		chains <- sample(nChains - 1, 1)
-		chains <- c(chains, chains + 1)
-		weights[1, ] <- as.numeric(read.table( paste0(outputDirs[ chains[1] ],'/wValues.txt') ))
-		weights[2, ] <- as.numeric(read.table( paste0(outputDirs[ chains[2] ],'/wValues.txt') ))
-
-		mh_denom <- log_dirichlet_pdf( rep( dirPriorAlphas[ chains[1] ], Kmax ), weights[1, ] ) 
-				+ log_dirichlet_pdf( rep( dirPriorAlphas[ chains[2] ], Kmax ), weights[2, ] )
-		mh_nom   <- log_dirichlet_pdf( rep( dirPriorAlphas[ chains[2] ], Kmax ), weights[1, ] ) 
-				+ log_dirichlet_pdf( rep( dirPriorAlphas[ chains[1] ], Kmax ), weights[2, ] )
-		mh_ratio <- mh_nom - mh_denom
-		if( log(runif(1)) < mh_ratio ){
-#		if( 0 < 1 ){
-
-			# dir1 to tmp
-			file.copy( 
-					from      = paste0(outputDirs[ chains[1] ], '/', file_names), 
-					to        = 'tmpDir',
-					overwrite = TRUE
-				)
-			# dir2 to dir1
-			file.copy( 
-					from      = paste0(outputDirs[ chains[2] ], '/', file_names), 
-					to        = outputDirs[ chains[1] ],
-					overwrite = TRUE
-				)
-			# tmp to dir2
-			file.copy( 
-					from      = paste0('tmpDir', '/', file_names), 
-					to        = outputDirs[ chains[2] ],
-					overwrite = TRUE
-				)
-			
-			mh_acceptance_rate <- mh_acceptance_rate + 1
+			mh_denom <- log_dirichlet_pdf( rep( dirPriorAlphas[ chains[1] ], Kmax ), weights[1, ] ) 
+					+ log_dirichlet_pdf( rep( dirPriorAlphas[ chains[2] ], Kmax ), weights[2, ] )
+			mh_nom   <- log_dirichlet_pdf( rep( dirPriorAlphas[ chains[2] ], Kmax ), weights[1, ] ) 
+					+ log_dirichlet_pdf( rep( dirPriorAlphas[ chains[1] ], Kmax ), weights[2, ] )
+			mh_ratio <- mh_nom - mh_denom
+			if( log(runif(1)) < mh_ratio ){
+				# dir1 to tmp
+				file.copy( 
+						from      = paste0(outputDirs[ chains[1] ], '/', file_names), 
+						to        = 'tmpDir',
+						overwrite = TRUE
+					)
+				# dir2 to dir1
+				file.copy( 
+						from      = paste0(outputDirs[ chains[2] ], '/', file_names), 
+						to        = outputDirs[ chains[1] ],
+						overwrite = TRUE
+					)
+				# tmp to dir2
+				file.copy( 
+						from      = paste0('tmpDir', '/', file_names), 
+						to        = outputDirs[ chains[2] ],
+						overwrite = TRUE
+					)
+				
+				mh_acceptance_rate <- mh_acceptance_rate + 1
+			}
 		}
-
 		for(myChain in 1:nChains){
 			kValues[iteration, myChain] <- read.table( paste0(outputDirs[myChain],'/k.and.logl.Values.txt') )[1,1]
 		}
@@ -3581,15 +3574,10 @@ fabMix_CxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 	}
 	mypal <- c(brewer.pal(9, "Set1"), "black") # up to 10 colours
 
-#	cat("         ____      __    __  ____     ", "\n")
-#	cat("        / __/___ _/ /_  /  |/  (_)  __", "\n")
-#	cat("       / /_/ __ `/ __ \\/ /|_/ / / |/_/", "\n")
-#	cat("      / __/ /_/ / /_/ / /  / / />  <  ", "\n")
-#	cat("     /_/  \\__,_/_.___/_/  /_/_/_/|_|  version 3.0", "\n")
-
-
-	if( range(diff(order(dirPriorAlphas)))[1] != 1){stop('dirPriorAlphas should be in increasing order.')}
-	if( range(diff(order(dirPriorAlphas)))[2] != 1){stop('dirPriorAlphas should be in increasing order.')}
+	if( nChains > 1 ){
+		if( range(diff(order(dirPriorAlphas)))[1] != 1){stop('dirPriorAlphas should be in increasing order.')}
+		if( range(diff(order(dirPriorAlphas)))[2] != 1){stop('dirPriorAlphas should be in increasing order.')}	
+	}
 	if(mCycles < burnCycles + 1){ stop('`burnCycles` should be less than `mCycles`.') } 
 	if(missing(g)){g <- 0.5}
 	if(missing(h)){h <- 0.5}
@@ -3778,42 +3766,40 @@ fabMix_CxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 				kValues[iteration, myChain] <- read.table( paste0(outputDirs[myChain],'/k.and.logl.Values.txt') )[1,1]
 			}
 		}
+		if(nChains > 1){
+			chains <- sample(nChains - 1, 1)
+			chains <- c(chains, chains + 1)
+			weights[1, ] <- as.numeric(read.table( paste0(outputDirs[ chains[1] ],'/wValues.txt') ))
+			weights[2, ] <- as.numeric(read.table( paste0(outputDirs[ chains[2] ],'/wValues.txt') ))
 
-		chains <- sample(nChains - 1, 1)
-		chains <- c(chains, chains + 1)
-		weights[1, ] <- as.numeric(read.table( paste0(outputDirs[ chains[1] ],'/wValues.txt') ))
-		weights[2, ] <- as.numeric(read.table( paste0(outputDirs[ chains[2] ],'/wValues.txt') ))
-
-		mh_denom <- log_dirichlet_pdf( rep( dirPriorAlphas[ chains[1] ], Kmax ), weights[1, ] ) 
-				+ log_dirichlet_pdf( rep( dirPriorAlphas[ chains[2] ], Kmax ), weights[2, ] )
-		mh_nom   <- log_dirichlet_pdf( rep( dirPriorAlphas[ chains[2] ], Kmax ), weights[1, ] ) 
-				+ log_dirichlet_pdf( rep( dirPriorAlphas[ chains[1] ], Kmax ), weights[2, ] )
-		mh_ratio <- mh_nom - mh_denom
-		if( log(runif(1)) < mh_ratio ){
-#		if( 0 < 1 ){
-
-			# dir1 to tmp
-			file.copy( 
-					from      = paste0(outputDirs[ chains[1] ], '/', file_names), 
-					to        = 'tmpDir',
-					overwrite = TRUE
-				)
-			# dir2 to dir1
-			file.copy( 
-					from      = paste0(outputDirs[ chains[2] ], '/', file_names), 
-					to        = outputDirs[ chains[1] ],
-					overwrite = TRUE
-				)
-			# tmp to dir2
-			file.copy( 
-					from      = paste0('tmpDir', '/', file_names), 
-					to        = outputDirs[ chains[2] ],
-					overwrite = TRUE
-				)
-			
-			mh_acceptance_rate <- mh_acceptance_rate + 1
+			mh_denom <- log_dirichlet_pdf( rep( dirPriorAlphas[ chains[1] ], Kmax ), weights[1, ] ) 
+					+ log_dirichlet_pdf( rep( dirPriorAlphas[ chains[2] ], Kmax ), weights[2, ] )
+			mh_nom   <- log_dirichlet_pdf( rep( dirPriorAlphas[ chains[2] ], Kmax ), weights[1, ] ) 
+					+ log_dirichlet_pdf( rep( dirPriorAlphas[ chains[1] ], Kmax ), weights[2, ] )
+			mh_ratio <- mh_nom - mh_denom
+			if( log(runif(1)) < mh_ratio ){
+				# dir1 to tmp
+				file.copy( 
+						from      = paste0(outputDirs[ chains[1] ], '/', file_names), 
+						to        = 'tmpDir',
+						overwrite = TRUE
+					)
+				# dir2 to dir1
+				file.copy( 
+						from      = paste0(outputDirs[ chains[2] ], '/', file_names), 
+						to        = outputDirs[ chains[1] ],
+						overwrite = TRUE
+					)
+				# tmp to dir2
+				file.copy( 
+						from      = paste0('tmpDir', '/', file_names), 
+						to        = outputDirs[ chains[2] ],
+						overwrite = TRUE
+					)
+				
+				mh_acceptance_rate <- mh_acceptance_rate + 1
+			}
 		}
-
 		for(myChain in 1:nChains){
 			kValues[iteration, myChain] <- read.table( paste0(outputDirs[myChain],'/k.and.logl.Values.txt') )[1,1]
 		}
@@ -3903,9 +3889,10 @@ fabMix_UxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 		nothingHere + 1
 	}
 	mypal <- c(brewer.pal(9, "Set1"), "black") # up to 10 colours
-
-	if( range(diff(order(dirPriorAlphas)))[1] != 1){stop('dirPriorAlphas should be in increasing order.')}
-	if( range(diff(order(dirPriorAlphas)))[2] != 1){stop('dirPriorAlphas should be in increasing order.')}
+	if( nChains > 1 ){
+		if( range(diff(order(dirPriorAlphas)))[1] != 1){stop('dirPriorAlphas should be in increasing order.')}
+		if( range(diff(order(dirPriorAlphas)))[2] != 1){stop('dirPriorAlphas should be in increasing order.')}
+	}
 	if(mCycles < burnCycles + 1){ stop('`burnCycles` should be less than `mCycles`.') } 
 	if(missing(g)){g <- 0.5}
 	if(missing(h)){h <- 0.5}
@@ -4050,42 +4037,40 @@ fabMix_UxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 				kValues[iteration, myChain] <- read.table( paste0(outputDirs[myChain],'/k.and.logl.Values.txt') )[1,1]
 			}
 		}
+		if(nChains > 1){
+			chains <- sample(nChains - 1, 1)
+			chains <- c(chains, chains + 1)
+			weights[1, ] <- as.numeric(read.table( paste0(outputDirs[ chains[1] ],'/wValues.txt') ))
+			weights[2, ] <- as.numeric(read.table( paste0(outputDirs[ chains[2] ],'/wValues.txt') ))
 
-		chains <- sample(nChains - 1, 1)
-		chains <- c(chains, chains + 1)
-		weights[1, ] <- as.numeric(read.table( paste0(outputDirs[ chains[1] ],'/wValues.txt') ))
-		weights[2, ] <- as.numeric(read.table( paste0(outputDirs[ chains[2] ],'/wValues.txt') ))
-
-		mh_denom <- log_dirichlet_pdf( rep( dirPriorAlphas[ chains[1] ], Kmax ), weights[1, ] ) 
-				+ log_dirichlet_pdf( rep( dirPriorAlphas[ chains[2] ], Kmax ), weights[2, ] )
-		mh_nom   <- log_dirichlet_pdf( rep( dirPriorAlphas[ chains[2] ], Kmax ), weights[1, ] ) 
-				+ log_dirichlet_pdf( rep( dirPriorAlphas[ chains[1] ], Kmax ), weights[2, ] )
-		mh_ratio <- mh_nom - mh_denom
-		if( log(runif(1)) < mh_ratio ){
-#		if( 0 < 1 ){
-
-			# dir1 to tmp
-			file.copy( 
-					from      = paste0(outputDirs[ chains[1] ], '/', file_names), 
-					to        = 'tmpDir',
-					overwrite = TRUE
-				)
-			# dir2 to dir1
-			file.copy( 
-					from      = paste0(outputDirs[ chains[2] ], '/', file_names), 
-					to        = outputDirs[ chains[1] ],
-					overwrite = TRUE
-				)
-			# tmp to dir2
-			file.copy( 
-					from      = paste0('tmpDir', '/', file_names), 
-					to        = outputDirs[ chains[2] ],
-					overwrite = TRUE
-				)
-			
-			mh_acceptance_rate <- mh_acceptance_rate + 1
+			mh_denom <- log_dirichlet_pdf( rep( dirPriorAlphas[ chains[1] ], Kmax ), weights[1, ] ) 
+					+ log_dirichlet_pdf( rep( dirPriorAlphas[ chains[2] ], Kmax ), weights[2, ] )
+			mh_nom   <- log_dirichlet_pdf( rep( dirPriorAlphas[ chains[2] ], Kmax ), weights[1, ] ) 
+					+ log_dirichlet_pdf( rep( dirPriorAlphas[ chains[1] ], Kmax ), weights[2, ] )
+			mh_ratio <- mh_nom - mh_denom
+			if( log(runif(1)) < mh_ratio ){
+				# dir1 to tmp
+				file.copy( 
+						from      = paste0(outputDirs[ chains[1] ], '/', file_names), 
+						to        = 'tmpDir',
+						overwrite = TRUE
+					)
+				# dir2 to dir1
+				file.copy( 
+						from      = paste0(outputDirs[ chains[2] ], '/', file_names), 
+						to        = outputDirs[ chains[1] ],
+						overwrite = TRUE
+					)
+				# tmp to dir2
+				file.copy( 
+						from      = paste0('tmpDir', '/', file_names), 
+						to        = outputDirs[ chains[2] ],
+						overwrite = TRUE
+					)
+				
+				mh_acceptance_rate <- mh_acceptance_rate + 1
+			}
 		}
-
 		for(myChain in 1:nChains){
 			kValues[iteration, myChain] <- read.table( paste0(outputDirs[myChain],'/k.and.logl.Values.txt') )[1,1]
 		}
@@ -4165,8 +4150,10 @@ fabMix_missing_values <- function(sameSigma = TRUE, dirPriorAlphas, rawData, out
 		dirPriorAlphas <- c(1, 1 + dN*(2:nChains - 1))/Kmax
 	}
 	nChains <- length(dirPriorAlphas)
-	if( range(diff(order(dirPriorAlphas)))[1] != 1){stop('dirPriorAlphas should be in increasing order.')}
-	if( range(diff(order(dirPriorAlphas)))[2] != 1){stop('dirPriorAlphas should be in increasing order.')}
+	if( nChains > 1 ){
+		if( range(diff(order(dirPriorAlphas)))[1] != 1){stop('dirPriorAlphas should be in increasing order.')}
+		if( range(diff(order(dirPriorAlphas)))[2] != 1){stop('dirPriorAlphas should be in increasing order.')}
+	}
 	if(mCycles < burnCycles + 1){ stop('`burnCycles` should be less than `mCycles`.') } 
 	if(missing(g)){g <- 0.5}
 	if(missing(h)){h <- 0.5}
@@ -4844,8 +4831,10 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 	cat(paste0('         * Entering directory: ', getwd()),'\n')
 	z <- as.matrix(read.table("zValues.txt"))
 	logl <- read.table("kValues.txt", header=T)
+	cllValues <- read.table("cllValues.txt")
 	if(burn > 0){
 		logl <- logl[-(1:burn), ]
+		cllValues <- cllValues[-(1:burn), ]
 		z <- z[-(1:burn),]
 	}
 	K <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
@@ -4856,9 +4845,10 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 	}else{
 		index <- which(logl[,1] == K)
 		Kindex <- index
-		logl <- logl[index,2]
+		logl <- logl[index,1]
+		cllValues <- cllValues[index,1]
 		z <- z[index,]
-		mapIndex <- which(logl == max(logl))[1]
+		mapIndex <- which(cllValues == max(cllValues))[1]
 		zPivot <- as.numeric(z[mapIndex,])
 		K <- max(z)
 		skiniko <- FALSE
@@ -4905,16 +4895,6 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 				}
 			}
 
-#			l <- as.matrix(read.table(paste0("LambdaValues",1,".txt")))
-#			J <- dim(l)[2]
-#			mcmc <- array(data = NA, dim = c(m,K,J))
-#			for(k in 1:K){
-#				l <- as.matrix(read.table(paste0("LambdaValues",k,".txt")))
-#				if(burn > 0){
-#					l <- l[-(1:burn),]
-#				}
-#				mcmc[,k,] <- l[index,]
-#			}
 			if(skiniko == TRUE){
 				tmp1 <- mcmc[,kLAST,]
 				tmp2 <-  mcmc[,Km,]	
@@ -5155,7 +5135,7 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 	cat("        / __/___ _/ /_  /  |/  (_)  __", "\n")
 	cat("       / /_/ __ `/ __ \\/ /|_/ / / |/_/", "\n")
 	cat("      / __/ /_/ / /_/ / /  / / />  <  ", "\n")
-	cat("     /_/  \\__,_/_.___/_/  /_/_/_/|_|  version 4.0", "\n\n")
+	cat("     /_/  \\__,_/_.___/_/  /_/_/_/|_|  version 4.1", "\n\n")
 
 	if(missing(Kmax)){Kmax <- 20}
 	if(missing(nIterPerCycle)){nIterPerCycle = 10}
@@ -5164,9 +5144,13 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 		nChains <- 8
 		dN <- 1
 		dirPriorAlphas <- c(1, 1 + dN*(2:nChains - 1))/Kmax
+	}else{
+		nChains <- length(dirPriorAlphas)
 	}
-	if( range(diff(order(dirPriorAlphas)))[1] != 1){stop('dirPriorAlphas should be in increasing order.')}
-	if( range(diff(order(dirPriorAlphas)))[2] != 1){stop('dirPriorAlphas should be in increasing order.')}
+	if( nChains > 1 ){
+		if( range(diff(order(dirPriorAlphas)))[1] != 1){stop('dirPriorAlphas should be in increasing order.')}
+		if( range(diff(order(dirPriorAlphas)))[2] != 1){stop('dirPriorAlphas should be in increasing order.')}
+	}
 	if(mCycles < burnCycles + 1){ stop('`burnCycles` should be less than `mCycles`.') } 
 	if(missing(g)){g <- 0.5}
 	if(missing(h)){h <- 0.5}
