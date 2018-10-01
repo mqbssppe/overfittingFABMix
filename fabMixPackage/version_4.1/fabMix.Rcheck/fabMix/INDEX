@@ -27,8 +27,9 @@ compute_sufficient_statistics_q0
 dealWithLabelSwitching
                         Apply label switching algorithms
 fabMix                  Main function
-fabMix-package          Overfitting Bayesian Mixtures of Factor
-                        Analyzers with an Unknown Number of Components
+fabMix-package          Overfitting Parsimonious Bayesian Mixtures of
+                        Factor Analyzers with an Unknown Number of
+                        Components
 fabMix_CxC              Main function of the package for CUC, CCC
                         models
 fabMix_CxU              Main function of the package for CCU, CUU

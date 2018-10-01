@@ -101,7 +101,7 @@ It is recommended to always use: \code{normalize = TRUE} (default). Tuning of \c
 \code{\link{dealWithLabelSwitching}}
 }
 \references{
-Papastamoulis, P. (2017). Overfitting Bayesian mixtures of factor analyzers with an unknown number of components. arXiv:1701.04605 [stat.ME]
+Papastamoulis, P. (2018). Overfitting Bayesian mixtures of factor analyzers with an unknown number of components. Computational Statistics and Data Analysis, 124: 220-234. DOI: 10.1016/j.csda.2018.03.007.
 }
 \author{
 Panagiotis Papastamoulis

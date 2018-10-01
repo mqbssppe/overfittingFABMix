@@ -11,8 +11,8 @@ nameEx("fabMix-package")
 flush(stderr()); flush(stdout())
 
 ### Name: fabMix-package
-### Title: Overfitting Bayesian Mixtures of Factor Analyzers with an
-###   Unknown Number of Components
+### Title: Overfitting Parsimonious Bayesian Mixtures of Factor Analyzers
+###   with an Unknown Number of Components
 ### Aliases: fabMix-package
 ### Keywords: package
 

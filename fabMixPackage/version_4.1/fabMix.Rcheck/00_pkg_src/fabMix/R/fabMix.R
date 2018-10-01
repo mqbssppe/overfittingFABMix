@@ -4919,7 +4919,7 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 				lambda.mean[k,,] <- matrix(lMean,nrow = p, ncol = q, byrow=TRUE)
 				lambda.map[k,,] <- matrix(lambda.perm.mcmc[mapIndex,k,],nrow = p, ncol = q, byrow=TRUE)
 			}
-			write.table(lambda.mean, file = 'lambda_estimate_ecr.txt', col.names = paste('lambda',1:p, rep(1:q, each = p), sep = "_"))
+			write.table(lambda.map, file = 'lambda_map.txt', col.names = paste('lambda',1:p, rep(1:q, each = p), sep = "_"))
 		}
 		mu <- read.table("muValues.txt")# auto to grafei ws mu_{11},mu_{12},...,mu_{1K}, ...., mu_{p1},mu_{p2},...,mu_{pK} gia kathe grammi
 		if(burn > 0){
@@ -5137,6 +5137,7 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 	cat("      / __/ /_/ / /_/ / /  / / />  <  ", "\n")
 	cat("     /_/  \\__,_/_.___/_/  /_/_/_/|_|  version 4.1", "\n\n")
 
+	model = intersect(model, c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "CCC"))
 	if(missing(Kmax)){Kmax <- 20}
 	if(missing(nIterPerCycle)){nIterPerCycle = 10}
 	if(missing(zStart)){zStart = FALSE}
@@ -5355,87 +5356,94 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 	}else{
 		dealWithLabelSwitching(sameSigma = FALSE, x_data = rawData, outputFolder = outDir, q = as.numeric(q_selected), compute_regularized_expression = TRUE, Km = Kmax)
 	}
+	if ( nClusters[q_selected, model_selected] > 1){
+		z <- as.numeric(read.table(paste0(outDir,"/singleBestClusterings.txt"), header=TRUE)[1,])
+		classification_probabilities_MAP <- read.table(paste0(outDir,"/classificationProbabilities.txt"))
+		covariance_matrix_MAP <- vector("list", length = nClusters[q_selected, model_selected])
+		for (k in 1:nClusters[q_selected, model_selected]){
+			covariance_matrix_MAP[[k]] <- as.matrix(read.table(paste0(outDir,"/estimated_cov_cluster_",k,".txt")))
+		}
+		names(covariance_matrix_MAP) <- names(table(z))
+		mu <- read.table(paste0(outDir,"/mu_estimate_ecr.txt"), header=TRUE)
+		mu <- t(mu[as.numeric(names(table(z))),])
+		w <- read.table(paste0(outDir,"/weights_estimate_ecr.txt"))[as.numeric(names(table(z))),]
+		w <- w/sum(w)	
 
-	z <- as.numeric(read.table(paste0(outDir,"/singleBestClusterings.txt"), header=TRUE)[1,])
-	classification_probabilities_MAP <- read.table(paste0(outDir,"/classificationProbabilities.txt"))
-	covariance_matrix_MAP <- vector("list", length = nClusters[q_selected, model_selected])
-	for (k in 1:nClusters[q_selected, model_selected]){
-		covariance_matrix_MAP[[k]] <- as.matrix(read.table(paste0(outDir,"/estimated_cov_cluster_",k,".txt")))
-	}
-	names(covariance_matrix_MAP) <- names(table(z))
-	mu <- read.table(paste0(outDir,"/mu_estimate_ecr.txt"), header=TRUE)
-	mu <- t(mu[as.numeric(names(table(z))),])
-	w <- read.table(paste0(outDir,"/weights_estimate_ecr.txt"))[as.numeric(names(table(z))),]
-	w <- w/sum(w)	
-
-	MCMC <- vector("list", length = 7)
-	names(MCMC) <- c("y", "w", "Lambda","mu","z","Sigma","K_all_chains")
-	lFile <- read.table(paste0(outDir,"/reordered_lambda_ecr.txt"), header = TRUE)
-	MCMC$Lambda <- vector("list", length = nClusters[q_selected, model_selected])
-	names(MCMC$Lambda) <- names(table(z))
-	for(k in names(table(z))){
-		MCMC$Lambda[[k]] <- array(data = NA, dim = c(dim(lFile)[1], p*as.numeric(q_selected)) )
-		f <- 0
-		for(i in 1:p){
-			for(j in 1:as.numeric(q_selected)){
-				f <- f + 1
-				MCMC$Lambda[[k]][, f] <- lFile[, paste0("k",k,"_i",i,"_j",j)]
+		MCMC <- vector("list", length = 7)
+		names(MCMC) <- c("y", "w", "Lambda","mu","z","Sigma","K_all_chains")
+		lFile <- read.table(paste0(outDir,"/reordered_lambda_ecr.txt"), header = TRUE)
+		MCMC$Lambda <- vector("list", length = nClusters[q_selected, model_selected])
+		names(MCMC$Lambda) <- names(table(z))
+		for(k in names(table(z))){
+			MCMC$Lambda[[k]] <- array(data = NA, dim = c(dim(lFile)[1], p*as.numeric(q_selected)) )
+			f <- 0
+			for(i in 1:p){
+				for(j in 1:as.numeric(q_selected)){
+					f <- f + 1
+					MCMC$Lambda[[k]][, f] <- lFile[, paste0("k",k,"_i",i,"_j",j)]
+				}
 			}
 		}
-	}
 
-	muValues <- read.table(paste0(outDir,"/reordered_mu_ecr.txt"))
-	MCMC$mu <- vector("list", length = nClusters[q_selected, model_selected])
-	names(MCMC$mu) <- names(table(z))
-	for(k in names(table(z))){
-		MCMC$mu[[k]] <- as.matrix(muValues[,as.numeric(k) + Kmax*((1:p)-1)])
-		colnames(MCMC$mu[[k]]) <- paste0("V",1:p)
-	}
-	MCMC$w <- read.table(paste0(outDir,"/reordered_weights_ecr.txt"))[,as.numeric(names(table(z)))]
-	MCMC$y <- read.table(paste0(outDir,"/yValues.txt"))
-	MCMC$z <- read.table(paste0(outDir,"/reordered_allocations_ecr.txt"))
-	if( strsplit(model_selected, split = "")[[1]][2] == "U" ){
-		sMATRIX <- read.table(paste0(outDir,'/reordered_sigma_ecr.txt'))
-		MCMC$Sigma <- vector("list", length = nClusters[q_selected, model_selected])
-		names(MCMC$Sigma) <- names(table(z))
-		if( strsplit(model_selected, split = "")[[1]][3] == "U" ){
-			for(k in names(table(z))){
-				MCMC$Sigma[[k]] <- as.matrix(sMATRIX[,((as.numeric(k)-1)*p + 1):(as.numeric(k)*p)])
-			}
+		muValues <- read.table(paste0(outDir,"/reordered_mu_ecr.txt"))
+		MCMC$mu <- vector("list", length = nClusters[q_selected, model_selected])
+		names(MCMC$mu) <- names(table(z))
+		for(k in names(table(z))){
+			MCMC$mu[[k]] <- as.matrix(muValues[,as.numeric(k) + Kmax*((1:p)-1)])
+			colnames(MCMC$mu[[k]]) <- paste0("V",1:p)
+		}
+		MCMC$w <- read.table(paste0(outDir,"/reordered_weights_ecr.txt"))[,as.numeric(names(table(z)))]
+		MCMC$y <- read.table(paste0(outDir,"/yValues.txt"))
+		MCMC$z <- read.table(paste0(outDir,"/reordered_allocations_ecr.txt"))
+		if( strsplit(model_selected, split = "")[[1]][2] == "U" ){
+			sMATRIX <- read.table(paste0(outDir,'/reordered_sigma_ecr.txt'))
+			MCMC$Sigma <- vector("list", length = nClusters[q_selected, model_selected])
+			names(MCMC$Sigma) <- names(table(z))
+			if( strsplit(model_selected, split = "")[[1]][3] == "U" ){
+				for(k in names(table(z))){
+					MCMC$Sigma[[k]] <- as.matrix(sMATRIX[,((as.numeric(k)-1)*p + 1):(as.numeric(k)*p)])
+				}
+			}else{
+				for(k in names(table(z))){
+					MCMC$Sigma[[k]] <- as.matrix(sMATRIX[,as.numeric(k)])
+				}
+			}		
 		}else{
-			for(k in names(table(z))){
-				MCMC$Sigma[[k]] <- as.matrix(sMATRIX[,as.numeric(k)])
-			}
-		}		
-	}else{
-		MCMC$Sigma <- 1/read.table(paste0(outDir, '/sigmainvValues.txt'))
-		if( strsplit(model_selected, split = "")[[1]][3] == "U" ){
-			MCMC$Sigma <- MCMC$Sigma
-		}else{
-			MCMC$Sigma <- MCMC$Sigma[,1]
-		}		
+			MCMC$Sigma <- 1/read.table(paste0(outDir, '/sigmainvValues.txt'))
+			if( strsplit(model_selected, split = "")[[1]][3] == "U" ){
+				MCMC$Sigma <- MCMC$Sigma
+			}else{
+				MCMC$Sigma <- MCMC$Sigma[,1]
+			}		
+		}
+		MCMC$K <- read.table(paste0(outDir,"/kValues.txt"))
+		rr <- vector("list", length = as.numeric(q_selected))
+		for(j in 1:as.numeric(q_selected)){
+			rr[[j]] <- read.table(paste0(outDir,"/estimated_regularized_expression_per_cluster_",j,".txt"))
+		}
 	}
-	MCMC$K <- read.table(paste0(outDir,"/kValues.txt"))
-	rr <- vector("list", length = as.numeric(q_selected))
-	for(j in 1:as.numeric(q_selected)){
-		rr[[j]] <- read.table(paste0(outDir,"/estimated_regularized_expression_per_cluster_",j,".txt"))
-	}
-
 	cat(paste0("\n","Given the specified range of models, factors, maximum number of clusters and MCMC parameters,","\n", "the best model corresponds to the ", model_selected, " parameterization with q = ", q_selected, " factors and K = ",nClusters[q_selected, model_selected]," clusters. ","\n","The BIC for this model equals ", round(min(bic),3), "."),"\n")
 	best_model <- data.frame(parameterization = model_selected, num_Clusters = nClusters[q_selected, model_selected], num_Factors = as.numeric(q_selected))
 	setwd("../")
 	results <- vector("list", length = 11)
 	results[[1]] <- bic
-	results[[2]] <- z
 	results[[3]] <- nClusters
-	results[[4]] <- classification_probabilities_MAP
-	results[[5]] <- covariance_matrix_MAP
-	results[[6]] <- mu
-	results[[7]] <- w
 	results[[8]] <- best_model
-	results[[9]] <- MCMC
 	results[[10]] <- rawData
-	results[[11]] <- rr
+	if ( nClusters[q_selected, model_selected] > 1){
+		results[[4]] <- classification_probabilities_MAP
+		results[[2]] <- z
+		results[[5]] <- covariance_matrix_MAP
+		results[[6]] <- mu
+		results[[7]] <- w
+		results[[9]] <- MCMC
+		results[[11]] <- rr
+	}else{
+		results[[2]] <- rep(1,n)
+		results[[4]] <- rep(1,n)
+		results[[7]] <- 1
+	}
+
 	names(results) <- c(	"bic", 
 				"class", 
 				"n_Clusters_per_model", 
@@ -5449,6 +5457,7 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 				"regularizedExpression"
 			)
 	class(results) <- c('list', 'fabMix.object')
+
 	return(results)
 }
 
