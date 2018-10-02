@@ -1,0 +1,15 @@
+Package: fabMix
+Type: Package
+Title: Overfitting Parsimonious Bayesian Mixtures of Factor Analyzers
+        with an Unknown Number of Components
+Version: 4.2
+Date: 2018-09-27
+Author: Panagiotis Papastamoulis
+Maintainer: Panagiotis Papastamoulis <papapast@yahoo.gr>
+Description: Model-based clustering of multivariate continuous data using overfitting Bayesian mixtures of factor analyzers (Papastamoulis, 2018 CSDA). Suitable prior assumptions ensure that asymptotically the extra components will have zero posterior weight (empty), therefore, the inference on the number of clusters is based on the ``alive'' components. The number of factors is considered fixed, and the optimal one can be estimated using information criteria. Eight parameterizations are available, namely the ``UUU'', ``UCU'', ``UCC'', ``CUU'', ``CUC'', ``CCC'', ``CCU'' and ``UUC'' models (see McNicholas et al, 2008 Stat Comp). Identifiability issues related to label switching are dealt by post-processing the simulated output with the ECR algorithm (Papastamoulis 2010 JCGS, 2016 JSS). Missing values are currently allowed for the UUU and UCU model parameterizations.
+License: GPL-2
+Imports: Rcpp (>= 0.12.17), MASS, doParallel, foreach, label.switching,
+        mvtnorm, doRNG, RColorBrewer, corrplot, mclust
+LinkingTo: Rcpp, RcppArmadillo
+NeedsCompilation: yes
+Packaged: 2018-10-02 18:02:09 UTC; panagiotis

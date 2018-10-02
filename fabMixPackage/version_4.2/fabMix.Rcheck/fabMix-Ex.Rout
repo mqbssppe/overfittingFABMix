@@ -1,0 +1,536 @@
+
+R version 3.4.4 (2018-03-15) -- "Someone to Lean On"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "fabMix"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> base::assign(".ExTimings", "fabMix-Ex.timings", pos = 'CheckExEnv')
+> base::cat("name\tuser\tsystem\telapsed\n", file=base::get(".ExTimings", pos = 'CheckExEnv'))
+> base::assign(".format_ptime",
++ function(x) {
++   if(!is.na(x[4L])) x[1L] <- x[1L] + x[4L]
++   if(!is.na(x[5L])) x[2L] <- x[2L] + x[5L]
++   options(OutDec = '.')
++   format(x[1L:3L], digits = 7L)
++ },
++ pos = 'CheckExEnv')
+> 
+> ### * </HEADER>
+> library('fabMix')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("fabMix-package")
+> ### * fabMix-package
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: fabMix-package
+> ### Title: Overfitting Parsimonious Bayesian Mixtures of Factor Analyzers
+> ###   with an Unknown Number of Components
+> ### Aliases: fabMix-package
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> 
+> library('fabMix')
+> 
+> n = 10               # sample size
+> p = 8                # number of variables
+> q = 2                # number of factors
+> K = 2		     # number of clusters
+> 
+> sINV_diag = 1/((1:p))	 				# diagonal of inverse variance of errors
+> set.seed(100)
+> syntheticDataset <- simData(sameLambda=TRUE,K.true = K, n = n, q = q, p = p, 
++ 			sINV_values = sINV_diag)
+Simulation parameters: 
+   n = 10 
+   p = 8 
+   q = 2 
+   K = 2 
+> colnames(syntheticDataset$data) <- paste0("x_",1:p)
+> qRange <- 1:2	# range of values for the number of factors
+> 
+> Kmax <- 5		# number of components for the overfitted mixture model
+> nChains <- 2		# number of parallel heated chains
+> 
+> # Run `fabMix` for a _small_ number of iterations for the 
+> #	`UUU` (maximal model) and `CCC` (minimal model) parameterizations,
+> # 	using the default prior parallel heating parameters `dirPriorAlphas`.
+> #	NOTE: `dirPriorAlphas` may require some tuning in general.
+> 
+> set.seed(1)
+> fm <- fabMix( model = c("UUU", "CCC"), nChains = 2, 
++ 	rawData = syntheticDataset$data, outDir = "toyExample",
++         Kmax = Kmax, mCycles = 4, burnCycles = 1, q = qRange,
++         g = 0.5, h = 0.5, alpha_sigma = 0.5, beta_sigma = 0.5, 
++         warm_up_overfitting = 5, warm_up = 25) 
+         ____      __    __  ____      
+        / __/___ _/ /_  /  |/  (_)  __ 
+       / /_/ __ `/ __ \/ /|_/ / / |/_/ 
+      / __/ /_/ / /_/ / /  / / />  <   
+     /_/  \__,_/_.___/_/  /_/_/_/|_|  version 4.2 
+
+-    Data consists of p = 8 variables and n = 10 observations
+-    MCMC parameters: g = 0.5, h = 0.5, alpha_sigma = 0.5, beta_sigma = 0.5
+-         using Nchains = 2 
+-         target posterior distribution corresponds to alpha = 0.2 
+-    The sampler uses standardized data. 
+Loading required package: foreach
+Loading required package: rngtools
+Loading required package: pkgmaker
+Loading required package: registry
+
+-    Parameterization: UUU model 
+-    Number of factors: q = 1
+-    (1) Initializing from priors that lead to overfitting...  OK 
+-    (2) Initializing the actual model from the previously obtained values...  OK 
+-    (3) Running the sampler...  
+
+-    DONE. 
+-    (4) Computing information criteria for q = 1 
+-    NOTE: using standardizing data. 
+         - Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_4.2/fabMix.Rcheck/toyExample/UUU_1 
+            Nclusters:    1     2 
+            Frequency:    2    1 
+         - Information criteria written to `UUU_1/informationCriteria_map_model.txt`. 
+
+-    Parameterization: UUU model 
+-    Number of factors: q = 2
+-    (1) Initializing from priors that lead to overfitting...  OK 
+-    (2) Initializing the actual model from the previously obtained values...  OK 
+-    (3) Running the sampler...  
+
+-    DONE. 
+-    (4) Computing information criteria for q = 2 
+-    NOTE: using standardizing data. 
+         - Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_4.2/fabMix.Rcheck/toyExample/UUU_2 
+            Nclusters:    1 
+            Frequency:    3 
+         - Information criteria written to `UUU_2/informationCriteria_map_model.txt`. 
+
+-    Parameterization: CCC model 
+-    Number of factors: q = 1
+-    (1) Initializing from priors that lead to overfitting...  OK 
+-    (2) Initializing the actual model from the previously obtained values...  OK 
+-    (3) Running the sampler...  
+
+-    DONE. 
+-    (4) Computing information criteria for q = 1 
+-    NOTE: using standardizing data. 
+         - Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_4.2/fabMix.Rcheck/toyExample/CCC_1 
+            Nclusters:    3 
+            Frequency:    3 
+         - Information criteria written to `CCC_1/informationCriteria_map_model.txt`. 
+
+-    Parameterization: CCC model 
+-    Number of factors: q = 2
+-    (1) Initializing from priors that lead to overfitting...  OK 
+-    (2) Initializing the actual model from the previously obtained values...  OK 
+-    (3) Running the sampler...  
+
+-    DONE. 
+-    (4) Computing information criteria for q = 2 
+-    NOTE: using standardizing data. 
+         - Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_4.2/fabMix.Rcheck/toyExample/CCC_2 
+            Nclusters:    2 
+            Frequency:    3 
+         - Information criteria written to `CCC_2/informationCriteria_map_model.txt`. 
+-    The label.switching package says hello. 
+-    (5) Dealing with label switching for q = 2 
+         * Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_4.2/fabMix.Rcheck/toyExample/CCC_2 
+         * Posterior mode corresponds to K = 2 
+
+    ......................................................................................
+    . Method                         Time (sec)           Status                         . 
+    ......................................................................................
+    . ECR                            0.019                OK                             . 
+    . ECR-ITERATIVE-1                0.003                Converged (2 iterations)       . 
+    ......................................................................................
+
+    Relabelling all methods according to method ECR ... done!
+    Retrieve the 2 permutation arrays by typing:
+        [...]$permutations$"ECR"
+        [...]$permutations$"ECR-ITERATIVE-1"
+    Retrieve the 2 best clusterings: [...]$clusters
+    Retrieve the 2 CPU times: [...]$timings
+    Retrieve the 2 X 2 similarity matrix: [...]$similarity
+    Label switching finished. Total time: 0 seconds. 
+-    Done. 
+
+Given the specified range of models, factors, maximum number of clusters and MCMC parameters,
+the best model corresponds to the CCC parameterization with q = 2 factors and K = 2 clusters. 
+The BIC for this model equals 102.273. 
+> 
+> # WARNING: the following parameters: 
+> #  Kmax, nChains, mCycles, burnCycles, warm_up_overfitting, warm_up 
+> #	 should take (much) _larger_ values. E.g. a typical implementation consists of:
+> #        Kmax = 20, nChains = 8, mCycles = 1100, burnCycles = 100, 
+> #        warm_up_overfitting = 500, warm_up = 5000. 
+> 
+> # Now print a run summary and produce some plots. 
+> print(fm)
+
+* Run information: 
+      Number of fitted models: (2 different number of factors) x (2 parameterizations) = 4 models.
+      Selected model: CCC model with K = 2 and q = 2 factors.
+* Estimated number of observations per cluster: 
+
+1 5 
+5 5 
+* Posterior mean of the mean per cluster: 
+       1     5
+V1 -0.93  0.90
+V2  0.47 -0.47
+V3  0.90 -0.85
+V4 -0.86  0.91
+V5 -0.62  0.56
+V6  0.82 -0.90
+V7  0.33 -0.41
+V8 -0.64  0.62
+> plot(fm, what = "BIC")
+> plot(fm, what = "classification_pairs")
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("fabMix-package", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+
+detaching ‘package:doRNG’, ‘package:rngtools’, ‘package:pkgmaker’,
+  ‘package:registry’, ‘package:foreach’
+
+> nameEx("fabMix")
+> ### * fabMix
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: fabMix
+> ### Title: Main function
+> ### Aliases: fabMix
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # simulate a synthetic dataset along the lines of the paper:
+> ##D n = 1000              # sample size
+> ##D p = 40                # number of variables
+> ##D q = 4                 # number of factors
+> ##D K = 10                # number of clusters
+> ##D sINV_diag = 1/((1:p)) # diagonal of inverse variance of errors
+> ##D set.seed(10)
+> ##D syntheticDataset <- simData(K.true = K, n = n, q = q, p = p, sINV_values = sINV_diag )
+> ##D 
+> ##D # define parameters
+> ##D Kmax <- 20    # number of overfitted mixture components
+> ##D nChains <- 8  # number of parallel chains
+> ##D outputFolder <- "fabMixExample"
+> ##D # Run algorithm
+> ##D fabMix( rawData = syntheticDataset$data, 
+> ##D 	nChains = nChains,
+> ##D         outDir = outputFolder, Kmax = Kmax, 
+> ##D 	mCycles = 1200, 
+> ##D         burnCycles = 200, q = 3:5) 
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("fabMix", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("fabMix_CxC")
+> ### * fabMix_CxC
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: fabMix_CxC
+> ### Title: Main function of the package for CUC, CCC models
+> ### Aliases: fabMix_CxC
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # simulate a synthetic dataset along the lines of the paper:
+> ##D n = 1000              # sample size
+> ##D p = 40                # number of variables
+> ##D q = 4                 # number of factors
+> ##D K = 10                # number of clusters
+> ##D sINV_diag = 1/((1:p)) # diagonal of inverse variance of errors
+> ##D set.seed(10)
+> ##D syntheticDataset <- simData(K.true = K, n = n, q = q, p = p, sINV_values = sINV_diag )
+> ##D 
+> ##D # define parameters
+> ##D Kmax <- 20    # number of overfitted mixture components
+> ##D nChains <- 8  # number of parallel chains
+> ##D dN <- 1
+> ##D # Dirichlet prior of mixture weights per chain.
+> ##D #   The target chain corresponds to the first entry.
+> ##D dirPriorAlphas <- c(1, 1 + dN * (2:nChains - 1))/Kmax   
+> ##D outputFolder <- "fabMixExample"
+> ##D # Run algorithm
+> ##D fabMix_CxC( dirPriorAlphas = dirPriorAlphas, 
+> ##D         rawData = syntheticDataset$data, 
+> ##D         outDir = outputFolder, Kmax = Kmax, mCycles = 1200, 
+> ##D         burnCycles = 200, q = q) 
+> ##D 
+> ##D # Compute information criteria:
+> ##D #getStuffForDIC(x_data = syntheticDataset$data, outputFolder = outputFolder, q = q)
+> ##D 
+> ##D # Deal with label switching:
+> ##D #dealWithLabelSwitching(x_data = syntheticDataset$data, 
+> ##D #        outputFolder = outputFolder, q = q, 
+> ##D #        compute_regularized_expression = TRUE, Km = Kmax)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("fabMix_CxC", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("fabMix_CxU")
+> ### * fabMix_CxU
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: fabMix_CxU
+> ### Title: Main function of the package for CCU, CUU models
+> ### Aliases: fabMix_CxU
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # simulate a synthetic dataset along the lines of the paper:
+> ##D n = 1000              # sample size
+> ##D p = 40                # number of variables
+> ##D q = 4                 # number of factors
+> ##D K = 10                # number of clusters
+> ##D sINV_diag = 1/((1:p)) # diagonal of inverse variance of errors
+> ##D set.seed(10)
+> ##D syntheticDataset <- simData(K.true = K, n = n, q = q, p = p, sINV_values = sINV_diag )
+> ##D 
+> ##D # define parameters
+> ##D Kmax <- 20    # number of overfitted mixture components
+> ##D nChains <- 8  # number of parallel chains
+> ##D dN <- 1
+> ##D # Dirichlet prior of mixture weights per chain.
+> ##D #   The target chain corresponds to the first entry.
+> ##D dirPriorAlphas <- c(1, 1 + dN * (2:nChains - 1))/Kmax   
+> ##D outputFolder <- "fabMixExample"
+> ##D # Run algorithm
+> ##D fabMix_CxU( dirPriorAlphas = dirPriorAlphas, 
+> ##D         rawData = syntheticDataset$data, 
+> ##D         outDir = outputFolder, Kmax = Kmax, mCycles = 1200, 
+> ##D         burnCycles = 200, q = q) 
+> ##D 
+> ##D # Compute information criteria:
+> ##D #getStuffForDIC(x_data = syntheticDataset$data, outputFolder = outputFolder, q = q)
+> ##D 
+> ##D # Deal with label switching:
+> ##D #dealWithLabelSwitching(x_data = syntheticDataset$data, 
+> ##D #        outputFolder = outputFolder, q = q, 
+> ##D #        compute_regularized_expression = TRUE, Km = Kmax)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("fabMix_CxU", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("fabMix_UxC")
+> ### * fabMix_UxC
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: fabMix_UxC
+> ### Title: Main function of the package for UUC, UCC models
+> ### Aliases: fabMix_UxC
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # simulate a synthetic dataset along the lines of the paper:
+> ##D n = 1000              # sample size
+> ##D p = 40                # number of variables
+> ##D q = 4                 # number of factors
+> ##D K = 10                # number of clusters
+> ##D sINV_diag = 1/((1:p)) # diagonal of inverse variance of errors
+> ##D set.seed(10)
+> ##D syntheticDataset <- simData(K.true = K, n = n, q = q, p = p, sINV_values = sINV_diag )
+> ##D 
+> ##D # define parameters
+> ##D Kmax <- 20    # number of overfitted mixture components
+> ##D nChains <- 8  # number of parallel chains
+> ##D dN <- 1
+> ##D # Dirichlet prior of mixture weights per chain.
+> ##D #   The target chain corresponds to the first entry.
+> ##D dirPriorAlphas <- c(1, 1 + dN * (2:nChains - 1))/Kmax   
+> ##D outputFolder <- "fabMixExample"
+> ##D # Run algorithm
+> ##D fabMix_UxC( dirPriorAlphas = dirPriorAlphas, 
+> ##D         rawData = syntheticDataset$data, 
+> ##D         outDir = outputFolder, Kmax = Kmax, mCycles = 1200, 
+> ##D         burnCycles = 200, q = q) 
+> ##D 
+> ##D # Compute information criteria:
+> ##D #getStuffForDIC(x_data = syntheticDataset$data, outputFolder = outputFolder, q = q)
+> ##D 
+> ##D # Deal with label switching:
+> ##D #dealWithLabelSwitching(x_data = syntheticDataset$data, 
+> ##D #        outputFolder = outputFolder, q = q, 
+> ##D #        compute_regularized_expression = TRUE, Km = Kmax)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("fabMix_UxC", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("fabMix_UxU")
+> ### * fabMix_UxU
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: fabMix_UxU
+> ### Title: Fit UxU mixtures
+> ### Aliases: fabMix_UxU
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # simulate a synthetic dataset along the lines of the paper:
+> ##D n = 1000              # sample size
+> ##D p = 40                # number of variables
+> ##D q = 4                 # number of factors
+> ##D K = 10                # number of clusters
+> ##D sINV_diag = 1/((1:p)) # diagonal of inverse variance of errors
+> ##D set.seed(10)
+> ##D syntheticDataset <- simData(K.true = K, n = n, q = q, p = p, sINV_values = sINV_diag )
+> ##D 
+> ##D # define parameters
+> ##D Kmax <- 20    # number of overfitted mixture components
+> ##D nChains <- 8  # number of parallel chains
+> ##D dN <- 1
+> ##D # Dirichlet prior of mixture weights per chain.
+> ##D #   The target chain corresponds to the first entry.
+> ##D dirPriorAlphas <- c(1, 1 + dN * (2:nChains - 1))/Kmax   
+> ##D outputFolder <- "fabMixExample"
+> ##D # Run algorithm
+> ##D fabMix_UxU( dirPriorAlphas = dirPriorAlphas, 
+> ##D         rawData = syntheticDataset$data, 
+> ##D         outDir = outputFolder, Kmax = Kmax, mCycles = 1200, 
+> ##D         burnCycles = 200, q = q) 
+> ##D 
+> ##D # Compute information criteria:
+> ##D getStuffForDIC(x_data = syntheticDataset$data, outputFolder = outputFolder, q = q)
+> ##D 
+> ##D # Deal with label switching:
+> ##D dealWithLabelSwitching(x_data = syntheticDataset$data, 
+> ##D         outputFolder = outputFolder, q = q, 
+> ##D         compute_regularized_expression = TRUE, Km = Kmax)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("fabMix_UxU", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("fabMix_missing_values")
+> ### * fabMix_missing_values
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: fabMix_missing_values
+> ### Title: Main function for the case of missing values
+> ### Aliases: fabMix_missing_values
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # simulate a synthetic dataset along the lines of the paper:
+> ##D n = 1000              # sample size
+> ##D p = 40                # number of variables
+> ##D q = 4                 # number of factors
+> ##D K = 10                # number of clusters
+> ##D sINV_diag = 1/((1:p)) # diagonal of inverse variance of errors
+> ##D set.seed(10)
+> ##D syntheticDataset <- simData(K.true = K, n = n, q = q, p = p, sINV_values = sINV_diag )
+> ##D 
+> ##D # define parameters
+> ##D Kmax <- 20    # number of overfitted mixture components
+> ##D nChains <- 8  # number of parallel chains
+> ##D dN <- 1
+> ##D # Dirichlet prior of mixture weights per chain.
+> ##D #   The target chain corresponds to the first entry.
+> ##D dirPriorAlphas <- c(1, 1 + dN * (2:nChains - 1))/Kmax   
+> ##D outputFolder <- "fabMixExample"
+> ##D # Run algorithm
+> ##D fabMix( dirPriorAlphas = dirPriorAlphas, 
+> ##D         rawData = syntheticDataset$data, 
+> ##D         outDir = outputFolder, Kmax = Kmax, mCycles = 1200, 
+> ##D         burnCycles = 200, q = q) 
+> ##D 
+> ##D # Compute information criteria:
+> ##D getStuffForDIC(x_data = syntheticDataset$data, outputFolder = outputFolder, q = q)
+> ##D 
+> ##D # Deal with label switching:
+> ##D dealWithLabelSwitching(x_data = syntheticDataset$data, 
+> ##D         outputFolder = outputFolder, q = q, 
+> ##D         compute_regularized_expression = TRUE, Km = Kmax)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("fabMix_missing_values", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> ### * <FOOTER>
+> ###
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  1.454 0.073 2.488 1.448 0.476 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
