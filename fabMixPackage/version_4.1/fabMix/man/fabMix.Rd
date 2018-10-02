@@ -21,7 +21,7 @@ Any subset of "UUU" "CUU" "UCU" "CCU" "UCC" "UUC" "CUC", "CCC" indicating the fi
 The number of parallel heated chains. When `dirPriorAlphas` is supplied, `nChains` can be ignored.
 }
   \item{dirPriorAlphas}{
-vector of length `nChains` in the form of an increasing sequence of positive scalars. Each entry contains the (common) prior Dirichlet parameter for the corresponding chain. Default value: dirPriorAlphas <- c(1, 1 + dN*(2:nChains - 1))/Kmax, where dN = 1, for nChains > 1. Otherwise, dirPriorAlphas = 1. 
+vector of length \code{nChains} in the form of an increasing sequence of positive scalars. Each entry contains the (common) prior Dirichlet parameter for the corresponding chain. Default: \code{dirPriorAlphas = c(1, 1 + dN*(2:nChains - 1))/Kmax}, where \code{dN = 1}, for \code{nChains > 1}. Otherwise, \code{dirPriorAlphas = 1/Kmax}. 
 }
   \item{rawData}{
 The observed data as an \eqn{n\times p} matrix. Clustering is performed on the rows of the matrix.
@@ -123,7 +123,7 @@ In all cases, \eqn{\boldsymbol{\varepsilon}_i} and \eqn{\boldsymbol{Y}_i} are as
 It is recommended to always use: \code{normalize = TRUE} (default). Tuning of \code{dirPriorAlphas} may be necessary to achieve reasonable acceptance rates of chain swaps. Note that the output is reordered in order to deal with the label switching problem, according to the ECR algorithm applied by \code{dealWithLabelSwitching} function.
 }
 \seealso{
-\code{\link{dealWithLabelSwitching}}
+\code{\link{plot.fabMix.object}}
 }
 \references{
 McNicholas, P.D. and Murphy, T.B. Stat Comput (2008) 18: 285. https://doi.org/10.1007/s11222-008-9056-0.

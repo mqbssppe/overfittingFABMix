@@ -59,11 +59,14 @@ Simulation parameters:
 > 
 > Kmax <- 5		# number of components for the overfitted mixture model
 > nChains <- 2		# number of parallel heated chains
-> dN <- 2         	# parameter the controls difference between successive chains
-> dirPriorAlphas <- c(1, 1 + dN * (2:nChains - 1))/Kmax	# Dirichlet prior parameter per chain
+> 
+> # Run `fabMix` for a _small_ number of iterations for the 
+> #	`UUU` (maximal model) and `CCC` (minimal model) parameterizations,
+> # 	using the default prior parallel heating parameters `dirPriorAlphas`.
+> #	NOTE: `dirPriorAlphas` may require some tuning in general.
 > 
 > set.seed(1)
-> fm <- fabMix( model = c("UCU", "UUC"), dirPriorAlphas = dirPriorAlphas, 
+> fm <- fabMix( model = c("UUU", "CCC"), nChains = 2, 
 + 	rawData = syntheticDataset$data, outDir = "toyExample",
 +         Kmax = Kmax, mCycles = 4, burnCycles = 1, q = qRange,
 +         g = 0.5, h = 0.5, alpha_sigma = 0.5, beta_sigma = 0.5, 
@@ -84,7 +87,7 @@ Loading required package: rngtools
 Loading required package: pkgmaker
 Loading required package: registry
 
--    Parameterization: UCU model 
+-    Parameterization: UUU model 
 -    Number of factors: q = 1
 -    (1) Initializing from priors that lead to overfitting...  OK 
 -    (2) Initializing the actual model from the previously obtained values...  OK 
@@ -93,12 +96,12 @@ Loading required package: registry
 -    DONE. 
 -    (4) Computing information criteria for q = 1 
 -    NOTE: using standardizing data. 
-         - Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_4.1/fabMix.Rcheck/toyExample/UCU_1 
-            Nclusters:    3     4 
-            Frequency:    1    2 
-         - Information criteria written to `UCU_1/informationCriteria_map_model.txt`. 
+         - Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_4.1/fabMix.Rcheck/toyExample/UUU_1 
+            Nclusters:    1     2 
+            Frequency:    2    1 
+         - Information criteria written to `UUU_1/informationCriteria_map_model.txt`. 
 
--    Parameterization: UCU model 
+-    Parameterization: UUU model 
 -    Number of factors: q = 2
 -    (1) Initializing from priors that lead to overfitting...  OK 
 -    (2) Initializing the actual model from the previously obtained values...  OK 
@@ -107,48 +110,48 @@ Loading required package: registry
 -    DONE. 
 -    (4) Computing information criteria for q = 2 
 -    NOTE: using standardizing data. 
-         - Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_4.1/fabMix.Rcheck/toyExample/UCU_2 
-            Nclusters:    2 
-            Frequency:    3 
-         - Information criteria written to `UCU_2/informationCriteria_map_model.txt`. 
-
--    Parameterization: UUC model 
--    Number of factors: q = 1
--    (1) Initializing from priors that lead to overfitting...  OK 
--    (2) Initializing the actual model from the previously obtained values...  OK 
--    (3) Running the sampler...  
-
--    DONE. 
--    (4) Computing information criteria for q = 1 
--    NOTE: using standardizing data. 
-         - Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_4.1/fabMix.Rcheck/toyExample/UUC_1 
-            Nclusters:    2 
-            Frequency:    3 
-         - Information criteria written to `UUC_1/informationCriteria_map_model.txt`. 
-
--    Parameterization: UUC model 
--    Number of factors: q = 2
--    (1) Initializing from priors that lead to overfitting...  OK 
--    (2) Initializing the actual model from the previously obtained values...  OK 
--    (3) Running the sampler...  
-
--    DONE. 
--    (4) Computing information criteria for q = 2 
--    NOTE: using standardizing data. 
-         - Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_4.1/fabMix.Rcheck/toyExample/UUC_2 
+         - Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_4.1/fabMix.Rcheck/toyExample/UUU_2 
             Nclusters:    1 
             Frequency:    3 
-         - Information criteria written to `UUC_2/informationCriteria_map_model.txt`. 
+         - Information criteria written to `UUU_2/informationCriteria_map_model.txt`. 
+
+-    Parameterization: CCC model 
+-    Number of factors: q = 1
+-    (1) Initializing from priors that lead to overfitting...  OK 
+-    (2) Initializing the actual model from the previously obtained values...  OK 
+-    (3) Running the sampler...  
+
+-    DONE. 
+-    (4) Computing information criteria for q = 1 
+-    NOTE: using standardizing data. 
+         - Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_4.1/fabMix.Rcheck/toyExample/CCC_1 
+            Nclusters:    3 
+            Frequency:    3 
+         - Information criteria written to `CCC_1/informationCriteria_map_model.txt`. 
+
+-    Parameterization: CCC model 
+-    Number of factors: q = 2
+-    (1) Initializing from priors that lead to overfitting...  OK 
+-    (2) Initializing the actual model from the previously obtained values...  OK 
+-    (3) Running the sampler...  
+
+-    DONE. 
+-    (4) Computing information criteria for q = 2 
+-    NOTE: using standardizing data. 
+         - Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_4.1/fabMix.Rcheck/toyExample/CCC_2 
+            Nclusters:    2 
+            Frequency:    3 
+         - Information criteria written to `CCC_2/informationCriteria_map_model.txt`. 
 -    The label.switching package says hello. 
--    (5) Dealing with label switching for q = 1 
-         * Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_4.1/fabMix.Rcheck/toyExample/UUC_1 
+-    (5) Dealing with label switching for q = 2 
+         * Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_4.1/fabMix.Rcheck/toyExample/CCC_2 
          * Posterior mode corresponds to K = 2 
 
     ......................................................................................
     . Method                         Time (sec)           Status                         . 
     ......................................................................................
     . ECR                            0.02                 OK                             . 
-    . ECR-ITERATIVE-1                0.004                Converged (2 iterations)       . 
+    . ECR-ITERATIVE-1                0.003                Converged (2 iterations)       . 
     ......................................................................................
 
     Relabelling all methods according to method ECR ... done!
@@ -162,33 +165,35 @@ Loading required package: registry
 -    Done. 
 
 Given the specified range of models, factors, maximum number of clusters and MCMC parameters,
-the best model corresponds to the UUC parameterization with q = 1 factors and K = 2 clusters. 
-The BIC for this model equals 232.377. 
+the best model corresponds to the CCC parameterization with q = 2 factors and K = 2 clusters. 
+The BIC for this model equals 102.273. 
 > 
 > # WARNING: the following parameters: 
 > #  Kmax, nChains, mCycles, burnCycles, warm_up_overfitting, warm_up 
-> #	 should take (much) larger values. E.g. a typical implementation consists of:
+> #	 should take (much) _larger_ values. E.g. a typical implementation consists of:
 > #        Kmax = 20, nChains = 8, mCycles = 1100, burnCycles = 100, 
-> #        warm_up_overfitting = 500, warm_up = 10000. 
+> #        warm_up_overfitting = 500, warm_up = 5000. 
+> 
+> # Now print a run summary and produce some plots. 
 > print(fm)
 
 * Run information: 
       Number of fitted models: (2 different number of factors) x (2 parameterizations) = 4 models.
-      Selected model: UUC model with K = 2 and q = 1 factors.
+      Selected model: CCC model with K = 2 and q = 2 factors.
 * Estimated number of observations per cluster: 
 
-3 5 
+1 5 
 5 5 
 * Posterior mean of the mean per cluster: 
-        3     5
-V1 -0.714  1.06
-V2  0.293 -0.24
-V3  0.682 -0.58
-V4 -0.725  0.85
-V5 -0.786  0.47
-V6  0.416 -0.59
-V7 -0.093 -0.71
-V8 -0.985  0.41
+       1     5
+V1 -0.93  0.90
+V2  0.47 -0.47
+V3  0.90 -0.85
+V4 -0.86  0.91
+V5 -0.62  0.56
+V6  0.82 -0.90
+V7  0.33 -0.41
+V8 -0.64  0.62
 > plot(fm, what = "BIC")
 > plot(fm, what = "classification_pairs")
 > 
@@ -224,16 +229,12 @@ detaching ‘package:doRNG’, ‘package:rngtools’, ‘package:pkgmaker’,
 > ##D # define parameters
 > ##D Kmax <- 20    # number of overfitted mixture components
 > ##D nChains <- 8  # number of parallel chains
-> ##D dN <- 1
-> ##D # Dirichlet prior of mixture weights per chain.
-> ##D #   The target chain corresponds to the first entry.
-> ##D dirPriorAlphas <- c(1, 1 + dN * (2:nChains - 1))/Kmax   
 > ##D outputFolder <- "fabMixExample"
 > ##D # Run algorithm
-> ##D fabMix( model = c("UUU" "CUU" "UCU" "CCU" "UCC" "UUC" "CUC", "CCC"),
-> ##D 	dirPriorAlphas = dirPriorAlphas, 
-> ##D         rawData = syntheticDataset$data, 
-> ##D         outDir = outputFolder, Kmax = Kmax, mCycles = 1200, 
+> ##D fabMix( rawData = syntheticDataset$data, 
+> ##D 	nChains = nChains,
+> ##D         outDir = outputFolder, Kmax = Kmax, 
+> ##D 	mCycles = 1200, 
 > ##D         burnCycles = 200, q = 3:5) 
 > ## End(Not run)
 > 
@@ -490,7 +491,7 @@ detaching ‘package:doRNG’, ‘package:rngtools’, ‘package:pkgmaker’,
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  1.465 0.16 2.667 1.524 0.541 
+Time elapsed:  1.456 0.134 2.565 1.48 0.473 
 > grDevices::dev.off()
 null device 
           1 

@@ -5156,7 +5156,7 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 				dN <- 1
 				dirPriorAlphas <- c(1, 1 + dN*(2:nChains - 1))/Kmax
 			}else{
-				dirPriorAlphas <- 1
+				dirPriorAlphas <- 1/Kmax
 			}
 		}else{
 			if( length(dirPriorAlphas) != nChains ){
