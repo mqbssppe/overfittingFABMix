@@ -7,7 +7,7 @@ Main function
 This function runs parallel chains under a prior tempering scheme of the Dirichlet prior distribution of mixture weights. 
 }
 \usage{
-fabMix(model, dirPriorAlphas, rawData, outDir, Kmax, mCycles, 
+fabMix(model, nChains, dirPriorAlphas, rawData, outDir, Kmax, mCycles, 
 	burnCycles, g, h, alpha_sigma, beta_sigma, q, normalize,  
 	thinning, zStart, nIterPerCycle, gibbs_z, 
 	warm_up_overfitting, warm_up, overfittingInitialization, 
@@ -15,10 +15,13 @@ fabMix(model, dirPriorAlphas, rawData, outDir, Kmax, mCycles,
 }
 \arguments{
   \item{model}{
-Any subset of "UUU" "CUU" "UCU" "CCU" "UCC" "UUC" "CUC", "CCC" indicating the fitted models.
+Any subset of "UUU" "CUU" "UCU" "CCU" "UCC" "UUC" "CUC", "CCC" indicating the fitted models. By default, all models are fitted. 
+}
+  \item{nChains}{
+The number of parallel heated chains. When `dirPriorAlphas` is supplied, `nChains` can be ignored.
 }
   \item{dirPriorAlphas}{
-The prior Dirichlet parameters for each chain.
+vector of length `nChains` in the form of an increasing sequence of positive scalars. Each entry contains the (common) prior Dirichlet parameter for the corresponding chain. Default value: dirPriorAlphas <- c(1, 1 + dN*(2:nChains - 1))/Kmax, where dN = 1, for nChains > 1. Otherwise, dirPriorAlphas = 1. 
 }
   \item{rawData}{
 The observed data as an \eqn{n\times p} matrix. Clustering is performed on the rows of the matrix.
@@ -94,6 +97,28 @@ Number of cycles that will be discarded as burn-in period.
   \item{mcmc }{A list containing the MCMC draws for the parameters of the selected models. All component-specific parameters have been reordered according to the ECR algorithm in order to undo the label switching problem.}
   \item{data }{The observed data.}
 }
+\details{
+Let \eqn{\boldsymbol{X}_i}; \eqn{i =1,\ldots,n} denote independent \eqn{p}-dimensional random vectors. Let \eqn{Y_i\in  R^q} with \eqn{q < p} denote the latent factor for observation \eqn{i = 1,\ldots,n}. In the typical factor analysis model, each observation is modelled as \eqn{\boldsymbol{X}_i = \boldsymbol{\mu} + \boldsymbol{\Lambda} \boldsymbol{Y}_i + \boldsymbol{\varepsilon}_i }, with \eqn{\boldsymbol{\varepsilon}_i \sim \mathcal N(0,\boldsymbol{\Sigma})}, where \eqn{\boldsymbol{\varepsilon}_i} and \eqn{Y_i} are assumed independent, \eqn{i =1,\ldots,n}. The \eqn{p\times q} matrix \eqn{\Lambda} consists of the factor loadings. Assume that there are \eqn{K} clusters and let \eqn{Z_i} denotes the latent allocation of observation \eqn{i} to one amongs the  \eqn{k} clusters, with prior probability \eqn{P(Z_i = k) = w_k}, \eqn{k = 1,\ldots,K}, independent for \eqn{i=1,\ldots,n}.  Following McNicholas et al (2008), the following parameterizations are used:
+
+UUU model: \eqn{(\boldsymbol{X}_i|Z_i = k) = \boldsymbol{\mu}_k + \boldsymbol{\Lambda}_k \boldsymbol{Y}_i + \boldsymbol{\varepsilon}_i}, with \eqn{\boldsymbol{\varepsilon}_i \sim \mathcal N(0,\boldsymbol{\Sigma}_k)}
+
+UCU model: \eqn{(\boldsymbol{X}_i|Z_i = k) = \boldsymbol{\mu}_k + \boldsymbol{\Lambda}_k \boldsymbol{Y}_i + \boldsymbol{\varepsilon}_i}, with \eqn{\boldsymbol{\varepsilon}_i \sim \mathcal N(0,\boldsymbol{\Sigma})}
+
+UUC model: \eqn{(\boldsymbol{X}_i|Z_i = k) = \boldsymbol{\mu}_k + \boldsymbol{\Lambda}_k \boldsymbol{Y}_i + \boldsymbol{\varepsilon}_i}, with \eqn{\boldsymbol{\varepsilon}_i \sim \mathcal N(0,\sigma_k \boldsymbol{I}_p)}
+
+UCC model: \eqn{(\boldsymbol{X}_i|Z_i = k) = \boldsymbol{\mu}_k + \boldsymbol{\Lambda}_k \boldsymbol{Y}_i + \boldsymbol{\varepsilon}_i}, with \eqn{\boldsymbol{\varepsilon}_i \sim \mathcal N(0,\sigma \boldsymbol{I}_p)}
+
+CUU model: \eqn{(\boldsymbol{X}_i|Z_i = k) = \boldsymbol{\mu}_k + \boldsymbol{\Lambda} \boldsymbol{Y}_i + \boldsymbol{\varepsilon}_i}, with \eqn{\boldsymbol{\varepsilon}_i \sim \mathcal N(0,\boldsymbol{\Sigma}_k)}
+
+CCU model: \eqn{(\boldsymbol{X}_i|Z_i = k) = \boldsymbol{\mu}_k + \boldsymbol{\Lambda} \boldsymbol{Y}_i + \boldsymbol{\varepsilon}_i}, with \eqn{\boldsymbol{\varepsilon}_i \sim \mathcal N(0,\boldsymbol{\Sigma})}
+
+CUC model: \eqn{(\boldsymbol{X}_i|Z_i = k) = \boldsymbol{\mu}_k + \boldsymbol{\Lambda} \boldsymbol{Y}_i + \boldsymbol{\varepsilon}_i}, with \eqn{\boldsymbol{\varepsilon}_i \sim \mathcal N(0,\sigma_k \boldsymbol{I}_p)}
+
+CCC model: \eqn{(\boldsymbol{X}_i|Z_i = k) = \boldsymbol{\mu}_k + \boldsymbol{\Lambda} \boldsymbol{Y}_i + \boldsymbol{\varepsilon}_i}, with \eqn{\boldsymbol{\varepsilon}_i \sim \mathcal N(0,\sigma \boldsymbol{I}_p)}
+
+In all cases, \eqn{\boldsymbol{\varepsilon}_i} and \eqn{\boldsymbol{Y}_i} are assumed independent, \eqn{i =1,\ldots,n}. Note that \eqn{\boldsymbol{\Sigma}_k} and \eqn{\boldsymbol{\Sigma}} denote positive definite matrices, \eqn{\boldsymbol{I}_p} denotes the \eqn{p\times p} identity matrix and \eqn{\sigma_k}, \eqn{\sigma} denote positive scalars. 
+
+}
 \note{
 It is recommended to always use: \code{normalize = TRUE} (default). Tuning of \code{dirPriorAlphas} may be necessary to achieve reasonable acceptance rates of chain swaps. Note that the output is reordered in order to deal with the label switching problem, according to the ECR algorithm applied by \code{dealWithLabelSwitching} function.
 }
@@ -101,6 +126,8 @@ It is recommended to always use: \code{normalize = TRUE} (default). Tuning of \c
 \code{\link{dealWithLabelSwitching}}
 }
 \references{
+McNicholas, P.D. and Murphy, T.B. Stat Comput (2008) 18: 285. https://doi.org/10.1007/s11222-008-9056-0.
+
 Papastamoulis, P. (2018). Overfitting Bayesian mixtures of factor analyzers with an unknown number of components. Computational Statistics and Data Analysis, 124: 220-234. DOI: 10.1016/j.csda.2018.03.007.
 }
 \author{
@@ -120,16 +147,12 @@ syntheticDataset <- simData(K.true = K, n = n, q = q, p = p, sINV_values = sINV_
 # define parameters
 Kmax <- 20    # number of overfitted mixture components
 nChains <- 8  # number of parallel chains
-dN <- 1
-# Dirichlet prior of mixture weights per chain.
-#   The target chain corresponds to the first entry.
-dirPriorAlphas <- c(1, 1 + dN * (2:nChains - 1))/Kmax   
 outputFolder <- "fabMixExample"
 # Run algorithm
-fabMix( model = c("UUU" "CUU" "UCU" "CCU" "UCC" "UUC" "CUC", "CCC"),
-	dirPriorAlphas = dirPriorAlphas, 
-        rawData = syntheticDataset$data, 
-        outDir = outputFolder, Kmax = Kmax, mCycles = 1200, 
+fabMix( rawData = syntheticDataset$data, 
+	nChains = nChains,
+        outDir = outputFolder, Kmax = Kmax, 
+	mCycles = 1200, 
         burnCycles = 200, q = 3:5) 
 }
 

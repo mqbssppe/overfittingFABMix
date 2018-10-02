@@ -5124,6 +5124,7 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 #new in version 3
 # overall main function
 fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "CCC"), 
+			nChains = NULL,
 			dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCycles, 
 			g, h, alpha_sigma, beta_sigma, q, normalize = TRUE, thinning, zStart, 
 			nIterPerCycle, gibbs_z = 1, warm_up_overfitting = 500, warm_up = 5000, 
@@ -5141,13 +5142,30 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 	if(missing(Kmax)){Kmax <- 20}
 	if(missing(nIterPerCycle)){nIterPerCycle = 10}
 	if(missing(zStart)){zStart = FALSE}
-	if( missing(dirPriorAlphas) ){
-		nChains <- 8
-		dN <- 1
-		dirPriorAlphas <- c(1, 1 + dN*(2:nChains - 1))/Kmax
+	if(is.null(nChains)){
+		if( missing(dirPriorAlphas) ){
+			nChains <- 8
+			dN <- 1
+			dirPriorAlphas <- c(1, 1 + dN*(2:nChains - 1))/Kmax
+		}else{
+			nChains <- length(dirPriorAlphas)
+		}
 	}else{
-		nChains <- length(dirPriorAlphas)
+		if( missing(dirPriorAlphas) ){
+			if(nChains > 1){
+				dN <- 1
+				dirPriorAlphas <- c(1, 1 + dN*(2:nChains - 1))/Kmax
+			}else{
+				dirPriorAlphas <- 1
+			}
+		}else{
+			if( length(dirPriorAlphas) != nChains ){
+				stop('dirPriorAlphas should have length equal to nChains.')
+			}
+		}
 	}
+
+
 	if( nChains > 1 ){
 		if( range(diff(order(dirPriorAlphas)))[1] != 1){stop('dirPriorAlphas should be in increasing order.')}
 		if( range(diff(order(dirPriorAlphas)))[2] != 1){stop('dirPriorAlphas should be in increasing order.')}

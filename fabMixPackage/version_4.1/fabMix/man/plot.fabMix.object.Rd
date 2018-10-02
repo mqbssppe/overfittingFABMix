@@ -26,9 +26,16 @@ An optional subset of the variables. By default, all variables are selected.
 }
 }
 \details{
-The function plots the BIC values obtained for each of the fitted models, visualizes the clusters.
+When the BIC values are plotted, a number indicates the most probable number of ``alive'' clusters. The pairwise scatterplots (\code{"classification_pairs"}) are created using the \code{coordProj} function of the \code{mclust} package. The \code{"correlation"} is plotted using the \code{corrplot} package. 
 }
 \author{
 Panagiotis Papastamoulis
 }
+\references{
+Luca Scrucca and Michael Fop and Thomas Brendan Murphy and Adrian E. Raftery (2017). mclust 5: clustering, classification and density estimation using Gaussian finite mixture models. The R Journal, 8(1): 205--233.
 
+ Taiyun Wei and Viliam Simko (2017). R package "corrplot":
+  Visualization of a Correlation Matrix (Version 0.84). Available from
+  https://github.com/taiyun/corrplot
+
+}

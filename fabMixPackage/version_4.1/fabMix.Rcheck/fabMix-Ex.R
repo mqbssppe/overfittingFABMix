@@ -35,11 +35,14 @@ qRange <- 1:2	# range of values for the number of factors
 
 Kmax <- 5		# number of components for the overfitted mixture model
 nChains <- 2		# number of parallel heated chains
-dN <- 2         	# parameter the controls difference between successive chains
-dirPriorAlphas <- c(1, 1 + dN * (2:nChains - 1))/Kmax	# Dirichlet prior parameter per chain
+
+# Run `fabMix` for a _small_ number of iterations for the 
+#	`UUU` (maximal model) and `CCC` (minimal model) parameterizations,
+# 	using the default prior parallel heating parameters `dirPriorAlphas`.
+#	NOTE: `dirPriorAlphas` may require some tuning in general.
 
 set.seed(1)
-fm <- fabMix( model = c("UCU", "UUC"), dirPriorAlphas = dirPriorAlphas, 
+fm <- fabMix( model = c("UUU", "CCC"), nChains = 2, 
 	rawData = syntheticDataset$data, outDir = "toyExample",
         Kmax = Kmax, mCycles = 4, burnCycles = 1, q = qRange,
         g = 0.5, h = 0.5, alpha_sigma = 0.5, beta_sigma = 0.5, 
@@ -47,9 +50,11 @@ fm <- fabMix( model = c("UCU", "UUC"), dirPriorAlphas = dirPriorAlphas,
 
 # WARNING: the following parameters: 
 #  Kmax, nChains, mCycles, burnCycles, warm_up_overfitting, warm_up 
-#	 should take (much) larger values. E.g. a typical implementation consists of:
+#	 should take (much) _larger_ values. E.g. a typical implementation consists of:
 #        Kmax = 20, nChains = 8, mCycles = 1100, burnCycles = 100, 
-#        warm_up_overfitting = 500, warm_up = 10000. 
+#        warm_up_overfitting = 500, warm_up = 5000. 
+
+# Now print a run summary and produce some plots. 
 print(fm)
 plot(fm, what = "BIC")
 plot(fm, what = "classification_pairs")
@@ -82,16 +87,12 @@ flush(stderr()); flush(stdout())
 ##D # define parameters
 ##D Kmax <- 20    # number of overfitted mixture components
 ##D nChains <- 8  # number of parallel chains
-##D dN <- 1
-##D # Dirichlet prior of mixture weights per chain.
-##D #   The target chain corresponds to the first entry.
-##D dirPriorAlphas <- c(1, 1 + dN * (2:nChains - 1))/Kmax   
 ##D outputFolder <- "fabMixExample"
 ##D # Run algorithm
-##D fabMix( model = c("UUU" "CUU" "UCU" "CCU" "UCC" "UUC" "CUC", "CCC"),
-##D 	dirPriorAlphas = dirPriorAlphas, 
-##D         rawData = syntheticDataset$data, 
-##D         outDir = outputFolder, Kmax = Kmax, mCycles = 1200, 
+##D fabMix( rawData = syntheticDataset$data, 
+##D 	nChains = nChains,
+##D         outDir = outputFolder, Kmax = Kmax, 
+##D 	mCycles = 1200, 
 ##D         burnCycles = 200, q = 3:5) 
 ## End(Not run)
 

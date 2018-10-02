@@ -12,4 +12,4 @@ Imports: Rcpp (>= 0.12.17), MASS, doParallel, foreach, label.switching,
         mvtnorm, doRNG, RColorBrewer, corrplot, mclust
 LinkingTo: Rcpp, RcppArmadillo
 NeedsCompilation: yes
-Packaged: 2018-10-01 17:29:45 UTC; panagiotis
+Packaged: 2018-10-02 10:22:27 UTC; panagiotis
