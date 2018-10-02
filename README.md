@@ -8,6 +8,9 @@ Beta-version of the package is up:
 2. [See Basic Usage](https://github.com/mqbssppe/overfittingFABMix/wiki/Basic-usage)
 2. [Example with missing values](https://github.com/mqbssppe/overfittingFABMix/wiki/Example-with-missing-values)
 
+
+__NOTE: currently, the package has been tested only in LINUX distributions.__
+
 ## Updates
 
 ### [September 2017] Version_2.0 added with support for **missing values** :waxing_gibbous_moon:
