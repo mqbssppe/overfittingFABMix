@@ -11,7 +11,7 @@ fabMix(model, nChains, dirPriorAlphas, rawData, outDir, Kmax, mCycles,
 	burnCycles, g, h, alpha_sigma, beta_sigma, q, normalize,  
 	thinning, zStart, nIterPerCycle, gibbs_z, 
 	warm_up_overfitting, warm_up, overfittingInitialization, 
-	progressGraphs, gwar)
+	progressGraphs, gwar, rmDir)
 }
 \arguments{
   \item{model}{
@@ -27,7 +27,7 @@ vector of length \code{nChains} in the form of an increasing sequence of positiv
 The observed data as an \eqn{n\times p} matrix. Clustering is performed on the rows of the matrix.
 }
   \item{outDir}{
-Name of the output folder.
+Name of the output folder. An error is thrown if this directory already exists.
 }
   \item{Kmax}{
 Number of components in the overfitted mixture. Default: 20.
@@ -83,6 +83,9 @@ Number of cycles that will be discarded as burn-in period.
   \item{gwar}{
 	Initialization parameter. Default: 0.05.
 }
+  \item{rmDir}{
+	Logical value indicating whether to delete the \code{outDir} directory. Default: TRUE.
+}
 }
 \value{
 	An object of class \code{fabMix.object}, that is, a list consisting of the following entries:
@@ -135,25 +138,33 @@ Panagiotis Papastamoulis
 }
 \examples{
 \dontrun{
-# simulate a synthetic dataset along the lines of the paper:
-n = 1000              # sample size
-p = 40                # number of variables
-q = 4                 # number of factors
-K = 10                # number of clusters
-sINV_diag = 1/((1:p)) # diagonal of inverse variance of errors
-set.seed(10)
-syntheticDataset <- simData(K.true = K, n = n, q = q, p = p, sINV_values = sINV_diag )
+library('fabMix')
 
-# define parameters
-Kmax <- 20    # number of overfitted mixture components
-nChains <- 8  # number of parallel chains
-outputFolder <- "fabMixExample"
-# Run algorithm
-fabMix( rawData = syntheticDataset$data, 
-	nChains = nChains,
-        outDir = outputFolder, Kmax = Kmax, 
-	mCycles = 1200, 
-        burnCycles = 200, q = 3:5) 
+n = 90                # sample size
+p = 50                # number of variables
+q = 2                # number of factors
+K = 3		     # number of clusters
+
+sINV_diag = 1/((1:p))	 				# diagonal of inverse variance of errors
+set.seed(100)
+syntheticDataset <- simData(sameLambda=FALSE,K.true = K, n = n, q = q, p = p, 
+			sINV_values = sINV_diag)
+colnames(syntheticDataset$data) <- paste0("x_",1:p)
+qRange <- 1:3	# range of values for the number of factors
+
+Kmax <- 20		# number of components for the overfitted mixture model
+nChains <- 8		# number of parallel heated chains
+
+set.seed(3)
+fm <- fabMix( rawData = syntheticDataset$data,
+	nChains = nChains, outDir = "fabMixExample",
+        Kmax = Kmax, mCycles = 500, burnCycles = 100, q = qRange) 
+
+
+# Now print a run summary and produce some plots. 
+print(fm)
+plot(fm, what = "BIC")
+plot(fm, what = "classification_pairs")
 }
 
 

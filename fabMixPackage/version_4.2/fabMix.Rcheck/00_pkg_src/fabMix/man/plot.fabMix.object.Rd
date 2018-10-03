@@ -26,7 +26,7 @@ An optional subset of the variables. By default, all variables are selected.
 }
 }
 \details{
-When the BIC values are plotted, a number indicates the most probable number of ``alive'' clusters. The pairwise scatterplots (\code{"classification_pairs"}) are created using the \code{coordProj} function of the \code{mclust} package. The \code{"correlation"} is plotted using the \code{corrplot} package. 
+When the BIC values are plotted, a number indicates the most probable number of ``alive'' clusters. The pairwise scatterplots (\code{what = "classification_pairs"}) are created using the \code{coordProj} function of the \code{mclust} package. The \code{what = "correlation"} is plotted using the \code{corrplot} package. Note that the \code{what = "classification_matplot"} plots the original data (before scaling and centering). On the other hand, the option \code{what = "classification_pairs"} plots the centered and scaled data. 
 }
 \author{
 Panagiotis Papastamoulis

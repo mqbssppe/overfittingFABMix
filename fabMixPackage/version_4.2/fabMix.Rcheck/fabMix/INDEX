@@ -27,17 +27,15 @@ compute_sufficient_statistics_q0
 dealWithLabelSwitching
                         Apply label switching algorithms
 fabMix                  Main function
-fabMix-package          Overfitting Parsimonious Bayesian Mixtures of
-                        Factor Analyzers with an Unknown Number of
-                        Components
-fabMix_CxC              Main function of the package for CUC, CCC
-                        models
-fabMix_CxU              Main function of the package for CCU, CUU
-                        models
-fabMix_UxC              Main function of the package for UUC, UCC
-                        models
-fabMix_UxU              Fit UxU mixtures
-fabMix_missing_values   Main function for the case of missing values
+fabMix-package          Overfitting Bayesian Mixtures of Factor
+                        Analyzers with Parsimonious Covariance and
+                        Unknown Number of Components
+fabMix_CxC              Function to estimate the CUC and CCC models
+fabMix_CxU              Function to estimate the CCU and CUU models
+fabMix_UxC              Function to estimate the UUC and UCC models
+fabMix_UxU              Function to estimate the UUU and UCU model
+fabMix_missing_values   Function to estimate the UUU or UCU models in
+                        case of missing values
 getStuffForDIC          Compute information criteria
 log_dirichlet_pdf       Log-density function of the Dirichlet
                         distribution

@@ -4966,6 +4966,12 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 		        for(k in 1:K){
 		                SigmaINV.mcmc[,k,] <- as.matrix(SigmaINV[,((k-1)*p + 1):(k*p)])
 		        }
+			if(skiniko == TRUE){
+				tmp1 <- SigmaINV.mcmc[,kLAST,]
+				tmp2 <-  SigmaINV.mcmc[,Km,]	
+				SigmaINV.mcmc[,kLAST,] <- tmp2
+				SigmaINV.mcmc[,Km,] <- tmp1
+			}
 		        SigmaINV.mcmc <- permute.mcmc(SigmaINV.mcmc, ls$permutations$ECR)$output
 		        Sigma.mcmc <- 1/SigmaINV.mcmc
 		        write.table(Sigma.mcmc, file = 'reordered_sigma_ecr.txt')
@@ -5124,11 +5130,11 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 #new in version 3
 # overall main function
 fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "CCC"), 
-			nChains = NULL,
-			dirPriorAlphas, rawData, outDir, Kmax, mCycles, burnCycles, 
-			g, h, alpha_sigma, beta_sigma, q, normalize = TRUE, thinning, zStart, 
-			nIterPerCycle, gibbs_z = 1, warm_up_overfitting = 500, warm_up = 5000, 
-			overfittingInitialization=TRUE, progressGraphs = FALSE, gwar = 0.05			
+			nChains = NULL,	dirPriorAlphas, rawData, outDir, Kmax, mCycles, 
+			burnCycles, g, h, alpha_sigma, beta_sigma, q, normalize = TRUE, 
+			thinning, zStart, nIterPerCycle, gibbs_z = 1, 
+			warm_up_overfitting = 500, warm_up = 5000,  overfittingInitialization=TRUE, 
+			progressGraphs = FALSE, gwar = 0.05, rmDir = TRUE			
 			){
 
 
@@ -5209,8 +5215,12 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 	colnames(nClusters) <- model
 	rownames(nClusters) <- q
 
+	if(dir.exists(outDir)){
+		stop(paste0('Directory `',outDir,'` exists, please supply another name.'))
+	}
 	dir.create(outDir)
 	setwd(outDir)
+	rememberOutDir <- outDir
 	check_if_at_least_one_model <- 0
 	if("UUU" %in% model){
 		for(nFactors in q){
@@ -5452,9 +5462,19 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 			rr[[j]] <- read.table(paste0(outDir,"/estimated_regularized_expression_per_cluster_",j,".txt"))
 		}
 	}
+
+
+	setwd("../")
+	if(rmDir == TRUE){
+		cat(paste0('-    Cleaning: deleting directory `', rememberOutDir, '` ...'))
+		unlink(rememberOutDir, recursive=TRUE)
+		cat(' done.', '\n')
+	}
+
+
 	cat(paste0("\n","Given the specified range of models, factors, maximum number of clusters and MCMC parameters,","\n", "the best model corresponds to the ", model_selected, " parameterization with q = ", q_selected, " factors and K = ",nClusters[q_selected, model_selected]," clusters. ","\n","The BIC for this model equals ", round(min(bic),3), "."),"\n")
 	best_model <- data.frame(parameterization = model_selected, num_Clusters = nClusters[q_selected, model_selected], num_Factors = as.numeric(q_selected))
-	setwd("../")
+
 	results <- vector("list", length = 11)
 	results[[1]] <- bic
 	results[[3]] <- nClusters
@@ -5487,7 +5507,6 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 				"regularizedExpression"
 			)
 	class(results) <- c('list', 'fabMix.object')
-
 	return(results)
 }
 
