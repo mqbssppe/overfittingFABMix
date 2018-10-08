@@ -1,0 +1,22 @@
+
+
+
+
+bibentry(bibtype = "Article",
+  author = c( 
+                person(given = "Panagiotis",
+                        family = "Papastamoulis",
+                        email = "papapast@yahoo.gr")        ),
+  title = "{Overfitting Bayesian mixtures of factor analyzers with an unknown number of components}",
+  year = "2018",
+  journal = "{Computational Statistics and Data Analysis}",
+  url = "https://doi.org/10.1016/j.csda.2018.03.007",
+  pages = "220--234",
+  volume = "124",
+  header       = "To cite fabMix in publications use:",
+  textVersion  =
+  paste("Panagiotis Papastamoulis (2018).",
+        "Overfitting Bayesian mixtures of factor analyzers with an unknown number of components.",
+        "Computational Statistics and Data Analysis 124, pages 220-234.")
+)
+
