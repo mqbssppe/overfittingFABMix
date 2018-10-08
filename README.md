@@ -25,4 +25,8 @@ Since version 4.0, the package is integrated with C++ code.
 
 Version 4.1 improves the Lambda output: all MCMC values are now exported to a single file (instead of multiple ones, as done in previous versions). 
 
-### [October 2, 2018] fabMix version 4.2 added with full Windows compatibility (currently under development). 
+### [October 2, 2018] fabMix version 4.2 added with Windows compatibility.
+
+### [October 8, 2018] fabMix version 4.3 added (currently under development):
+
+The `fabMix` function now features a new argument (`parallelModels`), allowing the user to run different models in parallel. This is combined with the pre-existing option to run heated chains in parallel, thus, parallelization is now implemented in __both model-level and chain-level__.  
