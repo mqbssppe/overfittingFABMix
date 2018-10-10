@@ -2,10 +2,16 @@ Package: fabMix
 Type: Package
 Title: Overfitting Bayesian Mixtures of Factor Analyzers with Parsimonious Covariance and Unknown Number of Components
 Version: 4.3
-Date: 2018-09-27
-Author: Panagiotis Papastamoulis
+Date: 2018-10-8
+Authors@R: 
+    c(person(given = "Panagiotis",
+	     family = "Papastamoulis",
+             email = "papapast@yahoo.gr",
+ 	     role = c( "aut", "cre"),
+	     comment = c(ORCID = "0000-0001-9468-7613")))
 Maintainer: Panagiotis Papastamoulis <papapast@yahoo.gr>
-Description: Model-based clustering of multivariate continuous data using Bayesian mixtures of factor analyzers (Papastamoulis, 2018 Computational Statistics and Data Analysis). The number of clusters is estimated using overfitting mixture models (Rousseau and Mengersen, 2011 Journal of the Royal Statistical Society B): suitable prior assumptions ensure that asymptotically the extra components will have zero posterior weight, therefore, the inference is based on the ``alive'' components. A Gibbs sampler is implemented in order to (approximately) sample from the posterior distribution of the overfitted mixture. A prior parallel tempering scheme is also available, which allows to run multiple parallel chains with different prior distributions on the mixture weights. These chains run in parallel and can swap states using a Metropolis-Hastings move. The number of factors is considered fixed and the optimal one can be estimated using the Bayesian Information Criterion. Eight different parameterizations give rise to parsimonious representations of the covariance per cluster (following Mc Nicholas and others, 2008 Statistics and Computing). Identifiability issues related to label switching are dealt by post-processing the simulated output with the Equivalence Classes Representatives algorithm (Papastamoulis 2010 Journal of Computational and Graphical Statistics, 2016 Journal of Statistical Software). Missing values are currently allowed for two model parameterizations.
+Description: Model-based clustering of multivariate continuous data using Bayesian mixtures of factor analyzers (Papastamoulis, 2018 Computational Statistics and Data Analysis). The number of clusters is estimated using overfitting mixture models (Rousseau and Mengersen, 2011 Journal of the Royal Statistical Society B): suitable prior assumptions ensure that asymptotically the extra components will have zero posterior weight, therefore, the inference is based on the ``alive'' components. A Gibbs sampler is implemented in order to (approximately) sample from the posterior distribution of the overfitting mixture. A prior parallel tempering scheme is also available, which allows to run multiple parallel chains with different prior distributions on the mixture weights. These chains run in parallel and can swap states using a Metropolis-Hastings move. Eight different parameterizations give rise to parsimonious representations of the covariance per cluster (following Mc Nicholas and others, 2008 Statistics and Computing). The model parameterization and number of factors is selected according to the Bayesian Information Criterion. Identifiability issues related to label switching are dealt by post-processing the simulated output with the Equivalence Classes Representatives algorithm (Papastamoulis 2010 Journal of Computational and Graphical Statistics, 2016 Journal of Statistical Software). Missing values are currently allowed for two model parameterizations.
 License: GPL-2
-Imports: Rcpp (>= 0.12.17), MASS, doParallel, foreach, label.switching, mvtnorm, doRNG, RColorBrewer, corrplot, mclust
+URL: https://github.com/mqbssppe/overfittingFABMix
+Imports: Rcpp (>= 0.12.17), MASS, doParallel, foreach, label.switching, mvtnorm, doRNG, RColorBrewer, corrplot, mclust, coda
 LinkingTo: Rcpp, RcppArmadillo

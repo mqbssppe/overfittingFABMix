@@ -4,7 +4,7 @@
 Function for model-level parallelization
 }
 \description{
-This function runs parallel versions of the \code{fabMix} function. 
+This function runs multiple copies of the \code{fabMix} function in parallel. 
 }
 \usage{
 fabMix_parallelModels(model, nChains, dirPriorAlphas, rawData, outDir, Kmax, mCycles, 
@@ -87,11 +87,11 @@ Number of cycles that will be discarded as burn-in period.
 	Logical value indicating whether to delete the \code{outDir} directory. Default: TRUE.
 }
   \item{parallelModels}{
-	Model-level parallelization: An optional integer specifying the number of cores that will be used in order to fit in parallel each member of \code{model}. Default: NULL (no model-level parallelization).
+	Model-level parallelization: An optional integer specifying the number of cores that will be used in order to fit in parallel each member of \code{model}. 
 }
 }
 \value{
-	An object of class \code{fabMix.object}, that is, a list consisting of the following entries.
+	An object of class \code{fabMix.object} (see the \code{\link{fabMix}} function).
 }
 \author{
 Panagiotis Papastamoulis

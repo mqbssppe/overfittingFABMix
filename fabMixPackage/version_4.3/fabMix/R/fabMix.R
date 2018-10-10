@@ -5434,6 +5434,9 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 					MCMC$Lambda[[k]][, f] <- lFile[, paste0("k",k,"_i",i,"_j",j)]
 				}
 			}
+			MCMC$Lambda[[k]] <- mcmc(MCMC$Lambda[[k]], 
+						start = warm_up_overfitting + warm_up + burnCycles*nIterPerCycle, 
+						thin = nIterPerCycle)
 		}
 
 		muValues <- read.table(paste0(outDir,"/reordered_mu_ecr.txt"))
@@ -5442,9 +5445,18 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 		for(k in names(table(z))){
 			MCMC$mu[[k]] <- as.matrix(muValues[,as.numeric(k) + Kmax*((1:p)-1)])
 			colnames(MCMC$mu[[k]]) <- paste0("V",1:p)
+			MCMC$mu[[k]] <- mcmc(MCMC$mu[[k]], 
+						start = warm_up_overfitting + warm_up + burnCycles*nIterPerCycle, 
+						thin = nIterPerCycle)
 		}
 		MCMC$w <- read.table(paste0(outDir,"/reordered_weights_ecr.txt"))[,as.numeric(names(table(z)))]
+		MCMC$w <- mcmc(MCMC$w,
+				start = warm_up_overfitting + warm_up + burnCycles*nIterPerCycle, 
+				thin = nIterPerCycle)
 		MCMC$y <- read.table(paste0(outDir,"/yValues.txt"))
+		MCMC$y <- mcmc(MCMC$y,
+				start = warm_up_overfitting + warm_up + burnCycles*nIterPerCycle, 
+				thin = nIterPerCycle)
 		MCMC$z <- read.table(paste0(outDir,"/reordered_allocations_ecr.txt"))
 		if( strsplit(model_selected, split = "")[[1]][2] == "U" ){
 			sMATRIX <- read.table(paste0(outDir,'/reordered_sigma_ecr.txt'))
@@ -5453,10 +5465,16 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 			if( strsplit(model_selected, split = "")[[1]][3] == "U" ){
 				for(k in names(table(z))){
 					MCMC$Sigma[[k]] <- as.matrix(sMATRIX[,((as.numeric(k)-1)*p + 1):(as.numeric(k)*p)])
+					MCMC$Sigma[[k]] <- mcmc(MCMC$Sigma[[k]], 
+								start = warm_up_overfitting + warm_up + burnCycles*nIterPerCycle,  
+								thin = nIterPerCycle)
 				}
 			}else{
 				for(k in names(table(z))){
 					MCMC$Sigma[[k]] <- as.matrix(sMATRIX[,as.numeric(k)])
+					MCMC$Sigma[[k]] <- mcmc(MCMC$Sigma[[k]], 
+								start = warm_up_overfitting + warm_up + burnCycles*nIterPerCycle, 
+								thin = nIterPerCycle)
 				}
 			}		
 		}else{
@@ -5466,8 +5484,15 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 			}else{
 				MCMC$Sigma <- MCMC$Sigma[,1]
 			}		
+			MCMC$Sigma <- mcmc(MCMC$Sigma, 
+						start = warm_up_overfitting + warm_up + burnCycles*nIterPerCycle, 
+						thin = nIterPerCycle)
+
 		}
 		MCMC$K <- read.table(paste0(outDir,"/kValues.txt"))
+		MCMC$K <- mcmc(MCMC$K, 
+					start = warm_up_overfitting + warm_up + burnCycles*nIterPerCycle, 
+					thin = nIterPerCycle)
 		rr <- vector("list", length = as.numeric(q_selected))
 		for(j in 1:as.numeric(q_selected)){
 			rr[[j]] <- read.table(paste0(outDir,"/estimated_regularized_expression_per_cluster_",j,".txt"))

@@ -100,7 +100,7 @@ Number of cycles that will be discarded as burn-in period.
   \item{mu }{The estimated posterior mean of the mean per cluster according to the selected model.}
   \item{weights }{The estimated posterior mean of the mixing proportions according to the selected model.}
   \item{selected_model }{Data frame containing the parameterization, number of clusters and factors of the selected model.}
-  \item{mcmc }{A list containing the MCMC draws for the parameters of the selected models. All component-specific parameters have been reordered according to the ECR algorithm in order to undo the label switching problem.}
+  \item{mcmc }{A list containing the MCMC draws for the parameters of the selected model. Each entry is returned as an \code{mcmc} object, a class imported from the \code{coda} package (Plummer et al, 2006). All component-specific parameters have been reordered according to the ECR algorithm in order to undo the label switching problem. However, the output corresponding to factor scores and factor loadings is not identifiable due to sign-switching across the MCMC trace.}
   \item{data }{The observed data.}
 }
 \details{
@@ -126,12 +126,16 @@ In all cases, \eqn{\boldsymbol{\varepsilon}_i} and \eqn{\boldsymbol{Y}_i} are as
 
 }
 \note{
-It is recommended to always use: \code{normalize = TRUE} (default). Tuning of \code{dirPriorAlphas} may be necessary to achieve reasonable acceptance rates of chain swaps. Note that the output is reordered in order to deal with the label switching problem, according to the ECR algorithm applied by \code{dealWithLabelSwitching} function.
+It is recommended to use: \code{normalize = TRUE} (default). Tuning of \code{dirPriorAlphas} may be necessary to achieve reasonable acceptance rates of chain swaps. Note that the output is reordered in order to deal with the label switching problem, according to the ECR algorithm applied by \code{\link{dealWithLabelSwitching}} function. 
+
+Parallelization is enabled in both the chain-level as well as the model-level. By default all heated chains (specified by the \code{nchains} argument) run in parallel using (at most) the same number of threads (if available). If \code{parallelModels = NULL} (default), then the selected parameterizations will run (serially) on the same thread. Otherwise, if \code{parallelModels = x} (where \code{x} denotes a positive integer), the algorithm will first use \code{x} threads to fit the specified model parameterizations in parallel, and furthermore will also parallelize the heated chains (according to the remaining free cores on the user's system). The user should combine \code{parallelModels} with \code{nChains} efficiently, for example: if the number of available threads equals 12 and the user wishes to run 3 heated chains per model (recall that there are 8 parameterizations in total), then, an ideal allocation would be \code{parallelModels = 4} and \code{nChains = 3} because all available threads will be constantly busy. If the user wishes to run \code{nChains = 4} heated chains per model using 12 threads, then an ideal allocation would be \code{parallelModels = 3} models running in parallel. In the case where \code{parallelModels*nChains} > \code{m}, with \code{m} denoting the available number of threads, the algorithm will first allocate min(\code{parallelModels}, \code{m}) threads to run the same number of parameterizations in parallel, and then the remaining threads (if any) will be used to process the parallel heated chains. If no other threads are available, the heated chains will be allocated to single threads. 
 }
 \seealso{
 \code{\link{plot.fabMix.object}}
 }
 \references{
+Martyn Plummer, Nicky Best, Kate Cowles and Karen Vines (2006). CODA: Convergence Diagnosis and Output Analysis for MCMC, R News, vol 6, 7-11.
+
 McNicholas, P.D. and Murphy, T.B. Stat Comput (2008) 18: 285. https://doi.org/10.1007/s11222-008-9056-0.
 
 Papastamoulis, P. (2018). Overfitting Bayesian mixtures of factor analyzers with an unknown number of components. Computational Statistics and Data Analysis, 124: 220-234. DOI: 10.1016/j.csda.2018.03.007.
@@ -148,11 +152,11 @@ Panagiotis Papastamoulis
 \dontrun{
 library('fabMix')
 set.seed(99)
-n = 100                # sample size
+n = 200                # sample size
 p = 30                # number of variables
 q = 2                # number of factors
 K = 5		     # number of clusters
-sINV_diag = rep(1/100,p) 	# diagonal of inverse variance of errors
+sINV_diag = rep(1/20,p) 	# diagonal of inverse variance of errors
 syntheticDataset <- simData(sameLambda=FALSE,K.true = K, n = n, q = q, p = p, 
 			sINV_values = sINV_diag)
 colnames(syntheticDataset$data) <- paste0("x_",1:p)
@@ -160,16 +164,19 @@ qRange <- 1:3	# range of values for the number of factors
 Kmax <- 20	# number of components for the overfitted mixture model
 nChains <- 3	# number of parallel heated chains
 
+# the next command takes ~ 2 hours in a Linux machine with 12 threads.
+
 fm <- fabMix( parallelModels = 4, 
 	nChains = nChains, 
 	model = c("UUU","CUU","UCU","CCU","UCC","UUC","CUC","CCC"), 
 	rawData = syntheticDataset$data, outDir = "toyExample_b",
-        Kmax = Kmax, mCycles = 600, burnCycles = 100, q = qRange,
-        g = 0.5, h = 0.5, alpha_sigma = 0.5, beta_sigma = 0.5, 
-        warm_up_overfitting = 500, warm_up = 5000) 
+        Kmax = Kmax, mCycles = 1100, burnCycles = 100, q = qRange) 
+
 print(fm)
 plot(fm, what = "BIC")
 plot(fm, what = "classification_pairs")
+# see also
+# plot(fm)
 
 }
 

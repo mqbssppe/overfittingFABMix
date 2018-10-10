@@ -20,6 +20,18 @@ Type 'q()' to quit R.
 > pkgname <- "fabMix"
 > source(file.path(R.home("share"), "R", "examples-header.R"))
 > options(warn = 1)
+> base::assign(".ExTimings", "fabMix-Ex.timings", pos = 'CheckExEnv')
+> base::cat("name\tuser\tsystem\telapsed\n", file=base::get(".ExTimings", pos = 'CheckExEnv'))
+> base::assign(".format_ptime",
++ function(x) {
++   if(!is.na(x[4L])) x[1L] <- x[1L] + x[4L]
++   if(!is.na(x[5L])) x[2L] <- x[2L] + x[5L]
++   options(OutDec = '.')
++   format(x[1L:3L], digits = 7L)
++ },
++ pos = 'CheckExEnv')
+> 
+> ### * </HEADER>
 > library('fabMix')
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
@@ -29,6 +41,7 @@ Type 'q()' to quit R.
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: fabMix-package
 > ### Title: Overfitting Bayesian Mixtures of Factor Analyzers with
 > ###   Parsimonious Covariance and Unknown Number of Components
@@ -37,7 +50,7 @@ Type 'q()' to quit R.
 > 
 > ### ** Examples
 > 
-> # TOY EXAMPLE (very small numbers...)
+> # TOY EXAMPLE (very small numbers... only for CRAN check purposes)
 > 
 > #################################################################
 > # (a) using 2 cores in parallel, each one running 2 heated chains.
@@ -47,9 +60,9 @@ Type 'q()' to quit R.
 > n = 8                # sample size
 > p = 5                # number of variables
 > q = 2                # number of factors
-> K = 2		     # number of clusters
+> K = 2		     # true number of clusters
 > 
-> sINV_diag = 1/((1:p))	 				# diagonal of inverse variance of errors
+> sINV_diag = 1/((1:p))	 # diagonal of inverse variance of errors
 > set.seed(100)
 > syntheticDataset <- simData(sameLambda=TRUE,K.true = K, n = n, q = q, p = p, 
 + 			sINV_values = sINV_diag)
@@ -59,21 +72,24 @@ Simulation parameters:
    q = 2 
    K = 2 
 > colnames(syntheticDataset$data) <- paste0("x_",1:p)
-> qRange <- 1:2	# range of values for the number of factors
-> 
-> Kmax <- 20		# number of components for the overfitted mixture model
-> nChains <- 2		# number of parallel heated chains
 > 
 > # Run `fabMix` for a _small_ number of iterations for the 
 > #	`UUU` (maximal model) and `CCC` (minimal model) parameterizations,
 > # 	using the default prior parallel heating parameters `dirPriorAlphas`.
 > #	NOTE: `dirPriorAlphas` may require some tuning in general.
-> set.seed(3)
+> 
+> 
+> qRange <- 2	# values for the number of factors (only the true number 
+> #                                                    is considered here)
+> Kmax <- 4	# number of components for the overfitted mixture model
+> nChains <- 2	# number of parallel heated chains
+> 
+> set.seed(1)
 > fm <- fabMix( model = c("UUU", "CCC"), nChains = nChains, 
 + 	rawData = syntheticDataset$data, outDir = "toyExample",
 +         Kmax = Kmax, mCycles = 4, burnCycles = 1, q = qRange,
 +         g = 0.5, h = 0.5, alpha_sigma = 0.5, beta_sigma = 0.5, 
-+         warm_up_overfitting = 2, warm_up = 3) 
++         warm_up_overfitting = 2, warm_up = 5) 
          ____      __    __  ____      
         / __/___ _/ /_  /  |/  (_)  __ 
        / /_/ __ `/ __ \/ /|_/ / / |/_/ 
@@ -83,26 +99,12 @@ Simulation parameters:
 -    Data consists of p = 5 variables and n = 8 observations
 -    MCMC parameters: g = 0.5, h = 0.5, alpha_sigma = 0.5, beta_sigma = 0.5
 -         using Nchains = 2 
--         target posterior distribution corresponds to alpha = 0.05 
+-         target posterior distribution corresponds to alpha = 0.25 
 -    The sampler uses standardized data. 
 Loading required package: foreach
 Loading required package: rngtools
 Loading required package: pkgmaker
 Loading required package: registry
-
--    Parameterization: UUU model 
--    Number of factors: q = 1
--    (1) Initializing from priors that lead to overfitting...  OK 
--    (2) Initializing the actual model from the previously obtained values...  OK 
--    (3) Running the sampler...  
-
--    DONE. 
--    (4) Computing information criteria for q = 1 
--    NOTE: using standardizing data. 
-         - Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_4.3/fabMix.Rcheck/toyExample/UUU_1 
-            Nclusters:    2 
-            Frequency:    3 
-         - Information criteria written to `UUU_1/informationCriteria_map_model.txt`. 
 
 -    Parameterization: UUU model 
 -    Number of factors: q = 2
@@ -114,23 +116,9 @@ Loading required package: registry
 -    (4) Computing information criteria for q = 2 
 -    NOTE: using standardizing data. 
          - Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_4.3/fabMix.Rcheck/toyExample/UUU_2 
-            Nclusters:    1     2 
-            Frequency:    2    1 
-         - Information criteria written to `UUU_2/informationCriteria_map_model.txt`. 
-
--    Parameterization: CCC model 
--    Number of factors: q = 1
--    (1) Initializing from priors that lead to overfitting...  OK 
--    (2) Initializing the actual model from the previously obtained values...  OK 
--    (3) Running the sampler...  
-
--    DONE. 
--    (4) Computing information criteria for q = 1 
--    NOTE: using standardizing data. 
-         - Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_4.3/fabMix.Rcheck/toyExample/CCC_1 
-            Nclusters:    3 
+            Nclusters:    2 
             Frequency:    3 
-         - Information criteria written to `CCC_1/informationCriteria_map_model.txt`. 
+         - Information criteria written to `UUU_2/informationCriteria_map_model.txt`. 
 
 -    Parameterization: CCC model 
 -    Number of factors: q = 2
@@ -142,8 +130,8 @@ Loading required package: registry
 -    (4) Computing information criteria for q = 2 
 -    NOTE: using standardizing data. 
          - Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_4.3/fabMix.Rcheck/toyExample/CCC_2 
-            Nclusters:    2 
-            Frequency:    3 
+            Nclusters:    2     3 
+            Frequency:    2    1 
          - Information criteria written to `CCC_2/informationCriteria_map_model.txt`. 
 -    The label.switching package says hello. 
 -    (5) Dealing with label switching for q = 2 
@@ -153,8 +141,8 @@ Loading required package: registry
     ......................................................................................
     . Method                         Time (sec)           Status                         . 
     ......................................................................................
-    . ECR                            0.031                OK                             . 
-    . ECR-ITERATIVE-1                0.018                Converged (2 iterations)       . 
+    . ECR                            0.018                OK                             . 
+    . ECR-ITERATIVE-1                0.002                Converged (2 iterations)       . 
     ......................................................................................
 
     Relabelling all methods according to method ECR ... done!
@@ -164,39 +152,38 @@ Loading required package: registry
     Retrieve the 2 best clusterings: [...]$clusters
     Retrieve the 2 CPU times: [...]$timings
     Retrieve the 2 X 2 similarity matrix: [...]$similarity
-    Label switching finished. Total time: 0.1 seconds. 
+    Label switching finished. Total time: 0 seconds. 
 -    Done. 
 -    Cleaning: deleting directory `toyExample` ... done. 
 
 Given the specified range of models, factors, maximum number of clusters and MCMC parameters,
 the best model corresponds to the CCC parameterization with q = 2 factors and K = 2 clusters. 
-The BIC for this model equals 91.423. 
+The BIC for this model equals 111.942. 
 > 
 > # WARNING: the following parameters: 
-> #  nChains, mCycles, burnCycles, warm_up_overfitting, warm_up 
+> #  Kmax, nChains, mCycles, burnCycles, warm_up_overfitting, warm_up 
 > #	 should take (much) _larger_ values. E.g. a typical implementation consists of:
-> #        nChains = 8, mCycles = 1100, burnCycles = 100, 
+> #        Kmax = 20, nChains >= 3, mCycles = 1100, burnCycles = 100, 
 > #        warm_up_overfitting = 500, warm_up = 5000. 
 > 
 > # Now print a run summary and produce some plots. 
 > print(fm)
 
 * Run information: 
-      Number of fitted models: (2 different number of factors) x (2 parameterizations) = 4 models.
+      Number of fitted models: (1 different number of factors) x (2 parameterizations) = 2 models.
       Selected model: CCC model with K = 2 and q = 2 factors.
 * Estimated number of observations per cluster: 
 
- 3 20 
- 3  5 
+1 4 
+5 3 
 * Posterior mean of the mean per cluster: 
-       3    20
-V1  0.72 -0.85
-V2  0.18 -0.75
-V3 -0.80  0.93
-V4 -0.52  0.48
-V5  0.81 -0.63
+        1     4
+V1 -0.624  1.11
+V2  0.029  0.61
+V3  0.584 -1.44
+V4  0.381 -0.61
+V5 -0.838  1.13
 > plot(fm, what = "BIC")
-> plot(fm, what = "classification_pairs")
 > 
 > #################################################################
 > # (b) using 12 cores_____________________________________________
@@ -218,6 +205,7 @@ V5  0.81 -0.63
 > ##D Kmax <- 20	# number of components for the overfitted mixture model
 > ##D nChains <- 3	# number of parallel heated chains
 > ##D 
+> ##D # the next command takes ~ 1 hour in a Linux workstation with 12 threads.
 > ##D fm <- fabMix( parallelModels = 4, 
 > ##D 	nChains = nChains, 
 > ##D 	model = c("UUU","CUU","UCU","CCU","UCC","UUC","CUC","CCC"), 
@@ -234,6 +222,8 @@ V5  0.81 -0.63
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("fabMix-package", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 
 detaching ‘package:doRNG’, ‘package:rngtools’, ‘package:pkgmaker’,
@@ -244,6 +234,7 @@ detaching ‘package:doRNG’, ‘package:rngtools’, ‘package:pkgmaker’,
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: fabMix
 > ### Title: Main function
 > ### Aliases: fabMix
@@ -258,11 +249,11 @@ detaching ‘package:doRNG’, ‘package:rngtools’, ‘package:pkgmaker’,
 > ## Not run: 
 > ##D library('fabMix')
 > ##D set.seed(99)
-> ##D n = 100                # sample size
+> ##D n = 200                # sample size
 > ##D p = 30                # number of variables
 > ##D q = 2                # number of factors
 > ##D K = 5		     # number of clusters
-> ##D sINV_diag = rep(1/100,p) 	# diagonal of inverse variance of errors
+> ##D sINV_diag = rep(1/20,p) 	# diagonal of inverse variance of errors
 > ##D syntheticDataset <- simData(sameLambda=FALSE,K.true = K, n = n, q = q, p = p, 
 > ##D 			sINV_values = sINV_diag)
 > ##D colnames(syntheticDataset$data) <- paste0("x_",1:p)
@@ -270,16 +261,19 @@ detaching ‘package:doRNG’, ‘package:rngtools’, ‘package:pkgmaker’,
 > ##D Kmax <- 20	# number of components for the overfitted mixture model
 > ##D nChains <- 3	# number of parallel heated chains
 > ##D 
+> ##D # the next command takes ~ 2 hours in a Linux machine with 12 threads.
+> ##D 
 > ##D fm <- fabMix( parallelModels = 4, 
 > ##D 	nChains = nChains, 
 > ##D 	model = c("UUU","CUU","UCU","CCU","UCC","UUC","CUC","CCC"), 
 > ##D 	rawData = syntheticDataset$data, outDir = "toyExample_b",
-> ##D         Kmax = Kmax, mCycles = 600, burnCycles = 100, q = qRange,
-> ##D         g = 0.5, h = 0.5, alpha_sigma = 0.5, beta_sigma = 0.5, 
-> ##D         warm_up_overfitting = 500, warm_up = 5000) 
+> ##D         Kmax = Kmax, mCycles = 1100, burnCycles = 100, q = qRange) 
+> ##D 
 > ##D print(fm)
 > ##D plot(fm, what = "BIC")
 > ##D plot(fm, what = "classification_pairs")
+> ##D # see also
+> ##D # plot(fm)
 > ##D 
 > ## End(Not run)
 > 
@@ -287,11 +281,13 @@ detaching ‘package:doRNG’, ‘package:rngtools’, ‘package:pkgmaker’,
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("fabMix", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > ### * <FOOTER>
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  1.658 0.128 2.894 1.611 0.56 
+Time elapsed:  1.082 0.044 1.396 0.376 0.131 
 > grDevices::dev.off()
 null device 
           1 

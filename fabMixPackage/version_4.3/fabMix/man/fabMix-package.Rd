@@ -10,7 +10,7 @@
 The main fuction of the package is \code{\link{fabMix}}. 
 }
 \author{
-\packageAuthor{fabMix}
+Panagiotis Papastamoulis
 
 Maintainer: \packageMaintainer{fabMix}
 }
@@ -34,7 +34,7 @@ Papastamoulis, P. (2018). Overfitting Bayesian mixtures of factor analyzers with
 \code{\link{fabMix}}, \code{\link{plot.fabMix.object}}
 }
 \examples{
-# TOY EXAMPLE (very small numbers...)
+# TOY EXAMPLE (very small numbers... only for CRAN check purposes)
 
 #################################################################
 # (a) using 2 cores in parallel, each one running 2 heated chains.
@@ -44,39 +44,41 @@ library('fabMix')
 n = 8                # sample size
 p = 5                # number of variables
 q = 2                # number of factors
-K = 2		     # number of clusters
+K = 2		     # true number of clusters
 
-sINV_diag = 1/((1:p))	 				# diagonal of inverse variance of errors
+sINV_diag = 1/((1:p))	 # diagonal of inverse variance of errors
 set.seed(100)
 syntheticDataset <- simData(sameLambda=TRUE,K.true = K, n = n, q = q, p = p, 
 			sINV_values = sINV_diag)
 colnames(syntheticDataset$data) <- paste0("x_",1:p)
-qRange <- 1:2	# range of values for the number of factors
-
-Kmax <- 20		# number of components for the overfitted mixture model
-nChains <- 2		# number of parallel heated chains
 
 # Run `fabMix` for a _small_ number of iterations for the 
 #	`UUU` (maximal model) and `CCC` (minimal model) parameterizations,
 # 	using the default prior parallel heating parameters `dirPriorAlphas`.
 #	NOTE: `dirPriorAlphas` may require some tuning in general.
-set.seed(3)
+
+
+qRange <- 2	# values for the number of factors (only the true number 
+#                                                    is considered here)
+Kmax <- 4	# number of components for the overfitted mixture model
+nChains <- 2	# number of parallel heated chains
+
+set.seed(1)
 fm <- fabMix( model = c("UUU", "CCC"), nChains = nChains, 
 	rawData = syntheticDataset$data, outDir = "toyExample",
         Kmax = Kmax, mCycles = 4, burnCycles = 1, q = qRange,
         g = 0.5, h = 0.5, alpha_sigma = 0.5, beta_sigma = 0.5, 
-        warm_up_overfitting = 2, warm_up = 3) 
+        warm_up_overfitting = 2, warm_up = 5) 
 
 # WARNING: the following parameters: 
-#  nChains, mCycles, burnCycles, warm_up_overfitting, warm_up 
+#  Kmax, nChains, mCycles, burnCycles, warm_up_overfitting, warm_up 
 #	 should take (much) _larger_ values. E.g. a typical implementation consists of:
-#        nChains = 8, mCycles = 1100, burnCycles = 100, 
+#        Kmax = 20, nChains >= 3, mCycles = 1100, burnCycles = 100, 
 #        warm_up_overfitting = 500, warm_up = 5000. 
 
 # Now print a run summary and produce some plots. 
 print(fm)
 plot(fm, what = "BIC")
-plot(fm, what = "classification_pairs")
 
 #################################################################
 # (b) using 12 cores_____________________________________________
@@ -98,6 +100,7 @@ qRange <- 1:3	# range of values for the number of factors
 Kmax <- 20	# number of components for the overfitted mixture model
 nChains <- 3	# number of parallel heated chains
 
+# the next command takes ~ 1 hour in a Linux workstation with 12 threads.
 fm <- fabMix( parallelModels = 4, 
 	nChains = nChains, 
 	model = c("UUU","CUU","UCU","CCU","UCC","UUC","CUC","CCC"), 
