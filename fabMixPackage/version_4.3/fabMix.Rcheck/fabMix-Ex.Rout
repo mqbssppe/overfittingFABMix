@@ -141,8 +141,8 @@ Loading required package: registry
     ......................................................................................
     . Method                         Time (sec)           Status                         . 
     ......................................................................................
-    . ECR                            0.018                OK                             . 
-    . ECR-ITERATIVE-1                0.002                Converged (2 iterations)       . 
+    . ECR                            0.023                OK                             . 
+    . ECR-ITERATIVE-1                0.003                Converged (2 iterations)       . 
     ......................................................................................
 
     Relabelling all methods according to method ECR ... done!
@@ -287,7 +287,7 @@ detaching ‘package:doRNG’, ‘package:rngtools’, ‘package:pkgmaker’,
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  1.082 0.044 1.396 0.376 0.131 
+Time elapsed:  1.151 0.084 1.542 0.367 0.15 
 > grDevices::dev.off()
 null device 
           1 
