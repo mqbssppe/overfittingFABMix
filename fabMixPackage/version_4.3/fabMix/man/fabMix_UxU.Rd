@@ -1,7 +1,7 @@
 \name{fabMix_UxU}
 \alias{fabMix_UxU}
 \title{
-Function to estimate the UUU and UCU model
+Function to estimate the \code{UUU} and \code{UCU} model
 }
 \description{
 This function runs parallel chains under a prior tempering scheme of the Dirichlet prior distribution of mixture weights. 
@@ -89,7 +89,7 @@ Number of cycles that will be discarded as burn-in period.
 %% ...
 }
 \note{
-It is recommended to always use: \code{normalize = TRUE} (default). Tuning of \code{dirPriorAlphas} may be necessary to achieve reasonable acceptance rates of chain swaps. Also note that the output is not identifiable due to label switching and the user has to subsequently call the \code{dealWithLabelSwitching} function.
+It is recommended to always use: \code{normalize = TRUE} (default). Tuning of \code{dirPriorAlphas} may be necessary to achieve reasonable acceptance rates of chain swaps. Also note that the output is not identifiable due to label switching and the user has to subsequently call the \code{dealWithLabelSwitching} function. See the \code{\link{fabMix}} function for examples.
 }
 \seealso{
 \code{\link{fabMix}}

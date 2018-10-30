@@ -31,7 +31,8 @@
 }
 }
 \value{
-	A list containing \eqn{A}, \eqn{B}, \eqn{\Gamma}, \eqn{\Delta} and a draw from the conditional distributions of \eqn{\mu} and \eqn{\Lambda}.
+A list containing a draw from the conditional distributions of \eqn{\mu}:
+	\item{mu}{\eqn{K\times p} array  (marginal mean per component)}
 }
 \author{
 Panagiotis Papastamoulis

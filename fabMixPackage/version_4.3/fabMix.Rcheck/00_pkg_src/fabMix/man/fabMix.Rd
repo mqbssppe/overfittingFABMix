@@ -144,6 +144,52 @@ Papastamoulis, P. (2018). Overfitting Bayesian mixtures of factor analyzers with
 Panagiotis Papastamoulis
 }
 \examples{
+# TOY EXAMPLE (very small numbers... only for CRAN check purposes)
+
+#################################################################
+# (a) using 2 cores in parallel, each one running 2 heated chains.
+#################################################################
+library('fabMix')
+
+n = 8                # sample size
+p = 5                # number of variables
+q = 2                # number of factors
+K = 2		     # true number of clusters
+
+sINV_diag = 1/((1:p))	 # diagonal of inverse variance of errors
+set.seed(100)
+syntheticDataset <- simData(sameLambda=TRUE,K.true = K, n = n, q = q, p = p, 
+			sINV_values = sINV_diag)
+colnames(syntheticDataset$data) <- paste0("x_",1:p)
+
+# Run `fabMix` for a _small_ number of iterations for the 
+#	`UUU` (maximal model) and `CCC` (minimal model) parameterizations,
+# 	using the default prior parallel heating parameters `dirPriorAlphas`.
+#	NOTE: `dirPriorAlphas` may require some tuning in general.
+
+
+qRange <- 2	# values for the number of factors (only the true number 
+#                                                    is considered here)
+Kmax <- 4	# number of components for the overfitted mixture model
+nChains <- 2	# number of parallel heated chains
+
+set.seed(1)
+fm <- fabMix( model = c("UUU", "CCC"), nChains = nChains, 
+	rawData = syntheticDataset$data, outDir = "toyExample",
+        Kmax = Kmax, mCycles = 4, burnCycles = 1, q = qRange,
+        g = 0.5, h = 0.5, alpha_sigma = 0.5, beta_sigma = 0.5, 
+        warm_up_overfitting = 2, warm_up = 5) 
+
+# WARNING: the following parameters: 
+#  Kmax, nChains, mCycles, burnCycles, warm_up_overfitting, warm_up 
+#	 should take (much) _larger_ values. E.g. a typical implementation consists of:
+#        Kmax = 20, nChains >= 3, mCycles = 1100, burnCycles = 100, 
+#        warm_up_overfitting = 500, warm_up = 5000. 
+
+# You may also print and plot
+# print(fm)
+# plot(fm, what = "BIC")
+
 #################################################################
 # (b) using 12 cores_____________________________________________
 #_______4 models with 3 heated chains running in parallel________

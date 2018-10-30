@@ -52,6 +52,6 @@ If necessary, more details than the description above
 Panagiotis Papastamoulis
 }
 \note{
-It is well known that DIC tends to overfit, so it advised to compare models with different number of factors using AIC or BIC.
+It is well known that DIC tends to overfit, so it advised to compare models with different number of factors using AIC or BIC. The main function of the package uses BIC. 
 }
 

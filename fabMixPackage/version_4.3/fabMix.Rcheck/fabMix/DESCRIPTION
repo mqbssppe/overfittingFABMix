@@ -3,7 +3,7 @@ Type: Package
 Title: Overfitting Bayesian Mixtures of Factor Analyzers with
         Parsimonious Covariance and Unknown Number of Components
 Version: 4.3
-Date: 2018-10-8
+Date: 2018-10-25
 Authors@R: 
     c(person(given = "Panagiotis",
 	     family = "Papastamoulis",
@@ -18,6 +18,6 @@ Imports: Rcpp (>= 0.12.17), MASS, doParallel, foreach, label.switching,
         mvtnorm, doRNG, RColorBrewer, corrplot, mclust, coda
 LinkingTo: Rcpp, RcppArmadillo
 NeedsCompilation: yes
-Packaged: 2018-10-16 18:31:27 UTC; panagiotis
+Packaged: 2018-10-25 15:55:42 UTC; panagiotis
 Author: Panagiotis Papastamoulis [aut, cre] (0000-0001-9468-7613)
-Built: R 3.4.4; x86_64-pc-linux-gnu; 2018-10-16 18:34:02 UTC; unix
+Built: R 3.4.4; x86_64-pc-linux-gnu; 2018-10-25 15:56:57 UTC; unix

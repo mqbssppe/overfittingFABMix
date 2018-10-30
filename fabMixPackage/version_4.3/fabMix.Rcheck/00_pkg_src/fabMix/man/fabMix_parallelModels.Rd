@@ -96,4 +96,6 @@ Number of cycles that will be discarded as burn-in period.
 \author{
 Panagiotis Papastamoulis
 }
-
+\note{
+See the \code{\link{fabMix}} function for examples.
+}
