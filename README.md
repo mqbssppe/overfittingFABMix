@@ -29,4 +29,8 @@ Version 4.1 improves the Lambda output: all MCMC values are now exported to a si
 
 ### [October 8, 2018] fabMix version 4.3 added (currently under development):
 
-The `fabMix` function now features a new argument (`parallelModels`), allowing the user to run different models in parallel. This is combined with the pre-existing option to run heated chains in parallel, thus, parallelization is now implemented in __both model-level and chain-level__.  
+The `fabMix` function now features a new argument (`parallelModels`), allowing the user to run different models in parallel. This is combined with the pre-existing option to run heated chains in parallel, thus, parallelization is now implemented in __both model-level and chain-level__. 
+
+### [October 30, 2018] fabMix 4.3 available on CRAN
+
+[CRAN package](https://cran.r-project.org/package=fabMix)
