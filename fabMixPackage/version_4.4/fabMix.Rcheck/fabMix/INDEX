@@ -1,0 +1,105 @@
+complete.log.likelihood
+                        Complete log-likelihood function for xCx
+                        models.
+complete.log.likelihood_Sj
+                        Complete log-likelihood function for xUx
+                        models.
+complete.log.likelihood_q0
+                        Complete log-likelihood function for xUx models
+                        and q=0
+complete.log.likelihood_q0_sameSigma
+                        Complete log-likelihood function for xCx models
+                        and q=0
+compute_A_B_G_D_and_simulate_mu_Lambda
+                        Computation and simulations
+compute_A_B_G_D_and_simulate_mu_Lambda_CCU
+                        Computation and simulations for CCU
+compute_A_B_G_D_and_simulate_mu_Lambda_CUU
+                        Computation and simulations for CUU
+compute_A_B_G_D_and_simulate_mu_Lambda_Sj
+                        Computation and simulations
+compute_A_B_G_D_and_simulate_mu_Lambda_q0
+                        Computation and simulations for q = 0.
+compute_A_B_G_D_and_simulate_mu_Lambda_q0_sameSigma
+                        Computation and simulations for q = 0.
+compute_sufficient_statistics
+                        Compute sufficient statistics
+compute_sufficient_statistics_given_mu
+                        Compute sufficient statistics given mu
+compute_sufficient_statistics_q0
+                        Compute sufficient statistics for q = 0
+dealWithLabelSwitching
+                        Apply label switching algorithms
+fabMix                  Main function
+fabMix-package          Overfitting Bayesian Mixtures of Factor
+                        Analyzers with Parsimonious Covariance and
+                        Unknown Number of Components
+fabMix_CxC              Function to estimate the 'CUC' and 'CCC' models
+fabMix_CxU              Function to estimate the 'CCU' and 'CUU' models
+fabMix_UxC              Function to estimate the 'UUC' and 'UCC' models
+fabMix_UxU              Function to estimate the 'UUU' and 'UCU' model
+fabMix_missing_values   Function to estimate the UUU or UCU models in
+                        case of missing values
+fabMix_parallelModels   Function for model-level parallelization
+getStuffForDIC          Compute information criteria
+log_dirichlet_pdf       Log-density function of the Dirichlet
+                        distribution
+myDirichlet             Simulate from the Dirichlet distribution
+observed.log.likelihood0
+                        Log-likelihood of the mixture model
+observed.log.likelihood0_Sj
+                        Log-likelihood of the mixture model
+observed.log.likelihood0_Sj_q0
+                        Log-likelihood of the mixture model for q=0
+observed.log.likelihood0_q0_sameSigma
+                        Log-likelihood of the mixture model for q=0 and
+                        same variance of errors
+overfittingMFA          Basic MCMC sampler for the 'UCU' model
+overfittingMFA_CCC      Basic MCMC sampler for the 'CCC' model
+overfittingMFA_CCU      Basic MCMC sampler for the 'CCU' model
+overfittingMFA_CUC      Basic MCMC sampler for the 'CUC' model
+overfittingMFA_CUU      Basic MCMC sampler for the 'CUU' model
+overfittingMFA_Sj       Basic MCMC sampler for the 'UUU' model
+overfittingMFA_Sj_missing_values
+                        Basic MCMC sampler for the case of missing data
+                        and different error variance
+overfittingMFA_UCC      Basic MCMC sampler for the 'UCC' model
+overfittingMFA_UUC      Basic MCMC sampler for the 'UUC' model
+overfittingMFA_missing_values
+                        Basic MCMC sampler for the case of missing data
+overfitting_q0          MCMC sampler for q=0
+overfitting_q0_sameSigma
+                        MCMC sampler for q=0 and same error variance
+                        parameterization
+plot.fabMix.object      Plot function
+print.fabMix.object     Print function
+readLambdaValues        Read Lambda values.
+simData                 Synthetic data generator
+update_OmegaINV         Gibbs sampling for Omega^{-1}
+update_OmegaINV_Cxx     Gibbs sampling for Omega^{-1} for Cxx model
+update_SigmaINV_faster
+                        Gibbs sampling for Sigma^{-1}
+update_SigmaINV_faster_Sj
+                        Gibbs sampling for Sigma^{-1} per component
+update_SigmaINV_faster_q0
+                        Gibbs sampling for Sigma^{-1} per component for
+                        q=0
+update_SigmaINV_faster_q0_sameSigma
+                        Gibbs sampling for Sigma^{-1} per component for
+                        q=0
+update_SigmaINV_xCC     Gibbs sampling for Sigma^{-1} for xCC models
+update_SigmaINV_xUC     Gibbs sampling for Sigma^{-1} per component for
+                        xUC models
+update_all_y            Gibbs sampling for y in 'xCx' model
+update_all_y_Sj         Gibbs sampling for y in 'xUx' model
+update_z2               Collapsed Gibbs for z using matrix inversion
+                        lemma
+update_z2_Sj            Collapsed Gibbs for z using matrix inversion
+                        lemma
+update_z4               Collapsed Gibbs for z
+update_z4_Sj            Collapsed Gibbs for z
+update_z_b              Gibbs sampling for z
+update_z_b_Sj           Gibbs sampling for z
+update_z_q0             Gibbs sampling for z for q=0
+update_z_q0_sameSigma   Gibbs sampling for z for q=0
+waveDataset1500         Wave dataset
