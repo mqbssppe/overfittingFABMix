@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.13)  9 NOV 2018 09:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.13)  13 NOV 2018 15:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -715,7 +715,7 @@ File: latin1.def 2015/03/17 v1.2c Input encoding file
 
 
 Writing index file Rd2.idx
-(/tmp/RtmpOZfR19/Rd2pdf10773a17623e/Rd2.aux)
+(/tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb/Rd2.aux)
 \openout1 = `Rd2.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
@@ -772,8 +772,8 @@ LaTeX Info: Redefining \ref on input line 8.
 LaTeX Info: Redefining \pageref on input line 8.
 LaTeX Info: Redefining \nameref on input line 8.
 
-(/tmp/RtmpOZfR19/Rd2pdf10773a17623e/Rd2.out)
-(/tmp/RtmpOZfR19/Rd2pdf10773a17623e/Rd2.out)
+(/tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb/Rd2.out)
+(/tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb/Rd2.out)
 \@outlinefile=\write4
 \openout4 = `Rd2.out'.
 
@@ -806,7 +806,7 @@ LaTeX Font Info:    Try loading font information for T1+phv on input line 31.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 )
-(/tmp/RtmpOZfR19/Rd2pdf10773a17623e/Rd2.toc [1
+(/tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb/Rd2.toc [1
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2])
@@ -1070,7 +1070,7 @@ File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 )
-Overfull \hbox (26.42029pt too wide) in paragraph at lines 3624--3624
+Overfull \hbox (26.42029pt too wide) in paragraph at lines 3627--3627
  []\T1/zi4/m/n/10 simData(sameSigma, sameLambda, p, q, K.true, n, loading_means
 , loading_sd, sINV_values)[] 
  []
@@ -1081,7 +1081,7 @@ File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 ) [63]
-Overfull \hbox (8.23181pt too wide) in paragraph at lines 3838--3838
+Overfull \hbox (8.23181pt too wide) in paragraph at lines 3841--3841
  []        \T1/zi4/m/n/9 diag(SigmaINV[k,,]) <- 1/diag(syntheticDataset$varianc
 e) + rgamma(p, shape=1, rate = 1)[] 
  []
@@ -1090,11 +1090,11 @@ e) + rgamma(p, shape=1, rate = 1)[]
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 )
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3851
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3854
 .
 
 [64]
-Overfull \hbox (8.23181pt too wide) in paragraph at lines 3902--3902
+Overfull \hbox (8.23181pt too wide) in paragraph at lines 3905--3905
  []        \T1/zi4/m/n/9 diag(SigmaINV[k,,]) <- 1/diag(syntheticDataset$varianc
 e) + rgamma(p, shape=1, rate = 1)[] 
  []
@@ -1103,11 +1103,11 @@ e) + rgamma(p, shape=1, rate = 1)[]
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 )
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3912
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3915
 .
 
 [65]
-Overfull \hbox (8.23181pt too wide) in paragraph at lines 3963--3963
+Overfull \hbox (8.23181pt too wide) in paragraph at lines 3966--3966
  []        \T1/zi4/m/n/9 diag(SigmaINV[k,,]) <- 1/diag(syntheticDataset$varianc
 e) + rgamma(p, shape=1, rate = 1)[] 
  []
@@ -1116,42 +1116,42 @@ e) + rgamma(p, shape=1, rate = 1)[]
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 )
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3975
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3978
 .
 
 [66] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 )
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4049
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4052
 .
 
 [67] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 )
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4092
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4095
 .
 
 [68] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 )
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4135
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4138
 .
 
 [69] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 )
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4209
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4212
 .
 
 [70] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 )
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4283
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4286
 .
 
 [71] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
@@ -1181,13 +1181,13 @@ File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 ) [80]
-Overfull \hbox (6.77829pt too wide) in paragraph at lines 4867--4868
+Overfull \hbox (6.77829pt too wide) in paragraph at lines 4870--4871
 []\T1/ptm/m/n/10 Lichman, M. (2013). UCI Ma-chine Learn-ing Repos-i-tory [][]$\
 T1/zi4/m/n/10 http : / / archive . ics . uci . edu / ml$[][]\T1/ptm/m/n/10 . Ir
 vine,
  []
 
-(/tmp/RtmpOZfR19/Rd2pdf10773a17623e/Rd2.ind [81]
+(/tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb/Rd2.ind [81]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 3.
 
@@ -1231,15 +1231,15 @@ Overfull \hbox (3.3567pt too wide) in paragraph at lines 28--30
 ] [83
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 4872.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 4872.
- (/tmp/RtmpOZfR19/Rd2pdf10773a17623e/Rd2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 4872.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 4872.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 4875.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 4875.
+ (/tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb/Rd2.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 4875.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 4875.
 
 Package rerunfilecheck Info: File `Rd2.out' has not changed.
 (rerunfilecheck)             Checksum: C539527E20FF3BBAB57E2C6D4D1ED2B1;5830.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 4872.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 4875.
  ) 
 Here is how much of TeX's memory you used:
  7389 strings out of 492982
@@ -1265,7 +1265,7 @@ ive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw
 /times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.
 pfb>
-Output written on Rd2.pdf (83 pages, 310897 bytes).
+Output written on Rd2.pdf (83 pages, 311079 bytes).
 PDF statistics:
  1415 PDF objects out of 1440 (max. 8388607)
  1302 compressed objects within 14 object streams

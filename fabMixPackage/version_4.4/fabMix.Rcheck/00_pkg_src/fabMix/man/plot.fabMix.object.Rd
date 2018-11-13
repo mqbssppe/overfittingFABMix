@@ -9,7 +9,7 @@ Plot function
 This function plots \code{fabMix} function.
 }
 \usage{
-\method{plot}{fabMix.object}(x, what, variableSubset, ...)
+\method{plot}{fabMix.object}(x, what, variableSubset, class_mfrow, ...)
 }
 \arguments{
   \item{x}{
@@ -20,6 +20,9 @@ One of the "BIC", "classification_matplot", "classification_pairs", "correlation
 }
   \item{variableSubset}{
 An optional subset of the variables. By default, all variables are selected.
+}
+  \item{class_mfrow}{
+An optional integer vector of length 2, that will be used to set the \code{mfrow} for "classification_matplot" and "correlation" plots. By default, each plot is printed to a new plotting area.
 }
   \item{...}{
         ignored.

@@ -5150,7 +5150,7 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 	cat("        / __/___ _/ /_  /  |/  (_)  __", "\n")
 	cat("       / /_/ __ `/ __ \\/ /|_/ / / |/_/", "\n")
 	cat("      / __/ /_/ / /_/ / /  / / />  <  ", "\n")
-	cat("     /_/  \\__,_/_.___/_/  /_/_/_/|_|  version 4.3", "\n\n")
+	cat("     /_/  \\__,_/_.___/_/  /_/_/_/|_|  version 4.4", "\n\n")
 
 	model = intersect(model, c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "CCC"))
 	if(missing(Kmax)){Kmax <- 20}
@@ -5430,8 +5430,10 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 		names(covariance_matrix_MAP) <- names(table(z))
 		mu <- read.table(paste0(outDir,"/mu_estimate_ecr.txt"), header=TRUE)
 		mu <- t(mu[as.numeric(names(table(z))),])
+		colnames(mu) <- names(table(z))
 		w <- read.table(paste0(outDir,"/weights_estimate_ecr.txt"))[as.numeric(names(table(z))),]
 		w <- w/sum(w)	
+		names(w) <- names(table(z))
 
 		MCMC <- vector("list", length = 7)
 		names(MCMC) <- c("y", "w", "Lambda","mu","z","Sigma","K_all_chains")
@@ -5440,6 +5442,7 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 		names(MCMC$Lambda) <- names(table(z))
 		for(k in names(table(z))){
 			MCMC$Lambda[[k]] <- array(data = NA, dim = c(dim(lFile)[1], p*as.numeric(q_selected)) )
+			colnames(MCMC$Lambda[[k]]) <- paste0('V',rep(1:p, each = as.numeric(q_selected)),'_F',rep(1:as.numeric(q_selected), p))
 			f <- 0
 			for(i in 1:p){
 				for(j in 1:as.numeric(q_selected)){
@@ -5463,10 +5466,12 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 						thin = nIterPerCycle)
 		}
 		MCMC$w <- read.table(paste0(outDir,"/reordered_weights_ecr.txt"))[,as.numeric(names(table(z)))]
+		colnames(MCMC$w) <- names(table(z))
 		MCMC$w <- mcmc(MCMC$w,
 				start = warm_up_overfitting + warm_up + burnCycles*nIterPerCycle, 
 				thin = nIterPerCycle)
 		MCMC$y <- read.table(paste0(outDir,"/yValues.txt"))
+		colnames(MCMC$y) <- paste0(rep( paste0('OBS',1:n), as.numeric(q_selected)), rep( paste0('_F',1:as.numeric(q_selected)), each = n))
 		MCMC$y <- mcmc(MCMC$y,
 				start = warm_up_overfitting + warm_up + burnCycles*nIterPerCycle, 
 				thin = nIterPerCycle)
@@ -5507,8 +5512,10 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 					start = warm_up_overfitting + warm_up + burnCycles*nIterPerCycle, 
 					thin = nIterPerCycle)
 		rr <- vector("list", length = as.numeric(q_selected))
+		names(rr) <- paste0('F',1:as.numeric(q_selected))
 		for(j in 1:as.numeric(q_selected)){
 			rr[[j]] <- read.table(paste0(outDir,"/estimated_regularized_expression_per_cluster_",j,".txt"))
+			rownames(rr[[j]]) <-  names(table(z))
 		}
 	}
 
@@ -5804,8 +5811,8 @@ print.fabMix.object <- function(x, printSubset = TRUE, ...){
                 cat(paste0("      Number of fitted models: (", dim(x$bic)[1]," different number of factors) x (",dim(x$bic)[2]," parameterizations) = ",prod(dim(x$bic))," models.","\n"))
                 cat(paste0("      Selected model: ", as.character(x$selected_model$parameterization)," model with K = ", x$selected_model$num_Clusters, " and q = ", x$selected_model$num_Factors ," factors.","\n"))
                 cat(paste0("* Estimated number of observations per cluster:"),'\n')
-                print(table(x$class))
-
+                print(table(x$class, dnn = c('label')))
+		cat('\n')
                 cat(paste0("* Posterior mean of the mean per cluster:"),'\n')
 		print(x$mu, digits = 2)
 
@@ -5815,7 +5822,7 @@ print.fabMix.object <- function(x, printSubset = TRUE, ...){
 }
 
 #' @export
-plot.fabMix.object <- function(x, what, variableSubset, ...){
+plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, ...){
         if( 'fabMix.object' %in% class(x) ){
 	K <- as.numeric(x$selected_model['num_Clusters'])
 	cMeans <- colMeans(x$data)
@@ -5863,25 +5870,45 @@ plot.fabMix.object <- function(x, what, variableSubset, ...){
 		if((v == 2)||(what == "classification_matplot")){
 			on.exit(par())
 			# 2. Matplot per cluster
-			if(K %% 2 == 0){
-				par(mfrow = c(floor(K/2), 2 ))
-			}else{
-				par(mfrow = c(floor(K/2) + 1, 2 ))
-			}
-			for(k in 1:K){
-				ind <- which(x$class == as.numeric(names(table(x$class)))[k])
-				# apply the suitable transformation:
-				sNew <- array(data = NA, dim = c(p,p))
-				for(i in 1:p){
-					for(j in 1:p){
-						sNew[i,j] <- sdevs[i]*sdevs[j]*x$covariance_matrix[[names(table(x$class))[k]]][i,j]
+			if(is.null( class_mfrow ) == FALSE){
+				par(mfrow = class_mfrow)
+				for(k in 1:K){
+					#ind <- which(x$class == as.numeric(names(table(x$class)))[k])
+					ind <- which(x$class == names(table(x$class))[k])
+					# apply the suitable transformation:
+					sNew <- array(data = NA, dim = c(p,p))
+					for(i in 1:p){
+						for(j in 1:p){
+							sNew[i,j] <- sdevs[i]*sdevs[j]*x$covariance_matrix[[names(table(x$class))[k]]][i,j]
+						}
 					}
+					matplot(t(x$data[ind,]), col = "gray", type = "l", lty = 1, main = paste0("cluster ``", names(table(x$class))[k],"''"), xlab = "", ylab = "")
+					points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k], type = "l", col =  mclustColors[k], lwd = 2)
+					points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k] + 2*sqrt(diag(sNew)), type = "l", col =  mclustColors[k], lty = 2, lwd = 2)
+					points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k] - 2*sqrt(diag(sNew)), type = "l", col =  mclustColors[k], lty = 2, lwd = 2)
+					legend("bottomleft", col = c( mclustColors[k], mclustColors[k], "gray"), c("estimated mean", "95% HDI", "assigned data"), lty = c(1,2,1), lwd = 2)
 				}
-				matplot(t(x$data[ind,]), col = "gray", type = "l", lty = 1, main = paste0("cluster ``", names(table(x$class))[k],"''"), xlab = "", ylab = "")
-				points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k], type = "l", col = "blue")
-				points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k] + 2*sqrt(diag(sNew)), type = "l", col = "blue", lty = 2)
-				points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k] - 2*sqrt(diag(sNew)), type = "l", col = "blue", lty = 2)
-				legend("bottomleft", col = c("blue","blue", "gray"), c("estimated mean", "95% HDI", "observed data"), lty = c(1,2,1))
+
+			}else{
+				k = 0
+				while(k < K){
+					k = k + 1
+					#ind <- which(x$class == as.numeric(names(table(x$class)))[k])
+					ind <- which(x$class == names(table(x$class))[k])
+					# apply the suitable transformation:
+					sNew <- array(data = NA, dim = c(p,p))
+					for(i in 1:p){
+						for(j in 1:p){
+							sNew[i,j] <- sdevs[i]*sdevs[j]*x$covariance_matrix[[names(table(x$class))[k]]][i,j]
+						}
+					}
+					matplot(t(x$data[ind,]), col = "gray", type = "l", lty = 1, main = paste0("cluster ``", names(table(x$class))[k],"''"), xlab = "", ylab = "")
+					points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k], type = "l", col =  mclustColors[k], lwd = 2)
+					points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k] + 2*sqrt(diag(sNew)), type = "l", col =  mclustColors[k], lty = 2, lwd = 2)
+					points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k] - 2*sqrt(diag(sNew)), type = "l", col =  mclustColors[k], lty = 2, lwd = 2)
+					legend("bottomleft", col = c( mclustColors[k], mclustColors[k], "gray"), c("estimated mean", "95% HDI", "assigned data"), lty = c(1,2,1), lwd = 2)
+					readline(prompt=paste0("Press ENTER to see next plot... (",k,"/",K,")"))
+				}
 			}
 		}
 
@@ -5929,40 +5956,68 @@ plot.fabMix.object <- function(x, what, variableSubset, ...){
 		if((v == 4)||(what == "correlation")){
 			on.exit(par())
 			# 4. Correlation plot per cluster
-			if(K %% 2 == 0){
-				par(mfrow = c(floor(K/2), 2 ))
-			}else{
-				par(mfrow = c(floor(K/2) + 1, 2 ))
-			}
-			for(k in 1:K){
-				sNew <- array(data = NA, dim = c(p,p))
-				for(i in 1:p){
-					for(j in 1:p){
-						sNew[i,j] <- sdevs[i]*sdevs[j]*x$covariance_matrix[[names(table(x$class))[k]]][i,j]
+			if(is.null( class_mfrow ) == FALSE){
+				par(mfrow = class_mfrow)
+				for(k in 1:K){
+					sNew <- array(data = NA, dim = c(p,p))
+					for(i in 1:p){
+						for(j in 1:p){
+							sNew[i,j] <- sdevs[i]*sdevs[j]*x$covariance_matrix[[names(table(x$class))[k]]][i,j]
+						}
 					}
+					corrplot(cov2cor(sNew),method = "ellipse", title = paste0("cluster ``", names(table(x$class))[k],"''"),  mar=c(0,0,2,0))
 				}
-				corrplot(cov2cor(sNew),method = "ellipse", title = paste0("cluster ``", names(table(x$class))[k],"''"))
-			}
+
+			}else{
+				par(mfrow = c(1,1))
+				k = 0
+				while(k < K){
+					k = k + 1
+					sNew <- array(data = NA, dim = c(p,p))
+					for(i in 1:p){
+						for(j in 1:p){
+							sNew[i,j] <- sdevs[i]*sdevs[j]*x$covariance_matrix[[names(table(x$class))[k]]][i,j]
+						}
+					}
+					corrplot(cov2cor(sNew),method = "ellipse", title = paste0("cluster ``", names(table(x$class))[k],"''"),  mar=c(0,0,2,0))
+					readline(prompt=paste0("Press ENTER to see next plot... (",k,"/",K,")"))
+				}
+			}			
 		}
 
 		if((v==5)||(what == "regularized_expression")){
 			on.exit(par())
 			q <- as.numeric(x$selected_model['num_Factors'])
-			par(mfrow = c(q, q), mar = c(4,4,4,2))
-			for(i in seq(q)){
-				for(j in seq(q)){
+			par(mfrow = c(q, q), mar = rep(c(0.3, 0.3/2), each = 2), oma = c(4, 4, 4, 4))
+			for(j in seq(q)){
+				for(i in seq(q)){
 					if(i == j){
-						matplot(t(x$regularizedExpression[[i]]), type = "b", col = mclustColors, main =  paste0("factor ",i), xlab = "variable", ylab = "score")
-						legend("bottomright", paste0("cluster label ", names(table(x$class))), col = mclustColors[1:K], pch = 16)
+						par(mgp=c(0,-1.4, 0)) 
+						matplot(t(x$regularizedExpression[[i]]), type = "n", col = mclustColors, xlab = "", ylab = "", xaxt = 'n', yaxt='n')
+						abline(h = 0, lty = 2, col = "gray")
+						matplot(t(x$regularizedExpression[[i]]), type = "l", col = mclustColors, xlab = "", ylab = "", xaxt = 'n', yaxt='n', add= TRUE)
+						title(paste0("Factor ",i), line = -1)
+						#legend("bottomright", paste0("cluster label ", names(table(x$class))), col = mclustColors[1:K], pch = 16)
+						if(q > 1){
+							axis(1, cex.axis=.7, font=1, tck=.01)
+						}
+						par(mgp = c(3, 1, 0)) #reset mpg values
 					}else{
-						plot(range(x$regularizedExpression[[i]]), range(x$regularizedExpression[[j]]), type = "n", xlab = paste0("factor ",i), 
-							ylab = paste0("factor ",j))
+						plot(range(x$regularizedExpression[[i]]), range(x$regularizedExpression[[j]]), type = "n", xlab = "", ylab = "", xaxt = 'n', yaxt='n')
 						for(k in 1:K){
 							abline(h = 0, lty = 2, col = "gray")
 							abline(v = 0, lty = 2, col = "gray")
-							text(as.numeric(x$regularizedExpression[[i]][k,]),as.numeric(x$regularizedExpression[[j]][k,]), labels = 1:p, col = mclustColors[k])
+							points(as.numeric(x$regularizedExpression[[i]][k,]),as.numeric(x$regularizedExpression[[j]][k,]), pch = k, col = mclustColors[k])
 						}
-					}	
+					}
+					if (j == 1 && (!(i%%2))) 
+					axis(3)
+					if (j == q && (i%%2)) 
+					axis(1)
+					if (i == 1 && (!(j%%2))) 
+					axis(2)
+					if (i == q && (j%%2)) 
+					axis(4)
 				}
 			}
 		}
