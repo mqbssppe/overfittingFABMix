@@ -587,8 +587,8 @@ Loading required package: registry
     ......................................................................................
     . Method                         Time (sec)           Status                         . 
     ......................................................................................
-    . ECR                            0.018                OK                             . 
-    . ECR-ITERATIVE-1                0.003                Converged (2 iterations)       . 
+    . ECR                            0.017                OK                             . 
+    . ECR-ITERATIVE-1                0.002                Converged (2 iterations)       . 
     ......................................................................................
 
     Relabelling all methods according to method ECR ... done!
@@ -779,7 +779,7 @@ Loading required package: registry
     ......................................................................................
     . Method                         Time (sec)           Status                         . 
     ......................................................................................
-    . ECR                            0.01                 OK                             . 
+    . ECR                            0.012                OK                             . 
     . ECR-ITERATIVE-1                0.03                 Converged (2 iterations)       . 
     ......................................................................................
 
@@ -2138,7 +2138,7 @@ Simulation parameters:
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  2.394 0.085 3.017 0.735 0.348 
+Time elapsed:  2.368 0.117 3.03 0.767 0.325 
 > grDevices::dev.off()
 null device 
           1 

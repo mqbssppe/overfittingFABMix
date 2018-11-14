@@ -5438,23 +5438,38 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 		MCMC <- vector("list", length = 7)
 		names(MCMC) <- c("y", "w", "Lambda","mu","z","Sigma","K_all_chains")
 		lFile <- read.table(paste0(outDir,"/reordered_lambda_ecr.txt"), header = TRUE)
-		MCMC$Lambda <- vector("list", length = nClusters[q_selected, model_selected])
-		names(MCMC$Lambda) <- names(table(z))
-		for(k in names(table(z))){
-			MCMC$Lambda[[k]] <- array(data = NA, dim = c(dim(lFile)[1], p*as.numeric(q_selected)) )
-			colnames(MCMC$Lambda[[k]]) <- paste0('V',rep(1:p, each = as.numeric(q_selected)),'_F',rep(1:as.numeric(q_selected), p))
+		if( strsplit(model_selected, split = "")[[1]][1] == "U" ){
+			MCMC$Lambda <- vector("list", length = nClusters[q_selected, model_selected])
+			names(MCMC$Lambda) <- names(table(z))
+			for(k in names(table(z))){
+				MCMC$Lambda[[k]] <- array(data = NA, dim = c(dim(lFile)[1], p*as.numeric(q_selected)) )
+				colnames(MCMC$Lambda[[k]]) <- paste0('V',rep(1:p, each = as.numeric(q_selected)),'_F',rep(1:as.numeric(q_selected), p))
+				f <- 0
+				for(i in 1:p){
+					for(j in 1:as.numeric(q_selected)){
+						f <- f + 1
+						MCMC$Lambda[[k]][, f] <- lFile[, paste0("k",k,"_i",i,"_j",j)]
+					}
+				}
+				MCMC$Lambda[[k]] <- mcmc(MCMC$Lambda[[k]], 
+							start = warm_up_overfitting + warm_up + burnCycles*nIterPerCycle, 
+							thin = nIterPerCycle)
+			}
+		}else{
+			k <- names(table(z))[1]
+			MCMC$Lambda <- array(data = NA, dim = c(dim(lFile)[1], p*as.numeric(q_selected)) )
+			colnames(MCMC$Lambda) <- paste0('V',rep(1:p, each = as.numeric(q_selected)),'_F',rep(1:as.numeric(q_selected), p))
 			f <- 0
 			for(i in 1:p){
 				for(j in 1:as.numeric(q_selected)){
 					f <- f + 1
-					MCMC$Lambda[[k]][, f] <- lFile[, paste0("k",k,"_i",i,"_j",j)]
+					MCMC$Lambda[, f] <- lFile[, paste0("k",k,"_i",i,"_j",j)]
 				}
 			}
-			MCMC$Lambda[[k]] <- mcmc(MCMC$Lambda[[k]], 
+			MCMC$Lambda <- mcmc(MCMC$Lambda, 
 						start = warm_up_overfitting + warm_up + burnCycles*nIterPerCycle, 
 						thin = nIterPerCycle)
 		}
-
 		muValues <- read.table(paste0(outDir,"/reordered_mu_ecr.txt"))
 		MCMC$mu <- vector("list", length = nClusters[q_selected, model_selected])
 		names(MCMC$mu) <- names(table(z))
@@ -5486,6 +5501,7 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 					MCMC$Sigma[[k]] <- mcmc(MCMC$Sigma[[k]], 
 								start = warm_up_overfitting + warm_up + burnCycles*nIterPerCycle,  
 								thin = nIterPerCycle)
+					colnames(MCMC$Sigma[[k]]) <- paste0('V',1:p)
 				}
 			}else{
 				for(k in names(table(z))){
@@ -5499,6 +5515,7 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 			MCMC$Sigma <- 1/read.table(paste0(outDir, '/sigmainvValues.txt'))
 			if( strsplit(model_selected, split = "")[[1]][3] == "U" ){
 				MCMC$Sigma <- MCMC$Sigma
+				colnames(MCMC$Sigma) <- paste0('V',1:p)
 			}else{
 				MCMC$Sigma <- MCMC$Sigma[,1]
 			}		

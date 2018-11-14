@@ -69,18 +69,14 @@ No file Rd2.aux.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [1{/var/lib/texmf/fonts
 /map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (15.35686pt too wide) in paragraph at lines 37--38
-\T1/ptm/m/n/10 <https://www.jstor.org/stable/25703571>, Pa-pas-ta-moulis (2016)
- <DOI:10.18637/jss.v069.c01>). Miss-
-
 Overfull \hbox (40.3775pt too wide) in paragraph at lines 51--52
 []\T1/ptm/m/n/10 McNicholas, P.D. and Mur-phy, T.B. Statis-tics and Com-put-ing
  (2008) 18: 285. https://doi.org/10.1007/s11222-
-[2]
+
 Overfull \hbox (54.50716pt too wide) in paragraph at lines 61--62
 \T1/ptm/m/n/10 ber of com-po-nents. Com-pu-ta-tional Statis-tics and Data Anal-
 y-sis, 124: 220-234. DOI: 10.1016/j.csda.2018.03.007. 
-(/usr/share/texlive/texmf-dist/tex/latex/inconsolata/ts1zi4.fd) [3]
+[2] (/usr/share/texlive/texmf-dist/tex/latex/inconsolata/ts1zi4.fd) [3]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [4]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [5]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [6]
@@ -252,7 +248,7 @@ Overfull \hbox (6.77829pt too wide) in paragraph at lines 4870--4871
 T1/zi4/m/n/10 http : / / archive . ics . uci . edu / ml$[][]\T1/ptm/m/n/10 . Ir
 vine,
 No file Rd2.ind.
-[80] (/tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb/Rd2.aux)
+[80] (/tmp/Rtmp4PohQ1/Rd2pdf119f66fc09a9/Rd2.aux)
 
 Package rerunfilecheck Warning: File `Rd2.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
@@ -275,7 +271,7 @@ nts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
 w/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (80 pages, 296826 bytes).
+Output written on Rd2.pdf (80 pages, 296752 bytes).
 Transcript written on Rd2.log.
 This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex)
  restricted \write18 enabled.
@@ -334,25 +330,21 @@ Package hyperref Warning: Option `pagebackref' has already been used,
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.dfu))
 (/usr/share/texlive/texmf-dist/tex/latex/base/latin1.def))
 Writing index file Rd2.idx
-(/tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb/Rd2.aux)
+(/tmp/Rtmp4PohQ1/Rd2pdf119f66fc09a9/Rd2.aux)
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 ) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty))
-(/tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb/Rd2.out)
-(/tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb/Rd2.out)
+(/tmp/Rtmp4PohQ1/Rd2pdf119f66fc09a9/Rd2.out)
+(/tmp/Rtmp4PohQ1/Rd2pdf119f66fc09a9/Rd2.out)
 (/usr/share/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd)
-(/tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/
+(/tmp/Rtmp4PohQ1/Rd2pdf119f66fc09a9/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/
 updmap/pdftex.map}] [2]) (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
-)
-Overfull \hbox (15.35686pt too wide) in paragraph at lines 37--38
-\T1/ptm/m/n/10 <https://www.jstor.org/stable/25703571>, Pa-pas-ta-moulis (2016)
- <DOI:10.18637/jss.v069.c01>). Miss-
-[3]
+) [3]
 Overfull \hbox (40.3775pt too wide) in paragraph at lines 51--52
 []\T1/ptm/m/n/10 McNicholas, P.D. and Mur-phy, T.B. Statis-tics and Com-put-ing
  (2008) 18: 285. https://doi.org/10.1007/s11222-
@@ -533,7 +525,7 @@ Overfull \hbox (6.77829pt too wide) in paragraph at lines 4870--4871
 T1/zi4/m/n/10 http : / / archive . ics . uci . edu / ml$[][]\T1/ptm/m/n/10 . Ir
 vine,
 No file Rd2.ind.
-[81] (/tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb/Rd2.aux) )
+[81] (/tmp/Rtmp4PohQ1/Rd2pdf119f66fc09a9/Rd2.aux) )
 (see the transcript file for additional information){/usr/share/texlive/texmf-d
 ist/fonts/enc/dvips/inconsolata/i4-ts1.enc}{/usr/share/texlive/texmf-dist/fonts
 /enc/dvips/base/8r.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/inconsola
@@ -550,7 +542,7 @@ nts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
 w/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (81 pages, 304004 bytes).
+Output written on Rd2.pdf (81 pages, 303925 bytes).
 Transcript written on Rd2.log.
 This is makeindex, version 2.15 [TeX Live 2017] (kpathsea + Thai support).
 Scanning input file Rd2.idx....done (81 entries accepted, 0 rejected).
@@ -615,25 +607,21 @@ Package hyperref Warning: Option `pagebackref' has already been used,
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.dfu))
 (/usr/share/texlive/texmf-dist/tex/latex/base/latin1.def))
 Writing index file Rd2.idx
-(/tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb/Rd2.aux)
+(/tmp/Rtmp4PohQ1/Rd2pdf119f66fc09a9/Rd2.aux)
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 ) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty))
-(/tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb/Rd2.out)
-(/tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb/Rd2.out)
+(/tmp/Rtmp4PohQ1/Rd2pdf119f66fc09a9/Rd2.out)
+(/tmp/Rtmp4PohQ1/Rd2pdf119f66fc09a9/Rd2.out)
 (/usr/share/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd)
-(/tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/
+(/tmp/Rtmp4PohQ1/Rd2pdf119f66fc09a9/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/
 updmap/pdftex.map}] [2]) (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
-)
-Overfull \hbox (15.35686pt too wide) in paragraph at lines 37--38
-\T1/ptm/m/n/10 <https://www.jstor.org/stable/25703571>, Pa-pas-ta-moulis (2016)
- <DOI:10.18637/jss.v069.c01>). Miss-
-[3]
+) [3]
 Overfull \hbox (40.3775pt too wide) in paragraph at lines 51--52
 []\T1/ptm/m/n/10 McNicholas, P.D. and Mur-phy, T.B. Statis-tics and Com-put-ing
  (2008) 18: 285. https://doi.org/10.1007/s11222-
@@ -813,7 +801,7 @@ Overfull \hbox (6.77829pt too wide) in paragraph at lines 4870--4871
 []\T1/ptm/m/n/10 Lichman, M. (2013). UCI Ma-chine Learn-ing Repos-i-tory [][]$\
 T1/zi4/m/n/10 http : / / archive . ics . uci . edu / ml$[][]\T1/ptm/m/n/10 . Ir
 vine,
-(/tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb/Rd2.ind [81]
+(/tmp/Rtmp4PohQ1/Rd2pdf119f66fc09a9/Rd2.ind [81]
 Overfull \hbox (3.3567pt too wide) in paragraph at lines 15--17
 []\T1/zi4/m/n/10 compute_A_B_G_D_and_simulate_mu_Lambda\T1/ptm/m/n/10 , 
 
@@ -835,7 +823,7 @@ Overfull \hbox (18.3567pt too wide) in paragraph at lines 25--27
 
 Overfull \hbox (3.3567pt too wide) in paragraph at lines 28--30
 []\T1/zi4/m/n/10 compute_sufficient_statistics_given_mu\T1/ptm/m/n/10 , 
-[82] [83]) (/tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb/Rd2.aux)
+[82] [83]) (/tmp/Rtmp4PohQ1/Rd2pdf119f66fc09a9/Rd2.aux)
 
 Package rerunfilecheck Warning: File `Rd2.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
@@ -858,7 +846,7 @@ nts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
 w/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (83 pages, 310069 bytes).
+Output written on Rd2.pdf (83 pages, 309986 bytes).
 Transcript written on Rd2.log.
 This is makeindex, version 2.15 [TeX Live 2017] (kpathsea + Thai support).
 Scanning input file Rd2.idx....done (81 entries accepted, 0 rejected).
@@ -923,25 +911,21 @@ Package hyperref Warning: Option `pagebackref' has already been used,
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.dfu))
 (/usr/share/texlive/texmf-dist/tex/latex/base/latin1.def))
 Writing index file Rd2.idx
-(/tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb/Rd2.aux)
+(/tmp/Rtmp4PohQ1/Rd2pdf119f66fc09a9/Rd2.aux)
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 ) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty))
-(/tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb/Rd2.out)
-(/tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb/Rd2.out)
+(/tmp/Rtmp4PohQ1/Rd2pdf119f66fc09a9/Rd2.out)
+(/tmp/Rtmp4PohQ1/Rd2pdf119f66fc09a9/Rd2.out)
 (/usr/share/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd)
-(/tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/
+(/tmp/Rtmp4PohQ1/Rd2pdf119f66fc09a9/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/
 updmap/pdftex.map}] [2]) (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
-)
-Overfull \hbox (15.35686pt too wide) in paragraph at lines 37--38
-\T1/ptm/m/n/10 <https://www.jstor.org/stable/25703571>, Pa-pas-ta-moulis (2016)
- <DOI:10.18637/jss.v069.c01>). Miss-
-[3]
+) [3]
 Overfull \hbox (40.3775pt too wide) in paragraph at lines 51--52
 []\T1/ptm/m/n/10 McNicholas, P.D. and Mur-phy, T.B. Statis-tics and Com-put-ing
  (2008) 18: 285. https://doi.org/10.1007/s11222-
@@ -1121,7 +1105,7 @@ Overfull \hbox (6.77829pt too wide) in paragraph at lines 4870--4871
 []\T1/ptm/m/n/10 Lichman, M. (2013). UCI Ma-chine Learn-ing Repos-i-tory [][]$\
 T1/zi4/m/n/10 http : / / archive . ics . uci . edu / ml$[][]\T1/ptm/m/n/10 . Ir
 vine,
-(/tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb/Rd2.ind [81]
+(/tmp/Rtmp4PohQ1/Rd2pdf119f66fc09a9/Rd2.ind [81]
 Overfull \hbox (3.3567pt too wide) in paragraph at lines 15--17
 []\T1/zi4/m/n/10 compute_A_B_G_D_and_simulate_mu_Lambda\T1/ptm/m/n/10 , 
 
@@ -1143,7 +1127,7 @@ Overfull \hbox (18.3567pt too wide) in paragraph at lines 25--27
 
 Overfull \hbox (3.3567pt too wide) in paragraph at lines 28--30
 []\T1/zi4/m/n/10 compute_sufficient_statistics_given_mu\T1/ptm/m/n/10 , 
-[82] [83]) (/tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb/Rd2.aux) )
+[82] [83]) (/tmp/Rtmp4PohQ1/Rd2pdf119f66fc09a9/Rd2.aux) )
 (see the transcript file for additional information){/usr/share/texlive/texmf-d
 ist/fonts/enc/dvips/inconsolata/i4-ts1.enc}{/usr/share/texlive/texmf-dist/fonts
 /enc/dvips/base/8r.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/inconsola
@@ -1160,8 +1144,8 @@ nts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
 w/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (83 pages, 311079 bytes).
+Output written on Rd2.pdf (83 pages, 311093 bytes).
 Transcript written on Rd2.log.
 Saving output to ‘fabMix-manual.pdf’ ...
 Done
-You may want to clean up by 'rm -rf /tmp/Rtmpb97Crs/Rd2pdf5a7d5b9b0cbb'
+You may want to clean up by 'rm -rf /tmp/Rtmp4PohQ1/Rd2pdf119f66fc09a9'
