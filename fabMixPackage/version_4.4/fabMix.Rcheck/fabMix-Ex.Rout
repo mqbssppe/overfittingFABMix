@@ -560,7 +560,7 @@ Loading required package: registry
 
 -    DONE. 
 -    (4) Computing information criteria for q = 2 
--    NOTE: using standardizing data. 
+-    NOTE: using standardized data. 
          - Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_4.4/fabMix.Rcheck/toyExample/UUU_2 
             Nclusters:    2 
             Frequency:    3 
@@ -574,7 +574,7 @@ Loading required package: registry
 
 -    DONE. 
 -    (4) Computing information criteria for q = 2 
--    NOTE: using standardizing data. 
+-    NOTE: using standardized data. 
          - Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_4.4/fabMix.Rcheck/toyExample/CCC_2 
             Nclusters:    2     3 
             Frequency:    2    1 
@@ -588,7 +588,7 @@ Loading required package: registry
     . Method                         Time (sec)           Status                         . 
     ......................................................................................
     . ECR                            0.017                OK                             . 
-    . ECR-ITERATIVE-1                0.002                Converged (2 iterations)       . 
+    . ECR-ITERATIVE-1                0.003                Converged (2 iterations)       . 
     ......................................................................................
 
     Relabelling all methods according to method ECR ... done!
@@ -617,7 +617,7 @@ The BIC for this model equals 111.942.
 
 * Run information: 
       Number of fitted models: (1 different number of factors) x (2 parameterizations) = 2 models.
-      Selected model: CCC model with K = 2 and q = 2 factors.
+      Selected model: CCC model with K = 2 clusters and q = 2 factors.
 * Estimated number of observations per cluster: 
 label
 1 4 
@@ -752,7 +752,7 @@ Loading required package: registry
 
 -    DONE. 
 -    (4) Computing information criteria for q = 2 
--    NOTE: using standardizing data. 
+-    NOTE: using standardized data. 
          - Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_4.4/fabMix.Rcheck/toyExample/UUU_2 
             Nclusters:    2 
             Frequency:    3 
@@ -766,7 +766,7 @@ Loading required package: registry
 
 -    DONE. 
 -    (4) Computing information criteria for q = 2 
--    NOTE: using standardizing data. 
+-    NOTE: using standardized data. 
          - Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_4.4/fabMix.Rcheck/toyExample/CCC_2 
             Nclusters:    2     3 
             Frequency:    2    1 
@@ -779,8 +779,8 @@ Loading required package: registry
     ......................................................................................
     . Method                         Time (sec)           Status                         . 
     ......................................................................................
-    . ECR                            0.012                OK                             . 
-    . ECR-ITERATIVE-1                0.03                 Converged (2 iterations)       . 
+    . ECR                            0.017                OK                             . 
+    . ECR-ITERATIVE-1                0.04                 Converged (2 iterations)       . 
     ......................................................................................
 
     Relabelling all methods according to method ECR ... done!
@@ -2138,7 +2138,7 @@ Simulation parameters:
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  2.368 0.117 3.03 0.767 0.325 
+Time elapsed:  2.366 0.121 3.03 0.728 0.374 
 > grDevices::dev.off()
 null device 
           1 

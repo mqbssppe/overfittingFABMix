@@ -4508,7 +4508,7 @@ getStuffForDIC <- function(sameSigma = TRUE, sameLambda = FALSE, isotropic  = FA
 	if(missing(normalize)){normalize = TRUE}
 	if(normalize){
 		x_data <- scale(x_data, center = TRUE, scale = TRUE)
-		cat('-    NOTE: using standardizing data.','\n')
+		cat('-    NOTE: using standardized data.','\n')
 	}
 	n <- dim(x_data)[1]
 	p <- dim(x_data)[2]
@@ -5826,7 +5826,7 @@ print.fabMix.object <- function(x, printSubset = TRUE, ...){
                 cat("\n")
                 cat(paste0("* Run information:"),"\n")
                 cat(paste0("      Number of fitted models: (", dim(x$bic)[1]," different number of factors) x (",dim(x$bic)[2]," parameterizations) = ",prod(dim(x$bic))," models.","\n"))
-                cat(paste0("      Selected model: ", as.character(x$selected_model$parameterization)," model with K = ", x$selected_model$num_Clusters, " and q = ", x$selected_model$num_Factors ," factors.","\n"))
+                cat(paste0("      Selected model: ", as.character(x$selected_model$parameterization)," model with K = ", x$selected_model$num_Clusters, " clusters and q = ", x$selected_model$num_Factors ," factors.","\n"))
                 cat(paste0("* Estimated number of observations per cluster:"),'\n')
                 print(table(x$class, dnn = c('label')))
 		cat('\n')
@@ -5908,7 +5908,7 @@ plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, ...)
 
 			}else{
 				k = 0
-				while(k < K){
+				while(k < K ){
 					k = k + 1
 					#ind <- which(x$class == as.numeric(names(table(x$class)))[k])
 					ind <- which(x$class == names(table(x$class))[k])
@@ -5924,7 +5924,9 @@ plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, ...)
 					points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k] + 2*sqrt(diag(sNew)), type = "l", col =  mclustColors[k], lty = 2, lwd = 2)
 					points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k] - 2*sqrt(diag(sNew)), type = "l", col =  mclustColors[k], lty = 2, lwd = 2)
 					legend("bottomleft", col = c( mclustColors[k], mclustColors[k], "gray"), c("estimated mean", "95% HDI", "assigned data"), lty = c(1,2,1), lwd = 2)
-					readline(prompt=paste0("Press ENTER to see next plot... (",k,"/",K,")"))
+					if(k < K){
+						readline(prompt=paste0("Press ENTER to see next plot... (",k + 1,"/",K,")"))
+					}
 				}
 			}
 		}
@@ -5988,7 +5990,7 @@ plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, ...)
 			}else{
 				par(mfrow = c(1,1))
 				k = 0
-				while(k < K){
+				while(k < K ){
 					k = k + 1
 					sNew <- array(data = NA, dim = c(p,p))
 					for(i in 1:p){
@@ -5997,7 +5999,9 @@ plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, ...)
 						}
 					}
 					corrplot(cov2cor(sNew),method = "ellipse", title = paste0("cluster ``", names(table(x$class))[k],"''"),  mar=c(0,0,2,0))
-					readline(prompt=paste0("Press ENTER to see next plot... (",k,"/",K,")"))
+					if(k < K){
+						readline(prompt=paste0("Press ENTER to see next plot... (",k + 1,"/",K,")"))
+					}
 				}
 			}			
 		}
