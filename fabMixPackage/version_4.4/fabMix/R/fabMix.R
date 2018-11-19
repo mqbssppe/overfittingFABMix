@@ -5884,19 +5884,26 @@ print.fabMix.object <- function(x, ...){
 
 
 #' @export
-summary.fabMix.object <- function(object, ...){
+summary.fabMix.object <- function(object, quantile_probs = c(0.025, 0.25, 0.5, 0.75, 0.975), ...){
 	if( 'fabMix.object' %in% class(object) ){
+		results <- vector("list", length = 3)
+		names(results) <- c("alive_cluster_labels", "posterior_means", "quantiles")
+		results$posterior_means <- vector("list", length = 3)
+		names(results$posterior_means) <- c("weight", "mean", "covariance_matrix")
 		cat(paste0("* ``Alive'' cluster labels:"),'\n')
 		print(names(table(object$class)))
+		results$alive_cluster_labels <- names(table(object$class))
 		cat('\n')		
 		m <- round(object$weights, 2)
 		cat(paste0('* Posterior mean of the mixing proportions:'),'\n')
 		print(m)
+		results$posterior_means$weight <- m
 		cat('\n')
 		m <- round(object$mu, 2)
 		names(dimnames(m)) <- list('Variable', 'Cluster label')
 		cat(paste0('* Posterior mean of the marginal means per cluster:'),'\n')
 		print(m)
+		results$posterior_means$mean <- m
 		cat('\n')
 		cat(paste0('* Posterior mean of the covariance matrix per cluster:'),'\n')		
 		for (k in names(table(object$class)) ){
@@ -5906,11 +5913,58 @@ summary.fabMix.object <- function(object, ...){
 			rownames(m) <- colnames(m)
 			print(m)
 		}
+		results$posterior_means$covariance_matrix <- object$covariance_matrix
 		cat('\n')
+		
+		if(is.null(quantile_probs)==FALSE){
+			cat(paste0('Quantiles for each parameter:'),'\n')
+			rp <- range(quantile_probs)
+			p <- dim(object$mu)[1]
+			if(rp[1] < 0){stop("`quantile_probs` should be between 0 and 1.")}
+			if(rp[2] > 1){stop("`quantile_probs` should be between 0 and 1.")}
+			K <- length(table(object$class))
+			class_names <- names(table(object$class))
+			nVariables <- length(object$mu) + length(object$weights) + K*(p^2 - p*(p-1)/2)
+			quants <- matrix(nrow = nVariables, ncol = length(quantile_probs))
+			colnames(quants) <- paste0(100*quantile_probs, '%')
+			covnames <- character(K*(p^2 - p*(p-1)/2))
+			cvm <- CovMat_mcmc_summary(object, quantile_probs = quantile_probs)
+			t <- 0
+			for(i in 1:p){
+				for(j in i:p){
+					kay <- 0
+					for(k in class_names){
+						kay <- kay + 1
+						t <- t + 1
+						covnames[t] <- paste0('cov_',k,'_V',i,'_V',j)
+						quants[K*p + K + t, ] <- unlist(lapply(cvm, function(x){return(c(x[i,j,kay]))}))
+					}
+				}
+			}
+			rownames(quants) <- c(	paste0('weight_',class_names),
+						paste0(paste0('mean_',class_names),'_V',rep(1:p, each = K)), 
+						covnames
+					)
+			names(dimnames(quants)) <- list('parameter', 'quantile')
+			# weights
+			w <- as.mcmc(t(apply(object$mcmc$w,1,function(x){x/sum(x)})))
+			summcmc <- summary(w, quantiles = quantile_probs)$quantiles
+			quants[1:K, ] <- as.matrix(summcmc)
+			#means
+			for(k in class_names){
+				summcmc <- summary(object$mcmc$mu[[k]], quantiles = quantile_probs)$quantiles
+				myRows <- paste0('mean_',k,'_V',1:p)
+				quants[myRows, ] <- as.matrix(summcmc)
+			}
+			results$quantiles <- quants
+			print(round(quants,3))
+		}
+		return(results)
 	}else{
 		cat(paste("    The input is not in class `fabMix.object`"),'\n')
 	}
 }
+
 
 
 
@@ -6265,4 +6319,78 @@ CorMat_mcmc_summary <- function(x, quantile_probs){
 
 }
 
+
+CovMat_mcmc_summary <- function(x, quantile_probs){
+	if( 'fabMix.object' %in% class(x) ){
+		rp <- range(quantile_probs)
+		
+		if(rp[1] < 0){stop("`quantile_probs` should be between 0 and 1.")}
+		if(rp[2] > 1){stop("`quantile_probs` should be between 0 and 1.")}
+
+		firstLetter <- strsplit(as.character(x$selected_model$parameterization), split = "")[[1]][1]
+		secondLetter <- strsplit(as.character(x$selected_model$parameterization), split = "")[[1]][2]
+		thirdLetter <- strsplit(as.character(x$selected_model$parameterization), split = "")[[1]][3]
+		K <- x$selected_model$num_Clusters
+		p <- dim(x$data)[2]
+		q <- x$selected_model$num_Factors
+		quantileList <- vector("list", length = length(quantile_probs))
+		names(quantileList) <- as.character(quantile_probs)
+		for(j in 1:length(quantile_probs)){
+			quantileList[[j]] <- array(0, dim = c(p, p, K))
+		}
+
+		for(k in 1:K){
+			if(firstLetter == 'C'){
+				l <- x$mcmc$Lambda
+			}else{
+				l <- x$mcmc$Lambda[[k]]
+			}
+			m <- dim(l)[1]
+
+			if(secondLetter == "C"){
+				if(thirdLetter == "C"){
+				# xCC
+					sigma = matrix(x$mcmc$Sigma, nrow = m, ncol = p )
+				}else{
+				# xCU
+					sigma = as.matrix(x$mcmc$Sigma)
+				}
+			}else{
+				if(thirdLetter == "C"){
+				#xUC
+					sigma = matrix(x$mcmc$Sigma[[k]], nrow = m, ncol = p )
+				}else{
+				#xUU
+					sigma = as.matrix(x$mcmc$Sigma[[k]])
+				}
+			}
+			# in all cases sigma is an m x p matrix. 
+
+
+			seqQ <- 1:q
+			for(i in 1:p){
+				for(j in i:p){
+					y <- numeric(m)
+					for(iter in 1:m){
+						x1 <- l[iter,paste0('V',i,'_F',seqQ )]
+						x2 <- l[iter,paste0('V',j,'_F',seqQ )]
+						if(j > i){ 
+							y[iter] <- sum(x1*x2) 
+						}else{
+							y[iter] <- sum(x1*x2) + sigma[iter, i]
+						}
+					}
+					quants <- as.numeric(quantile(y, probs = quantile_probs))
+					for(h in 1:length(quantile_probs)){
+						quantileList[[h]][i,j,k] <- quantileList[[h]][j,i,k] <- quants[h]
+					}
+				}
+			}
+		}
+		return(quantileList)
+        }else{
+                cat(paste("    The input is not in class `fabMix.object`"),'\n')
+        }
+
+}
 

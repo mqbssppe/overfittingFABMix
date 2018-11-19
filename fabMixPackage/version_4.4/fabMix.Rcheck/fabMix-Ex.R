@@ -649,7 +649,7 @@ fm <- fabMix( model = c("UUU", "CCC"), nChains = nChains,
 ##D plot(fm, what = "BIC")
 ##D plot(fm, what = "classification_pairs")
 ##D # see also
-##D # plot(fm)
+##D # plot(fm); summary(fm)
 ##D 
 ## End(Not run)
 

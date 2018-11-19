@@ -224,7 +224,7 @@ print(fm)
 plot(fm, what = "BIC")
 plot(fm, what = "classification_pairs")
 # see also
-# plot(fm)
+# plot(fm); summary(fm)
 
 }
 

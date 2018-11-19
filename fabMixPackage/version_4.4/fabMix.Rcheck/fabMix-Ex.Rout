@@ -587,8 +587,8 @@ Loading required package: registry
     ......................................................................................
     . Method                         Time (sec)           Status                         . 
     ......................................................................................
-    . ECR                            0.019                OK                             . 
-    . ECR-ITERATIVE-1                0.003                Converged (2 iterations)       . 
+    . ECR                            0.022                OK                             . 
+    . ECR-ITERATIVE-1                0.002                Converged (2 iterations)       . 
     ......................................................................................
 
     Relabelling all methods according to method ECR ... done!
@@ -778,8 +778,8 @@ Loading required package: registry
     ......................................................................................
     . Method                         Time (sec)           Status                         . 
     ......................................................................................
-    . ECR                            0.011                OK                             . 
-    . ECR-ITERATIVE-1                0.029                Converged (2 iterations)       . 
+    . ECR                            0.01                 OK                             . 
+    . ECR-ITERATIVE-1                0.031                Converged (2 iterations)       . 
     ......................................................................................
 
     Relabelling all methods according to method ECR ... done!
@@ -839,7 +839,7 @@ The BIC for this model equals 111.942.
 > ##D plot(fm, what = "BIC")
 > ##D plot(fm, what = "classification_pairs")
 > ##D # see also
-> ##D # plot(fm)
+> ##D # plot(fm); summary(fm)
 > ##D 
 > ## End(Not run)
 > 
@@ -2137,7 +2137,7 @@ Simulation parameters:
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  2.505 0.153 3.198 0.779 0.322 
+Time elapsed:  2.698 0.124 3.4 0.798 0.349 
 > grDevices::dev.off()
 null device 
           1 

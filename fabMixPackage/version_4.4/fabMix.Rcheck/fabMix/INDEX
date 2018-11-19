@@ -1,4 +1,5 @@
 CorMat_mcmc_summary     Compute quantiles for the correlation matrix.
+CovMat_mcmc_summary     Compute quantiles for the covariance matrix.
 complete.log.likelihood
                         Complete log-likelihood function for xCx
                         models.
