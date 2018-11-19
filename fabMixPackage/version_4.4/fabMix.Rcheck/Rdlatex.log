@@ -91,65 +91,64 @@ y-sis, 124: 220-234. DOI: 10.1016/j.csda.2018.03.007.
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [17]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [18]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [19]
-Overfull \hbox (21.31825pt too wide) in paragraph at lines 1063--1064
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (21.31825pt too wide) in paragraph at lines 1098--1099
 []\T1/ptm/m/n/10 This func-tions is a wrap-per for the \T1/zi4/m/n/10 label.swi
 tching \T1/ptm/m/n/10 pack-age and ap-plies the \T1/zi4/m/n/10 ECR \T1/ptm/m/n/
 10 and \T1/zi4/m/n/10 ECR.ITERATIVE.1
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [20]
-Overfull \hbox (13.21764pt too wide) in paragraph at lines 1136--1137
+[20] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (13.21764pt too wide) in paragraph at lines 1171--1172
 []\T1/ptm/m/n/10 The num-ber of par-al-lel heated chains. When `dirPri-o-rAl-ph
 as` is sup-plied, `nChains`
-
-Overfull \hbox (31.72931pt too wide) in paragraph at lines 1139--1140
+[21]
+Overfull \hbox (31.72931pt too wide) in paragraph at lines 1174--1175
 \T1/ptm/m/n/10 re-spond-ing chain. De-fault: \T1/zi4/m/n/10 dirPriorAlphas = c(
 1, 1 + dN*(2:nChains - 1))/Kmax\T1/ptm/m/n/10 ,
 
-Overfull \hbox (2.02823pt too wide) in paragraph at lines 1172--1173
+Overfull \hbox (2.02823pt too wide) in paragraph at lines 1207--1208
 []\T1/ptm/m/n/10 Should the ob-served data be nor-mal-ized? De-fault value: TRU
 E. (Rec-om-mended) 
-[21] [22] [23]
-Overfull \hbox (54.50716pt too wide) in paragraph at lines 1264--1265
+[22] [23] [24]
+Overfull \hbox (54.50716pt too wide) in paragraph at lines 1301--1302
 \T1/ptm/m/n/10 ber of com-po-nents. Com-pu-ta-tional Statis-tics and Data Anal-
 y-sis, 124: 220-234. DOI: 10.1016/j.csda.2018.03.007. 
-[24]
-Underfull \vbox (badness 10000) has occurred while \output is active [25]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [26]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 1459--1460
+[25] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [26] [27]
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 1496--1497
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [27] [28]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 1566--1567
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [28]
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 1603--1604
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [29]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 1666--1667
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [29] [30]
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 1703--1704
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-Overfull \hbox (19.76044pt too wide) in paragraph at lines 1681--1681
+Overfull \hbox (19.76044pt too wide) in paragraph at lines 1718--1718
  []\T1/zi4/m/n/10 fabMix_parallelModels(model, nChains, dirPriorAlphas, rawData
 , outDir, Kmax, mCycles,[] 
-[30]
-Overfull \hbox (13.21764pt too wide) in paragraph at lines 1695--1696
+
+Overfull \hbox (13.21764pt too wide) in paragraph at lines 1732--1733
 []\T1/ptm/m/n/10 The num-ber of par-al-lel heated chains. When `dirPri-o-rAl-ph
 as` is sup-plied, `nChains`
 
-Overfull \hbox (31.72931pt too wide) in paragraph at lines 1698--1699
+Overfull \hbox (31.72931pt too wide) in paragraph at lines 1735--1736
 \T1/ptm/m/n/10 re-spond-ing chain. De-fault: \T1/zi4/m/n/10 dirPriorAlphas = c(
 1, 1 + dN*(2:nChains - 1))/Kmax\T1/ptm/m/n/10 ,
-
-Overfull \hbox (2.02823pt too wide) in paragraph at lines 1731--1732
+[31]
+Overfull \hbox (2.02823pt too wide) in paragraph at lines 1768--1769
 []\T1/ptm/m/n/10 Should the ob-served data be nor-mal-ized? De-fault value: TRU
 E. (Rec-om-mended) 
-[31] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [32]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 1877--1878
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [32] [33]
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 1914--1915
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
-[33] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [34]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 1984--1985
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [34]
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 2021--2022
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [35] [36]
+[35] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [36]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [37]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [38]
@@ -159,96 +158,97 @@ Overfull \hbox (8.33775pt too wide) in paragraph at lines 1984--1985
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [42]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [43] [44]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [45]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [46]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [47] [48]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-Overfull \hbox (38.10059pt too wide) in paragraph at lines 2891--2891
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [46] [47]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [48]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [49]
+Overfull \hbox (38.10059pt too wide) in paragraph at lines 2928--2928
  []\T1/zi4/m/n/10 overfittingMFA_missing_values(missing_entries, x_data, origin
 alX, outputDirectory, Kmax,[] 
-[49] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [50]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [51]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [52] [53]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [54]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [50] [51]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [52]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [53] [54]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [55]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [56]
-Overfull \hbox (19.76044pt too wide) in paragraph at lines 3431--3431
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (19.76044pt too wide) in paragraph at lines 3468--3468
  []\T1/zi4/m/n/10 overfitting_q0_sameSigma(x_data, originalX, outputDirectory, 
 Kmax, m, thinning, burn,[] 
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [57]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [58]
+[57] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [58]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [59]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-Overfull \hbox (26.42029pt too wide) in paragraph at lines 3627--3627
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (26.42029pt too wide) in paragraph at lines 3664--3664
  []\T1/zi4/m/n/10 simData(sameSigma, sameLambda, p, q, K.true, n, loading_means
 , loading_sd, sINV_values)[] 
-[60] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [61]
+[60] [61] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [62]
-Overfull \hbox (8.23181pt too wide) in paragraph at lines 3841--3841
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [63]
+Overfull \hbox (8.23181pt too wide) in paragraph at lines 3912--3912
  []        \T1/zi4/m/n/9 diag(SigmaINV[k,,]) <- 1/diag(syntheticDataset$varianc
 e) + rgamma(p, shape=1, rate = 1)[] 
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+[64] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3854
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3925
 .
 
-[63]
-Overfull \hbox (8.23181pt too wide) in paragraph at lines 3905--3905
+
+Overfull \hbox (8.23181pt too wide) in paragraph at lines 3976--3976
  []        \T1/zi4/m/n/9 diag(SigmaINV[k,,]) <- 1/diag(syntheticDataset$varianc
 e) + rgamma(p, shape=1, rate = 1)[] 
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3915
-.
-
-[64]
-Overfull \hbox (8.23181pt too wide) in paragraph at lines 3966--3966
- []        \T1/zi4/m/n/9 diag(SigmaINV[k,,]) <- 1/diag(syntheticDataset$varianc
-e) + rgamma(p, shape=1, rate = 1)[] 
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3978
-.
-
 [65] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4052
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3986
 .
 
+
+Overfull \hbox (8.23181pt too wide) in paragraph at lines 4037--4037
+ []        \T1/zi4/m/n/9 diag(SigmaINV[k,,]) <- 1/diag(syntheticDataset$varianc
+e) + rgamma(p, shape=1, rate = 1)[] 
 [66] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4095
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4049
 .
 
 [67] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4138
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4123
 .
 
 [68] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4212
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4166
 .
 
-[69] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4286
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4209
 .
 
-[70] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [71]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [72]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [73]
+[69] [70] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4283
+.
+
+[71] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4357
+.
+
+[72] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [73]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [74]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [75] [76]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [75]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [76]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [77]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [78]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [79]
-Overfull \hbox (6.77829pt too wide) in paragraph at lines 4870--4871
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [80]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (6.77829pt too wide) in paragraph at lines 4941--4942
 []\T1/ptm/m/n/10 Lichman, M. (2013). UCI Ma-chine Learn-ing Repos-i-tory [][]$\
 T1/zi4/m/n/10 http : / / archive . ics . uci . edu / ml$[][]\T1/ptm/m/n/10 . Ir
 vine,
 No file Rd2.ind.
-[80] (/tmp/RtmpZfgXNR/Rd2pdf42a752e6e7b6/Rd2.aux)
+[81] (/tmp/Rtmp5R96W4/Rd2pdf214d77a78e72/Rd2.aux)
 
 Package rerunfilecheck Warning: File `Rd2.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
@@ -271,7 +271,7 @@ nts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
 w/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (80 pages, 296752 bytes).
+Output written on Rd2.pdf (81 pages, 299796 bytes).
 Transcript written on Rd2.log.
 This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex)
  restricted \write18 enabled.
@@ -330,19 +330,19 @@ Package hyperref Warning: Option `pagebackref' has already been used,
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.dfu))
 (/usr/share/texlive/texmf-dist/tex/latex/base/latin1.def))
 Writing index file Rd2.idx
-(/tmp/RtmpZfgXNR/Rd2pdf42a752e6e7b6/Rd2.aux)
+(/tmp/Rtmp5R96W4/Rd2pdf214d77a78e72/Rd2.aux)
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 ) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty))
-(/tmp/RtmpZfgXNR/Rd2pdf42a752e6e7b6/Rd2.out)
-(/tmp/RtmpZfgXNR/Rd2pdf42a752e6e7b6/Rd2.out)
+(/tmp/Rtmp5R96W4/Rd2pdf214d77a78e72/Rd2.out)
+(/tmp/Rtmp5R96W4/Rd2pdf214d77a78e72/Rd2.out)
 (/usr/share/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd)
-(/tmp/RtmpZfgXNR/Rd2pdf42a752e6e7b6/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/
+(/tmp/Rtmp5R96W4/Rd2pdf214d77a78e72/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/
 updmap/pdftex.map}] [2]) (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 ) [3]
 Overfull \hbox (40.3775pt too wide) in paragraph at lines 51--52
@@ -368,65 +368,64 @@ Underfull \vbox (badness 10000) has occurred while \output is active [5]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [18]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [19]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [20]
-Overfull \hbox (21.31825pt too wide) in paragraph at lines 1063--1064
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (21.31825pt too wide) in paragraph at lines 1098--1099
 []\T1/ptm/m/n/10 This func-tions is a wrap-per for the \T1/zi4/m/n/10 label.swi
 tching \T1/ptm/m/n/10 pack-age and ap-plies the \T1/zi4/m/n/10 ECR \T1/ptm/m/n/
 10 and \T1/zi4/m/n/10 ECR.ITERATIVE.1
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [21]
-Overfull \hbox (13.21764pt too wide) in paragraph at lines 1136--1137
+[21] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (13.21764pt too wide) in paragraph at lines 1171--1172
 []\T1/ptm/m/n/10 The num-ber of par-al-lel heated chains. When `dirPri-o-rAl-ph
 as` is sup-plied, `nChains`
-
-Overfull \hbox (31.72931pt too wide) in paragraph at lines 1139--1140
+[22]
+Overfull \hbox (31.72931pt too wide) in paragraph at lines 1174--1175
 \T1/ptm/m/n/10 re-spond-ing chain. De-fault: \T1/zi4/m/n/10 dirPriorAlphas = c(
 1, 1 + dN*(2:nChains - 1))/Kmax\T1/ptm/m/n/10 ,
 
-Overfull \hbox (2.02823pt too wide) in paragraph at lines 1172--1173
+Overfull \hbox (2.02823pt too wide) in paragraph at lines 1207--1208
 []\T1/ptm/m/n/10 Should the ob-served data be nor-mal-ized? De-fault value: TRU
 E. (Rec-om-mended) 
-[22] [23] [24]
-Overfull \hbox (54.50716pt too wide) in paragraph at lines 1264--1265
+[23] [24] [25]
+Overfull \hbox (54.50716pt too wide) in paragraph at lines 1301--1302
 \T1/ptm/m/n/10 ber of com-po-nents. Com-pu-ta-tional Statis-tics and Data Anal-
 y-sis, 124: 220-234. DOI: 10.1016/j.csda.2018.03.007. 
-[25]
-Underfull \vbox (badness 10000) has occurred while \output is active [26]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [27]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 1459--1460
+[26] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [27] [28]
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 1496--1497
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [28] [29]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 1566--1567
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [29]
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 1603--1604
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [30]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 1666--1667
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [30] [31]
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 1703--1704
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-Overfull \hbox (19.76044pt too wide) in paragraph at lines 1681--1681
+Overfull \hbox (19.76044pt too wide) in paragraph at lines 1718--1718
  []\T1/zi4/m/n/10 fabMix_parallelModels(model, nChains, dirPriorAlphas, rawData
 , outDir, Kmax, mCycles,[] 
-[31]
-Overfull \hbox (13.21764pt too wide) in paragraph at lines 1695--1696
+
+Overfull \hbox (13.21764pt too wide) in paragraph at lines 1732--1733
 []\T1/ptm/m/n/10 The num-ber of par-al-lel heated chains. When `dirPri-o-rAl-ph
 as` is sup-plied, `nChains`
 
-Overfull \hbox (31.72931pt too wide) in paragraph at lines 1698--1699
+Overfull \hbox (31.72931pt too wide) in paragraph at lines 1735--1736
 \T1/ptm/m/n/10 re-spond-ing chain. De-fault: \T1/zi4/m/n/10 dirPriorAlphas = c(
 1, 1 + dN*(2:nChains - 1))/Kmax\T1/ptm/m/n/10 ,
-
-Overfull \hbox (2.02823pt too wide) in paragraph at lines 1731--1732
+[32]
+Overfull \hbox (2.02823pt too wide) in paragraph at lines 1768--1769
 []\T1/ptm/m/n/10 Should the ob-served data be nor-mal-ized? De-fault value: TRU
 E. (Rec-om-mended) 
-[32] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [33]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 1877--1878
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [33] [34]
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 1914--1915
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
-[34] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [35]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 1984--1985
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [35]
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 2021--2022
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [36] [37]
+[36] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [37]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [38]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [39]
@@ -436,96 +435,97 @@ Overfull \hbox (8.33775pt too wide) in paragraph at lines 1984--1985
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [43]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [44] [45]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [46]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [47]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [48] [49]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-Overfull \hbox (38.10059pt too wide) in paragraph at lines 2891--2891
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [47] [48]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [49]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [50]
+Overfull \hbox (38.10059pt too wide) in paragraph at lines 2928--2928
  []\T1/zi4/m/n/10 overfittingMFA_missing_values(missing_entries, x_data, origin
 alX, outputDirectory, Kmax,[] 
-[50] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [51]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [52]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [53] [54]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [55]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [51] [52]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [53]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [54] [55]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [56]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [57]
-Overfull \hbox (19.76044pt too wide) in paragraph at lines 3431--3431
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (19.76044pt too wide) in paragraph at lines 3468--3468
  []\T1/zi4/m/n/10 overfitting_q0_sameSigma(x_data, originalX, outputDirectory, 
 Kmax, m, thinning, burn,[] 
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [58]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [59]
+[58] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [59]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [60]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-Overfull \hbox (26.42029pt too wide) in paragraph at lines 3627--3627
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (26.42029pt too wide) in paragraph at lines 3664--3664
  []\T1/zi4/m/n/10 simData(sameSigma, sameLambda, p, q, K.true, n, loading_means
 , loading_sd, sINV_values)[] 
-[61] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [62]
+[61] [62] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [63]
-Overfull \hbox (8.23181pt too wide) in paragraph at lines 3841--3841
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [64]
+Overfull \hbox (8.23181pt too wide) in paragraph at lines 3912--3912
  []        \T1/zi4/m/n/9 diag(SigmaINV[k,,]) <- 1/diag(syntheticDataset$varianc
 e) + rgamma(p, shape=1, rate = 1)[] 
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+[65] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3854
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3925
 .
 
-[64]
-Overfull \hbox (8.23181pt too wide) in paragraph at lines 3905--3905
+
+Overfull \hbox (8.23181pt too wide) in paragraph at lines 3976--3976
  []        \T1/zi4/m/n/9 diag(SigmaINV[k,,]) <- 1/diag(syntheticDataset$varianc
 e) + rgamma(p, shape=1, rate = 1)[] 
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3915
-.
-
-[65]
-Overfull \hbox (8.23181pt too wide) in paragraph at lines 3966--3966
- []        \T1/zi4/m/n/9 diag(SigmaINV[k,,]) <- 1/diag(syntheticDataset$varianc
-e) + rgamma(p, shape=1, rate = 1)[] 
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3978
-.
-
 [66] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4052
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3986
 .
 
+
+Overfull \hbox (8.23181pt too wide) in paragraph at lines 4037--4037
+ []        \T1/zi4/m/n/9 diag(SigmaINV[k,,]) <- 1/diag(syntheticDataset$varianc
+e) + rgamma(p, shape=1, rate = 1)[] 
 [67] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4095
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4049
 .
 
 [68] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4138
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4123
 .
 
 [69] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4212
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4166
 .
 
-[70] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4286
-.
-
-[71] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [72]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [73]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [74]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [75]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [76] [77]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [78]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4209
+.
+
+[70] [71] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4283
+.
+
+[72] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4357
+.
+
+[73] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [74]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [75]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [76]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [77]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [78]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [79]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [80]
-Overfull \hbox (6.77829pt too wide) in paragraph at lines 4870--4871
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [81]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (6.77829pt too wide) in paragraph at lines 4941--4942
 []\T1/ptm/m/n/10 Lichman, M. (2013). UCI Ma-chine Learn-ing Repos-i-tory [][]$\
 T1/zi4/m/n/10 http : / / archive . ics . uci . edu / ml$[][]\T1/ptm/m/n/10 . Ir
 vine,
 No file Rd2.ind.
-[81] (/tmp/RtmpZfgXNR/Rd2pdf42a752e6e7b6/Rd2.aux) )
+[82] (/tmp/Rtmp5R96W4/Rd2pdf214d77a78e72/Rd2.aux) )
 (see the transcript file for additional information){/usr/share/texlive/texmf-d
 ist/fonts/enc/dvips/inconsolata/i4-ts1.enc}{/usr/share/texlive/texmf-dist/fonts
 /enc/dvips/base/8r.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/inconsola
@@ -542,12 +542,12 @@ nts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
 w/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (81 pages, 303925 bytes).
+Output written on Rd2.pdf (82 pages, 307239 bytes).
 Transcript written on Rd2.log.
 This is makeindex, version 2.15 [TeX Live 2017] (kpathsea + Thai support).
-Scanning input file Rd2.idx....done (81 entries accepted, 0 rejected).
-Sorting entries....done (555 comparisons).
-Generating output file Rd2.ind....done (124 lines written, 0 warnings).
+Scanning input file Rd2.idx....done (83 entries accepted, 0 rejected).
+Sorting entries....done (559 comparisons).
+Generating output file Rd2.ind....done (126 lines written, 0 warnings).
 Output written in Rd2.ind.
 Transcript written in Rd2.ilg.
 This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex)
@@ -607,19 +607,19 @@ Package hyperref Warning: Option `pagebackref' has already been used,
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.dfu))
 (/usr/share/texlive/texmf-dist/tex/latex/base/latin1.def))
 Writing index file Rd2.idx
-(/tmp/RtmpZfgXNR/Rd2pdf42a752e6e7b6/Rd2.aux)
+(/tmp/Rtmp5R96W4/Rd2pdf214d77a78e72/Rd2.aux)
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 ) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty))
-(/tmp/RtmpZfgXNR/Rd2pdf42a752e6e7b6/Rd2.out)
-(/tmp/RtmpZfgXNR/Rd2pdf42a752e6e7b6/Rd2.out)
+(/tmp/Rtmp5R96W4/Rd2pdf214d77a78e72/Rd2.out)
+(/tmp/Rtmp5R96W4/Rd2pdf214d77a78e72/Rd2.out)
 (/usr/share/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd)
-(/tmp/RtmpZfgXNR/Rd2pdf42a752e6e7b6/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/
+(/tmp/Rtmp5R96W4/Rd2pdf214d77a78e72/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/
 updmap/pdftex.map}] [2]) (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 ) [3]
 Overfull \hbox (40.3775pt too wide) in paragraph at lines 51--52
@@ -645,65 +645,64 @@ Underfull \vbox (badness 10000) has occurred while \output is active [5]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [18]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [19]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [20]
-Overfull \hbox (21.31825pt too wide) in paragraph at lines 1063--1064
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (21.31825pt too wide) in paragraph at lines 1098--1099
 []\T1/ptm/m/n/10 This func-tions is a wrap-per for the \T1/zi4/m/n/10 label.swi
 tching \T1/ptm/m/n/10 pack-age and ap-plies the \T1/zi4/m/n/10 ECR \T1/ptm/m/n/
 10 and \T1/zi4/m/n/10 ECR.ITERATIVE.1
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [21]
-Overfull \hbox (13.21764pt too wide) in paragraph at lines 1136--1137
+[21] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (13.21764pt too wide) in paragraph at lines 1171--1172
 []\T1/ptm/m/n/10 The num-ber of par-al-lel heated chains. When `dirPri-o-rAl-ph
 as` is sup-plied, `nChains`
-
-Overfull \hbox (31.72931pt too wide) in paragraph at lines 1139--1140
+[22]
+Overfull \hbox (31.72931pt too wide) in paragraph at lines 1174--1175
 \T1/ptm/m/n/10 re-spond-ing chain. De-fault: \T1/zi4/m/n/10 dirPriorAlphas = c(
 1, 1 + dN*(2:nChains - 1))/Kmax\T1/ptm/m/n/10 ,
 
-Overfull \hbox (2.02823pt too wide) in paragraph at lines 1172--1173
+Overfull \hbox (2.02823pt too wide) in paragraph at lines 1207--1208
 []\T1/ptm/m/n/10 Should the ob-served data be nor-mal-ized? De-fault value: TRU
 E. (Rec-om-mended) 
-[22] [23] [24]
-Overfull \hbox (54.50716pt too wide) in paragraph at lines 1264--1265
+[23] [24] [25]
+Overfull \hbox (54.50716pt too wide) in paragraph at lines 1301--1302
 \T1/ptm/m/n/10 ber of com-po-nents. Com-pu-ta-tional Statis-tics and Data Anal-
 y-sis, 124: 220-234. DOI: 10.1016/j.csda.2018.03.007. 
-[25]
-Underfull \vbox (badness 10000) has occurred while \output is active [26]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [27]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 1459--1460
+[26] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [27] [28]
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 1496--1497
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [28] [29]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 1566--1567
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [29]
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 1603--1604
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [30]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 1666--1667
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [30] [31]
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 1703--1704
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-Overfull \hbox (19.76044pt too wide) in paragraph at lines 1681--1681
+Overfull \hbox (19.76044pt too wide) in paragraph at lines 1718--1718
  []\T1/zi4/m/n/10 fabMix_parallelModels(model, nChains, dirPriorAlphas, rawData
 , outDir, Kmax, mCycles,[] 
-[31]
-Overfull \hbox (13.21764pt too wide) in paragraph at lines 1695--1696
+
+Overfull \hbox (13.21764pt too wide) in paragraph at lines 1732--1733
 []\T1/ptm/m/n/10 The num-ber of par-al-lel heated chains. When `dirPri-o-rAl-ph
 as` is sup-plied, `nChains`
 
-Overfull \hbox (31.72931pt too wide) in paragraph at lines 1698--1699
+Overfull \hbox (31.72931pt too wide) in paragraph at lines 1735--1736
 \T1/ptm/m/n/10 re-spond-ing chain. De-fault: \T1/zi4/m/n/10 dirPriorAlphas = c(
 1, 1 + dN*(2:nChains - 1))/Kmax\T1/ptm/m/n/10 ,
-
-Overfull \hbox (2.02823pt too wide) in paragraph at lines 1731--1732
+[32]
+Overfull \hbox (2.02823pt too wide) in paragraph at lines 1768--1769
 []\T1/ptm/m/n/10 Should the ob-served data be nor-mal-ized? De-fault value: TRU
 E. (Rec-om-mended) 
-[32] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [33]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 1877--1878
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [33] [34]
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 1914--1915
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
-[34] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [35]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 1984--1985
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [35]
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 2021--2022
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [36] [37]
+[36] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [37]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [38]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [39]
@@ -713,95 +712,96 @@ Overfull \hbox (8.33775pt too wide) in paragraph at lines 1984--1985
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [43]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [44] [45]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [46]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [47]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [48] [49]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-Overfull \hbox (38.10059pt too wide) in paragraph at lines 2891--2891
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [47] [48]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [49]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [50]
+Overfull \hbox (38.10059pt too wide) in paragraph at lines 2928--2928
  []\T1/zi4/m/n/10 overfittingMFA_missing_values(missing_entries, x_data, origin
 alX, outputDirectory, Kmax,[] 
-[50] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [51]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [52]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [53] [54]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [55]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [51] [52]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [53]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [54] [55]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [56]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [57]
-Overfull \hbox (19.76044pt too wide) in paragraph at lines 3431--3431
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (19.76044pt too wide) in paragraph at lines 3468--3468
  []\T1/zi4/m/n/10 overfitting_q0_sameSigma(x_data, originalX, outputDirectory, 
 Kmax, m, thinning, burn,[] 
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [58]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [59]
+[58] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [59]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [60]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-Overfull \hbox (26.42029pt too wide) in paragraph at lines 3627--3627
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (26.42029pt too wide) in paragraph at lines 3664--3664
  []\T1/zi4/m/n/10 simData(sameSigma, sameLambda, p, q, K.true, n, loading_means
 , loading_sd, sINV_values)[] 
-[61] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [62]
+[61] [62] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [63]
-Overfull \hbox (8.23181pt too wide) in paragraph at lines 3841--3841
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [64]
+Overfull \hbox (8.23181pt too wide) in paragraph at lines 3912--3912
  []        \T1/zi4/m/n/9 diag(SigmaINV[k,,]) <- 1/diag(syntheticDataset$varianc
 e) + rgamma(p, shape=1, rate = 1)[] 
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+[65] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3854
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3925
 .
 
-[64]
-Overfull \hbox (8.23181pt too wide) in paragraph at lines 3905--3905
+
+Overfull \hbox (8.23181pt too wide) in paragraph at lines 3976--3976
  []        \T1/zi4/m/n/9 diag(SigmaINV[k,,]) <- 1/diag(syntheticDataset$varianc
 e) + rgamma(p, shape=1, rate = 1)[] 
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3915
-.
-
-[65]
-Overfull \hbox (8.23181pt too wide) in paragraph at lines 3966--3966
- []        \T1/zi4/m/n/9 diag(SigmaINV[k,,]) <- 1/diag(syntheticDataset$varianc
-e) + rgamma(p, shape=1, rate = 1)[] 
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3978
-.
-
 [66] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4052
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3986
 .
 
+
+Overfull \hbox (8.23181pt too wide) in paragraph at lines 4037--4037
+ []        \T1/zi4/m/n/9 diag(SigmaINV[k,,]) <- 1/diag(syntheticDataset$varianc
+e) + rgamma(p, shape=1, rate = 1)[] 
 [67] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4095
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4049
 .
 
 [68] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4138
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4123
 .
 
 [69] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4212
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4166
 .
 
-[70] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4286
-.
-
-[71] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [72]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [73]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [74]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [75]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [76] [77]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [78]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4209
+.
+
+[70] [71] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4283
+.
+
+[72] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4357
+.
+
+[73] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [74]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [75]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [76]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [77]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [78]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [79]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [80]
-Overfull \hbox (6.77829pt too wide) in paragraph at lines 4870--4871
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [81]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (6.77829pt too wide) in paragraph at lines 4941--4942
 []\T1/ptm/m/n/10 Lichman, M. (2013). UCI Ma-chine Learn-ing Repos-i-tory [][]$\
 T1/zi4/m/n/10 http : / / archive . ics . uci . edu / ml$[][]\T1/ptm/m/n/10 . Ir
 vine,
-(/tmp/RtmpZfgXNR/Rd2pdf42a752e6e7b6/Rd2.ind [81]
+(/tmp/Rtmp5R96W4/Rd2pdf214d77a78e72/Rd2.ind [82]
 Overfull \hbox (3.3567pt too wide) in paragraph at lines 15--17
 []\T1/zi4/m/n/10 compute_A_B_G_D_and_simulate_mu_Lambda\T1/ptm/m/n/10 , 
 
@@ -823,7 +823,7 @@ Overfull \hbox (18.3567pt too wide) in paragraph at lines 25--27
 
 Overfull \hbox (3.3567pt too wide) in paragraph at lines 28--30
 []\T1/zi4/m/n/10 compute_sufficient_statistics_given_mu\T1/ptm/m/n/10 , 
-[82] [83]) (/tmp/RtmpZfgXNR/Rd2pdf42a752e6e7b6/Rd2.aux)
+[83] [84]) (/tmp/Rtmp5R96W4/Rd2pdf214d77a78e72/Rd2.aux)
 
 Package rerunfilecheck Warning: File `Rd2.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
@@ -846,12 +846,12 @@ nts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
 w/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (83 pages, 309986 bytes).
+Output written on Rd2.pdf (84 pages, 313950 bytes).
 Transcript written on Rd2.log.
 This is makeindex, version 2.15 [TeX Live 2017] (kpathsea + Thai support).
-Scanning input file Rd2.idx....done (81 entries accepted, 0 rejected).
-Sorting entries....done (555 comparisons).
-Generating output file Rd2.ind....done (124 lines written, 0 warnings).
+Scanning input file Rd2.idx....done (83 entries accepted, 0 rejected).
+Sorting entries....done (559 comparisons).
+Generating output file Rd2.ind....done (126 lines written, 0 warnings).
 Output written in Rd2.ind.
 Transcript written in Rd2.ilg.
 This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex)
@@ -911,19 +911,19 @@ Package hyperref Warning: Option `pagebackref' has already been used,
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.dfu))
 (/usr/share/texlive/texmf-dist/tex/latex/base/latin1.def))
 Writing index file Rd2.idx
-(/tmp/RtmpZfgXNR/Rd2pdf42a752e6e7b6/Rd2.aux)
+(/tmp/Rtmp5R96W4/Rd2pdf214d77a78e72/Rd2.aux)
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 ) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty))
-(/tmp/RtmpZfgXNR/Rd2pdf42a752e6e7b6/Rd2.out)
-(/tmp/RtmpZfgXNR/Rd2pdf42a752e6e7b6/Rd2.out)
+(/tmp/Rtmp5R96W4/Rd2pdf214d77a78e72/Rd2.out)
+(/tmp/Rtmp5R96W4/Rd2pdf214d77a78e72/Rd2.out)
 (/usr/share/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd)
-(/tmp/RtmpZfgXNR/Rd2pdf42a752e6e7b6/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/
+(/tmp/Rtmp5R96W4/Rd2pdf214d77a78e72/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/
 updmap/pdftex.map}] [2]) (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 ) [3]
 Overfull \hbox (40.3775pt too wide) in paragraph at lines 51--52
@@ -949,65 +949,64 @@ Underfull \vbox (badness 10000) has occurred while \output is active [5]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [18]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [19]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [20]
-Overfull \hbox (21.31825pt too wide) in paragraph at lines 1063--1064
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (21.31825pt too wide) in paragraph at lines 1098--1099
 []\T1/ptm/m/n/10 This func-tions is a wrap-per for the \T1/zi4/m/n/10 label.swi
 tching \T1/ptm/m/n/10 pack-age and ap-plies the \T1/zi4/m/n/10 ECR \T1/ptm/m/n/
 10 and \T1/zi4/m/n/10 ECR.ITERATIVE.1
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [21]
-Overfull \hbox (13.21764pt too wide) in paragraph at lines 1136--1137
+[21] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (13.21764pt too wide) in paragraph at lines 1171--1172
 []\T1/ptm/m/n/10 The num-ber of par-al-lel heated chains. When `dirPri-o-rAl-ph
 as` is sup-plied, `nChains`
-
-Overfull \hbox (31.72931pt too wide) in paragraph at lines 1139--1140
+[22]
+Overfull \hbox (31.72931pt too wide) in paragraph at lines 1174--1175
 \T1/ptm/m/n/10 re-spond-ing chain. De-fault: \T1/zi4/m/n/10 dirPriorAlphas = c(
 1, 1 + dN*(2:nChains - 1))/Kmax\T1/ptm/m/n/10 ,
 
-Overfull \hbox (2.02823pt too wide) in paragraph at lines 1172--1173
+Overfull \hbox (2.02823pt too wide) in paragraph at lines 1207--1208
 []\T1/ptm/m/n/10 Should the ob-served data be nor-mal-ized? De-fault value: TRU
 E. (Rec-om-mended) 
-[22] [23] [24]
-Overfull \hbox (54.50716pt too wide) in paragraph at lines 1264--1265
+[23] [24] [25]
+Overfull \hbox (54.50716pt too wide) in paragraph at lines 1301--1302
 \T1/ptm/m/n/10 ber of com-po-nents. Com-pu-ta-tional Statis-tics and Data Anal-
 y-sis, 124: 220-234. DOI: 10.1016/j.csda.2018.03.007. 
-[25]
-Underfull \vbox (badness 10000) has occurred while \output is active [26]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [27]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 1459--1460
+[26] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [27] [28]
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 1496--1497
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [28] [29]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 1566--1567
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [29]
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 1603--1604
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [30]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 1666--1667
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [30] [31]
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 1703--1704
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-Overfull \hbox (19.76044pt too wide) in paragraph at lines 1681--1681
+Overfull \hbox (19.76044pt too wide) in paragraph at lines 1718--1718
  []\T1/zi4/m/n/10 fabMix_parallelModels(model, nChains, dirPriorAlphas, rawData
 , outDir, Kmax, mCycles,[] 
-[31]
-Overfull \hbox (13.21764pt too wide) in paragraph at lines 1695--1696
+
+Overfull \hbox (13.21764pt too wide) in paragraph at lines 1732--1733
 []\T1/ptm/m/n/10 The num-ber of par-al-lel heated chains. When `dirPri-o-rAl-ph
 as` is sup-plied, `nChains`
 
-Overfull \hbox (31.72931pt too wide) in paragraph at lines 1698--1699
+Overfull \hbox (31.72931pt too wide) in paragraph at lines 1735--1736
 \T1/ptm/m/n/10 re-spond-ing chain. De-fault: \T1/zi4/m/n/10 dirPriorAlphas = c(
 1, 1 + dN*(2:nChains - 1))/Kmax\T1/ptm/m/n/10 ,
-
-Overfull \hbox (2.02823pt too wide) in paragraph at lines 1731--1732
+[32]
+Overfull \hbox (2.02823pt too wide) in paragraph at lines 1768--1769
 []\T1/ptm/m/n/10 Should the ob-served data be nor-mal-ized? De-fault value: TRU
 E. (Rec-om-mended) 
-[32] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [33]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 1877--1878
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [33] [34]
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 1914--1915
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
-[34] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [35]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 1984--1985
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [35]
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 2021--2022
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [36] [37]
+[36] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [37]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [38]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [39]
@@ -1017,95 +1016,96 @@ Overfull \hbox (8.33775pt too wide) in paragraph at lines 1984--1985
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [43]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [44] [45]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [46]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [47]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [48] [49]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-Overfull \hbox (38.10059pt too wide) in paragraph at lines 2891--2891
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [47] [48]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [49]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [50]
+Overfull \hbox (38.10059pt too wide) in paragraph at lines 2928--2928
  []\T1/zi4/m/n/10 overfittingMFA_missing_values(missing_entries, x_data, origin
 alX, outputDirectory, Kmax,[] 
-[50] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [51]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [52]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [53] [54]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [55]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [51] [52]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [53]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [54] [55]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [56]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [57]
-Overfull \hbox (19.76044pt too wide) in paragraph at lines 3431--3431
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (19.76044pt too wide) in paragraph at lines 3468--3468
  []\T1/zi4/m/n/10 overfitting_q0_sameSigma(x_data, originalX, outputDirectory, 
 Kmax, m, thinning, burn,[] 
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [58]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [59]
+[58] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [59]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [60]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-Overfull \hbox (26.42029pt too wide) in paragraph at lines 3627--3627
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (26.42029pt too wide) in paragraph at lines 3664--3664
  []\T1/zi4/m/n/10 simData(sameSigma, sameLambda, p, q, K.true, n, loading_means
 , loading_sd, sINV_values)[] 
-[61] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [62]
+[61] [62] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [63]
-Overfull \hbox (8.23181pt too wide) in paragraph at lines 3841--3841
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [64]
+Overfull \hbox (8.23181pt too wide) in paragraph at lines 3912--3912
  []        \T1/zi4/m/n/9 diag(SigmaINV[k,,]) <- 1/diag(syntheticDataset$varianc
 e) + rgamma(p, shape=1, rate = 1)[] 
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+[65] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3854
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3925
 .
 
-[64]
-Overfull \hbox (8.23181pt too wide) in paragraph at lines 3905--3905
+
+Overfull \hbox (8.23181pt too wide) in paragraph at lines 3976--3976
  []        \T1/zi4/m/n/9 diag(SigmaINV[k,,]) <- 1/diag(syntheticDataset$varianc
 e) + rgamma(p, shape=1, rate = 1)[] 
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3915
-.
-
-[65]
-Overfull \hbox (8.23181pt too wide) in paragraph at lines 3966--3966
- []        \T1/zi4/m/n/9 diag(SigmaINV[k,,]) <- 1/diag(syntheticDataset$varianc
-e) + rgamma(p, shape=1, rate = 1)[] 
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3978
-.
-
 [66] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4052
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 3986
 .
 
+
+Overfull \hbox (8.23181pt too wide) in paragraph at lines 4037--4037
+ []        \T1/zi4/m/n/9 diag(SigmaINV[k,,]) <- 1/diag(syntheticDataset$varianc
+e) + rgamma(p, shape=1, rate = 1)[] 
 [67] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4095
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4049
 .
 
 [68] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4138
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4123
 .
 
 [69] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4212
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4166
 .
 
-[70] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
-
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4286
-.
-
-[71] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [72]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [73]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [74]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [75]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [76] [77]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [78]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4209
+.
+
+[70] [71] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4283
+.
+
+[72] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4357
+.
+
+[73] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [74]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [75]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [76]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [77]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [78]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [79]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [80]
-Overfull \hbox (6.77829pt too wide) in paragraph at lines 4870--4871
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [81]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (6.77829pt too wide) in paragraph at lines 4941--4942
 []\T1/ptm/m/n/10 Lichman, M. (2013). UCI Ma-chine Learn-ing Repos-i-tory [][]$\
 T1/zi4/m/n/10 http : / / archive . ics . uci . edu / ml$[][]\T1/ptm/m/n/10 . Ir
 vine,
-(/tmp/RtmpZfgXNR/Rd2pdf42a752e6e7b6/Rd2.ind [81]
+(/tmp/Rtmp5R96W4/Rd2pdf214d77a78e72/Rd2.ind [82]
 Overfull \hbox (3.3567pt too wide) in paragraph at lines 15--17
 []\T1/zi4/m/n/10 compute_A_B_G_D_and_simulate_mu_Lambda\T1/ptm/m/n/10 , 
 
@@ -1127,7 +1127,7 @@ Overfull \hbox (18.3567pt too wide) in paragraph at lines 25--27
 
 Overfull \hbox (3.3567pt too wide) in paragraph at lines 28--30
 []\T1/zi4/m/n/10 compute_sufficient_statistics_given_mu\T1/ptm/m/n/10 , 
-[82] [83]) (/tmp/RtmpZfgXNR/Rd2pdf42a752e6e7b6/Rd2.aux) )
+[83] [84]) (/tmp/Rtmp5R96W4/Rd2pdf214d77a78e72/Rd2.aux) )
 (see the transcript file for additional information){/usr/share/texlive/texmf-d
 ist/fonts/enc/dvips/inconsolata/i4-ts1.enc}{/usr/share/texlive/texmf-dist/fonts
 /enc/dvips/base/8r.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/inconsola
@@ -1144,8 +1144,8 @@ nts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
 w/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (83 pages, 311093 bytes).
+Output written on Rd2.pdf (84 pages, 314776 bytes).
 Transcript written on Rd2.log.
 Saving output to ‘fabMix-manual.pdf’ ...
 Done
-You may want to clean up by 'rm -rf /tmp/RtmpZfgXNR/Rd2pdf42a752e6e7b6'
+You may want to clean up by 'rm -rf /tmp/Rtmp5R96W4/Rd2pdf214d77a78e72'

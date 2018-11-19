@@ -9,20 +9,23 @@ Plot function
 This function plots \code{fabMix} function.
 }
 \usage{
-\method{plot}{fabMix.object}(x, what, variableSubset, class_mfrow, ...)
+\method{plot}{fabMix.object}(x, what, variableSubset, class_mfrow, sig_correlation,...)
 }
 \arguments{
   \item{x}{
 An object of class \code{fabMix.object}, which is returned by the \code{fabMix} function.
 }
   \item{what}{
-One of the "BIC", "classification_matplot", "classification_pairs", "correlation", "regularized_expression". The plot will display the BIC values per model and number of factors (along with the most probable number of clusters as text), a matplot per cluster for the selected model, scatterplots pairs, the estimated correlation matrix per cluster, and the estimated regularized expression of each variable to the factor space for the selected model, respectively.
+One of the "BIC", "classification_matplot", "classification_pairs", "correlation", "factor_loadings". The plot will display the BIC values per model and number of factors (along with the most probable number of clusters as text), a matplot per cluster for the selected model, scatterplots pairs, the estimated correlation matrix per cluster, and the MAP estimate of factor loadings, respectively.
 }
   \item{variableSubset}{
 An optional subset of the variables. By default, all variables are selected.
 }
   \item{class_mfrow}{
 An optional integer vector of length 2, that will be used to set the \code{mfrow} for "classification_matplot" and "correlation" plots. By default, each plot is printed to a new plotting area.
+}
+  \item{sig_correlation}{
+The ``significance-level'' for plotting the correlation between variables. Note that this is an estimate of a posterior probability and not a significance level as defined in frequentist statistics. Default value: NULL (all correlations are plotted).
 }
   \item{...}{
         ignored.

@@ -4961,6 +4961,8 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 				sigmaINV <- sigmaINV[-(1:burn),] 
 			}
 			sigmaINV <- sigmaINV[Kindex, ] 
+		        Sigma.mcmc <- 1/sigmaINV
+		        write.table(Sigma.mcmc, file = 'reordered_sigma_ecr.txt')
 		}else{	
 		
 		        SigmaINV <- as.matrix(read.table("sigmainvValues.txt"))
@@ -5233,6 +5235,9 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 	nClusters <- array(data = NA, dim = c(length(q), length(model)))
 	colnames(nClusters) <- model
 	rownames(nClusters) <- q
+	Kmap_prob <- array(data = NA, dim = c(length(q), length(model)))
+	colnames(Kmap_prob) <- model
+	rownames(Kmap_prob) <- q
 
 	if(dir.exists(outDir)){
 		stop(paste0('Directory `',outDir,'` exists, please supply another name.'))
@@ -5257,6 +5262,8 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 			bic[as.character(nFactors), "UUU"] <- read.table(paste0(myDir,"/informationCriteria_map_model.txt"))[4, ]
 			logl <- read.table(paste0(myDir,"/kValues.txt"), header=T)
 			nClusters[as.character(nFactors), "UUU"] <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
+			r.freq <- 100*as.numeric(table(logl[,1])/length(logl[,1])) 
+			Kmap_prob[as.character(nFactors), "UUU"] <- max(r.freq)
 			check_if_at_least_one_model <- 	check_if_at_least_one_model + 1
 		}
 	}
@@ -5277,6 +5284,8 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 			bic[as.character(nFactors), "UCU"] <- read.table(paste0(myDir,"/informationCriteria_map_model.txt"))[4, ]
 			logl <- read.table(paste0(myDir,"/kValues.txt"), header=T)
 			nClusters[as.character(nFactors), "UCU"] <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
+			r.freq <- 100*as.numeric(table(logl[,1])/length(logl[,1])) 
+			Kmap_prob[as.character(nFactors), "UCU"] <- max(r.freq)
 			check_if_at_least_one_model <- 	check_if_at_least_one_model + 1
 		}
 	}
@@ -5297,6 +5306,8 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 			bic[as.character(nFactors), "CUU"] <- read.table(paste0(myDir,"/informationCriteria_map_model.txt"))[4, ]
 			logl <- read.table(paste0(myDir,"/kValues.txt"), header=T)
 			nClusters[as.character(nFactors), "CUU"] <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
+			r.freq <- 100*as.numeric(table(logl[,1])/length(logl[,1])) 
+			Kmap_prob[as.character(nFactors), "CUU"] <- max(r.freq)
 			check_if_at_least_one_model <- 	check_if_at_least_one_model + 1
 		}
 	}
@@ -5317,6 +5328,8 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 			bic[as.character(nFactors), "CCU"] <- read.table(paste0(myDir,"/informationCriteria_map_model.txt"))[4, ]
 			logl <- read.table(paste0(myDir,"/kValues.txt"), header=T)
 			nClusters[as.character(nFactors), "CCU"] <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
+			r.freq <- 100*as.numeric(table(logl[,1])/length(logl[,1])) 
+			Kmap_prob[as.character(nFactors), "CCU"] <- max(r.freq)
 			check_if_at_least_one_model <- 	check_if_at_least_one_model + 1
 		}
 	}
@@ -5337,6 +5350,8 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 			bic[as.character(nFactors), "CUC"] <- read.table(paste0(myDir,"/informationCriteria_map_model.txt"))[4, ]
 			logl <- read.table(paste0(myDir,"/kValues.txt"), header=T)
 			nClusters[as.character(nFactors), "CUC"] <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
+			r.freq <- 100*as.numeric(table(logl[,1])/length(logl[,1])) 
+			Kmap_prob[as.character(nFactors), "CUC"] <- max(r.freq)
 			check_if_at_least_one_model <- 	check_if_at_least_one_model + 1
 		}
 	}
@@ -5357,6 +5372,8 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 			bic[as.character(nFactors), "CCC"] <- read.table(paste0(myDir,"/informationCriteria_map_model.txt"))[4, ]
 			logl <- read.table(paste0(myDir,"/kValues.txt"), header=T)
 			nClusters[as.character(nFactors), "CCC"] <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
+			r.freq <- 100*as.numeric(table(logl[,1])/length(logl[,1])) 
+			Kmap_prob[as.character(nFactors), "CCC"] <- max(r.freq)
 			check_if_at_least_one_model <- 	check_if_at_least_one_model + 1
 		}
 	}
@@ -5377,6 +5394,8 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 			bic[as.character(nFactors), "UUC"] <- read.table(paste0(myDir,"/informationCriteria_map_model.txt"))[4, ]
 			logl <- read.table(paste0(myDir,"/kValues.txt"), header=T)
 			nClusters[as.character(nFactors), "UUC"] <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
+			r.freq <- 100*as.numeric(table(logl[,1])/length(logl[,1])) 
+			Kmap_prob[as.character(nFactors), "UUC"] <- max(r.freq)
 			check_if_at_least_one_model <- 	check_if_at_least_one_model + 1
 		}
 	}
@@ -5397,6 +5416,8 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 			bic[as.character(nFactors), "UCC"] <- read.table(paste0(myDir,"/informationCriteria_map_model.txt"))[4, ]
 			logl <- read.table(paste0(myDir,"/kValues.txt"), header=T)
 			nClusters[as.character(nFactors), "UCC"] <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
+			r.freq <- 100*as.numeric(table(logl[,1])/length(logl[,1])) 
+			Kmap_prob[as.character(nFactors), "UCC"] <- max(r.freq)
 			check_if_at_least_one_model <- 	check_if_at_least_one_model + 1
 		}
 	}
@@ -5435,8 +5456,8 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 		w <- w/sum(w)	
 		names(w) <- names(table(z))
 
-		MCMC <- vector("list", length = 7)
-		names(MCMC) <- c("y", "w", "Lambda","mu","z","Sigma","K_all_chains")
+		MCMC <- vector("list", length = 8)
+		names(MCMC) <- c("y", "w", "Lambda","mu","z","Sigma","K_all_chains", "lambda_map")
 		lFile <- read.table(paste0(outDir,"/reordered_lambda_ecr.txt"), header = TRUE)
 		if( strsplit(model_selected, split = "")[[1]][1] == "U" ){
 			MCMC$Lambda <- vector("list", length = nClusters[q_selected, model_selected])
@@ -5512,7 +5533,8 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 				}
 			}		
 		}else{
-			MCMC$Sigma <- 1/read.table(paste0(outDir, '/sigmainvValues.txt'))
+#			MCMC$Sigma <- 1/read.table(paste0(outDir, '/sigmainvValues.txt'))
+			MCMC$Sigma <- read.table(paste0(outDir,'/reordered_sigma_ecr.txt'))
 			if( strsplit(model_selected, split = "")[[1]][3] == "U" ){
 				MCMC$Sigma <- MCMC$Sigma
 				colnames(MCMC$Sigma) <- paste0('V',1:p)
@@ -5528,6 +5550,7 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 		MCMC$K_all_chains <- mcmc(MCMC$K_all_chains, 
 					start = warm_up_overfitting + warm_up + burnCycles*nIterPerCycle, 
 					thin = nIterPerCycle)
+		MCMC$lambda_map <- read.table(paste0(outDir, '/lambda_map.txt'))
 		rr <- vector("list", length = as.numeric(q_selected))
 		names(rr) <- paste0('F',1:as.numeric(q_selected))
 		for(j in 1:as.numeric(q_selected)){
@@ -5548,11 +5571,12 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 	cat(paste0("\n","Given the specified range of models, factors, maximum number of clusters and MCMC parameters,","\n", "the best model corresponds to the ", model_selected, " parameterization with q = ", q_selected, " factors and K = ",nClusters[q_selected, model_selected]," clusters. ","\n","The BIC for this model equals ", round(min(bic),3), "."),"\n")
 	best_model <- data.frame(parameterization = model_selected, num_Clusters = nClusters[q_selected, model_selected], num_Factors = as.numeric(q_selected))
 
-	results <- vector("list", length = 11)
+	results <- vector("list", length = 12)
 	results[[1]] <- bic
 	results[[3]] <- nClusters
 	results[[8]] <- best_model
 	results[[10]] <- rawData
+	results[[12]] <- Kmap_prob
 	if ( nClusters[q_selected, model_selected] > 1){
 		results[[4]] <- classification_probabilities_MAP
 		results[[2]] <- z
@@ -5577,7 +5601,8 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 				"selected_model", 
 				"mcmc",
 				"data",
-				"regularizedExpression"
+				"regularizedExpression",
+				"Kmap_prob"
 			)
 	class(results) <- c('list', 'fabMix.object')
 	return(results)
@@ -5662,7 +5687,7 @@ fabMix_parallelModels <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "
 	setwd('../')
 
 	# merging all results together and return a fabMix object
-	mergedResult <- vector('list', length = 11)	
+	mergedResult <- vector('list', length = 12)	
 	names(mergedResult) <- c("bic", 
 				"class", 
 				"n_Clusters_per_model", 
@@ -5673,11 +5698,13 @@ fabMix_parallelModels <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "
 				"selected_model", 
 				"mcmc",
 				"data",
-				"regularizedExpression"
+				"regularizedExpression",
+				"Kmap_prob"
 			)
 	class(mergedResult) <- c('list', 'fabMix.object')
 
 	mergedResult$bic <- matrix(unlist(lapply(myList, function(y)y$bic)), nrow = length(q), ncol = length(model), dimnames = list(q, model))
+	mergedResult$Kmap_prob <- matrix(unlist(lapply(myList, function(y)y$Kmap_prob)), nrow = length(q), ncol = length(model), dimnames = list(q, model))
 	mergedResult$data <- myList[[1]]$data
 	mergedResult$n_Clusters_per_model <- matrix(unlist(lapply(myList, function(y)y$n_Clusters_per_model)), nrow = length(q), ncol = length(model), dimnames = list(q, model)) 
 	model_selected <- model[which.min(apply(mergedResult$bic,2,min))]
@@ -5821,25 +5848,75 @@ simData <- function(sameSigma = TRUE, sameLambda = FALSE, p, q, K.true, n, loadi
 }
 
 #' @export
-print.fabMix.object <- function(x, printSubset = TRUE, ...){
-        if( 'fabMix.object' %in% class(x) ){
+print.fabMix.object <- function(x, ...){
+       if( 'fabMix.object' %in% class(x) ){
                 cat("\n")
                 cat(paste0("* Run information:"),"\n")
-                cat(paste0("      Number of fitted models: (", dim(x$bic)[1]," different number of factors) x (",dim(x$bic)[2]," parameterizations) = ",prod(dim(x$bic))," models.","\n"))
+                cat(paste0("      Number of fitted models: (", dim(x$bic)[1]," factor levels) x (",dim(x$bic)[2]," parameterizations) = ",prod(dim(x$bic))," models.","\n"))
                 cat(paste0("      Selected model: ", as.character(x$selected_model$parameterization)," model with K = ", x$selected_model$num_Clusters, " clusters and q = ", x$selected_model$num_Factors ," factors.","\n"))
-                cat(paste0("* Estimated number of observations per cluster:"),'\n')
+                cat("\n")
+                cat(paste0("* Maximum A Posteriori (MAP) number of ``alive'' clusters and selected number of factors (BIC) per model:"),"\n")
+		if(dim(x$bic)[1] > 1){
+			l1 <- as.numeric(as.numeric(rownames(x$bic)[apply(x$bic, 2, order)[1,]]))
+			l2 <- as.numeric(diag(x$n_Clusters_per_model[ rownames(x$bic)[apply(x$bic, 2, order)[1,]],]))
+			l3 <- round(as.numeric(diag(x$Kmap_prob[ rownames(x$bic)[apply(x$bic, 2, order)[1,]],]))/100,2)
+		}else{
+			l1 <- rep(rownames(x$bic), dim(x$bic)[2])
+			l2 <- as.numeric(x$n_Clusters_per_model)
+			l3 <- as.numeric(round(x$Kmap_prob/100, 2))
+		}
+		model.info <- data.frame(model = as.factor(colnames(x$bic)), 
+					nClusters_MAP = l2, 
+					nClusters_MAP_prob =  l3,
+					nFactors = l1, 
+					BIC_nFactors = as.numeric(as.numeric(round(apply(x$bic, 2, min),1)))
+				)		
+		print(model.info)
+		cat('\n')
+                cat(paste0("* Estimated number of observations per cluster (selected model):"),'\n')
                 print(table(x$class, dnn = c('label')))
 		cat('\n')
-                cat(paste0("* Posterior mean of the mean per cluster:"),'\n')
-		print(x$mu, digits = 2)
 
         }else{
                 cat(paste("    The input is not in class `fabMix.object`"),'\n')
         }
 }
 
+
 #' @export
-plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, ...){
+summary.fabMix.object <- function(object, ...){
+	if( 'fabMix.object' %in% class(object) ){
+		cat(paste0("* ``Alive'' cluster labels:"),'\n')
+		print(names(table(object$class)))
+		cat('\n')		
+		m <- round(object$weights, 2)
+		cat(paste0('* Posterior mean of the mixing proportions:'),'\n')
+		print(m)
+		cat('\n')
+		m <- round(object$mu, 2)
+		names(dimnames(m)) <- list('Variable', 'Cluster label')
+		cat(paste0('* Posterior mean of the marginal means per cluster:'),'\n')
+		print(m)
+		cat('\n')
+		cat(paste0('* Posterior mean of the covariance matrix per cluster:'),'\n')		
+		for (k in names(table(object$class)) ){
+			cat('\n')
+			cat(paste0("   Covariance matrix for cluster ``",k,"'':"),'\n')
+			m <- round(object$covariance_matrix[[k]], 2)
+			rownames(m) <- colnames(m)
+			print(m)
+		}
+		cat('\n')
+	}else{
+		cat(paste("    The input is not in class `fabMix.object`"),'\n')
+	}
+}
+
+
+
+
+#' @export
+plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, sig_correlation = NULL, ...){
         if( 'fabMix.object' %in% class(x) ){
 	K <- as.numeric(x$selected_model['num_Clusters'])
 	cMeans <- colMeans(x$data)
@@ -5865,7 +5942,7 @@ plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, ...)
 			cat(paste0("2: Classification (matplot view)"),"\n")
 			cat(paste0("3: Classification (scatter view)"),"\n")
 			cat(paste0("4: Correlation plot"),"\n")
-			cat(paste0("5: Regularized expression"),"\n")
+			cat(paste0("5: Factor loadings (MAP estimate)"),"\n")
 			cat("\n")
 			v <- readline(prompt="Selection:")
 		}else{
@@ -5974,6 +6051,12 @@ plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, ...)
 
 		if((v == 4)||(what == "correlation")){
 			on.exit(par())
+			if(is.null(sig_correlation)){sig_correlation = 10}
+			if(sig_correlation < 1){
+				cm <- CorMat_mcmc_summary(x, quantile_probs = c(0.025, 0.975))
+			}
+
+
 			# 4. Correlation plot per cluster
 			if(is.null( class_mfrow ) == FALSE){
 				par(mfrow = class_mfrow)
@@ -5984,7 +6067,12 @@ plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, ...)
 							sNew[i,j] <- sdevs[i]*sdevs[j]*x$covariance_matrix[[names(table(x$class))[k]]][i,j]
 						}
 					}
-					corrplot(cov2cor(sNew),method = "ellipse", title = paste0("cluster ``", names(table(x$class))[k],"''"),  mar=c(0,0,2,0))
+					if(sig_correlation < 1){
+						corrplot(cov2cor(sNew),method = "ellipse", title = paste0("cluster ``", names(table(x$class))[k],"''"),  mar=c(0,0,2,0), 
+							p.mat = cm$p_matrix[,,k], sig.level = sig_correlation, insig = "pch")
+					}else{
+						corrplot(cov2cor(sNew),method = "ellipse", title = paste0("cluster ``", names(table(x$class))[k],"''"),  mar=c(0,0,2,0))
+					}
 				}
 
 			}else{
@@ -5998,7 +6086,12 @@ plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, ...)
 							sNew[i,j] <- sdevs[i]*sdevs[j]*x$covariance_matrix[[names(table(x$class))[k]]][i,j]
 						}
 					}
-					corrplot(cov2cor(sNew),method = "ellipse", title = paste0("cluster ``", names(table(x$class))[k],"''"),  mar=c(0,0,2,0))
+					if(sig_correlation < 1){
+						corrplot(cov2cor(sNew),method = "ellipse", title = paste0("cluster ``", names(table(x$class))[k],"''"),  mar=c(0,0,2,0), 
+							p.mat = cm$p_matrix[,,k], sig.level = sig_correlation, insig = "pch")
+					}else{
+						corrplot(cov2cor(sNew),method = "ellipse", title = paste0("cluster ``", names(table(x$class))[k],"''"),  mar=c(0,0,2,0))
+					}
 					if(k < K){
 						readline(prompt=paste0("Press ENTER to see next plot... (",k + 1,"/",K,")"))
 					}
@@ -6006,7 +6099,7 @@ plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, ...)
 			}			
 		}
 
-		if((v==5)||(what == "regularized_expression")){
+		if((v==666)||(what == "regularized_expression")){
 			on.exit(par())
 			q <- as.numeric(x$selected_model['num_Factors'])
 			par(mfrow = c(q, q), mar = rep(c(0.3, 0.3/2), each = 2), oma = c(4, 4, 4, 4))
@@ -6043,6 +6136,42 @@ plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, ...)
 			}
 		}
 
+		if((v == 5)||(what == "factor_loadings")){
+			on.exit(par())
+			# 4. Factor loadings per cluster
+			par(mfrow = c(1,1))
+			firstLetter <- strsplit(as.character(x$selected_model$parameterization), split = "")[[1]][1]
+			q <- as.numeric(x$selected_model['num_Factors'])
+			k = 0
+			while((k < K)){
+				k = k + 1
+				Factor = as.factor(rep(paste0('Factor ', 1:q), each = p))
+				Variable = as.factor(rep(1:p, q))
+				lambda = as.numeric(x$mcmc$lambda_map[k,])
+				df <- data.frame( Factor, Variable, lambda)
+				if(firstLetter == "C"){
+					myTitle <- "Factor loadings (MAP)"
+					mySubTitle <- "Common for all clusters"
+				}else{
+					myTitle <- "Factor loadings (MAP)"
+					mySubTitle <- paste0("Cluster ", k)
+				}
+				p1 <- ggplot(df, aes(x=as.factor(Factor), y=lambda, fill=Variable)) +
+				  geom_bar(position=position_dodge(), stat="identity", colour='black') +
+				  coord_flip() +
+				  labs(y = "loading", x = "factor") + 
+				  labs(title = myTitle, subtitle = mySubTitle)
+				print(p1)
+				if( (k < K) & ((firstLetter == "U")) ){
+					readline(prompt=paste0("Press ENTER to see next plot... (",k + 1,"/",K,")"))
+				}else{
+					k = K
+				}
+			}
+
+		}
+
+
 	}
 
         }else{
@@ -6051,5 +6180,89 @@ plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, ...)
 }
 
 
+
+CorMat_mcmc_summary <- function(x, quantile_probs){
+	if( 'fabMix.object' %in% class(x) ){
+		rp <- range(quantile_probs)
+		
+		if(rp[1] < 0){stop("`quantile_probs` should be between 0 and 1.")}
+		if(rp[2] > 1){stop("`quantile_probs` should be between 0 and 1.")}
+
+		firstLetter <- strsplit(as.character(x$selected_model$parameterization), split = "")[[1]][1]
+		secondLetter <- strsplit(as.character(x$selected_model$parameterization), split = "")[[1]][2]
+		thirdLetter <- strsplit(as.character(x$selected_model$parameterization), split = "")[[1]][3]
+		K <- x$selected_model$num_Clusters
+		p <- dim(x$data)[2]
+		q <- x$selected_model$num_Factors
+		quantileList <- vector("list", length = length(quantile_probs))
+		names(quantileList) <- as.character(quantile_probs)
+		for(j in 1:length(quantile_probs)){
+			quantileList[[j]] <- array(0, dim = c(p, p, K))
+		}
+		Prob_larger_than_zero <- p_matrix <- array(0, dim = c(p, p, K))
+		for(j in 1:length(quantile_probs)){
+			for(kay in 1:K){
+				diag(quantileList[[j]][,,kay]) <- rep(1,p)
+			}
+		}
+		
+		for(k in 1:K){
+			if(firstLetter == 'C'){
+				l <- x$mcmc$Lambda
+			}else{
+				l <- x$mcmc$Lambda[[k]]
+			}
+			m <- dim(l)[1]
+
+			if(secondLetter == "C"){
+				if(thirdLetter == "C"){
+				# xCC
+					sigma = matrix(x$mcmc$Sigma, nrow = m, ncol = p )
+				}else{
+				# xCU
+					sigma = as.matrix(x$mcmc$Sigma)
+				}
+			}else{
+				if(thirdLetter == "C"){
+				#xUC
+					sigma = matrix(x$mcmc$Sigma[[k]], nrow = m, ncol = p )
+				}else{
+				#xUU
+					sigma = as.matrix(x$mcmc$Sigma[[k]])
+				}
+			}
+			# in all cases sigma is an m x p matrix. 
+
+			diag(Prob_larger_than_zero[,,k]) <- rep(1,p)
+			seqQ <- 1:q
+			for(i in 1:(p-1)){
+				for(j in (i+1):p){
+					y <- numeric(m)
+					for(iter in 1:m){
+						x1 <- l[iter,paste0('V',i,'_F',seqQ )]
+						x2 <- l[iter,paste0('V',j,'_F',seqQ )]
+						y[iter] <- sum(x1*x2)/sqrt((sum(x1^2) + sigma[iter, i])*(sum(x2^2) + sigma[iter, j]))
+						Prob_larger_than_zero[i,j,k] <- Prob_larger_than_zero[i, j, k] + as.numeric(y[iter] > 0)
+					}
+					Prob_larger_than_zero[i,j, k] <- Prob_larger_than_zero[i,j, k]/m
+					Prob_larger_than_zero[j, i, k] <- Prob_larger_than_zero[i, j, k]
+					quants <- as.numeric(quantile(y, probs = quantile_probs))
+					for(h in 1:length(quantile_probs)){
+						quantileList[[h]][i,j,k] <- quantileList[[h]][j,i,k] <- quants[h]
+					}
+				}
+			}
+			p_matrix[,,k] <- 1 - 2*abs(0.5 - Prob_larger_than_zero[,,k])
+		}
+		results <- vector("list", length = 2)
+		results[[1]] <- quantileList
+		results[[2]] <- p_matrix
+		names(results) <- c("quantiles", "p_matrix")
+		return(results)
+        }else{
+                cat(paste("    The input is not in class `fabMix.object`"),'\n')
+        }
+
+}
 
 

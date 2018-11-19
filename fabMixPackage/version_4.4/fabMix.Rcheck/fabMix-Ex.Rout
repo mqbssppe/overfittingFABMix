@@ -587,7 +587,7 @@ Loading required package: registry
     ......................................................................................
     . Method                         Time (sec)           Status                         . 
     ......................................................................................
-    . ECR                            0.017                OK                             . 
+    . ECR                            0.019                OK                             . 
     . ECR-ITERATIVE-1                0.003                Converged (2 iterations)       . 
     ......................................................................................
 
@@ -616,20 +616,19 @@ The BIC for this model equals 111.942.
 > print(fm)
 
 * Run information: 
-      Number of fitted models: (1 different number of factors) x (2 parameterizations) = 2 models.
+      Number of fitted models: (1 factor levels) x (2 parameterizations) = 2 models.
       Selected model: CCC model with K = 2 clusters and q = 2 factors.
-* Estimated number of observations per cluster: 
+
+* Maximum A Posteriori (MAP) number of ``alive'' clusters and selected number of factors (BIC) per model: 
+  model nClusters_MAP nClusters_MAP_prob nFactors BIC_nFactors
+1   UUU             2               1.00        2        173.1
+2   CCC             2               0.67        2        111.9
+
+* Estimated number of observations per cluster (selected model): 
 label
 1 4 
 5 3 
 
-* Posterior mean of the mean per cluster: 
-        1     4
-V1 -0.624  1.11
-V2  0.029  0.61
-V3  0.584 -1.44
-V4  0.381 -0.61
-V5 -0.838  1.13
 > plot(fm, what = "BIC")
 > 
 > #################################################################
@@ -779,8 +778,8 @@ Loading required package: registry
     ......................................................................................
     . Method                         Time (sec)           Status                         . 
     ......................................................................................
-    . ECR                            0.017                OK                             . 
-    . ECR-ITERATIVE-1                0.04                 Converged (2 iterations)       . 
+    . ECR                            0.011                OK                             . 
+    . ECR-ITERATIVE-1                0.029                Converged (2 iterations)       . 
     ......................................................................................
 
     Relabelling all methods according to method ECR ... done!
@@ -2138,7 +2137,7 @@ Simulation parameters:
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  2.366 0.121 3.03 0.728 0.374 
+Time elapsed:  2.505 0.153 3.198 0.779 0.322 
 > grDevices::dev.off()
 null device 
           1 

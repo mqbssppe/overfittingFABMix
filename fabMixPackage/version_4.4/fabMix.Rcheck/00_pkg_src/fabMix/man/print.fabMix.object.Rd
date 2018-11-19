@@ -9,14 +9,11 @@ Print function
 This function prints a summary of objects returned by the \code{fabMix} function.
 }
 \usage{
-\method{print}{fabMix.object}(x, printSubset, ...)
+\method{print}{fabMix.object}(x, ...)
 }
 \arguments{
   \item{x}{
 An object of class \code{fabMix.object}, which is returned by the \code{fabMix} function.
-}
-  \item{printSubset}{
-Logical.
 }
   \item{...}{
         ignored.

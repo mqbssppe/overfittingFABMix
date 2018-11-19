@@ -1,3 +1,4 @@
+CorMat_mcmc_summary     Compute quantiles for the correlation matrix.
 complete.log.likelihood
                         Complete log-likelihood function for xCx
                         models.
@@ -75,6 +76,7 @@ plot.fabMix.object      Plot function
 print.fabMix.object     Print function
 readLambdaValues        Read Lambda values.
 simData                 Synthetic data generator
+summary.fabMix.object   Summary method
 update_OmegaINV         Gibbs sampling for Omega^{-1}
 update_OmegaINV_Cxx     Gibbs sampling for Omega^{-1} for Cxx model
 update_SigmaINV_faster
