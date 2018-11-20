@@ -5518,7 +5518,8 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 			names(MCMC$Sigma) <- names(table(z))
 			if( strsplit(model_selected, split = "")[[1]][3] == "U" ){
 				for(k in names(table(z))){
-					MCMC$Sigma[[k]] <- as.matrix(sMATRIX[,((as.numeric(k)-1)*p + 1):(as.numeric(k)*p)])
+					myColumns <- as.numeric(Kmax)*(1:p) - (Kmax - as.numeric(k))
+					MCMC$Sigma[[k]] <- as.matrix(sMATRIX[,myColumns])
 					MCMC$Sigma[[k]] <- mcmc(MCMC$Sigma[[k]], 
 								start = warm_up_overfitting + warm_up + burnCycles*nIterPerCycle,  
 								thin = nIterPerCycle)
