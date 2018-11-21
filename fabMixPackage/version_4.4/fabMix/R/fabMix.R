@@ -481,8 +481,9 @@ update_OmegaINV_Cxx <- function(Lambda, K, g, h){
 # new in version 4.1
 readLambdaValues <- function(myFile,K,p,q){
 	l <- array(data = NA, dim = c(K,p,q))
-	myline <- as.numeric(read.table(myFile))
-	if(length(myline) != K*p*q){stop("dimensions do not match")}
+	kpq <- K*p*q
+	myline <- as.numeric(read.table(myFile, colClasses = rep('numeric', kpq) ))
+	if(length(myline) != kpq){stop("dimensions do not match")}
 	iter <- 0
 	for(k in 1:K){
 		for(i in 1:p){
@@ -1077,19 +1078,19 @@ overfittingMFA <- function(x_data, originalX, outputDirectory, Kmax, m, thinning
 		}
 	}else{
 #		cat(paste0('reading starting values... '))	
-		diag(OmegaINV.constant) <- as.numeric(read.table('omegainvValues.txt')[1,])
+		diag(OmegaINV.constant) <- as.numeric(read.table('omegainvValues.txt', colClasses = rep('numeric',q))[1,])
 		omega <- OmegaINV.constant
 		diag(omega) <- 1/(diag(omega))
-		tmp1 <- read.table("muValues.txt")
+		tmp1 <- read.table("muValues.txt", colClasses = rep('numeric',Kmax*p))
 		diag(SigmaINV.values) <- as.numeric(read.table("sigmainvValues.txt"))
 		for(k in 1:K){
 			mu.values[k, ] <- as.matrix(tmp1[ , k + Kmax*((1:p)-1)])
 #			Lambda.values[k, , ] <- matrix(as.matrix(read.table(paste0("LambdaValues",k,".txt"))),nrow = p, ncol = q, byrow=TRUE) 
 		}
 		Lambda.values <- readLambdaValues(myFile = "LambdaValues.txt", K = K, p = p, q = q)
-		y <- matrix(as.matrix(read.table('yValues.txt')), nrow = n , ncol = q)
-		w.values <- as.numeric(read.table("wValues.txt"))
-		z <- as.numeric(read.table("zValues.txt"))
+		y <- matrix(as.matrix(read.table('yValues.txt', colClasses = rep('numeric',n*q))), nrow = n , ncol = q)
+		w.values <- as.numeric(read.table("wValues.txt", colClasses = rep('numeric',Kmax)))
+		z <- as.numeric(read.table("zValues.txt", colClasses = rep('numeric', n)))
 #		cat(paste0('done.'),'\n')
 	}
 	###############################################
@@ -1274,19 +1275,19 @@ overfittingMFA_Sj <- function(x_data, originalX, outputDirectory, Kmax, m, thinn
 		}
 	}else{
 #		cat(paste0('reading starting values... '))	
-		diag(OmegaINV.constant) <- as.numeric(read.table('omegainvValues.txt')[1,])
+		diag(OmegaINV.constant) <- as.numeric(read.table('omegainvValues.txt', colClasses = rep('numeric',q))[1,])
 		omega <- OmegaINV.constant
 		diag(omega) <- 1/(diag(omega))
-		tmp1 <- read.table("muValues.txt")
+		tmp1 <- read.table("muValues.txt", colClasses = rep('numeric',Kmax*p))
 		tmp2 <- as.matrix(read.table("sigmainvValues.txt"))
 		for(k in 1:K){
 			mu.values[k, ] <- as.matrix(tmp1[ , k + Kmax*((1:p)-1)])
 			diag(SigmaINV.values[k, , ]) <- as.matrix(tmp2[,((k-1)*p + 1):(k*p)]) 
 		}
 		Lambda.values <- readLambdaValues(myFile = "LambdaValues.txt", K = K, p = p, q = q)
-		y <- matrix(as.matrix(read.table('yValues.txt')), nrow = n , ncol = q)
-		w.values <- as.numeric(read.table("wValues.txt"))
-		z <- as.numeric(read.table("zValues.txt"))
+		y <- matrix(as.matrix(read.table('yValues.txt', colClasses = rep('numeric',n*q))), nrow = n , ncol = q)
+		w.values <- as.numeric(read.table("wValues.txt", colClasses = rep('numeric',Kmax)))
+		z <- as.numeric(read.table("zValues.txt", colClasses = rep('numeric', n)))
 #		cat(paste0('done.'),'\n')
 	}
 	###############################################
@@ -1476,18 +1477,18 @@ overfittingMFA_CCU <- function(x_data, originalX, outputDirectory, Kmax, m, thin
 		}
 	}else{
 #		cat(paste0('reading starting values... '))	
-		diag(OmegaINV.constant) <- as.numeric(read.table('omegainvValues.txt')[1,])
+		diag(OmegaINV.constant) <- as.numeric(read.table('omegainvValues.txt', colClasses = rep('numeric',q))[1,])
 		omega <- OmegaINV.constant
 		diag(omega) <- 1/(diag(omega))
-		tmp1 <- read.table("muValues.txt")
+		tmp1 <- read.table("muValues.txt", colClasses = rep('numeric',Kmax*p))
 		diag(SigmaINV.values) <- as.numeric(read.table("sigmainvValues.txt"))
 		for(k in 1:K){
 			mu.values[k, ] <- as.matrix(tmp1[ , k + Kmax*((1:p)-1)])
 		}
 		Lambda.values <- readLambdaValues(myFile = "LambdaValues.txt", K = K, p = p, q = q)
-		y <- matrix(as.matrix(read.table('yValues.txt')), nrow = n , ncol = q)
-		w.values <- as.numeric(read.table("wValues.txt"))
-		z <- as.numeric(read.table("zValues.txt"))
+		y <- matrix(as.matrix(read.table('yValues.txt', colClasses = rep('numeric',n*q))), nrow = n , ncol = q)
+		w.values <- as.numeric(read.table("wValues.txt", colClasses = rep('numeric',Kmax)))
+		z <- as.numeric(read.table("zValues.txt", colClasses = rep('numeric', n)))
 #		cat(paste0('done.'),'\n')
 	}
 	###############################################
@@ -1677,19 +1678,19 @@ overfittingMFA_CUU <- function(x_data, originalX, outputDirectory, Kmax, m, thin
 		}
 	}else{
 #		cat(paste0('reading starting values... '))	
-		diag(OmegaINV.constant) <- as.numeric(read.table('omegainvValues.txt')[1,])
+		diag(OmegaINV.constant) <- as.numeric(read.table('omegainvValues.txt', colClasses = rep('numeric',q))[1,])
 		omega <- OmegaINV.constant
 		diag(omega) <- 1/(diag(omega))
-		tmp1 <- read.table("muValues.txt")
+		tmp1 <- read.table("muValues.txt", colClasses = rep('numeric',Kmax*p))
 		tmp2 <- as.matrix(read.table("sigmainvValues.txt"))
 		for(k in 1:K){
 			mu.values[k, ] <- as.matrix(tmp1[ , k + Kmax*((1:p)-1)])
 			diag(SigmaINV.values[k, , ]) <- as.matrix(tmp2[,((k-1)*p + 1):(k*p)]) 
 		}
 		Lambda.values <- readLambdaValues(myFile = "LambdaValues.txt", K = K, p = p, q = q)
-		y <- matrix(as.matrix(read.table('yValues.txt')), nrow = n , ncol = q)
-		w.values <- as.numeric(read.table("wValues.txt"))
-		z <- as.numeric(read.table("zValues.txt"))
+		y <- matrix(as.matrix(read.table('yValues.txt', colClasses = rep('numeric',n*q))), nrow = n , ncol = q)
+		w.values <- as.numeric(read.table("wValues.txt", colClasses = rep('numeric',Kmax)))
+		z <- as.numeric(read.table("zValues.txt", colClasses = rep('numeric', n)))
 #		cat(paste0('done.'),'\n')
 	}
 	###############################################
@@ -1879,18 +1880,18 @@ overfittingMFA_CCC <- function(x_data, originalX, outputDirectory, Kmax, m, thin
 		}
 	}else{
 #		cat(paste0('reading starting values... '))	
-		diag(OmegaINV.constant) <- as.numeric(read.table('omegainvValues.txt')[1,])
+		diag(OmegaINV.constant) <- as.numeric(read.table('omegainvValues.txt', colClasses = rep('numeric',q))[1,])
 		omega <- OmegaINV.constant
 		diag(omega) <- 1/(diag(omega))
-		tmp1 <- read.table("muValues.txt")
+		tmp1 <- read.table("muValues.txt", colClasses = rep('numeric',Kmax*p))
 		diag(SigmaINV.values) <- as.numeric(read.table("sigmainvValues.txt"))
 		for(k in 1:K){
 			mu.values[k, ] <- as.matrix(tmp1[ , k + Kmax*((1:p)-1)])
 		}
 		Lambda.values <- readLambdaValues(myFile = "LambdaValues.txt", K = K, p = p, q = q)
-		y <- matrix(as.matrix(read.table('yValues.txt')), nrow = n , ncol = q)
-		w.values <- as.numeric(read.table("wValues.txt"))
-		z <- as.numeric(read.table("zValues.txt"))
+		y <- matrix(as.matrix(read.table('yValues.txt', colClasses = rep('numeric',n*q))), nrow = n , ncol = q)
+		w.values <- as.numeric(read.table("wValues.txt", colClasses = rep('numeric',Kmax)))
+		z <- as.numeric(read.table("zValues.txt", colClasses = rep('numeric', n)))
 #		cat(paste0('done.'),'\n')
 	}
 	###############################################
@@ -2079,19 +2080,19 @@ overfittingMFA_CUC <- function(x_data, originalX, outputDirectory, Kmax, m, thin
 #		}
 	}else{
 #		cat(paste0('reading starting values... '))	
-		diag(OmegaINV.constant) <- as.numeric(read.table('omegainvValues.txt')[1,])
+		diag(OmegaINV.constant) <- as.numeric(read.table('omegainvValues.txt', colClasses = rep('numeric',q))[1,])
 		omega <- OmegaINV.constant
 		diag(omega) <- 1/(diag(omega))
-		tmp1 <- read.table("muValues.txt")
+		tmp1 <- read.table("muValues.txt", colClasses = rep('numeric',Kmax*p))
 		tmp2 <- as.matrix(read.table("sigmainvValues.txt"))
 		for(k in 1:K){
 			mu.values[k, ] <- as.matrix(tmp1[ , k + Kmax*((1:p)-1)])
 			diag(SigmaINV.values[k, , ]) <- as.matrix(tmp2[,((k-1)*p + 1):(k*p)]) 
 		}
 		Lambda.values <- readLambdaValues(myFile = "LambdaValues.txt", K = K, p = p, q = q)
-		y <- matrix(as.matrix(read.table('yValues.txt')), nrow = n , ncol = q)
-		w.values <- as.numeric(read.table("wValues.txt"))
-		z <- as.numeric(read.table("zValues.txt"))
+		y <- matrix(as.matrix(read.table('yValues.txt', colClasses = rep('numeric',n*q))), nrow = n , ncol = q)
+		w.values <- as.numeric(read.table("wValues.txt", colClasses = rep('numeric',Kmax)))
+		z <- as.numeric(read.table("zValues.txt", colClasses = rep('numeric', n)))
 #		cat(paste0('done.'),'\n')
 	}
 	###############################################
@@ -2277,18 +2278,18 @@ overfittingMFA_UCC <- function(x_data, originalX, outputDirectory, Kmax, m, thin
 		}
 	}else{
 #		cat(paste0('reading starting values... '))	
-		diag(OmegaINV.constant) <- as.numeric(read.table('omegainvValues.txt')[1,])
+		diag(OmegaINV.constant) <- as.numeric(read.table('omegainvValues.txt', colClasses = rep('numeric',q))[1,])
 		omega <- OmegaINV.constant
 		diag(omega) <- 1/(diag(omega))
-		tmp1 <- read.table("muValues.txt")
+		tmp1 <- read.table("muValues.txt", colClasses = rep('numeric',Kmax*p))
 		diag(SigmaINV.values) <- as.numeric(read.table("sigmainvValues.txt"))
 		for(k in 1:K){
 			mu.values[k, ] <- as.matrix(tmp1[ , k + Kmax*((1:p)-1)])
 		}
 		Lambda.values <- readLambdaValues(myFile = "LambdaValues.txt", K = K, p = p, q = q)
-		y <- matrix(as.matrix(read.table('yValues.txt')), nrow = n , ncol = q)
-		w.values <- as.numeric(read.table("wValues.txt"))
-		z <- as.numeric(read.table("zValues.txt"))
+		y <- matrix(as.matrix(read.table('yValues.txt', colClasses = rep('numeric',n*q))), nrow = n , ncol = q)
+		w.values <- as.numeric(read.table("wValues.txt", colClasses = rep('numeric',Kmax)))
+		z <- as.numeric(read.table("zValues.txt", colClasses = rep('numeric', n)))
 #		cat(paste0('done.'),'\n')
 	}
 	###############################################
@@ -2473,19 +2474,19 @@ overfittingMFA_UUC <- function(x_data, originalX, outputDirectory, Kmax, m, thin
 		}
 	}else{
 #		cat(paste0('reading starting values... '))	
-		diag(OmegaINV.constant) <- as.numeric(read.table('omegainvValues.txt')[1,])
+		diag(OmegaINV.constant) <- as.numeric(read.table('omegainvValues.txt', colClasses = rep('numeric',q))[1,])
 		omega <- OmegaINV.constant
 		diag(omega) <- 1/(diag(omega))
-		tmp1 <- read.table("muValues.txt")
+		tmp1 <- read.table("muValues.txt", colClasses = rep('numeric',Kmax*p))
 		tmp2 <- as.matrix(read.table("sigmainvValues.txt"))
 		for(k in 1:K){
 			mu.values[k, ] <- as.matrix(tmp1[ , k + Kmax*((1:p)-1)])
 			diag(SigmaINV.values[k, , ]) <- as.matrix(tmp2[,((k-1)*p + 1):(k*p)]) 
 		}
 		Lambda.values <- readLambdaValues(myFile = "LambdaValues.txt", K = K, p = p, q = q)
-		y <- matrix(as.matrix(read.table('yValues.txt')), nrow = n , ncol = q)
-		w.values <- as.numeric(read.table("wValues.txt"))
-		z <- as.numeric(read.table("zValues.txt"))
+		y <- matrix(as.matrix(read.table('yValues.txt', colClasses = rep('numeric',n*q))), nrow = n , ncol = q)
+		w.values <- as.numeric(read.table("wValues.txt", colClasses = rep('numeric',Kmax)))
+		z <- as.numeric(read.table("zValues.txt", colClasses = rep('numeric', n)))
 #		cat(paste0('done.'),'\n')
 	}
 	###############################################
@@ -2671,18 +2672,18 @@ overfittingMFA_missing_values <- function(missing_entries, x_data, originalX, ou
 		
 	}else{
 #		cat(paste0('reading starting values... '))	
-		diag(OmegaINV.constant) <- as.numeric(read.table('omegainvValues.txt')[1,])
+		diag(OmegaINV.constant) <- as.numeric(read.table('omegainvValues.txt', colClasses = rep('numeric',q))[1,])
 		omega <- OmegaINV.constant
 		diag(omega) <- 1/(diag(omega))
-		tmp1 <- read.table("muValues.txt")
+		tmp1 <- read.table("muValues.txt", colClasses = rep('numeric',Kmax*p))
 		diag(SigmaINV.values) <- as.numeric(read.table("sigmainvValues.txt"))
 		for(k in 1:K){
 			mu.values[k, ] <- as.matrix(tmp1[ , k + Kmax*((1:p)-1)])
 		}
 		Lambda.values <- readLambdaValues(myFile = "LambdaValues.txt", K = K, p = p, q = q)
-		y <- matrix(as.matrix(read.table('yValues.txt')), nrow = n , ncol = q)
-		w.values <- as.numeric(read.table("wValues.txt"))
-		z <- as.numeric(read.table("zValues.txt"))
+		y <- matrix(as.matrix(read.table('yValues.txt', colClasses = rep('numeric',n*q))), nrow = n , ncol = q)
+		w.values <- as.numeric(read.table("wValues.txt", colClasses = rep('numeric',Kmax)))
+		z <- as.numeric(read.table("zValues.txt", colClasses = rep('numeric', n)))
 #		cat(paste0('done.'),'\n')
 		x_complete <- as.matrix(read.table("x_complete.txt", header=TRUE))
 	}
@@ -2867,19 +2868,19 @@ overfittingMFA_Sj_missing_values <- function(missing_entries, x_data, originalX,
 		x_mean <- x_complete
 	}else{
 #		cat(paste0('reading starting values... '))	
-		diag(OmegaINV.constant) <- as.numeric(read.table('omegainvValues.txt')[1,])
+		diag(OmegaINV.constant) <- as.numeric(read.table('omegainvValues.txt', colClasses = rep('numeric',q))[1,])
 		omega <- OmegaINV.constant
 		diag(omega) <- 1/(diag(omega))
-		tmp1 <- read.table("muValues.txt")
+		tmp1 <- read.table("muValues.txt", colClasses = rep('numeric',Kmax*p))
 		tmp2 <- as.matrix(read.table("sigmainvValues.txt"))
 		for(k in 1:K){
 			mu.values[k, ] <- as.matrix(tmp1[ , k + Kmax*((1:p)-1)])
 			diag(SigmaINV.values[k, , ]) <- as.matrix(tmp2[,((k-1)*p + 1):(k*p)]) 
 		}
 		Lambda.values <- readLambdaValues(myFile = "LambdaValues.txt", K = K, p = p, q = q)
-		y <- matrix(as.matrix(read.table('yValues.txt')), nrow = n , ncol = q)
-		w.values <- as.numeric(read.table("wValues.txt"))
-		z <- as.numeric(read.table("zValues.txt"))
+		y <- matrix(as.matrix(read.table('yValues.txt', colClasses = rep('numeric',n*q))), nrow = n , ncol = q)
+		w.values <- as.numeric(read.table("wValues.txt", colClasses = rep('numeric',Kmax)))
+		z <- as.numeric(read.table("zValues.txt", colClasses = rep('numeric', n)))
 #		cat(paste0('done.'),'\n')
 		x_complete <- as.matrix(read.table("x_complete.txt", header=TRUE))
 	}
@@ -3069,7 +3070,7 @@ fabMix_UxU <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 		v_r[r] <- min(r,q)
 	}
 
-
+	kpq <- Kmax*p*q
 	#	initialization
 	iteration <- 1
 	if(q == 0){warm_up_overfitting = 2*warm_up_overfitting}
@@ -3139,7 +3140,9 @@ fabMix_UxU <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 	wConnection_target <- file(paste0(getwd(),"/wValues.txt"),open = "w")
 	LambdaConnection_target <- vector('list',length = Kmax)
 	cllConnection_target <- file(paste0(getwd(),"/cllValues.txt"),open = "w")
-	LambdaConnection_target <- file(paste0(getwd(),"/LambdaValues.txt"),open = "w")  
+	LambdaConnection_target <- file(paste0(getwd(),"/LambdaValues.txt"),open = "w") 
+	swapRate <-  file(paste0(getwd(),"/swapRate.txt"),open = "w")
+	ar <- 0 
 	LambdaHeader <- character(Kmax*p*q)
 	iter <- 0
 	for(k in 1:Kmax){
@@ -3177,8 +3180,8 @@ fabMix_UxU <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 		if(nChains > 1){
 			chains <- sample(nChains - 1, 1)
 			chains <- c(chains, chains + 1)
-			weights[1, ] <- as.numeric(read.table( paste0(outputDirs[ chains[1] ],'/wValues.txt') ))
-			weights[2, ] <- as.numeric(read.table( paste0(outputDirs[ chains[2] ],'/wValues.txt') ))
+			weights[1, ] <- as.numeric(read.table( paste0(outputDirs[ chains[1] ],'/wValues.txt'), colClasses = rep('numeric',Kmax) ))
+			weights[2, ] <- as.numeric(read.table( paste0(outputDirs[ chains[2] ],'/wValues.txt'), colClasses = rep('numeric',Kmax) ))
 
 			mh_denom <- log_dirichlet_pdf( rep( dirPriorAlphas[ chains[1] ], Kmax ), weights[1, ] ) 
 					+ log_dirichlet_pdf( rep( dirPriorAlphas[ chains[2] ], Kmax ), weights[2, ] )
@@ -3212,7 +3215,7 @@ fabMix_UxU <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 			kValues[iteration, myChain] <- read.table( paste0(outputDirs[myChain],'/k.and.logl.Values.txt') )[1,1]
 		}
 
-		z <- as.numeric(read.table('alpha_1/zValues.txt'))
+		z <- as.numeric(read.table('alpha_1/zValues.txt', colClasses = rep('numeric', n)))
 		if( (iteration %% 10) == 0 ){
 			if(progressGraphs == TRUE){
 				par(mfrow = c(1,3))
@@ -3227,14 +3230,14 @@ fabMix_UxU <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 		}
 		if(iteration %% thinning == 0){
 			if(iteration > burnCycles){
-				w        <- as.numeric(read.table('alpha_1/wValues.txt')) 
-				mu       <- as.numeric(read.table('alpha_1/muValues.txt'))
+				w        <- as.numeric(read.table('alpha_1/wValues.txt', colClasses = rep('numeric',Kmax))) 
+				mu       <- as.numeric(read.table('alpha_1/muValues.txt', colClasses = rep('numeric',Kmax*p)))
 				sigmainv <- as.numeric(read.table('alpha_1/sigmainvValues.txt')) 
 				cll      <- as.numeric(read.table('alpha_1/k.and.logl.Values.txt') )[2]
 			if(q > 0){
-				y        <- as.numeric(read.table('alpha_1/yValues.txt'))
-				omegainv <- as.numeric(read.table('alpha_1/omegainvValues.txt'))
-				Lambda <- as.numeric( read.table(paste0('alpha_1/LambdaValues.txt') ) )
+				y        <- as.numeric(read.table('alpha_1/yValues.txt', colClasses = rep('numeric',n*q)))
+				omegainv <- as.numeric(read.table('alpha_1/omegainvValues.txt', colClasses = rep('numeric',q)))
+				Lambda <- as.numeric( read.table(paste0('alpha_1/LambdaValues.txt'), colClasses=rep('numeric',kpq) ) )
 				cat(Lambda, file = LambdaConnection_target, '\n', append = TRUE)
 				cat(y       , file = yConnection_target, '\n', append = TRUE)
 				cat(omegainv, file = omegainvConnection_target, '\n', append = TRUE)
@@ -3244,6 +3247,7 @@ fabMix_UxU <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 				cat(mu      , file = muConnection_target, '\n', append = TRUE)
 				cat(sigmainv, file = sigmainvConnection_target, '\n', append = TRUE)
 				cat(cll     , file = cllConnection_target, '\n', append = TRUE)
+				cat(ar	    , file = swapRate, '\n', append = TRUE)
 			}
 		}
 	}
@@ -3257,6 +3261,7 @@ fabMix_UxU <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 	close(omegainvConnection_target)
 	close(cllConnection_target)
 	close(LambdaConnection_target)
+	close(swapRate)
 	keepedSeq <- seq(burnCycles + thinning, mCycles, by = thinning)
 	if( burnCycles > 0){
 		burnedSeq <- 1:burnCycles
@@ -3344,7 +3349,7 @@ fabMix_CxU <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 		v_r[r] <- min(r,q)
 	}
 
-
+	kpq <- Kmax*p*q
 	#	initialization
 	iteration <- 1
 	if(q == 0){warm_up_overfitting = 2*warm_up_overfitting}
@@ -3416,6 +3421,8 @@ fabMix_CxU <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 	cllConnection_target <- file(paste0(getwd(),"/cllValues.txt"),open = "w")
 	LambdaConnection_target <- file(paste0(getwd(),"/LambdaValues.txt"),open = "w")  
 	LambdaHeader <- character(Kmax*p*q)
+	swapRate <-  file(paste0(getwd(),"/swapRate.txt"),open = "w") 
+	ar <- 0
 	iter <- 0
 	for(k in 1:Kmax){
 		for(i in 1:p){
@@ -3453,8 +3460,8 @@ fabMix_CxU <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 		if(nChains > 1){
 			chains <- sample(nChains - 1, 1)
 			chains <- c(chains, chains + 1)
-			weights[1, ] <- as.numeric(read.table( paste0(outputDirs[ chains[1] ],'/wValues.txt') ))
-			weights[2, ] <- as.numeric(read.table( paste0(outputDirs[ chains[2] ],'/wValues.txt') ))
+			weights[1, ] <- as.numeric(read.table( paste0(outputDirs[ chains[1] ],'/wValues.txt'), colClasses = rep('numeric',Kmax) ))
+			weights[2, ] <- as.numeric(read.table( paste0(outputDirs[ chains[2] ],'/wValues.txt'), colClasses = rep('numeric',Kmax) ))
 
 			mh_denom <- log_dirichlet_pdf( rep( dirPriorAlphas[ chains[1] ], Kmax ), weights[1, ] ) 
 					+ log_dirichlet_pdf( rep( dirPriorAlphas[ chains[2] ], Kmax ), weights[2, ] )
@@ -3488,7 +3495,7 @@ fabMix_CxU <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 			kValues[iteration, myChain] <- read.table( paste0(outputDirs[myChain],'/k.and.logl.Values.txt') )[1,1]
 		}
 
-		z <- as.numeric(read.table('alpha_1/zValues.txt'))
+		z <- as.numeric(read.table('alpha_1/zValues.txt', colClasses = rep('numeric', n)))
 		if( (iteration %% 10) == 0 ){
 			if(progressGraphs == TRUE){
 				par(mfrow = c(1,3))
@@ -3503,14 +3510,14 @@ fabMix_CxU <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 		}
 		if(iteration %% thinning == 0){
 			if(iteration > burnCycles){
-				w        <- as.numeric(read.table('alpha_1/wValues.txt')) 
-				mu       <- as.numeric(read.table('alpha_1/muValues.txt'))
+				w        <- as.numeric(read.table('alpha_1/wValues.txt', colClasses = rep('numeric',Kmax))) 
+				mu       <- as.numeric(read.table('alpha_1/muValues.txt', colClasses = rep('numeric',Kmax*p)))
 				sigmainv <- as.numeric(read.table('alpha_1/sigmainvValues.txt')) 
 				cll      <- as.numeric(read.table('alpha_1/k.and.logl.Values.txt') )[2]
 			if(q > 0){
-				y        <- as.numeric(read.table('alpha_1/yValues.txt'))
-				omegainv <- as.numeric(read.table('alpha_1/omegainvValues.txt'))
-				Lambda <- as.numeric( read.table(paste0('alpha_1/LambdaValues.txt') ) )
+				y        <- as.numeric(read.table('alpha_1/yValues.txt', colClasses = rep('numeric',n*q)))
+				omegainv <- as.numeric(read.table('alpha_1/omegainvValues.txt', colClasses = rep('numeric',q)))
+				Lambda <- as.numeric( read.table(paste0('alpha_1/LambdaValues.txt'), colClasses=rep('numeric',kpq) ) )
 				cat(Lambda, file = LambdaConnection_target, '\n', append = TRUE)
 				cat(y       , file = yConnection_target, '\n', append = TRUE)
 				cat(omegainv, file = omegainvConnection_target, '\n', append = TRUE)
@@ -3520,6 +3527,7 @@ fabMix_CxU <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 				cat(mu      , file = muConnection_target, '\n', append = TRUE)
 				cat(sigmainv, file = sigmainvConnection_target, '\n', append = TRUE)
 				cat(cll     , file = cllConnection_target, '\n', append = TRUE)
+				cat(ar	    , file = swapRate, '\n', append = TRUE)
 			}
 		}
 	}
@@ -3533,6 +3541,7 @@ fabMix_CxU <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 	close(omegainvConnection_target)
 	close(cllConnection_target)
 	close(LambdaConnection_target)
+	close(swapRate)
 	keepedSeq <- seq(burnCycles + thinning, mCycles, by = thinning)
 	if( burnCycles > 0){
 		burnedSeq <- 1:burnCycles
@@ -3620,7 +3629,7 @@ fabMix_CxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 		v_r[r] <- min(r,q)
 	}
 
-
+	kpq <- Kmax*p*q
 	#	initialization
 	if(cccStart == FALSE){
 		iteration <- 1
@@ -3731,6 +3740,8 @@ fabMix_CxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 	LambdaConnection_target <- file(paste0(getwd(),"/LambdaValues.txt"),open = "w")  
 	cllConnection_target <- file(paste0(getwd(),"/cllValues.txt"),open = "w")
 	LambdaHeader <- character(Kmax*p*q)
+	swapRate <-  file(paste0(getwd(),"/swapRate.txt"),open = "w") 
+	ar <- 0
 	iter <- 0
 	for(k in 1:Kmax){
 		for(i in 1:p){
@@ -3769,8 +3780,8 @@ fabMix_CxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 		if(nChains > 1){
 			chains <- sample(nChains - 1, 1)
 			chains <- c(chains, chains + 1)
-			weights[1, ] <- as.numeric(read.table( paste0(outputDirs[ chains[1] ],'/wValues.txt') ))
-			weights[2, ] <- as.numeric(read.table( paste0(outputDirs[ chains[2] ],'/wValues.txt') ))
+			weights[1, ] <- as.numeric(read.table( paste0(outputDirs[ chains[1] ],'/wValues.txt'), colClasses = rep('numeric',Kmax) ))
+			weights[2, ] <- as.numeric(read.table( paste0(outputDirs[ chains[2] ],'/wValues.txt'), colClasses = rep('numeric',Kmax) ))
 
 			mh_denom <- log_dirichlet_pdf( rep( dirPriorAlphas[ chains[1] ], Kmax ), weights[1, ] ) 
 					+ log_dirichlet_pdf( rep( dirPriorAlphas[ chains[2] ], Kmax ), weights[2, ] )
@@ -3804,7 +3815,7 @@ fabMix_CxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 			kValues[iteration, myChain] <- read.table( paste0(outputDirs[myChain],'/k.and.logl.Values.txt') )[1,1]
 		}
 
-		z <- as.numeric(read.table('alpha_1/zValues.txt'))
+		z <- as.numeric(read.table('alpha_1/zValues.txt', colClasses = rep('numeric', n)))
 		if( (iteration %% 10) == 0 ){
 			if(progressGraphs == TRUE){
 				par(mfrow = c(1,3))
@@ -3819,14 +3830,14 @@ fabMix_CxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 		}
 		if(iteration %% thinning == 0){
 			if(iteration > burnCycles){
-				w        <- as.numeric(read.table('alpha_1/wValues.txt')) 
-				mu       <- as.numeric(read.table('alpha_1/muValues.txt'))
+				w        <- as.numeric(read.table('alpha_1/wValues.txt', colClasses = rep('numeric',Kmax))) 
+				mu       <- as.numeric(read.table('alpha_1/muValues.txt', colClasses = rep('numeric',Kmax*p)))
 				sigmainv <- as.numeric(read.table('alpha_1/sigmainvValues.txt')) 
 				cll      <- as.numeric(read.table('alpha_1/k.and.logl.Values.txt') )[2]
 			if(q > 0){
-				y        <- as.numeric(read.table('alpha_1/yValues.txt'))
-				omegainv <- as.numeric(read.table('alpha_1/omegainvValues.txt'))
-				Lambda <- as.numeric( read.table(paste0('alpha_1/LambdaValues.txt') ) )
+				y        <- as.numeric(read.table('alpha_1/yValues.txt', colClasses = rep('numeric',n*q)))
+				omegainv <- as.numeric(read.table('alpha_1/omegainvValues.txt', colClasses = rep('numeric',q)))
+				Lambda <- as.numeric( read.table(paste0('alpha_1/LambdaValues.txt'), colClasses=rep('numeric',kpq) ) )
 				cat(Lambda, file = LambdaConnection_target, '\n', append = TRUE)
 				cat(y       , file = yConnection_target, '\n', append = TRUE)
 				cat(omegainv, file = omegainvConnection_target, '\n', append = TRUE)
@@ -3836,6 +3847,7 @@ fabMix_CxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 				cat(mu      , file = muConnection_target, '\n', append = TRUE)
 				cat(sigmainv, file = sigmainvConnection_target, '\n', append = TRUE)
 				cat(cll     , file = cllConnection_target, '\n', append = TRUE)
+				cat(ar	    , file = swapRate, '\n', append = TRUE)
 			}
 		}
 	}
@@ -3849,6 +3861,7 @@ fabMix_CxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 	close(omegainvConnection_target)
 	close(cllConnection_target)
 	close(LambdaConnection_target)
+	close(swapRate)
 	keepedSeq <- seq(burnCycles + thinning, mCycles, by = thinning)
 	if( burnCycles > 0){
 		burnedSeq <- 1:burnCycles
@@ -3933,7 +3946,7 @@ fabMix_UxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 		v_r[r] <- min(r,q)
 	}
 
-
+	kpq <- Kmax*p*q
 	#	initialization
 	iteration <- 1
 	if(q == 0){warm_up_overfitting = 2*warm_up_overfitting}
@@ -4004,6 +4017,8 @@ fabMix_UxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 	cllConnection_target <- file(paste0(getwd(),"/cllValues.txt"),open = "w")
 	LambdaConnection_target <- file(paste0(getwd(),"/LambdaValues.txt"),open = "w")  
 	LambdaHeader <- character(Kmax*p*q)
+	swapRate <-  file(paste0(getwd(),"/swapRate.txt"),open = "w") 
+	ar <- 0
 	iter <- 0
 	for(k in 1:Kmax){
 		for(i in 1:p){
@@ -4040,8 +4055,8 @@ fabMix_UxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 		if(nChains > 1){
 			chains <- sample(nChains - 1, 1)
 			chains <- c(chains, chains + 1)
-			weights[1, ] <- as.numeric(read.table( paste0(outputDirs[ chains[1] ],'/wValues.txt') ))
-			weights[2, ] <- as.numeric(read.table( paste0(outputDirs[ chains[2] ],'/wValues.txt') ))
+			weights[1, ] <- as.numeric(read.table( paste0(outputDirs[ chains[1] ],'/wValues.txt'), colClasses = rep('numeric',Kmax) ))
+			weights[2, ] <- as.numeric(read.table( paste0(outputDirs[ chains[2] ],'/wValues.txt'), colClasses = rep('numeric',Kmax) ))
 
 			mh_denom <- log_dirichlet_pdf( rep( dirPriorAlphas[ chains[1] ], Kmax ), weights[1, ] ) 
 					+ log_dirichlet_pdf( rep( dirPriorAlphas[ chains[2] ], Kmax ), weights[2, ] )
@@ -4075,7 +4090,7 @@ fabMix_UxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 			kValues[iteration, myChain] <- read.table( paste0(outputDirs[myChain],'/k.and.logl.Values.txt') )[1,1]
 		}
 
-		z <- as.numeric(read.table('alpha_1/zValues.txt'))
+		z <- as.numeric(read.table('alpha_1/zValues.txt', colClasses = rep('numeric', n)))
 		if( (iteration %% 10) == 0 ){
 			if(progressGraphs == TRUE){
 				par(mfrow = c(1,3))
@@ -4090,14 +4105,14 @@ fabMix_UxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 		}
 		if(iteration %% thinning == 0){
 			if(iteration > burnCycles){
-				w        <- as.numeric(read.table('alpha_1/wValues.txt')) 
-				mu       <- as.numeric(read.table('alpha_1/muValues.txt'))
+				w        <- as.numeric(read.table('alpha_1/wValues.txt', colClasses = rep('numeric',Kmax))) 
+				mu       <- as.numeric(read.table('alpha_1/muValues.txt', colClasses = rep('numeric',Kmax*p)))
 				sigmainv <- as.numeric(read.table('alpha_1/sigmainvValues.txt')) 
 				cll      <- as.numeric(read.table('alpha_1/k.and.logl.Values.txt') )[2]
 			if(q > 0){
-				y        <- as.numeric(read.table('alpha_1/yValues.txt'))
-				omegainv <- as.numeric(read.table('alpha_1/omegainvValues.txt'))
-				Lambda <- as.numeric( read.table(paste0('alpha_1/LambdaValues.txt') ) )
+				y        <- as.numeric(read.table('alpha_1/yValues.txt', colClasses = rep('numeric',n*q)))
+				omegainv <- as.numeric(read.table('alpha_1/omegainvValues.txt', colClasses = rep('numeric',q)))
+				Lambda <- as.numeric( read.table(paste0('alpha_1/LambdaValues.txt'), colClasses=rep('numeric',kpq) ) )
 				cat(Lambda, file = LambdaConnection_target, '\n', append = TRUE)
 				cat(y       , file = yConnection_target, '\n', append = TRUE)
 				cat(omegainv, file = omegainvConnection_target, '\n', append = TRUE)
@@ -4107,6 +4122,7 @@ fabMix_UxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 				cat(mu      , file = muConnection_target, '\n', append = TRUE)
 				cat(sigmainv, file = sigmainvConnection_target, '\n', append = TRUE)
 				cat(cll     , file = cllConnection_target, '\n', append = TRUE)
+				cat(ar	    , file = swapRate, '\n', append = TRUE)
 			}
 		}
 	}
@@ -4120,6 +4136,7 @@ fabMix_UxC <- function(sameSigma = TRUE, dirPriorAlphas, rawData, outDir, Kmax, 
 	close(omegainvConnection_target)
 	close(cllConnection_target)
 	close(LambdaConnection_target)
+	close(swapRate)
 
 	keepedSeq <- seq(burnCycles + thinning, mCycles, by = thinning)
 	if( burnCycles > 0){
@@ -4204,7 +4221,7 @@ fabMix_missing_values <- function(sameSigma = TRUE, dirPriorAlphas, rawData, out
 		v_r[r] <- min(r,q)
 	}
 
-
+	kpq <- Kmax*p*q
 	#	initialization
 	iteration <- 1
 	cat(paste('-    (1) Initializing from priors that lead to overfitting... '))
@@ -4290,8 +4307,8 @@ fabMix_missing_values <- function(sameSigma = TRUE, dirPriorAlphas, rawData, out
 
 		chains <- sample(nChains - 1, 1)
 		chains <- c(chains, chains + 1)
-		weights[1, ] <- as.numeric(read.table( paste0(outputDirs[ chains[1] ],'/wValues.txt') ))
-		weights[2, ] <- as.numeric(read.table( paste0(outputDirs[ chains[2] ],'/wValues.txt') ))
+		weights[1, ] <- as.numeric(read.table( paste0(outputDirs[ chains[1] ],'/wValues.txt'), colClasses = rep('numeric',Kmax) ))
+		weights[2, ] <- as.numeric(read.table( paste0(outputDirs[ chains[2] ],'/wValues.txt'), colClasses = rep('numeric',Kmax) ))
 
 		mh_denom <- log_dirichlet_pdf( rep( dirPriorAlphas[ chains[1] ], Kmax ), weights[1, ] ) 
 				+ log_dirichlet_pdf( rep( dirPriorAlphas[ chains[2] ], Kmax ), weights[2, ] )
@@ -4327,7 +4344,7 @@ fabMix_missing_values <- function(sameSigma = TRUE, dirPriorAlphas, rawData, out
 			kValues[iteration, myChain] <- read.table( paste0(outputDirs[myChain],'/k.and.logl.Values.txt') )[1,1]
 		}
 
-		z <- as.numeric(read.table('alpha_1/zValues.txt'))
+		z <- as.numeric(read.table('alpha_1/zValues.txt', colClasses = rep('numeric', n)))
 		if( (iteration %% 10) == 0 ){
 			if(progressGraphs == TRUE){
 				par(mfrow = c(1,3))
@@ -4343,15 +4360,15 @@ fabMix_missing_values <- function(sameSigma = TRUE, dirPriorAlphas, rawData, out
 		}
 		if(iteration %% thinning == 0){
 			if(iteration > burnCycles){
-				y        <- as.numeric(read.table('alpha_1/yValues.txt'))
-				w        <- as.numeric(read.table('alpha_1/wValues.txt')) 
-				mu       <- as.numeric(read.table('alpha_1/muValues.txt'))
-				omegainv <- as.numeric(read.table('alpha_1/omegainvValues.txt'))
+				y        <- as.numeric(read.table('alpha_1/yValues.txt', colClasses = rep('numeric',n*q)))
+				w        <- as.numeric(read.table('alpha_1/wValues.txt', colClasses = rep('numeric',Kmax))) 
+				mu       <- as.numeric(read.table('alpha_1/muValues.txt', colClasses = rep('numeric',Kmax*p)))
+				omegainv <- as.numeric(read.table('alpha_1/omegainvValues.txt', colClasses = rep('numeric',q)))
 				sigmainv <- as.numeric(read.table('alpha_1/sigmainvValues.txt')) 
 				cll      <- as.numeric(read.table('alpha_1/k.and.logl.Values.txt') )[2]
 				xCurrent <- as.matrix(read.table('alpha_1/x_complete.txt', header = TRUE) )
 				xMean    <- xMean + xCurrent
-				Lambda <- as.numeric( read.table(paste0('alpha_1/LambdaValues.txt') ) )
+				Lambda <- as.numeric( read.table(paste0('alpha_1/LambdaValues.txt'), colClasses=rep('numeric',kpq) ) )
 				cat(Lambda, file = LambdaConnection_target, '\n', append = TRUE)
 				cat(z       , file = zConnection_target, '\n', append = TRUE)
 				cat(y       , file = yConnection_target, '\n', append = TRUE)
@@ -4516,7 +4533,7 @@ getStuffForDIC <- function(sameSigma = TRUE, sameLambda = FALSE, isotropic  = FA
 	if(missing(burn)){burn <- 0}
 	setwd(outputFolder)
 	cat(paste0('         - Entering directory: ', getwd()),'\n')
-	z <- as.matrix(read.table("zValues.txt"))
+	z <- as.matrix(read.table("zValues.txt", colClasses = rep('numeric', n)))
 	logl <- read.table("cllValues.txt")
         tmp  <- apply(z,1,function(y){length(table(y))})
         logl <- cbind(tmp, logl)
@@ -4571,7 +4588,7 @@ getStuffForDIC <- function(sameSigma = TRUE, sameLambda = FALSE, isotropic  = FA
 			lMean <- apply(lambda.perm.mcmc[,k,],2,mean)
 		}
 	}
-	mu <- read.table("muValues.txt")# auto to grafei ws mu_{11},mu_{12},...,mu_{1K}, ...., mu_{p1},mu_{p2},...,mu_{pK} gia kathe grammi
+	mu <- read.table("muValues.txt", colClasses = rep('numeric',Km*p))# auto to grafei ws mu_{11},mu_{12},...,mu_{1K}, ...., mu_{p1},mu_{p2},...,mu_{pK} gia kathe grammi
 	if(burn > 0){
 		mu <- mu[-(1:burn),] 
 	}
@@ -4605,7 +4622,7 @@ getStuffForDIC <- function(sameSigma = TRUE, sameLambda = FALSE, isotropic  = FA
 	Sigma.mcmc <- 1/SigmaINV.mcmc
 
 	#SigmaINV.mean <- as.numeric(apply(SigmaINV,2,mean))
-	w.mcmc <- as.matrix(read.table("wValues.txt"))
+	w.mcmc <- as.matrix(read.table("wValues.txt", colClasses = rep('numeric',Km)))
 	w.mcmc <- array(w.mcmc, dim = c(dim(w.mcmc)[1], Km, 1))
 	if(burn > 0){
 		w.mcmc <- w.mcmc[-(1:burn),,]
@@ -4830,7 +4847,7 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 	cat(paste0('-    (5) Dealing with label switching for q = ', q), '\n')
 	setwd(outputFolder)
 	cat(paste0('         * Entering directory: ', getwd()),'\n')
-	z <- as.matrix(read.table("zValues.txt"))
+	z <- as.matrix(read.table("zValues.txt", colClasses = rep('numeric', n)))
 	logl <- read.table("kValues.txt", header=T)
 	cllValues <- read.table("cllValues.txt")
 	if(burn > 0){
@@ -4928,7 +4945,7 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 			}
 			write.table(lambda.map, file = 'lambda_map.txt', col.names = paste('lambda',1:p, rep(1:q, each = p), sep = "_"))
 		}
-		mu <- read.table("muValues.txt")# auto to grafei ws mu_{11},mu_{12},...,mu_{1K}, ...., mu_{p1},mu_{p2},...,mu_{pK} gia kathe grammi
+		mu <- read.table("muValues.txt", colClasses = rep('numeric',Km*p))# auto to grafei ws mu_{11},mu_{12},...,mu_{1K}, ...., mu_{p1},mu_{p2},...,mu_{pK} gia kathe grammi
 		if(burn > 0){
 			mu <- mu[-(1:burn),] 
 		}
@@ -4995,7 +5012,7 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 		        write.table(sigma.mean, file = 'sigma_estimate_ecr.txt')
 		}
 
-		w.mcmc <- as.matrix(read.table("wValues.txt"))
+		w.mcmc <- as.matrix(read.table("wValues.txt", colClasses = rep('numeric',Km)))
 		w.mcmc <- array(w.mcmc, dim = c(dim(w.mcmc)[1], K, 1))
 		if(burn > 0){
 			w.mcmc <- w.mcmc[-(1:burn),,]
@@ -5092,7 +5109,7 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 
 		if( compute_regularized_expression == TRUE ){
 #			cat(paste("-    computing regularized expressions..."),'\n')
-			yValues <- read.table("yValues.txt")
+			yValues <- read.table("yValues.txt", colClasses = rep('numeric',n*q))
 			if(burn > 0){
 				yValues <- yValues[-(1:burn), ]
 			}
@@ -5236,8 +5253,9 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 	colnames(nClusters) <- model
 	rownames(nClusters) <- q
 	Kmap_prob <- array(data = NA, dim = c(length(q), length(model)))
-	colnames(Kmap_prob) <- model
-	rownames(Kmap_prob) <- q
+	swap_rate <- array(data = NA, dim = c(length(q), length(model)))
+	colnames(Kmap_prob) <- colnames(swap_rate) <- model
+	rownames(Kmap_prob) <- rownames(swap_rate) <- q
 
 	if(dir.exists(outDir)){
 		stop(paste0('Directory `',outDir,'` exists, please supply another name.'))
@@ -5264,6 +5282,8 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 			nClusters[as.character(nFactors), "UUU"] <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
 			r.freq <- 100*as.numeric(table(logl[,1])/length(logl[,1])) 
 			Kmap_prob[as.character(nFactors), "UUU"] <- max(r.freq)
+			sr <- read.table(paste0(myDir,"/swapRate.txt"))
+			swap_rate[as.character(nFactors), "UUU"] <- as.numeric(tail(sr, 1))
 			check_if_at_least_one_model <- 	check_if_at_least_one_model + 1
 		}
 	}
@@ -5286,6 +5306,8 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 			nClusters[as.character(nFactors), "UCU"] <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
 			r.freq <- 100*as.numeric(table(logl[,1])/length(logl[,1])) 
 			Kmap_prob[as.character(nFactors), "UCU"] <- max(r.freq)
+			sr <- read.table(paste0(myDir,"/swapRate.txt"))
+			swap_rate[as.character(nFactors), "UCU"] <- as.numeric(tail(sr, 1))
 			check_if_at_least_one_model <- 	check_if_at_least_one_model + 1
 		}
 	}
@@ -5308,6 +5330,8 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 			nClusters[as.character(nFactors), "CUU"] <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
 			r.freq <- 100*as.numeric(table(logl[,1])/length(logl[,1])) 
 			Kmap_prob[as.character(nFactors), "CUU"] <- max(r.freq)
+			sr <- read.table(paste0(myDir,"/swapRate.txt"))
+			swap_rate[as.character(nFactors), "CUU"] <- as.numeric(tail(sr, 1))
 			check_if_at_least_one_model <- 	check_if_at_least_one_model + 1
 		}
 	}
@@ -5330,6 +5354,8 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 			nClusters[as.character(nFactors), "CCU"] <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
 			r.freq <- 100*as.numeric(table(logl[,1])/length(logl[,1])) 
 			Kmap_prob[as.character(nFactors), "CCU"] <- max(r.freq)
+			sr <- read.table(paste0(myDir,"/swapRate.txt"))
+			swap_rate[as.character(nFactors), "CCU"] <- as.numeric(tail(sr, 1))
 			check_if_at_least_one_model <- 	check_if_at_least_one_model + 1
 		}
 	}
@@ -5352,6 +5378,8 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 			nClusters[as.character(nFactors), "CUC"] <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
 			r.freq <- 100*as.numeric(table(logl[,1])/length(logl[,1])) 
 			Kmap_prob[as.character(nFactors), "CUC"] <- max(r.freq)
+			sr <- read.table(paste0(myDir,"/swapRate.txt"))
+			swap_rate[as.character(nFactors), "CUC"] <- as.numeric(tail(sr, 1))
 			check_if_at_least_one_model <- 	check_if_at_least_one_model + 1
 		}
 	}
@@ -5374,6 +5402,8 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 			nClusters[as.character(nFactors), "CCC"] <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
 			r.freq <- 100*as.numeric(table(logl[,1])/length(logl[,1])) 
 			Kmap_prob[as.character(nFactors), "CCC"] <- max(r.freq)
+			sr <- read.table(paste0(myDir,"/swapRate.txt"))
+			swap_rate[as.character(nFactors), "CCC"] <- as.numeric(tail(sr, 1))
 			check_if_at_least_one_model <- 	check_if_at_least_one_model + 1
 		}
 	}
@@ -5396,6 +5426,8 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 			nClusters[as.character(nFactors), "UUC"] <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
 			r.freq <- 100*as.numeric(table(logl[,1])/length(logl[,1])) 
 			Kmap_prob[as.character(nFactors), "UUC"] <- max(r.freq)
+			sr <- read.table(paste0(myDir,"/swapRate.txt"))
+			swap_rate[as.character(nFactors), "UUC"] <- as.numeric(tail(sr, 1))
 			check_if_at_least_one_model <- 	check_if_at_least_one_model + 1
 		}
 	}
@@ -5418,6 +5450,8 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 			nClusters[as.character(nFactors), "UCC"] <- as.numeric(names(sort(table(logl[,1]),decreasing=TRUE)[1]))
 			r.freq <- 100*as.numeric(table(logl[,1])/length(logl[,1])) 
 			Kmap_prob[as.character(nFactors), "UCC"] <- max(r.freq)
+			sr <- read.table(paste0(myDir,"/swapRate.txt"))
+			swap_rate[as.character(nFactors), "UCC"] <- as.numeric(tail(sr, 1))
 			check_if_at_least_one_model <- 	check_if_at_least_one_model + 1
 		}
 	}
@@ -5506,7 +5540,7 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 		MCMC$w <- mcmc(MCMC$w,
 				start = warm_up_overfitting + warm_up + burnCycles*nIterPerCycle, 
 				thin = nIterPerCycle)
-		MCMC$y <- read.table(paste0(outDir,"/yValues.txt"))
+		MCMC$y <- read.table(paste0(outDir,"/yValues.txt"), colClasses = rep('numeric',n*as.numeric(q_selected)))
 		colnames(MCMC$y) <- paste0(rep( paste0('OBS',1:n), as.numeric(q_selected)), rep( paste0('_F',1:as.numeric(q_selected)), each = n))
 		MCMC$y <- mcmc(MCMC$y,
 				start = warm_up_overfitting + warm_up + burnCycles*nIterPerCycle, 
@@ -5572,12 +5606,13 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 	cat(paste0("\n","Given the specified range of models, factors, maximum number of clusters and MCMC parameters,","\n", "the best model corresponds to the ", model_selected, " parameterization with q = ", q_selected, " factors and K = ",nClusters[q_selected, model_selected]," clusters. ","\n","The BIC for this model equals ", round(min(bic),3), "."),"\n")
 	best_model <- data.frame(parameterization = model_selected, num_Clusters = nClusters[q_selected, model_selected], num_Factors = as.numeric(q_selected))
 
-	results <- vector("list", length = 12)
+	results <- vector("list", length = 13)
 	results[[1]] <- bic
 	results[[3]] <- nClusters
 	results[[8]] <- best_model
 	results[[10]] <- rawData
 	results[[12]] <- Kmap_prob
+	results[[13]] <- swap_rate
 	if ( nClusters[q_selected, model_selected] > 1){
 		results[[4]] <- classification_probabilities_MAP
 		results[[2]] <- z
@@ -5603,7 +5638,8 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 				"mcmc",
 				"data",
 				"regularizedExpression",
-				"Kmap_prob"
+				"Kmap_prob",
+				"swap_rate"
 			)
 	class(results) <- c('list', 'fabMix.object')
 	return(results)
@@ -5688,7 +5724,7 @@ fabMix_parallelModels <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "
 	setwd('../')
 
 	# merging all results together and return a fabMix object
-	mergedResult <- vector('list', length = 12)	
+	mergedResult <- vector('list', length = 13)	
 	names(mergedResult) <- c("bic", 
 				"class", 
 				"n_Clusters_per_model", 
@@ -5700,12 +5736,14 @@ fabMix_parallelModels <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "
 				"mcmc",
 				"data",
 				"regularizedExpression",
-				"Kmap_prob"
+				"Kmap_prob",
+				"swap_rate"
 			)
 	class(mergedResult) <- c('list', 'fabMix.object')
 
 	mergedResult$bic <- matrix(unlist(lapply(myList, function(y)y$bic)), nrow = length(q), ncol = length(model), dimnames = list(q, model))
 	mergedResult$Kmap_prob <- matrix(unlist(lapply(myList, function(y)y$Kmap_prob)), nrow = length(q), ncol = length(model), dimnames = list(q, model))
+	mergedResult$swap_rate <- matrix(unlist(lapply(myList, function(y)y$swap_rate)), nrow = length(q), ncol = length(model), dimnames = list(q, model))
 	mergedResult$data <- myList[[1]]$data
 	mergedResult$n_Clusters_per_model <- matrix(unlist(lapply(myList, function(y)y$n_Clusters_per_model)), nrow = length(q), ncol = length(model), dimnames = list(q, model)) 
 	model_selected <- model[which.min(apply(mergedResult$bic,2,min))]
@@ -5861,16 +5899,19 @@ print.fabMix.object <- function(x, ...){
 			l1 <- as.numeric(as.numeric(rownames(x$bic)[apply(x$bic, 2, order)[1,]]))
 			l2 <- as.numeric(diag(x$n_Clusters_per_model[ rownames(x$bic)[apply(x$bic, 2, order)[1,]],]))
 			l3 <- round(as.numeric(diag(x$Kmap_prob[ rownames(x$bic)[apply(x$bic, 2, order)[1,]],]))/100,2)
+			l4 <- paste0(round(as.numeric(diag(x$swap_rate[ rownames(x$bic)[apply(x$bic, 2, order)[1,]],])),2), '%')
 		}else{
 			l1 <- rep(rownames(x$bic), dim(x$bic)[2])
 			l2 <- as.numeric(x$n_Clusters_per_model)
 			l3 <- as.numeric(round(x$Kmap_prob/100, 2))
+			l4 <- paste0(as.numeric(round(x$swap_rate, 2)), '%')
 		}
 		model.info <- data.frame(model = as.factor(colnames(x$bic)), 
-					nClusters_MAP = l2, 
-					nClusters_MAP_prob =  l3,
-					nFactors = l1, 
-					BIC_nFactors = as.numeric(as.numeric(round(apply(x$bic, 2, min),1)))
+					K_MAP = l2, 
+					K_MAP_prob =  l3,
+					q = l1, 
+					BIC_q = as.numeric(as.numeric(round(apply(x$bic, 2, min),1))),
+					chain_swap_rate = l4
 				)		
 		print(model.info)
 		cat('\n')
