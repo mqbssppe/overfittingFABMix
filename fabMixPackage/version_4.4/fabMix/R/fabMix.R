@@ -4859,7 +4859,228 @@ dealWithLabelSwitching <- function(sameSigma = TRUE, x_data, outputFolder, q, bu
 	kSelected <- K
 	cat(paste0('         * Posterior mode corresponds to K = ', K),'\n')
 	if(K == 1){
-		cat(paste0('         *  no label switching algorithms are applied'),'\n')
+		cat(paste0('         *  no label switching algorithms are applied. Processing output...'),'\n')
+		index <- which(logl[,1] == K)
+		Kindex <- index
+		logl <- logl[index,1]
+		cllValues <- cllValues[index,1]
+		z <- z[index,]
+		mapIndex <- which(cllValues == max(cllValues))[1]
+		m <- length(logl)
+
+		K <- max(z)
+		skiniko <- FALSE
+		if(K < Km){
+			skiniko <- TRUE
+			kLAST <- K 
+			newZ <- t(apply(z, 1, function(y){ myI <- which(y == K); y[myI] <- rep(Km, length(myI));return(y) } ) )
+			z <- newZ
+			K <- max(z)
+		}
+
+		write.table(matrix(1,nrow = m, ncol = n), file = 'reordered_allocations_ecr.txt')
+		sbc <- matrix(1,nrow = 2, ncol = n)
+		colnames(sbc) <- paste0('V',1:n)
+		write.table(sbc, file = "singleBestClusterings.txt", quote = FALSE, row.names = FALSE)
+		write.table(rep(1,n), file = "classificationProbabilities.txt")
+
+
+		l <- read.table("LambdaValues.txt", header=TRUE)
+		if(burn > 0){
+			l <- l[-(1:burn),]
+		}
+		J <- p*q
+		mcmc <- array(data = NA, dim = c(m,K,J))
+		t <- 0
+		i <- 1:p
+		for(iter in index){
+			t <- t + 1
+			for(k in 1:K){
+				for(j in 1:q){
+					mcmc[t, k, (i-1)*q + j] <- as.numeric(l[iter, paste0("k",k,"_i",i,"_j",j)])
+				}
+			}
+		}
+		if(skiniko == TRUE){
+			tmp1 <- mcmc[,kLAST,]
+			tmp2 <-  mcmc[,Km,]	
+			mcmc[,kLAST,] <- tmp2
+			mcmc[,Km,] <- tmp1
+		}
+		lambda.perm.mcmc <- mcmc
+		t <- 0
+		for(iter in index){
+			t <- t + 1
+			j <- z[t, 1]
+			lambda.perm.mcmc[t, 1, ] <- mcmc[t, j, ]
+			lambda.perm.mcmc[t, j, ] <- mcmc[t, 1, ]
+		}
+		
+		lCon <- file('reordered_lambda_ecr.txt', open = "w")
+		cat(colnames(l), file = lCon, '\n', append = TRUE)
+		for (i in 1:m){
+			for(k in 1:K){
+				cat(lambda.perm.mcmc[i,k, ], " ", file = lCon, append = TRUE)
+			}
+			cat("\n", file = lCon, append = TRUE)
+		}
+		close(lCon)
+		lambda.map <- array(data = NA, dim = c(K,p,q))
+		for(k in 1:K){
+			lambda.map[k,,] <- matrix(lambda.perm.mcmc[mapIndex,k,],nrow = p, ncol = q, byrow=TRUE)
+		}
+		write.table(lambda.map, file = 'lambda_map.txt', col.names = paste('lambda',1:p, rep(1:q, each = p), sep = "_"))
+
+
+		mu <- read.table("muValues.txt", colClasses = rep('numeric',Km*p))# auto to grafei ws mu_{11},mu_{12},...,mu_{1K}, ...., mu_{p1},mu_{p2},...,mu_{pK} gia kathe grammi
+		if(burn > 0){
+			mu <- mu[-(1:burn),] 
+		}
+		mu <- mu[Kindex,]
+
+		mu.mcmc <- array(data = NA, dim = c(m,K,p))
+		for(k in 1:K){
+			mu.mcmc[,k,] <- as.matrix(mu[,k + K*((1:p)-1)])
+		}
+		if(skiniko == TRUE){
+			tmp1 <- mu.mcmc[,kLAST,]
+			tmp2 <-  mu.mcmc[,Km,]	
+			mu.mcmc[,kLAST,] <- tmp2
+			mu.mcmc[,Km,] <- tmp1
+		}
+		tmp1 <- tmp2 <- 0
+		mu.perm.mcmc <- mu.mcmc
+		t <- 0
+		for(iter in index){
+			t <- t + 1
+			j <- z[t, 1]
+			mu.perm.mcmc[t, 1, ] <- mu.mcmc[t, j, ]
+			mu.perm.mcmc[t, j, ] <- mu.mcmc[t, 1, ]
+		}
+		write.table(mu.perm.mcmc, file = 'reordered_mu_ecr.txt')
+		mu.mean <- array(data = NA, dim = c(K,p))
+		mu.map <- array(data = NA, dim = c(K,p))
+		for(k in 1:K){
+			for(j in 1:p){
+				mu.mean[k,j] <- mean(mu.perm.mcmc[,k,j])
+				mu.map[k,j] <- mu.mcmc[mapIndex,k,j]
+			}
+		}
+		write.table(mu.mean, file = 'mu_estimate_ecr.txt')
+		if(sameSigma == TRUE){
+			sigmaINV <- as.matrix(read.table("sigmainvValues.txt"))# auto to grafei ws (s_{11},...,s_{p1}),....,(s_{1k},...,s_{pk}),....,(s_{1K},...,s_{pK})
+			if(burn > 0){
+				sigmaINV <- sigmaINV[-(1:burn),] 
+			}
+			sigmaINV <- sigmaINV[Kindex, ] 
+		        Sigma.mcmc <- 1/sigmaINV
+		        write.table(Sigma.mcmc, file = 'reordered_sigma_ecr.txt')
+		}else{	
+		
+		        SigmaINV <- as.matrix(read.table("sigmainvValues.txt"))
+			if(burn > 0){
+				SigmaINV <- SigmaINV[-(1:burn),] 
+			}
+			SigmaINV <- SigmaINV[Kindex,]
+
+		        SigmaINV.mcmc <- array(data = NA, dim = c(m,K,p))
+		        for(k in 1:K){
+		                SigmaINV.mcmc[,k,] <- as.matrix(SigmaINV[,((k-1)*p + 1):(k*p)])
+		        }
+			if(skiniko == TRUE){
+				tmp1 <- SigmaINV.mcmc[,kLAST,]
+				tmp2 <-  SigmaINV.mcmc[,Km,]	
+				SigmaINV.mcmc[,kLAST,] <- tmp2
+				SigmaINV.mcmc[,Km,] <- tmp1
+			}
+			tmp1 <- tmp2 <- 0
+		        SigmaINV.perm.mcmc <- SigmaINV.mcmc
+		        Sigma.mcmc <- 1/SigmaINV.mcmc
+			Sigma.perm.mcmc <- Sigma.mcmc
+			t <- 0
+			for(iter in index){
+				t <- t + 1
+				j <- z[t, 1]
+				Sigma.perm.mcmc[t, 1, ] <- Sigma.mcmc[t, j, ]
+				Sigma.perm.mcmc[t, j, ] <- Sigma.mcmc[t, 1, ]
+			}
+		        write.table(Sigma.perm.mcmc, file = 'reordered_sigma_ecr.txt')
+		        sigma.mean <- array(data = NA, dim = c(K,p))
+		        sigma.map <- array(data = NA, dim = c(K,p))
+		        for(k in 1:K){
+		                for(j in 1:p){
+		                        sigma.mean[k,j] <- mean(Sigma.perm.mcmc[,k,j])
+		                        sigma.map[k,j] <- Sigma.mcmc[mapIndex,k,j]
+		                }
+		        }
+		        write.table(sigma.mean, file = 'sigma_estimate_ecr.txt')
+		}
+
+		w.mcmc <- as.matrix(read.table("wValues.txt", colClasses = rep('numeric',Km)))
+		w.mcmc <- array(w.mcmc, dim = c(dim(w.mcmc)[1], K, 1))
+		if(burn > 0){
+			w.mcmc <- w.mcmc[-(1:burn),,]
+			w.mcmc <- w.mcmc[Kindex,]
+		}else{
+			w.mcmc <- w.mcmc[Kindex,,]
+		}
+		w.mcmc <- array(w.mcmc[,1:K],dim = c(length(Kindex),K,1))
+		w.mcmc_raw <- w.mcmc
+		if(skiniko == TRUE){
+			tmp1 <- w.mcmc[,kLAST,]
+			tmp2 <-  w.mcmc[,Km,]	
+			w.mcmc[,kLAST,] <- tmp2
+			w.mcmc[,Km,] <- tmp1
+		}
+		w.perm.mcmc <- w.mcmc
+		t <- 0
+		for(iter in index){
+			t <- t + 1
+			j <- z[t, 1]
+			w.perm.mcmc[t, 1, ] <- w.mcmc[t, j, ]
+			w.perm.mcmc[t, j, ] <- w.mcmc[t, 1, ]
+		}
+
+		w.mean <- numeric(K)
+		w.map <- numeric(K)
+		for(k in 1:K){
+			w.mean[k] <- mean(w.perm.mcmc[,k,1])
+			w.map[k] <- w.mcmc[mapIndex,k,1]
+		}
+		write.table(w.perm.mcmc, file = 'reordered_weights_ecr.txt')
+		write.table(w.mean, file = 'weights_estimate_ecr.txt')
+
+		aliveClusters <- 1
+		covmat <- array(data = 0, dim = c( length(aliveClusters), p, p ))
+		rownames(covmat) <- as.character(aliveClusters)
+		if(sameSigma == TRUE){
+			for(k in aliveClusters){
+				for(iter in 1:m){
+					lambda_k <- matrix( lambda.perm.mcmc[iter, k, ], nrow = p, ncol = q, byrow=T)
+					covmat[as.character(k), , ] <- covmat[as.character(k), , ] + lambda_k %*% t(lambda_k) 
+				}
+				covmat[as.character(k), , ] <- covmat[as.character(k), , ]/m
+				diag(covmat[as.character(k), , ]) <- diag(covmat[as.character(k), , ]) + as.numeric(apply(1/sigmaINV, 2, median))
+			}
+		}else{
+			for(k in aliveClusters){
+				for(iter in 1:m){
+					lambda_k <- matrix( lambda.perm.mcmc[iter, k, ], nrow = p, ncol = q, byrow=T)
+					covmat[as.character(k), , ] <- covmat[as.character(k), , ] + lambda_k %*% t(lambda_k) 
+				}
+				covmat[as.character(k), , ] <- covmat[as.character(k), , ]/m
+			
+				diag(covmat[as.character(k), , ]) <- diag(covmat[as.character(k), , ]) + as.numeric(apply( Sigma.perm.mcmc[ ,k, ], 2, median ))
+			}
+		}
+		for(k in 1:length(aliveClusters)){
+			write.table(covmat[k, , ], file = paste0("estimated_cov_cluster_",k,".txt"))
+			write.table(lambda.map[k, , ], file = paste0('lambda_map_',k,'.txt'))
+		}
+
+
+
+		cat(paste0('-    Done.'), '\n')
 	}else{
 		index <- which(logl[,1] == K)
 		Kindex <- index
@@ -5470,7 +5691,7 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 	}else{
 		dealWithLabelSwitching(sameSigma = FALSE, x_data = rawData, outputFolder = outDir, q = as.numeric(q_selected), compute_regularized_expression = TRUE, Km = Kmax)
 	}
-	if ( nClusters[q_selected, model_selected] > 1){
+#	if ( nClusters[q_selected, model_selected] > 1){
 		z <- as.numeric(read.table(paste0(outDir,"/singleBestClusterings.txt"), header=TRUE)[1,])
 		if( nClusters[q_selected, model_selected] != length(table(z)) ){
 			nClusters[q_selected, model_selected] <- length(table(z))
@@ -5536,6 +5757,9 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 						thin = nIterPerCycle)
 		}
 		MCMC$w <- read.table(paste0(outDir,"/reordered_weights_ecr.txt"))[,as.numeric(names(table(z)))]
+		if( nClusters[q_selected, model_selected] == 1 ){
+			MCMC$w <- as.matrix(MCMC$w)
+		}
 		colnames(MCMC$w) <- names(table(z))
 		MCMC$w <- mcmc(MCMC$w,
 				start = warm_up_overfitting + warm_up + burnCycles*nIterPerCycle, 
@@ -5588,11 +5812,13 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 		MCMC$lambda_map <- read.table(paste0(outDir, '/lambda_map.txt'))
 		rr <- vector("list", length = as.numeric(q_selected))
 		names(rr) <- paste0('F',1:as.numeric(q_selected))
-		for(j in 1:as.numeric(q_selected)){
-			rr[[j]] <- read.table(paste0(outDir,"/estimated_regularized_expression_per_cluster_",j,".txt"))
-			rownames(rr[[j]]) <-  names(table(z))
+		if ( nClusters[q_selected, model_selected] > 1){
+			for(j in 1:as.numeric(q_selected)){
+				rr[[j]] <- read.table(paste0(outDir,"/estimated_regularized_expression_per_cluster_",j,".txt"))
+				rownames(rr[[j]]) <-  names(table(z))
+			}
 		}
-	}
+#	}
 
 
 	setwd("../")
@@ -5613,7 +5839,7 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 	results[[10]] <- rawData
 	results[[12]] <- Kmap_prob
 	results[[13]] <- swap_rate
-	if ( nClusters[q_selected, model_selected] > 1){
+#	if ( nClusters[q_selected, model_selected] > 1){
 		results[[4]] <- classification_probabilities_MAP
 		results[[2]] <- z
 		results[[5]] <- covariance_matrix_MAP
@@ -5621,11 +5847,11 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 		results[[7]] <- w
 		results[[9]] <- MCMC
 		results[[11]] <- rr
-	}else{
-		results[[2]] <- rep(1,n)
-		results[[4]] <- rep(1,n)
-		results[[7]] <- 1
-	}
+#	}else{
+#		results[[2]] <- rep(1,n)
+#		results[[4]] <- rep(1,n)
+#		results[[7]] <- 1
+#	}
 
 	names(results) <- c(	"bic", 
 				"class", 
@@ -5989,7 +6215,11 @@ summary.fabMix.object <- function(object, quantile_probs = c(0.025, 0.25, 0.5, 0
 					)
 			names(dimnames(quants)) <- list('parameter', 'quantile')
 			# weights
-			w <- as.mcmc(t(apply(object$mcmc$w,1,function(x){x/sum(x)})))
+			if(K > 1){
+				w <- as.mcmc(t(apply(object$mcmc$w,1,function(x){x/sum(x)})))
+			}else{
+				w <- object$mcmc$w/object$mcmc$w
+			}
 			summcmc <- summary(w, quantiles = quantile_probs)$quantiles
 			quants[1:K, ] <- as.matrix(summcmc)
 			#means
