@@ -45,6 +45,7 @@ plot.fabMix.object	plot.fabMix.object
 print.fabMix.object	print.fabMix.object
 readLambdaValues	readLambdaValues
 simData	simData
+simData2	simData2
 summary.fabMix.object	summary.fabMix.object
 update_all_y	update_all_y
 update_all_y_Sj	update_all_y_Sj

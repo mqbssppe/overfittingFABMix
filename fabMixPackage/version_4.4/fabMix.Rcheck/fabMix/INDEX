@@ -77,6 +77,7 @@ plot.fabMix.object      Plot function
 print.fabMix.object     Print function
 readLambdaValues        Read Lambda values.
 simData                 Synthetic data generator
+simData2                Synthetic data generator 2
 summary.fabMix.object   Summary method
 update_OmegaINV         Gibbs sampling for Omega^{-1}
 update_OmegaINV_Cxx     Gibbs sampling for Omega^{-1} for Cxx model
