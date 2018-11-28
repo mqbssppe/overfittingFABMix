@@ -9,7 +9,7 @@ Plot function
 This function plots \code{fabMix} function.
 }
 \usage{
-\method{plot}{fabMix.object}(x, what, variableSubset, class_mfrow, sig_correlation,...)
+\method{plot}{fabMix.object}(x, what, variableSubset, class_mfrow, sig_correlation, confidence, ...)
 }
 \arguments{
   \item{x}{
@@ -26,6 +26,9 @@ An optional integer vector of length 2, that will be used to set the \code{mfrow
 }
   \item{sig_correlation}{
 The ``significance-level'' for plotting the correlation between variables. Note that this is an estimate of a posterior probability and not a significance level as defined in frequentist statistics. Default value: NULL (all correlations are plotted).
+}
+  \item{confidence}{
+Confidence level(s) for plotting the Highest Density Interval(s) (as shown via \code{what = 2}). Default: \code{confidence = 0.95}.
 }
   \item{...}{
         ignored.

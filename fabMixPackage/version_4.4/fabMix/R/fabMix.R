@@ -5424,6 +5424,7 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 		if( range(diff(order(dirPriorAlphas)))[1] != 1){stop('dirPriorAlphas should be in increasing order.')}
 		if( range(diff(order(dirPriorAlphas)))[2] != 1){stop('dirPriorAlphas should be in increasing order.')}
 	}
+	if(burnCycles < 1){ burnCycles <- 1;  mCycles <- mCycles + 1}
 	if(mCycles < burnCycles + 1){ stop('`burnCycles` should be less than `mCycles`.') } 
 	if(missing(g)){g <- 0.5}
 	if(missing(h)){h <- 0.5}
@@ -6367,7 +6368,7 @@ summary.fabMix.object <- function(object, quantile_probs = c(0.025, 0.25, 0.5, 0
 
 
 #' @export
-plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, sig_correlation = NULL, ...){
+plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, sig_correlation = NULL, confidence = 0.95, ...){
         if( 'fabMix.object' %in% class(x) ){
 	K <- as.numeric(x$selected_model['num_Clusters'])
 	cMeans <- colMeans(x$data)
@@ -6385,6 +6386,8 @@ plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, sig_
 		variableSubset = 1:p
 	}
 	if(length(variableSubset) < 2){stop("variableSubset should contain at least 2 variables.")}
+	if(min(confidence) < 0.5){stop('confidence should be between 0.5 and 1.')}
+	if(max(confidence) > 1){stop('confidence should be between 0.5 and 1.')}
 	while(v > 0){
 		if(what=="menu"){
 			cat(paste0("fabMix plots:"),"\n\n")
@@ -6404,7 +6407,9 @@ plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, sig_
 			# 1. Plot BIC values
 			par(mfrow=c(1,1),mar=c(5.1, 4.1, 4.1, 8.1), xpd=TRUE)
 			myCols <- brewer.pal(8, "Set1")
-			matplot(x$bic, type = "b", xlab = "number of factors", ylab = "BIC", cex = 0, col = myCols, lty = 1, xaxt = "n")
+			matplot(x$bic, type = "n", xlab = "number of factors", ylab = "BIC", cex = 0, col = myCols, lty = 1, xaxt = "n")
+			rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4],col = "lightgrey")
+			matplot(x$bic, type = "b", add = TRUE, xlab = "number of factors", ylab = "BIC", cex = 0, col = myCols, lty = 1, xaxt = "n")
 			axis(1, at = 1:dim(x$bic)[1], labels = as.numeric(rownames(x$bic)))
 			for (i in 1:dim(x$bic)[2]){
 				text(labels = x$n_Clusters_per_model[,i], y = x$bic[,i], x = 1:dim(x$bic)[1], col = myCols[i])
@@ -6414,9 +6419,19 @@ plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, sig_
 		
 		if((v == 2)||(what == "classification_matplot")){
 			on.exit(par())
+			ZNORM <- qnorm(p = (1 - confidence)/2)
 			# 2. Matplot per cluster
+			tmp.mar <- par()$mar
+			par(mar = c(3,3,3,1))
 			if(is.null( class_mfrow ) == FALSE){
-				par(mfrow = class_mfrow)
+				if(prod(class_mfrow) < length(table(x$class))){
+					stop('class_mfrow not correct.')
+				}
+				remaining <- prod(class_mfrow) -  length(table(x$class))
+				#par(mfrow = class_mfrow)
+				myMat <- matrix(1:prod(class_mfrow), nrow = class_mfrow[1], ncol = class_mfrow[2], byrow=TRUE) 
+				myMat <- rbind(myMat, rep(prod(class_mfrow) + 1,class_mfrow[2]))
+				layout(myMat, heights = c(rep(9,class_mfrow[1]),1))
 				for(k in 1:K){
 					#ind <- which(x$class == as.numeric(names(table(x$class)))[k])
 					ind <- which(x$class == names(table(x$class))[k])
@@ -6427,13 +6442,28 @@ plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, sig_
 							sNew[i,j] <- sdevs[i]*sdevs[j]*x$covariance_matrix[[names(table(x$class))[k]]][i,j]
 						}
 					}
-					matplot(t(x$data[ind,]), col = "gray", type = "l", lty = 1, main = paste0("cluster ``", names(table(x$class))[k],"''"), xlab = "", ylab = "")
-					points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k], type = "l", col =  mclustColors[k], lwd = 2)
-					points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k] + 2*sqrt(diag(sNew)), type = "l", col =  mclustColors[k], lty = 2, lwd = 2)
-					points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k] - 2*sqrt(diag(sNew)), type = "l", col =  mclustColors[k], lty = 2, lwd = 2)
-					legend("bottomleft", col = c( mclustColors[k], mclustColors[k], "gray"), c("estimated mean", "95% HDI", "assigned data"), lty = c(1,2,1), lwd = 2)
+					matplot(t(x$data[ind,]), col = "gray", type = "l", lty = 1, main = paste0("cluster `", names(table(x$class))[k],"' (n = ", as.numeric(table(x$class))[k] ,")"), xlab = "", ylab = "")
+#					points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k], type = "l", col =  mclustColors[k], lwd = 2)
+					points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k], type = "l", col =  1, lwd = 2)
+					mylty <- 1
+					for(z_norm in ZNORM){
+						mylty = mylty + 1
+#						points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k] + z_norm*sqrt(diag(sNew)), type = "l", col =  mclustColors[k], lty = mylty, lwd = 2)
+#						points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k] - z_norm*sqrt(diag(sNew)), type = "l", col =  mclustColors[k], lty = mylty, lwd = 2)
+						points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k] + z_norm*sqrt(diag(sNew)), type = "l", col =  1, lty = mylty, lwd = 2)
+						points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k] - z_norm*sqrt(diag(sNew)), type = "l", col =  1, lty = mylty, lwd = 2)
+					}
+#					legend("bottomleft", col = c( mclustColors[k], rep(mclustColors[k], length(ZNORM)), "gray"), c("estimated mean", paste0(round(confidence*100,2),"% HDI"), "assigned data"), lty = c(1,2:mylty,1), lwd = 2)
 				}
-
+				if(remaining > 0){
+					for (i in 1:remaining){
+						plot(1, type = 'n', ylab = '', xlab = '', axes=FALSE)					
+					}
+				}
+				par(mar = c(0,0,0,0))
+				plot(1, type = 'n', ylab = '', xlab = '', axes=FALSE)
+				legend("center",  col = c(rep(1,length(ZNORM) + 1),'gray'), c("mean", paste0(round(confidence*100,2),"% HDI"), "assigned data"), lty = c(1,2:mylty,1), lwd = 2, ncol = 2 + length(ZNORM), bty = 'n')
+				par(mar = tmp.mar)
 			}else{
 				k = 0
 				while(k < K ){
@@ -6447,11 +6477,16 @@ plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, sig_
 							sNew[i,j] <- sdevs[i]*sdevs[j]*x$covariance_matrix[[names(table(x$class))[k]]][i,j]
 						}
 					}
-					matplot(t(x$data[ind,]), col = "gray", type = "l", lty = 1, main = paste0("cluster ``", names(table(x$class))[k],"''"), xlab = "", ylab = "")
+					matplot(t(x$data[ind,]), col = "gray", type = "l", lty = 1, main = paste0("cluster `", names(table(x$class))[k],"' (n = ", as.numeric(table(x$class))[k] ,")"), xlab = "", ylab = "")
 					points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k], type = "l", col =  mclustColors[k], lwd = 2)
-					points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k] + 2*sqrt(diag(sNew)), type = "l", col =  mclustColors[k], lty = 2, lwd = 2)
-					points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k] - 2*sqrt(diag(sNew)), type = "l", col =  mclustColors[k], lty = 2, lwd = 2)
-					legend("bottomleft", col = c( mclustColors[k], mclustColors[k], "gray"), c("estimated mean", "95% HDI", "assigned data"), lty = c(1,2,1), lwd = 2)
+					mylty <- 1
+					for(z_norm in ZNORM){
+						mylty = mylty + 1
+						points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k] + z_norm*sqrt(diag(sNew)), type = "l", col =  mclustColors[k], lty = mylty, lwd = 2)
+						points(apply(x$mu, 2, function(y){cMeans + sdevs*y})[,k] - z_norm*sqrt(diag(sNew)), type = "l", col =  mclustColors[k], lty = mylty, lwd = 2)
+					}
+					legend("bottomleft", col = c( mclustColors[k], rep(mclustColors[k], length(ZNORM)), "gray"), 
+						c("estimated mean", paste0(round(confidence*100,2),"% HDI"), "assigned data"), lty = c(1,2:mylty,1), lwd = 2)
 					if(k < K){
 						readline(prompt=paste0("Press ENTER to see next plot... (",k + 1,"/",K,")"))
 					}
@@ -6486,7 +6521,8 @@ plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, sig_
 			    else {
 			      coordProj(data = scale(x$data), what = "classification", 
 				parameters = tt, classification = x$class, 
-				addEllipses = TRUE, dimens = dimens[c(j, i)], main = FALSE, xaxt = "n", yaxt = "n", ...)
+				addEllipses = TRUE, dimens = dimens[c(j, i)], 
+				main = FALSE, xaxt = "n", yaxt = "n", ...)
 			    }
 			    if (i == 1 && (!(j%%2))) 
 			      axis(3)
@@ -6519,10 +6555,10 @@ plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, sig_
 						}
 					}
 					if(sig_correlation < 1){
-						corrplot(cov2cor(sNew),method = "ellipse", title = paste0("cluster ``", names(table(x$class))[k],"''"),  mar=c(0,0,2,0), 
+						corrplot(cov2cor(sNew),method = "ellipse", title = paste0("cluster `", names(table(x$class))[k],"'"),  mar=c(0,0,2,0), 
 							p.mat = cm$p_matrix[,,k], sig.level = sig_correlation, insig = "pch")
 					}else{
-						corrplot(cov2cor(sNew),method = "ellipse", title = paste0("cluster ``", names(table(x$class))[k],"''"),  mar=c(0,0,2,0))
+						corrplot(cov2cor(sNew),method = "ellipse", title = paste0("cluster `", names(table(x$class))[k],"'"),  mar=c(0,0,2,0))
 					}
 				}
 
@@ -6538,10 +6574,10 @@ plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, sig_
 						}
 					}
 					if(sig_correlation < 1){
-						corrplot(cov2cor(sNew),method = "ellipse", title = paste0("cluster ``", names(table(x$class))[k],"''"),  mar=c(0,0,2,0), 
+						corrplot(cov2cor(sNew),method = "ellipse", title = paste0("cluster `", names(table(x$class))[k],"'"),  mar=c(0,0,2,0), 
 							p.mat = cm$p_matrix[,,k], sig.level = sig_correlation, insig = "pch")
 					}else{
-						corrplot(cov2cor(sNew),method = "ellipse", title = paste0("cluster ``", names(table(x$class))[k],"''"),  mar=c(0,0,2,0))
+						corrplot(cov2cor(sNew),method = "ellipse", title = paste0("cluster `", names(table(x$class))[k],"'"),  mar=c(0,0,2,0))
 					}
 					if(k < K){
 						readline(prompt=paste0("Press ENTER to see next plot... (",k + 1,"/",K,")"))
@@ -6629,6 +6665,7 @@ plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, sig_
                 cat(paste("    The input is not in class `fabMix.object`"),'\n')
         }
 }
+
 
 
 
