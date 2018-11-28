@@ -6404,8 +6404,12 @@ plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, sig_
 		}
 		if((v == 1)||(what == "BIC")){
 			on.exit(par())
+			tmp.mar <- par()$mar
 			# 1. Plot BIC values
-			par(mfrow=c(1,1),mar=c(5.1, 4.1, 4.1, 8.1), xpd=TRUE)
+#			par(mfrow=c(1,1),mar=c(5.1, 4.1, 4.1, 8.1), xpd=TRUE)
+			par(mar = c(4,4,1.5,1))
+			myMat <- matrix(1:2, nrow = 1, ncol = 2, byrow=TRUE) 
+			layout(myMat, widths = c(6.5,1))			
 			myCols <- brewer.pal(8, "Set1")
 			matplot(x$bic, type = "n", xlab = "number of factors", ylab = "BIC", cex = 0, col = myCols, lty = 1, xaxt = "n")
 			rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4],col = "lightgrey")
@@ -6414,7 +6418,11 @@ plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, sig_
 			for (i in 1:dim(x$bic)[2]){
 				text(labels = x$n_Clusters_per_model[,i], y = x$bic[,i], x = 1:dim(x$bic)[1], col = myCols[i])
 			}
-			legend("topright", inset=c(-0.3,0.3), legend=colnames(x$bic), col = myCols, lty = 1, title="Model")
+			par(mar = c(0,0,0,0))
+			plot(1, type = 'n', ylab = '', xlab = '', axes=FALSE)
+			legend("center", legend=colnames(x$bic), col = myCols, lty = 1, title="Model", bty = 'n')
+			par(mar = tmp.mar)
+#			legend("topright", inset=c(-0.3,0.3), legend=colnames(x$bic), col = myCols, lty = 1, title="Model")
 		}
 		
 		if((v == 2)||(what == "classification_matplot")){
@@ -6657,7 +6665,7 @@ plot.fabMix.object <- function(x, what, variableSubset, class_mfrow = NULL, sig_
 			}
 
 		}
-
+		par(mfrow=c(1,1))
 
 	}
 

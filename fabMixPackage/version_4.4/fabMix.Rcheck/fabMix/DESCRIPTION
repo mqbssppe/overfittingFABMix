@@ -18,6 +18,6 @@ Imports: Rcpp (>= 0.12.17), MASS, doParallel, foreach, label.switching,
         mvtnorm, doRNG, RColorBrewer, corrplot, mclust, coda, ggplot2
 LinkingTo: Rcpp, RcppArmadillo
 NeedsCompilation: yes
-Packaged: 2018-11-28 15:03:45 UTC; panagiotis
+Packaged: 2018-11-28 18:23:06 UTC; panagiotis
 Author: Panagiotis Papastamoulis [aut, cre] (0000-0001-9468-7613)
-Built: R 3.4.4; x86_64-pc-linux-gnu; 2018-11-28 15:03:53 UTC; unix
+Built: R 3.4.4; x86_64-pc-linux-gnu; 2018-11-28 18:23:16 UTC; unix
