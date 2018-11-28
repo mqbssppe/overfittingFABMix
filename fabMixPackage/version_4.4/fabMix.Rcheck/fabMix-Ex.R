@@ -1,6 +1,18 @@
 pkgname <- "fabMix"
 source(file.path(R.home("share"), "R", "examples-header.R"))
 options(warn = 1)
+base::assign(".ExTimings", "fabMix-Ex.timings", pos = 'CheckExEnv')
+base::cat("name\tuser\tsystem\telapsed\n", file=base::get(".ExTimings", pos = 'CheckExEnv'))
+base::assign(".format_ptime",
+function(x) {
+  if(!is.na(x[4L])) x[1L] <- x[1L] + x[4L]
+  if(!is.na(x[5L])) x[2L] <- x[2L] + x[5L]
+  options(OutDec = '.')
+  format(x[1L:3L], digits = 7L)
+},
+pos = 'CheckExEnv')
+
+### * </HEADER>
 library('fabMix')
 
 base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
@@ -10,6 +22,7 @@ nameEx("complete.log.likelihood")
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: complete.log.likelihood
 ### Title: Complete log-likelihood function for xCx models.
 ### Aliases: complete.log.likelihood
@@ -35,12 +48,15 @@ flush(stderr()); flush(stdout())
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("complete.log.likelihood", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("complete.log.likelihood_Sj")
 ### * complete.log.likelihood_Sj
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: complete.log.likelihood_Sj
 ### Title: Complete log-likelihood function for xUx models.
 ### Aliases: complete.log.likelihood_Sj
@@ -66,12 +82,15 @@ flush(stderr()); flush(stdout())
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("complete.log.likelihood_Sj", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("complete.log.likelihood_q0")
 ### * complete.log.likelihood_q0
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: complete.log.likelihood_q0
 ### Title: Complete log-likelihood function for xUx models and q=0
 ### Aliases: complete.log.likelihood_q0
@@ -96,12 +115,15 @@ flush(stderr()); flush(stdout())
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("complete.log.likelihood_q0", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("complete.log.likelihood_q0_sameSigma")
 ### * complete.log.likelihood_q0_sameSigma
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: complete.log.likelihood_q0_sameSigma
 ### Title: Complete log-likelihood function for xCx models and q=0
 ### Aliases: complete.log.likelihood_q0_sameSigma
@@ -126,12 +148,15 @@ flush(stderr()); flush(stdout())
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("complete.log.likelihood_q0_sameSigma", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("compute_A_B_G_D_and_simulate_mu_Lambda")
 ### * compute_A_B_G_D_and_simulate_mu_Lambda
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: compute_A_B_G_D_and_simulate_mu_Lambda
 ### Title: Computation and simulations
 ### Aliases: compute_A_B_G_D_and_simulate_mu_Lambda
@@ -177,12 +202,15 @@ flush(stderr()); flush(stdout())
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("compute_A_B_G_D_and_simulate_mu_Lambda", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("compute_A_B_G_D_and_simulate_mu_Lambda_CCU")
 ### * compute_A_B_G_D_and_simulate_mu_Lambda_CCU
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: compute_A_B_G_D_and_simulate_mu_Lambda_CCU
 ### Title: Computation and simulations for CCU
 ### Aliases: compute_A_B_G_D_and_simulate_mu_Lambda_CCU
@@ -227,12 +255,15 @@ flush(stderr()); flush(stdout())
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("compute_A_B_G_D_and_simulate_mu_Lambda_CCU", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("compute_A_B_G_D_and_simulate_mu_Lambda_CUU")
 ### * compute_A_B_G_D_and_simulate_mu_Lambda_CUU
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: compute_A_B_G_D_and_simulate_mu_Lambda_CUU
 ### Title: Computation and simulations for CUU
 ### Aliases: compute_A_B_G_D_and_simulate_mu_Lambda_CUU
@@ -279,12 +310,15 @@ flush(stderr()); flush(stdout())
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("compute_A_B_G_D_and_simulate_mu_Lambda_CUU", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("compute_A_B_G_D_and_simulate_mu_Lambda_Sj")
 ### * compute_A_B_G_D_and_simulate_mu_Lambda_Sj
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: compute_A_B_G_D_and_simulate_mu_Lambda_Sj
 ### Title: Computation and simulations
 ### Aliases: compute_A_B_G_D_and_simulate_mu_Lambda_Sj
@@ -331,12 +365,15 @@ flush(stderr()); flush(stdout())
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("compute_A_B_G_D_and_simulate_mu_Lambda_Sj", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("compute_sufficient_statistics")
 ### * compute_sufficient_statistics
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: compute_sufficient_statistics
 ### Title: Compute sufficient statistics
 ### Aliases: compute_sufficient_statistics
@@ -359,12 +396,15 @@ flush(stderr()); flush(stdout())
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("compute_sufficient_statistics", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("compute_sufficient_statistics_given_mu")
 ### * compute_sufficient_statistics_given_mu
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: compute_sufficient_statistics_given_mu
 ### Title: Compute sufficient statistics given mu
 ### Aliases: compute_sufficient_statistics_given_mu
@@ -388,12 +428,15 @@ flush(stderr()); flush(stdout())
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("compute_sufficient_statistics_given_mu", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("compute_sufficient_statistics_q0")
 ### * compute_sufficient_statistics_q0
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: compute_sufficient_statistics_q0
 ### Title: Compute sufficient statistics for q = 0
 ### Aliases: compute_sufficient_statistics_q0
@@ -413,12 +456,15 @@ flush(stderr()); flush(stdout())
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("compute_sufficient_statistics_q0", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("fabMix-package")
 ### * fabMix-package
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: fabMix-package
 ### Title: Overfitting Bayesian Mixtures of Factor Analyzers with
 ###   Parsimonious Covariance and Unknown Number of Components
@@ -510,12 +556,15 @@ plot(fm, what = "BIC")
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("fabMix-package", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("fabMix")
 ### * fabMix
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: fabMix
 ### Title: Main function
 ### Aliases: fabMix
@@ -608,12 +657,15 @@ fm <- fabMix( model = c("UUU", "CCC"), nChains = nChains,
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("fabMix", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("observed.log.likelihood0")
 ### * observed.log.likelihood0
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: observed.log.likelihood0
 ### Title: Log-likelihood of the mixture model
 ### Aliases: observed.log.likelihood0
@@ -640,12 +692,15 @@ flush(stderr()); flush(stdout())
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("observed.log.likelihood0", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("observed.log.likelihood0_Sj")
 ### * observed.log.likelihood0_Sj
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: observed.log.likelihood0_Sj
 ### Title: Log-likelihood of the mixture model
 ### Aliases: observed.log.likelihood0_Sj
@@ -671,12 +726,15 @@ flush(stderr()); flush(stdout())
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("observed.log.likelihood0_Sj", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("observed.log.likelihood0_Sj_q0")
 ### * observed.log.likelihood0_Sj_q0
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: observed.log.likelihood0_Sj_q0
 ### Title: Log-likelihood of the mixture model for q=0
 ### Aliases: observed.log.likelihood0_Sj_q0
@@ -701,12 +759,15 @@ flush(stderr()); flush(stdout())
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("observed.log.likelihood0_Sj_q0", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("observed.log.likelihood0_q0_sameSigma")
 ### * observed.log.likelihood0_q0_sameSigma
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: observed.log.likelihood0_q0_sameSigma
 ### Title: Log-likelihood of the mixture model for q=0 and same variance of
 ###   errors
@@ -733,12 +794,15 @@ flush(stderr()); flush(stdout())
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("observed.log.likelihood0_q0_sameSigma", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("overfittingMFA")
 ### * overfittingMFA
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: overfittingMFA
 ### Title: Basic MCMC sampler for the 'UCU' model
 ### Aliases: overfittingMFA
@@ -771,12 +835,15 @@ unlink('outDir', recursive = TRUE)
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("overfittingMFA", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("overfittingMFA_CCC")
 ### * overfittingMFA_CCC
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: overfittingMFA_CCC
 ### Title: Basic MCMC sampler for the 'CCC' model
 ### Aliases: overfittingMFA_CCC
@@ -809,12 +876,15 @@ unlink('outDir', recursive = TRUE)
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("overfittingMFA_CCC", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("overfittingMFA_CCU")
 ### * overfittingMFA_CCU
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: overfittingMFA_CCU
 ### Title: Basic MCMC sampler for the 'CCU' model
 ### Aliases: overfittingMFA_CCU
@@ -847,12 +917,15 @@ unlink('outDir', recursive = TRUE)
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("overfittingMFA_CCU", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("overfittingMFA_CUC")
 ### * overfittingMFA_CUC
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: overfittingMFA_CUC
 ### Title: Basic MCMC sampler for the 'CUC' model
 ### Aliases: overfittingMFA_CUC
@@ -885,12 +958,15 @@ unlink('outDir', recursive = TRUE)
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("overfittingMFA_CUC", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("overfittingMFA_CUU")
 ### * overfittingMFA_CUU
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: overfittingMFA_CUU
 ### Title: Basic MCMC sampler for the 'CUU' model
 ### Aliases: overfittingMFA_CUU
@@ -923,12 +999,15 @@ unlink('outDir', recursive = TRUE)
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("overfittingMFA_CUU", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("overfittingMFA_Sj")
 ### * overfittingMFA_Sj
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: overfittingMFA_Sj
 ### Title: Basic MCMC sampler for the 'UUU' model
 ### Aliases: overfittingMFA_Sj
@@ -961,12 +1040,15 @@ unlink('outDir', recursive = TRUE)
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("overfittingMFA_Sj", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("overfittingMFA_UCC")
 ### * overfittingMFA_UCC
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: overfittingMFA_UCC
 ### Title: Basic MCMC sampler for the 'UCC' model
 ### Aliases: overfittingMFA_UCC
@@ -999,12 +1081,15 @@ unlink('outDir', recursive = TRUE)
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("overfittingMFA_UCC", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("overfittingMFA_UUC")
 ### * overfittingMFA_UUC
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: overfittingMFA_UUC
 ### Title: Basic MCMC sampler for the 'UUC' model
 ### Aliases: overfittingMFA_UUC
@@ -1037,12 +1122,15 @@ unlink('outDir', recursive = TRUE)
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("overfittingMFA_UUC", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("simData")
 ### * simData
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: simData
 ### Title: Synthetic data generator
 ### Aliases: simData
@@ -1064,12 +1152,15 @@ summary(syntheticDataset)
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("simData", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("simData2")
 ### * simData2
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: simData2
 ### Title: Synthetic data generator 2
 ### Aliases: simData2
@@ -1091,12 +1182,15 @@ summary(syntheticDataset)
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("simData2", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("update_OmegaINV")
 ### * update_OmegaINV
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: update_OmegaINV
 ### Title: Gibbs sampling for Omega^{-1}
 ### Aliases: update_OmegaINV
@@ -1125,12 +1219,15 @@ update_OmegaINV(Lambda = syntheticDataset$factorLoadings,
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("update_OmegaINV", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("update_OmegaINV_Cxx")
 ### * update_OmegaINV_Cxx
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: update_OmegaINV_Cxx
 ### Title: Gibbs sampling for Omega^{-1} for Cxx model
 ### Aliases: update_OmegaINV_Cxx
@@ -1161,12 +1258,15 @@ update_OmegaINV_Cxx(Lambda = syntheticDataset$factorLoadings,
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("update_OmegaINV_Cxx", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("update_SigmaINV_faster")
 ### * update_SigmaINV_faster
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: update_SigmaINV_faster
 ### Title: Gibbs sampling for Sigma^{-1}
 ### Aliases: update_SigmaINV_faster
@@ -1196,12 +1296,15 @@ update_SigmaINV_faster(x_data = syntheticDataset$data,
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("update_SigmaINV_faster", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("update_SigmaINV_faster_Sj")
 ### * update_SigmaINV_faster_Sj
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: update_SigmaINV_faster_Sj
 ### Title: Gibbs sampling for Sigma^{-1} per component
 ### Aliases: update_SigmaINV_faster_Sj
@@ -1231,12 +1334,15 @@ update_SigmaINV_faster_Sj(x_data = syntheticDataset$data,
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("update_SigmaINV_faster_Sj", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("update_SigmaINV_xCC")
 ### * update_SigmaINV_xCC
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: update_SigmaINV_xCC
 ### Title: Gibbs sampling for Sigma^{-1} for xCC models
 ### Aliases: update_SigmaINV_xCC
@@ -1266,12 +1372,15 @@ update_SigmaINV_xCC(x_data = syntheticDataset$data,
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("update_SigmaINV_xCC", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("update_SigmaINV_xUC")
 ### * update_SigmaINV_xUC
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: update_SigmaINV_xUC
 ### Title: Gibbs sampling for Sigma^{-1} per component for xUC models
 ### Aliases: update_SigmaINV_xUC
@@ -1301,12 +1410,15 @@ update_SigmaINV_xUC(x_data = syntheticDataset$data,
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("update_SigmaINV_xUC", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("update_all_y")
 ### * update_all_y
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: update_all_y
 ### Title: Gibbs sampling for y in 'xCx' model
 ### Aliases: update_all_y
@@ -1334,12 +1446,15 @@ update_all_y(x_data = syntheticDataset$data,
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("update_all_y", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("update_all_y_Sj")
 ### * update_all_y_Sj
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: update_all_y_Sj
 ### Title: Gibbs sampling for y in 'xUx' model
 ### Aliases: update_all_y_Sj
@@ -1373,12 +1488,15 @@ update_all_y_Sj(x_data = syntheticDataset$data,
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("update_all_y_Sj", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("update_z2")
 ### * update_z2
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: update_z2
 ### Title: Collapsed Gibbs for z using matrix inversion lemma
 ### Aliases: update_z2
@@ -1404,12 +1522,15 @@ update_z2(w = syntheticDataset$weights, mu = syntheticDataset$means,
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("update_z2", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("update_z2_Sj")
 ### * update_z2_Sj
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: update_z2_Sj
 ### Title: Collapsed Gibbs for z using matrix inversion lemma
 ### Aliases: update_z2_Sj
@@ -1440,12 +1561,15 @@ update_z2_Sj(w = syntheticDataset$weights, mu = syntheticDataset$means,
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("update_z2_Sj", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("update_z4")
 ### * update_z4
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: update_z4
 ### Title: Collapsed Gibbs for z
 ### Aliases: update_z4
@@ -1471,12 +1595,15 @@ update_z4(w = syntheticDataset$weights, mu = syntheticDataset$means,
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("update_z4", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("update_z4_Sj")
 ### * update_z4_Sj
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: update_z4_Sj
 ### Title: Collapsed Gibbs for z
 ### Aliases: update_z4_Sj
@@ -1507,12 +1634,15 @@ update_z4_Sj(w = syntheticDataset$weights, mu = syntheticDataset$means,
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("update_z4_Sj", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("update_z_b")
 ### * update_z_b
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: update_z_b
 ### Title: Gibbs sampling for z
 ### Aliases: update_z_b
@@ -1540,12 +1670,15 @@ update_z_b(w = syntheticDataset$weights, mu = syntheticDataset$means,
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("update_z_b", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
 nameEx("update_z_b_Sj")
 ### * update_z_b_Sj
 
 flush(stderr()); flush(stdout())
 
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### Name: update_z_b_Sj
 ### Title: Gibbs sampling for z
 ### Aliases: update_z_b_Sj
@@ -1577,6 +1710,8 @@ update_z_b_Sj(w = syntheticDataset$weights, mu = syntheticDataset$means,
 
 
 
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("update_z_b_Sj", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 ### * <FOOTER>
 ###
 options(digits = 7L)
