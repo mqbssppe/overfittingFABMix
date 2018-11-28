@@ -16,6 +16,10 @@ The following refers to version 2.0 of the software, used to write the CSDA pape
 
 ## News and Updates
 
+### [November 28, 2018] fabMix version 4.4 available on CRAN
+
+Improved plot and summary methods. See [CRAN page](https://cran.r-project.org/package=fabMix).
+
 ### [November 21, 2018] fabMix version 4.4 edited
 
 Improved `plot` and `summary` methods. This new version will be available to CRAN later this month.
