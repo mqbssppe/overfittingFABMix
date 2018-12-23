@@ -10,11 +10,16 @@ The following refers to version 2.0 of the software, used to write the CSDA pape
 
 
 ### Note
-1. All package versions smaller than 4.2 are compatible only with Linux distributions.
-2. Lots of updates are now available. 
+1. Recent versions are recommended. 
+2. All package versions smaller than 4.2 are compatible only with Linux distributions.
+
 
 
 ## News and Updates
+
+### [December 23, 2018] fabMix version 4.5 uploaded 
+
+Bug fix in `plot` for `Lamba_map`.
 
 ### [November 28, 2018] fabMix version 4.4 available on CRAN
 
