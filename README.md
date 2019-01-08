@@ -17,6 +17,10 @@ The following refers to version 2.0 of the software, used to write the CSDA pape
 
 ## News and Updates
 
+### [Jan 08, 2019] fabMix version 4.5 uploaded to CRAN
+
+Bug fix in `plot` for `Lamba_map`.
+
 ### [December 23, 2018] fabMix version 4.5 uploaded 
 
 Bug fix in `plot` for `Lamba_map`.
