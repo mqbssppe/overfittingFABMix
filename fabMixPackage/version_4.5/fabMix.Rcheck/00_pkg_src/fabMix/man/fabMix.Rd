@@ -164,8 +164,8 @@ syntheticDataset <- simData(sameLambda=TRUE,K.true = K, n = n, q = q, p = p,
 			sINV_values = sINV_diag)
 colnames(syntheticDataset$data) <- paste0("x_",1:p)
 
-# Run `fabMix` for a _small_ number of iterations for the 
-#	`UUU` (maximal model) and `CCC` (minimal model) parameterizations,
+# Run `fabMix` for a _small_ number of iterations 
+#	but considering only the `UUU` (maximal model),
 # 	using the default prior parallel heating parameters `dirPriorAlphas`.
 #	NOTE: `dirPriorAlphas` may require some tuning in general.
 
@@ -176,7 +176,7 @@ Kmax <- 4	# number of components for the overfitted mixture model
 nChains <- 2	# number of parallel heated chains
 
 set.seed(1)
-fm <- fabMix( model = c("UUU", "CCC"), nChains = nChains, 
+fm <- fabMix( model = "UUU", nChains = nChains, 
 	rawData = syntheticDataset$data, outDir = "toyExample",
         Kmax = Kmax, mCycles = 4, burnCycles = 1, q = qRange,
         g = 0.5, h = 0.5, alpha_sigma = 0.5, beta_sigma = 0.5, 
@@ -190,7 +190,7 @@ fm <- fabMix( model = c("UUU", "CCC"), nChains = nChains,
 
 # You may also print and plot
 # print(fm)
-# plot(fm, what = "BIC")
+# plot(fm)
 
 #################################################################
 # (b) using 12 cores_____________________________________________
@@ -222,7 +222,6 @@ fm <- fabMix( parallelModels = 4,
 
 print(fm)
 plot(fm, what = "BIC")
-plot(fm, what = "classification_pairs")
 # see also
 # plot(fm); summary(fm)
 

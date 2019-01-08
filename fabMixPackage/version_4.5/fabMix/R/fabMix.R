@@ -5390,7 +5390,7 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 	cat("        / __/___ _/ /_  /  |/  (_)  __", "\n")
 	cat("       / /_/ __ `/ __ \\/ /|_/ / / |/_/", "\n")
 	cat("      / __/ /_/ / /_/ / /  / / />  <  ", "\n")
-	cat("     /_/  \\__,_/_.___/_/  /_/_/_/|_|  version 4.4", "\n\n")
+	cat("     /_/  \\__,_/_.___/_/  /_/_/_/|_|  version 4.5", "\n\n")
 
 	model = intersect(model, c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "CCC"))
 	if(missing(Kmax)){Kmax <- 20}

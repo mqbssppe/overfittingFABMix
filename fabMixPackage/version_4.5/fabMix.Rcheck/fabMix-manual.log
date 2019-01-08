@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.13)  2 DEC 2018 18:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.13)  8 JAN 2019 08:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -715,7 +715,7 @@ File: latin1.def 2015/03/17 v1.2c Input encoding file
 
 
 Writing index file Rd2.idx
-(/tmp/RtmpY1Pl51/Rd2pdf1fd0deee0c5/Rd2.aux)
+(/tmp/RtmplCdYIo/Rd2pdf3aae1b27233a/Rd2.aux)
 \openout1 = `Rd2.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
@@ -772,8 +772,8 @@ LaTeX Info: Redefining \ref on input line 8.
 LaTeX Info: Redefining \pageref on input line 8.
 LaTeX Info: Redefining \nameref on input line 8.
 
-(/tmp/RtmpY1Pl51/Rd2pdf1fd0deee0c5/Rd2.out)
-(/tmp/RtmpY1Pl51/Rd2pdf1fd0deee0c5/Rd2.out)
+(/tmp/RtmplCdYIo/Rd2pdf3aae1b27233a/Rd2.out)
+(/tmp/RtmplCdYIo/Rd2pdf3aae1b27233a/Rd2.out)
 \@outlinefile=\write4
 \openout4 = `Rd2.out'.
 
@@ -806,7 +806,7 @@ LaTeX Font Info:    Try loading font information for T1+phv on input line 31.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 )
-(/tmp/RtmpY1Pl51/Rd2pdf1fd0deee0c5/Rd2.toc [1
+(/tmp/RtmplCdYIo/Rd2pdf3aae1b27233a/Rd2.toc [1
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2])
@@ -928,7 +928,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 ) [28]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 1528--1529
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 1527--1528
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
  []
@@ -936,7 +936,7 @@ Overfull \hbox (8.33775pt too wide) in paragraph at lines 1528--1529
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 ) [29] [30]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 1635--1636
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 1634--1635
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
  []
@@ -944,7 +944,7 @@ Overfull \hbox (8.33775pt too wide) in paragraph at lines 1635--1636
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 ) [31]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 1735--1736
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 1734--1735
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
  []
@@ -952,25 +952,25 @@ Overfull \hbox (8.33775pt too wide) in paragraph at lines 1735--1736
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 ) [32]
-Overfull \hbox (19.76044pt too wide) in paragraph at lines 1750--1750
+Overfull \hbox (19.76044pt too wide) in paragraph at lines 1749--1749
  []\T1/zi4/m/n/10 fabMix_parallelModels(model, nChains, dirPriorAlphas, rawData
 , outDir, Kmax, mCycles,[] 
  []
 
 
-Overfull \hbox (13.21764pt too wide) in paragraph at lines 1764--1765
+Overfull \hbox (13.21764pt too wide) in paragraph at lines 1763--1764
 []\T1/ptm/m/n/10 The num-ber of par-al-lel heated chains. When `dirPri-o-rAl-ph
 as` is sup-plied, `nChains`
  []
 
 
-Overfull \hbox (31.72931pt too wide) in paragraph at lines 1767--1768
+Overfull \hbox (31.72931pt too wide) in paragraph at lines 1766--1767
 \T1/ptm/m/n/10 re-spond-ing chain. De-fault: \T1/zi4/m/n/10 dirPriorAlphas = c(
 1, 1 + dN*(2:nChains - 1))/Kmax\T1/ptm/m/n/10 ,
  []
 
 
-Overfull \hbox (2.02823pt too wide) in paragraph at lines 1800--1801
+Overfull \hbox (2.02823pt too wide) in paragraph at lines 1799--1800
 []\T1/ptm/m/n/10 Should the ob-served data be nor-mal-ized? De-fault value: TRU
 E. (Rec-om-mended) 
  []
@@ -978,7 +978,7 @@ E. (Rec-om-mended)
 [33] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 ) [34]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 1946--1947
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 1945--1946
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
  []
@@ -986,7 +986,7 @@ Overfull \hbox (8.33775pt too wide) in paragraph at lines 1946--1947
 [35] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 ) [36]
-Overfull \hbox (8.33775pt too wide) in paragraph at lines 2053--2054
+Overfull \hbox (8.33775pt too wide) in paragraph at lines 2052--2053
 \T1/ptm/m/n/10 iden-ti-fi-able due to la-bel switch-ing and the user has to sub
 -se-quently call the \T1/zi4/m/n/10 dealWithLabelSwitching
  []
@@ -1030,7 +1030,7 @@ File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 )
-Overfull \hbox (38.10059pt too wide) in paragraph at lines 2960--2960
+Overfull \hbox (38.10059pt too wide) in paragraph at lines 2959--2959
  []\T1/zi4/m/n/10 overfittingMFA_missing_values(missing_entries, x_data, origin
 alX, outputDirectory, Kmax,[] 
  []
@@ -1053,7 +1053,7 @@ File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 ) [58]
-Overfull \hbox (19.76044pt too wide) in paragraph at lines 3500--3500
+Overfull \hbox (19.76044pt too wide) in paragraph at lines 3499--3499
  []\T1/zi4/m/n/10 overfitting_q0_sameSigma(x_data, originalX, outputDirectory, 
 Kmax, m, thinning, burn,[] 
  []
@@ -1070,7 +1070,7 @@ File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 )
-Overfull \hbox (26.42029pt too wide) in paragraph at lines 3699--3699
+Overfull \hbox (26.42029pt too wide) in paragraph at lines 3698--3698
  []\T1/zi4/m/n/10 simData(sameSigma, sameLambda, p, q, K.true, n, loading_means
 , loading_sd, sINV_values)[] 
  []
@@ -1087,7 +1087,7 @@ File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 ) [67]
-Overfull \hbox (8.23181pt too wide) in paragraph at lines 4059--4059
+Overfull \hbox (8.23181pt too wide) in paragraph at lines 4058--4058
  []        \T1/zi4/m/n/9 diag(SigmaINV[k,,]) <- 1/diag(syntheticDataset$varianc
 e) + rgamma(p, shape=1, rate = 1)[] 
  []
@@ -1096,11 +1096,11 @@ e) + rgamma(p, shape=1, rate = 1)[]
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 )
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4072
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4071
 .
 
 [68]
-Overfull \hbox (8.23181pt too wide) in paragraph at lines 4123--4123
+Overfull \hbox (8.23181pt too wide) in paragraph at lines 4122--4122
  []        \T1/zi4/m/n/9 diag(SigmaINV[k,,]) <- 1/diag(syntheticDataset$varianc
 e) + rgamma(p, shape=1, rate = 1)[] 
  []
@@ -1109,11 +1109,11 @@ e) + rgamma(p, shape=1, rate = 1)[]
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 )
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4133
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4132
 .
 
 [69]
-Overfull \hbox (8.23181pt too wide) in paragraph at lines 4184--4184
+Overfull \hbox (8.23181pt too wide) in paragraph at lines 4183--4183
  []        \T1/zi4/m/n/9 diag(SigmaINV[k,,]) <- 1/diag(syntheticDataset$varianc
 e) + rgamma(p, shape=1, rate = 1)[] 
  []
@@ -1122,42 +1122,42 @@ e) + rgamma(p, shape=1, rate = 1)[]
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 )
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4196
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4195
 .
 
 [70] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 )
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4270
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4269
 .
 
 [71] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 )
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4313
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4312
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 )
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4356
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4355
 .
 
 [72] [73] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 )
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4430
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4429
 .
 
 [74] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 )
 
-LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4504
+LaTeX Warning: Command \textasciicircum invalid in math mode on input line 4503
 .
 
 [75] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
@@ -1187,13 +1187,13 @@ File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 )
-Overfull \hbox (6.77829pt too wide) in paragraph at lines 5088--5089
+Overfull \hbox (6.77829pt too wide) in paragraph at lines 5087--5088
 []\T1/ptm/m/n/10 Lichman, M. (2013). UCI Ma-chine Learn-ing Repos-i-tory [][]$\
 T1/zi4/m/n/10 http : / / archive . ics . uci . edu / ml$[][]\T1/ptm/m/n/10 . Ir
 vine,
  []
 
-(/tmp/RtmpY1Pl51/Rd2pdf1fd0deee0c5/Rd2.ind [84]
+(/tmp/RtmplCdYIo/Rd2pdf3aae1b27233a/Rd2.ind [84]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 3.
 
@@ -1237,19 +1237,19 @@ Overfull \hbox (3.3567pt too wide) in paragraph at lines 28--30
 ] [86
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 5093.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 5093.
- (/tmp/RtmpY1Pl51/Rd2pdf1fd0deee0c5/Rd2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 5093.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 5093.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 5092.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 5092.
+ (/tmp/RtmplCdYIo/Rd2pdf3aae1b27233a/Rd2.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 5092.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 5092.
 
 Package rerunfilecheck Info: File `Rd2.out' has not changed.
 (rerunfilecheck)             Checksum: 8ED5FF9E78647B4DC2EDE5EA593D7255;6124.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 5093.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 5092.
  ) 
 Here is how much of TeX's memory you used:
  7436 strings out of 492982
- 113415 string characters out of 6134895
+ 113428 string characters out of 6134895
  178634 words of memory out of 5000000
  10131 multiletter control sequences out of 15000+600000
  44456 words of font info for 54 fonts, out of 8000000 for 9000
@@ -1271,7 +1271,7 @@ ive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw
 /times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.
 pfb>
-Output written on Rd2.pdf (86 pages, 319630 bytes).
+Output written on Rd2.pdf (86 pages, 319550 bytes).
 PDF statistics:
  1487 PDF objects out of 1728 (max. 8388607)
  1371 compressed objects within 14 object streams
