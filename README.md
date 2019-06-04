@@ -17,6 +17,10 @@ The following refers to version 2.0 of the software, used to write the CSDA pape
 
 ## News and Updates
 
+### [June 04, 2019] New pre-print available on arXiv
+
+[Clustering Multivariate Data using Factor Analytic Bayesian Mixtures with an Unknown Number of Components](https://arxiv.org/abs/1906.00348)
+
 ### [Jan 08, 2019] fabMix version 4.5 uploaded to CRAN
 
 Bug fix in `plot` for `Lamba_map`.
