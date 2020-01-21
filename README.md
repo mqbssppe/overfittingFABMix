@@ -2,6 +2,10 @@
  
 ## News and Updates
 
+### [January 21, 2020] Version 4.6 submitted to CRAN. 
+
+In this new version I have removed all dependence on the orphaned doRNG package. 
+
 ### [August 15, 2019] Paper accepted to Statistics and Computing.
 
 Pre-print available on arXiv:

@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>R: Overfitting Bayesian Mixtures of Factor Analyzers with
+Parsimonious Covariance and Unknown Number of Components</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+<h1> Overfitting Bayesian Mixtures of Factor Analyzers with
+Parsimonious Covariance and Unknown Number of Components
+<img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
+</h1>
+<hr/>
+<div style="text-align: center;">
+<a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
+<a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
+</div><h2>Documentation for package &lsquo;fabMix&rsquo; version 4.6</h2>
+
+<ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
+</ul>
+
+<h2>Help Pages</h2>
+
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="fabMix-package.html">fabMix-package</a></td>
+<td>Overfitting Bayesian Mixtures of Factor Analyzers with Parsimonious Covariance and Unknown Number of Components</td></tr>
+<tr><td style="width: 25%;"><a href="complete.log.likelihood.html">complete.log.likelihood</a></td>
+<td>Complete log-likelihood function for xCx models.</td></tr>
+<tr><td style="width: 25%;"><a href="complete.log.likelihood_q0.html">complete.log.likelihood_q0</a></td>
+<td>Complete log-likelihood function for xUx models and q=0</td></tr>
+<tr><td style="width: 25%;"><a href="complete.log.likelihood_q0_sameSigma.html">complete.log.likelihood_q0_sameSigma</a></td>
+<td>Complete log-likelihood function for xCx models and q=0</td></tr>
+<tr><td style="width: 25%;"><a href="complete.log.likelihood_Sj.html">complete.log.likelihood_Sj</a></td>
+<td>Complete log-likelihood function for xUx models.</td></tr>
+<tr><td style="width: 25%;"><a href="compute_A_B_G_D_and_simulate_mu_Lambda.html">compute_A_B_G_D_and_simulate_mu_Lambda</a></td>
+<td>Computation and simulations</td></tr>
+<tr><td style="width: 25%;"><a href="compute_A_B_G_D_and_simulate_mu_Lambda_CCU.html">compute_A_B_G_D_and_simulate_mu_Lambda_CCU</a></td>
+<td>Computation and simulations for CCU</td></tr>
+<tr><td style="width: 25%;"><a href="compute_A_B_G_D_and_simulate_mu_Lambda_CUU.html">compute_A_B_G_D_and_simulate_mu_Lambda_CUU</a></td>
+<td>Computation and simulations for CUU</td></tr>
+<tr><td style="width: 25%;"><a href="compute_A_B_G_D_and_simulate_mu_Lambda_q0.html">compute_A_B_G_D_and_simulate_mu_Lambda_q0</a></td>
+<td>Computation and simulations for q = 0.</td></tr>
+<tr><td style="width: 25%;"><a href="compute_A_B_G_D_and_simulate_mu_Lambda_q0_sameSigma.html">compute_A_B_G_D_and_simulate_mu_Lambda_q0_sameSigma</a></td>
+<td>Computation and simulations for q = 0.</td></tr>
+<tr><td style="width: 25%;"><a href="compute_A_B_G_D_and_simulate_mu_Lambda_Sj.html">compute_A_B_G_D_and_simulate_mu_Lambda_Sj</a></td>
+<td>Computation and simulations</td></tr>
+<tr><td style="width: 25%;"><a href="compute_sufficient_statistics.html">compute_sufficient_statistics</a></td>
+<td>Compute sufficient statistics</td></tr>
+<tr><td style="width: 25%;"><a href="compute_sufficient_statistics_given_mu.html">compute_sufficient_statistics_given_mu</a></td>
+<td>Compute sufficient statistics given mu</td></tr>
+<tr><td style="width: 25%;"><a href="compute_sufficient_statistics_q0.html">compute_sufficient_statistics_q0</a></td>
+<td>Compute sufficient statistics for q = 0</td></tr>
+<tr><td style="width: 25%;"><a href="CorMat_mcmc_summary.html">CorMat_mcmc_summary</a></td>
+<td>Compute quantiles for the correlation matrix.</td></tr>
+<tr><td style="width: 25%;"><a href="CovMat_mcmc_summary.html">CovMat_mcmc_summary</a></td>
+<td>Compute quantiles for the covariance matrix.</td></tr>
+<tr><td style="width: 25%;"><a href="dealWithLabelSwitching.html">dealWithLabelSwitching</a></td>
+<td>Apply label switching algorithms</td></tr>
+<tr><td style="width: 25%;"><a href="fabMix.html">fabMix</a></td>
+<td>Main function</td></tr>
+<tr><td style="width: 25%;"><a href="fabMix_CxC.html">fabMix_CxC</a></td>
+<td>Function to estimate the 'CUC' and 'CCC' models</td></tr>
+<tr><td style="width: 25%;"><a href="fabMix_CxU.html">fabMix_CxU</a></td>
+<td>Function to estimate the 'CCU' and 'CUU' models</td></tr>
+<tr><td style="width: 25%;"><a href="fabMix_missing_values.html">fabMix_missing_values</a></td>
+<td>Function to estimate the UUU or UCU models in case of missing values</td></tr>
+<tr><td style="width: 25%;"><a href="fabMix_parallelModels.html">fabMix_parallelModels</a></td>
+<td>Function for model-level parallelization</td></tr>
+<tr><td style="width: 25%;"><a href="fabMix_UxC.html">fabMix_UxC</a></td>
+<td>Function to estimate the 'UUC' and 'UCC' models</td></tr>
+<tr><td style="width: 25%;"><a href="fabMix_UxU.html">fabMix_UxU</a></td>
+<td>Function to estimate the 'UUU' and 'UCU' model</td></tr>
+<tr><td style="width: 25%;"><a href="getStuffForDIC.html">getStuffForDIC</a></td>
+<td>Compute information criteria</td></tr>
+<tr><td style="width: 25%;"><a href="log_dirichlet_pdf.html">log_dirichlet_pdf</a></td>
+<td>Log-density function of the Dirichlet distribution</td></tr>
+<tr><td style="width: 25%;"><a href="myDirichlet.html">myDirichlet</a></td>
+<td>Simulate from the Dirichlet distribution</td></tr>
+<tr><td style="width: 25%;"><a href="observed.log.likelihood0.html">observed.log.likelihood0</a></td>
+<td>Log-likelihood of the mixture model</td></tr>
+<tr><td style="width: 25%;"><a href="observed.log.likelihood0_q0_sameSigma.html">observed.log.likelihood0_q0_sameSigma</a></td>
+<td>Log-likelihood of the mixture model for q=0 and same variance of errors</td></tr>
+<tr><td style="width: 25%;"><a href="observed.log.likelihood0_Sj.html">observed.log.likelihood0_Sj</a></td>
+<td>Log-likelihood of the mixture model</td></tr>
+<tr><td style="width: 25%;"><a href="observed.log.likelihood0_Sj_q0.html">observed.log.likelihood0_Sj_q0</a></td>
+<td>Log-likelihood of the mixture model for q=0</td></tr>
+<tr><td style="width: 25%;"><a href="overfittingMFA.html">overfittingMFA</a></td>
+<td>Basic MCMC sampler for the 'UCU' model</td></tr>
+<tr><td style="width: 25%;"><a href="overfittingMFA_CCC.html">overfittingMFA_CCC</a></td>
+<td>Basic MCMC sampler for the 'CCC' model</td></tr>
+<tr><td style="width: 25%;"><a href="overfittingMFA_CCU.html">overfittingMFA_CCU</a></td>
+<td>Basic MCMC sampler for the 'CCU' model</td></tr>
+<tr><td style="width: 25%;"><a href="overfittingMFA_CUC.html">overfittingMFA_CUC</a></td>
+<td>Basic MCMC sampler for the 'CUC' model</td></tr>
+<tr><td style="width: 25%;"><a href="overfittingMFA_CUU.html">overfittingMFA_CUU</a></td>
+<td>Basic MCMC sampler for the 'CUU' model</td></tr>
+<tr><td style="width: 25%;"><a href="overfittingMFA_missing_values.html">overfittingMFA_missing_values</a></td>
+<td>Basic MCMC sampler for the case of missing data</td></tr>
+<tr><td style="width: 25%;"><a href="overfittingMFA_Sj.html">overfittingMFA_Sj</a></td>
+<td>Basic MCMC sampler for the 'UUU' model</td></tr>
+<tr><td style="width: 25%;"><a href="overfittingMFA_Sj_missing_values.html">overfittingMFA_Sj_missing_values</a></td>
+<td>Basic MCMC sampler for the case of missing data and different error variance</td></tr>
+<tr><td style="width: 25%;"><a href="overfittingMFA_UCC.html">overfittingMFA_UCC</a></td>
+<td>Basic MCMC sampler for the 'UCC' model</td></tr>
+<tr><td style="width: 25%;"><a href="overfittingMFA_UUC.html">overfittingMFA_UUC</a></td>
+<td>Basic MCMC sampler for the 'UUC' model</td></tr>
+<tr><td style="width: 25%;"><a href="overfitting_q0.html">overfitting_q0</a></td>
+<td>MCMC sampler for q=0</td></tr>
+<tr><td style="width: 25%;"><a href="overfitting_q0_sameSigma.html">overfitting_q0_sameSigma</a></td>
+<td>MCMC sampler for q=0 and same error variance parameterization</td></tr>
+<tr><td style="width: 25%;"><a href="plot.fabMix.object.html">plot.fabMix.object</a></td>
+<td>Plot function</td></tr>
+<tr><td style="width: 25%;"><a href="print.fabMix.object.html">print.fabMix.object</a></td>
+<td>Print function</td></tr>
+<tr><td style="width: 25%;"><a href="readLambdaValues.html">readLambdaValues</a></td>
+<td>Read Lambda values.</td></tr>
+<tr><td style="width: 25%;"><a href="simData.html">simData</a></td>
+<td>Synthetic data generator</td></tr>
+<tr><td style="width: 25%;"><a href="simData2.html">simData2</a></td>
+<td>Synthetic data generator 2</td></tr>
+<tr><td style="width: 25%;"><a href="summary.fabMix.object.html">summary.fabMix.object</a></td>
+<td>Summary method</td></tr>
+<tr><td style="width: 25%;"><a href="update_all_y.html">update_all_y</a></td>
+<td>Gibbs sampling for y in 'xCx' model</td></tr>
+<tr><td style="width: 25%;"><a href="update_all_y_Sj.html">update_all_y_Sj</a></td>
+<td>Gibbs sampling for y in 'xUx' model</td></tr>
+<tr><td style="width: 25%;"><a href="update_OmegaINV.html">update_OmegaINV</a></td>
+<td>Gibbs sampling for Omega^{-1}</td></tr>
+<tr><td style="width: 25%;"><a href="update_OmegaINV_Cxx.html">update_OmegaINV_Cxx</a></td>
+<td>Gibbs sampling for Omega^{-1} for Cxx model</td></tr>
+<tr><td style="width: 25%;"><a href="update_SigmaINV_faster.html">update_SigmaINV_faster</a></td>
+<td>Gibbs sampling for Sigma^{-1}</td></tr>
+<tr><td style="width: 25%;"><a href="update_SigmaINV_faster_q0.html">update_SigmaINV_faster_q0</a></td>
+<td>Gibbs sampling for Sigma^{-1} per component for q=0</td></tr>
+<tr><td style="width: 25%;"><a href="update_SigmaINV_faster_q0_sameSigma.html">update_SigmaINV_faster_q0_sameSigma</a></td>
+<td>Gibbs sampling for Sigma^{-1} per component for q=0</td></tr>
+<tr><td style="width: 25%;"><a href="update_SigmaINV_faster_Sj.html">update_SigmaINV_faster_Sj</a></td>
+<td>Gibbs sampling for Sigma^{-1} per component</td></tr>
+<tr><td style="width: 25%;"><a href="update_SigmaINV_xCC.html">update_SigmaINV_xCC</a></td>
+<td>Gibbs sampling for Sigma^{-1} for xCC models</td></tr>
+<tr><td style="width: 25%;"><a href="update_SigmaINV_xUC.html">update_SigmaINV_xUC</a></td>
+<td>Gibbs sampling for Sigma^{-1} per component for xUC models</td></tr>
+<tr><td style="width: 25%;"><a href="update_z2.html">update_z2</a></td>
+<td>Collapsed Gibbs for z using matrix inversion lemma</td></tr>
+<tr><td style="width: 25%;"><a href="update_z2_Sj.html">update_z2_Sj</a></td>
+<td>Collapsed Gibbs for z using matrix inversion lemma</td></tr>
+<tr><td style="width: 25%;"><a href="update_z4.html">update_z4</a></td>
+<td>Collapsed Gibbs for z</td></tr>
+<tr><td style="width: 25%;"><a href="update_z4_Sj.html">update_z4_Sj</a></td>
+<td>Collapsed Gibbs for z</td></tr>
+<tr><td style="width: 25%;"><a href="update_z_b.html">update_z_b</a></td>
+<td>Gibbs sampling for z</td></tr>
+<tr><td style="width: 25%;"><a href="update_z_b_Sj.html">update_z_b_Sj</a></td>
+<td>Gibbs sampling for z</td></tr>
+<tr><td style="width: 25%;"><a href="update_z_q0.html">update_z_q0</a></td>
+<td>Gibbs sampling for z for q=0</td></tr>
+<tr><td style="width: 25%;"><a href="update_z_q0_sameSigma.html">update_z_q0_sameSigma</a></td>
+<td>Gibbs sampling for z for q=0</td></tr>
+<tr><td style="width: 25%;"><a href="waveDataset1500.html">waveDataset1500</a></td>
+<td>Wave dataset</td></tr>
+</table>
+</body></html>
