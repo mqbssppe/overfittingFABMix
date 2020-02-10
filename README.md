@@ -2,6 +2,15 @@
  
 ## News and Updates
 
+### [February 10, 2020] Version 5.0 (not yet on CRAN). 
+
+Now the lower triangular expansion on the matrix of loadings is optional:
+
+> **lowerTriangular:**  logical value indicating whether a lower triangular
+          parameterization should be imposed on the matrix of factor
+          loadings (if TRUE) or not. Default: TRUE.
+
+
 ### [January 21, 2020] Version 4.6 submitted to CRAN. 
 
 In this new version I have removed all dependence on the orphaned doRNG package. 

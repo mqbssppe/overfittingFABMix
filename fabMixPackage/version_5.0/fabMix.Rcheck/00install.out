@@ -1,0 +1,15 @@
+* installing *source* package ‘fabMix’ ...
+** libs
+g++ -std=gnu++11 -I/usr/share/R/include -DNDEBUG  -I"/home/mqbssppe/R/x86_64-pc-linux-gnu-library/3.4/Rcpp/include" -I"/home/mqbssppe/R/x86_64-pc-linux-gnu-library/3.4/RcppArmadillo/include"   -fopenmp  -fpic  -g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -g -c RcppExports.cpp -o RcppExports.o
+g++ -std=gnu++11 -I/usr/share/R/include -DNDEBUG  -I"/home/mqbssppe/R/x86_64-pc-linux-gnu-library/3.4/Rcpp/include" -I"/home/mqbssppe/R/x86_64-pc-linux-gnu-library/3.4/RcppArmadillo/include"   -fopenmp  -fpic  -g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -g -c fabMix.cpp -o fabMix.o
+g++ -std=gnu++11 -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -Wl,-z,relro -o fabMix.so RcppExports.o fabMix.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/usr/lib/R/lib -lR
+installing to /home/mqbssppe/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_5.0/fabMix.Rcheck/fabMix/libs
+** R
+** data
+** inst
+** preparing package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded
+* DONE (fabMix)
