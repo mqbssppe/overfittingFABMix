@@ -5,11 +5,13 @@ citEntry(entry   = "Article",
          title   = "Clustering multivariate data using factor analytic Bayesian mixtures with an unknown number of components.",
          author  = personList(as.person("Panagiotis Papastamoulis")),
          journal = "Statistics and Computing",
-         year    = "2019",
+         year    = "2020",
+	 volume  = "30",
+         pages   = "485--506",
          doi     = "10.1007/s11222-019-09891-z",
-         textVersion = "Panagiotis Papastamoulis (2019).
+         textVersion = "Panagiotis Papastamoulis (2020).
                         Clustering multivariate data using factor analytic Bayesian mixtures with an unknown number of components.
-                        Statistics and Computing, doi: 10.1007/s11222-019-09891-z.")
+                        Statistics and Computing: 30, pages 485-506.")
 
 
 citEntry(entry   = "Article",
@@ -17,8 +19,8 @@ citEntry(entry   = "Article",
          author  = personList(as.person("Panagiotis Papastamoulis")),
          journal = "Computational Statistics and Data Analysis",
          year    = "2018",
-	 pages = "220--234",
-	 volume = "124",
+	 pages   = "220--234",
+	 volume  = "124",
          doi     = "10.1016/j.csda.2018.03.007",
          textVersion = "Panagiotis Papastamoulis (2018).
                         Overfitting Bayesian mixtures of factor analyzers with an unknown number of components.

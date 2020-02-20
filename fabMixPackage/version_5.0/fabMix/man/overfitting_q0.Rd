@@ -8,7 +8,8 @@
 }
 \usage{
 overfitting_q0(x_data, originalX, outputDirectory, Kmax, m, thinning, burn, 
-	g, h, alpha_prior, alpha_sigma, beta_sigma, start_values, q, zStart, gibbs_z, lowerTriangular)
+	g, h, alpha_prior, alpha_sigma, beta_sigma, 
+	start_values, q, zStart, gibbs_z, lowerTriangular)
 }
 \arguments{
   \item{x_data}{

@@ -543,7 +543,7 @@ Simulation parameters:
      /_/  \__,_/_.___/_/  /_/_/_/|_|  version 5.0 
 
 -    Data consists of p = 5 variables and n = 8 observations
--    MCMC parameters: g = 0.5, h = 0.5, alpha_sigma = 0.5, beta_sigma = 0.5
+-    Prior parameters: g = 0.5, h = 0.5, alpha_sigma = 0.5, beta_sigma = 0.5
 -         using Nchains = 2 
 -         target posterior distribution corresponds to alpha = 0.5 
 -    The sampler uses standardized data. 
@@ -557,20 +557,20 @@ Simulation parameters:
 -    DONE. 
 -    (4) Computing information criteria for q = 2 
 -    NOTE: using standardized data. 
-         - Entering directory: /home/mqbssppe/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_5.0/fabMix.Rcheck/toyExample/UUU_2 
-            Nclusters:    1     2 
-            Frequency:    1    2 
+         - Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_5.0/fabMix.Rcheck/toyExample/UUU_2 
+            Nclusters:    2 
+            Frequency:    3 
          - Information criteria written to `UUU_2/informationCriteria_map_model.txt`. 
 -    The label.switching package says hello. 
 -    (5) Dealing with label switching for q = 2 
-         * Entering directory: /home/mqbssppe/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_5.0/fabMix.Rcheck/toyExample/UUU_2 
+         * Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_5.0/fabMix.Rcheck/toyExample/UUU_2 
          * Posterior mode corresponds to K = 2 
 
     ......................................................................................
     . Method                         Time (sec)           Status                         . 
     ......................................................................................
-    . ECR                            0.029                OK                             . 
-    . ECR-ITERATIVE-1                0.005                Converged (2 iterations)       . 
+    . ECR                            0.026                OK                             . 
+    . ECR-ITERATIVE-1                0.002                Converged (2 iterations)       . 
     ......................................................................................
 
     Relabelling all methods according to method ECR ... done!
@@ -584,9 +584,9 @@ Simulation parameters:
 -    Done. 
 -    Cleaning: deleting directory `toyExample` ... done. 
 
-Given the specified range of models, factors, maximum number of clusters and MCMC parameters,
+Given the specified range of models, factors, maximum number of clusters and Prior parameters,
 the best model corresponds to the UUU parameterization with q = 2 factors and K = 2 clusters. 
-The BIC for this model equals 182.788. 
+The BIC for this model equals 176.205. 
 > 
 > # WARNING: the following parameters: 
 > #  Kmax, nChains, mCycles, burnCycles, warm_up_overfitting, warm_up 
@@ -603,12 +603,12 @@ The BIC for this model equals 182.788.
 
 * Maximum A Posteriori (MAP) number of ``alive'' clusters and selected number of factors (BIC) per model: 
   model K_MAP K_MAP_prob q BIC_q chain_swap_rate
-1   UUU     2       0.67 2 182.8              0%
+1   UUU     2          1 2 176.2              0%
 
 * Estimated number of observations per cluster (selected model): 
 label
 1 2 
-7 1 
+5 3 
 
 > # you may also plot, summary the output. 
 > 
@@ -711,7 +711,7 @@ Simulation parameters:
      /_/  \__,_/_.___/_/  /_/_/_/|_|  version 5.0 
 
 -    Data consists of p = 5 variables and n = 8 observations
--    MCMC parameters: g = 0.5, h = 0.5, alpha_sigma = 0.5, beta_sigma = 0.5
+-    Prior parameters: g = 0.5, h = 0.5, alpha_sigma = 0.5, beta_sigma = 0.5
 -         using Nchains = 2 
 -         target posterior distribution corresponds to alpha = 0.5 
 -    The sampler uses standardized data. 
@@ -725,21 +725,21 @@ Simulation parameters:
 -    DONE. 
 -    (4) Computing information criteria for q = 2 
 -    NOTE: using standardized data. 
-         - Entering directory: /home/mqbssppe/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_5.0/fabMix.Rcheck/toyExample/UUU_2 
-            Nclusters:    1     2 
-            Frequency:    2    1 
+         - Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_5.0/fabMix.Rcheck/toyExample/UUU_2 
+            Nclusters:    1 
+            Frequency:    3 
          - Information criteria written to `UUU_2/informationCriteria_map_model.txt`. 
 -    The label.switching package says hello. 
 -    (5) Dealing with label switching for q = 2 
-         * Entering directory: /home/mqbssppe/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_5.0/fabMix.Rcheck/toyExample/UUU_2 
+         * Entering directory: /myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_5.0/fabMix.Rcheck/toyExample/UUU_2 
          * Posterior mode corresponds to K = 1 
          *  no label switching algorithms are applied. Processing output... 
 -    Done. 
 -    Cleaning: deleting directory `toyExample` ... done. 
 
-Given the specified range of models, factors, maximum number of clusters and MCMC parameters,
+Given the specified range of models, factors, maximum number of clusters and Prior parameters,
 the best model corresponds to the UUU parameterization with q = 2 factors and K = 1 clusters. 
-The BIC for this model equals 122.574. 
+The BIC for this model equals 127.909. 
 > 
 > # WARNING: the following parameters: 
 > #  Kmax, nChains, mCycles, burnCycles, warm_up_overfitting, warm_up 
@@ -2119,7 +2119,7 @@ Simulation parameters:
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  3.504 0.104 4.303 0.624 0.176 
+Time elapsed:  2.208 0.052 2.527 0.38 0.112 
 > grDevices::dev.off()
 null device 
           1 

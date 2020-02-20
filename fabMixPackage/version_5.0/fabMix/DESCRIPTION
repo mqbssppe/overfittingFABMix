@@ -2,7 +2,7 @@ Package: fabMix
 Type: Package
 Title: Overfitting Bayesian Mixtures of Factor Analyzers with Parsimonious Covariance and Unknown Number of Components
 Version: 5.0
-Date: 2020-01-30
+Date: 2020-02-19
 Authors@R: 
     c(person(given = "Panagiotis",
 	     family = "Papastamoulis",

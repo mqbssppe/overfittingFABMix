@@ -5468,7 +5468,7 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 	p <- dim(rawData)[2]
 	n <- dim(rawData)[1]
 	cat(paste0("-    Data consists of p = ", p, " variables and n = ",n," observations","\n"))
-	cat(paste0("-    MCMC parameters: g = ", g, ", h = ", h, ", alpha_sigma = ", alpha_sigma, ", beta_sigma = ", beta_sigma,"\n"))
+	cat(paste0("-    Prior parameters: g = ", g, ", h = ", h, ", alpha_sigma = ", alpha_sigma, ", beta_sigma = ", beta_sigma,"\n"))
 	cat(paste0('-         using Nchains = ', nChains),'\n')
 	cat(paste0('-         target posterior distribution corresponds to alpha = ', dirPriorAlphas[1]),'\n')
 	if( normalize == TRUE ){
@@ -5864,7 +5864,7 @@ fabMix <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "UUC", "CUC", "C
 	}
 
 
-	cat(paste0("\n","Given the specified range of models, factors, maximum number of clusters and MCMC parameters,","\n", "the best model corresponds to the ", model_selected, " parameterization with q = ", q_selected, " factors and K = ",nClusters[q_selected, model_selected]," clusters. ","\n","The BIC for this model equals ", round(min(bic),3), "."),"\n")
+	cat(paste0("\n","Given the specified range of models, factors, maximum number of clusters and Prior parameters,","\n", "the best model corresponds to the ", model_selected, " parameterization with q = ", q_selected, " factors and K = ",nClusters[q_selected, model_selected]," clusters. ","\n","The BIC for this model equals ", round(min(bic),3), "."),"\n")
 	best_model <- data.frame(parameterization = model_selected, num_Clusters = nClusters[q_selected, model_selected], num_Factors = as.numeric(q_selected))
 
 	results <- vector("list", length = 13)
@@ -6020,7 +6020,7 @@ fabMix_parallelModels <- function(model = c("UUU", "CUU", "UCU", "CCU", "UCC", "
 	mergedResult$mcmc <- myList[[model_pointer]][['mcmc']]
 	mergedResult$regularizedExpression <- myList[[model_pointer]][['regularizedExpression']]
 
-	cat(paste0("\n","Given the specified range of models, factors, maximum number of clusters and MCMC parameters,","\n", "the best model corresponds to the ", model_selected, " parameterization with q = ", q_selected, " factors and K = ",mergedResult$selected_model$num_Clusters," clusters. ","\n","The BIC for this model equals ", round(min(mergedResult$bic[as.character(q_selected),model_selected]),3), "."),"\n")
+	cat(paste0("\n","Given the specified range of models, factors, maximum number of clusters and Prior parameters,","\n", "the best model corresponds to the ", model_selected, " parameterization with q = ", q_selected, " factors and K = ",mergedResult$selected_model$num_Clusters," clusters. ","\n","The BIC for this model equals ", round(min(mergedResult$bic[as.character(q_selected),model_selected]),3), "."),"\n")
 
 	if(rmDir == TRUE){
 		unlink(outDir, recursive=TRUE)

@@ -1,4 +1,4 @@
-* using log directory ‘/home/mqbssppe/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_5.0/fabMix.Rcheck’
+* using log directory ‘/myspace/Dropbox/sparseFA_MIX/heated_prior/fabMixPackage/version_5.0/fabMix.Rcheck’
 * using R version 3.4.4 (2018-03-15)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
@@ -40,16 +40,7 @@ Maintainer: ‘Panagiotis Papastamoulis <papapast@yahoo.gr>’
 * checking R code for possible problems ... OK
 * checking Rd files ... OK
 * checking Rd metadata ... OK
-* checking Rd line widths ... NOTE
-Rd file 'overfitting_q0.Rd':
-  \usage lines wider than 90 characters:
-             g, h, alpha_prior, alpha_sigma, beta_sigma, start_values, q, zStart, gibbs_z, lowerTriangular)
-
-Rd file 'overfitting_q0_sameSigma.Rd':
-  \usage lines wider than 90 characters:
-             g, h, alpha_prior, alpha_sigma, beta_sigma, start_values, q, zStart, gibbs_z, lowerTriangular)
-
-These lines will be truncated in the PDF manual.
+* checking Rd line widths ... OK
 * checking Rd cross-references ... OK
 * checking for missing documentation entries ... OK
 * checking for code/documentation mismatches ... OK
@@ -68,4 +59,4 @@ These lines will be truncated in the PDF manual.
 * checking examples ... OK
 * checking PDF version of manual ... OK
 * DONE
-Status: 1 NOTE
+Status: OK

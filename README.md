@@ -2,7 +2,7 @@
  
 ## News and Updates
 
-### [February 10, 2020] Version 5.0 (not yet on CRAN). 
+### [February 20, 2020] Version 5.0 available on CRAN. 
 
 Now the lower triangular expansion on the matrix of loadings is optional:
 
@@ -10,6 +10,9 @@ Now the lower triangular expansion on the matrix of loadings is optional:
           parameterization should be imposed on the matrix of factor
           loadings (if TRUE) or not. Default: TRUE.
 
+### [February 10, 2020] Version 5.0 (not yet on CRAN). 
+
+Now the lower triangular expansion on the matrix of loadings is optional.
 
 ### [January 21, 2020] Version 4.6 submitted to CRAN. 
 
