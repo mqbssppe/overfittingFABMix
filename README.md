@@ -66,8 +66,9 @@ Since version 4.0, the package is integrated with C++ code.
 Version 4.1 improves the Lambda output: all MCMC values are now exported to a single file (instead of multiple ones, as done in previous versions). 
 
 
-### [March 2018] Paper accepted to [Computational Statistics & Data Analysis](https://doi.org/10.1016/j.csda.2018.03.007) (please use version 2.0 of the software for the relevant scripts)
+### [March 2018] Paper accepted to [Computational Statistics & Data Analysis](https://doi.org/10.1016/j.csda.2018.03.007)
 
+Please use version 2.0 of the software for the [relevant R scripts](https://github.com/mqbssppe/overfittingFABMix/tree/master/scripts_CSDA_paper_fabMix_v2.0). But *note* that
 1. Recent versions are recommended. 
 2. All package versions smaller than 4.2 are compatible only with Linux distributions.
 
